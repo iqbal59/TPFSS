@@ -17,7 +17,7 @@ class Auth extends CI_Controller {
 
     public function log(){
 
-        if($_POST){ 
+        if($_POST){
             $query = $this->login_model->validate_user();
             
             //-- if valid
