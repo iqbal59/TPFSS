@@ -272,7 +272,7 @@
                                             <a href="#">
                                                 <div class="btn btn-primary btn-circle"><i class="ti-user"></i></div>
                                                 <div class="mail-contnet">
-                                                    <h5>Pavan kumarr</h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
+                                                    <h5>Mohammad Ahmad </h5> <span class="mail-desc">Just see the my admin!</span> <span class="time">9:02 AM</span> </div>
                                             </a>
                                         </div>
                                     </li>

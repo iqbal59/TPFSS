@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/favicon.png">
-    <title>Metrovic login</title>
+    <title>Tumble Drive Login</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -54,7 +54,7 @@
                 <?php endif ?>
 
                 <form class="form-horizontal form-material" id="login-form" action="<?php echo base_url('auth/log'); ?>" method="post">
-                    <h2 class="box-title m-b-40 text-center">Sign In Metrovic</h2>
+                    <h2 class="box-title m-b-40 text-center">Sign In Tumble</h2>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" type="email" name="user_name" required="" placeholder="Username"> </div>
