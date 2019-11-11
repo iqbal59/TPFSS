@@ -11,10 +11,10 @@ class Login_model extends CI_Model {
     public function check_email($email){
         $this->db->select('*');
         $this->db->from('user');
-        $this->db->where('email', $email); 
+        $this->db->where('email', $email);
         $this->db->limit(1);
         $query = $this->db->get();
-        if($query->num_rows() == 1) {                 
+        if($query->num_rows() == 1) {            
             return $query->result();
         }else{
             return false;
@@ -56,7 +56,4 @@ class Login_model extends CI_Model {
             return false;
         }
     }
-
-
-
 }
