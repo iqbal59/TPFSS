@@ -8,10 +8,10 @@
     
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">User</h3>
+            <h3 class="text-themecolor m-b-0 m-t-0">Store</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">All Users</li>
+                <li class="breadcrumb-item active">All Stores</li>
             </ol>
         </div>
         <div class="col-md-7 col-4 align-self-center">
@@ -20,16 +20,16 @@
             <div class="d-flex m-t-10 justify-content-end">
                 <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                     <div class="chart-text m-r-10">
-                        <h6 class="m-b-0"><small>Active User</small></h6>
-                        <h4 class="m-t-0 text-info"><?php echo $count->active_user; ?></h4>
+                        <h6 class="m-b-0"><small>Active Store</small></h6>
+                        <h4 class="m-t-0 text-info">21</h4>
                     </div>
                 </div>
-                <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                <!-- <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                     <div class="chart-text m-r-10">
                         <h6 class="m-b-0"><small>Inctive User</small></h6>
                         <h4 class="m-t-0 text-primary"><?php echo $count->inactive_user; ?></h4>
                     </div>
-                </div>
+                </div> -->
                 
             </div>
         </div>
@@ -63,14 +63,14 @@
                 <div class="card-body">
 
                 <?php if ($this->session->userdata('role') == 'admin'): ?>
-                    <a href="<?php echo base_url('admin/user') ?>" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Add New User</a> &nbsp;
+                    <a href="<?php echo base_url('admin/store/add') ?>" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Add New Store</a> &nbsp;
 
-                    <a href="<?php echo base_url('admin/user/power') ?>" class="btn btn-info"><i class="fa fa-user-o"></i> &nbsp; Add User Power</a>
+                   
                 <?php else: ?>
                     <!-- check logged user role permissions -->
 
                     <?php if(check_power(1)):?>
-                        <a href="<?php echo base_url('admin/user') ?>" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Add New User</a>
+                        <a href="<?php echo base_url('admin/store/add') ?>" class="btn btn-info pull-right"><i class="fa fa-plus"></i> Add New Store</a>
                     <?php endif; ?>
                 <?php endif ?>
                 
@@ -79,61 +79,52 @@
                         <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
+                                    <th>Store Code</th>
+                                    <th>CRM Code</th>
+                                    <th>Firm Name</th>
+                                    <th>Store Name</th>
                                     <th>Mobile</th>
-                                    <th>Country</th>
-                                    <th>Status</th>
-                                    <th>Role</th>
-                                    <th>Joining Date</th>
+                                    <th>Address</th>
+                                    <th>State</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
                             <tfoot>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
+                                    <th>Store Code</th>
+                                    <th>CRM Code</th>
+                                    <th>Firm Name</th>
+                                    <th>Store Name</th>
                                     <th>Mobile</th>
-                                    <th>Gender</th>
-                                    <th>Status</th>
-                                    <th>Role</th>
-                                    <th>Joining Date</th>
+                                    <th>Address</th>
+                                    <th>State</th>
                                     <th>Action</th>
                                 </tr>
                             </tfoot>
                             
                             <tbody>
-                            <?php foreach ($users as $user): ?>
+                            <?php foreach ($stores as $store): ?>
                                 
                                 <tr>
 
-                                    <td><?php echo $user['first_name'].' '.$user['last_name']; ?></td>
-                                    <td><?php echo $user['email']; ?></td>
-                                    <td><?php echo $user['mobile']; ?></td>
-                                    <td><?php echo $user['country']; ?></td>
+                                    <td><?php echo $store['store_code'];?></td>
+                                    <td><?php echo $store['store_crm_code']; ?></td>
+                                    <td><?php echo $store['firm_name']; ?></td>
+                                    <td><?php echo $store['store_name']; ?></td>
+                                    <td><?php echo $store['contact_number']; ?></td>
+                                    <td><?php echo $store['store_address']; ?></td>
+                                    <td><?php echo $store['store_state']; ?></td>
+                                    
+                                    
 
-                                    <td>
-                                        <?php if ($user['status'] == 0): ?>
-                                            <div class="label label-table label-danger">Inactive</div>
-                                        <?php else: ?>
-                                            <div class="label label-table label-success">Active</div>
-                                        <?php endif ?>
-                                    </td>
-                                    <td width="10%">
-                                        <?php if ($user['role'] == 'admin'): ?>
-                                            <div class="label label-table label-info"><i class="fa fa-user"></i> admin</div>
-                                        <?php else: ?>
-                                            <div class="label label-table label-success">user</div>
-                                        <?php endif ?>
-                                    </td>
 
-                                    <td><?php echo my_date_show_time($user['created_at']); ?></td>
+
                                     <td class="text-nowrap">
 
                                         <?php if ($this->session->userdata('role') == 'admin'): ?>
-                                            <a href="<?php echo base_url('admin/user/update/'.$user['id']) ?>" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-success m-r-10"></i> </a>
+                                            <a href="<?php echo base_url('admin/store/update/'.$store['id']) ?>" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-success m-r-10"></i> </a>
 
-                                            <a id="delete" data-toggle="modal" data-target="#confirm_delete_<?php echo $user['id'];?>" href="#"  data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-trash text-danger m-r-10"></i> </a>
+                                            <a id="delete" data-toggle="modal" data-target="#confirm_delete_<?php echo $store['id'];?>" href="#"  data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-trash text-danger m-r-10"></i> </a>
 
 
                                         <?php else: ?>
@@ -141,21 +132,16 @@
                                             <!-- check logged user role permissions -->
 
                                             <?php if(check_power(2)):?>
-                                                <a href="<?php echo base_url('admin/user/update/'.$user['id']) ?>" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-success m-r-10"></i> </a>
+                                                <a href="<?php echo base_url('admin/store/update/'.$store['id']) ?>" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-success m-r-10"></i> </a>
                                             <?php endif; ?>
                                             <?php if(check_power(3)):?>
-                                                <a href="<?php echo base_url('admin/user/delete/'.$user['id']) ?>" onClick="return doconfirm();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-trash text-danger m-r-10"></i> </a>
+                                                <a href="<?php echo base_url('admin/store/delete/'.$store['id']) ?>" onClick="return doconfirm();" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-trash text-danger m-r-10"></i> </a>
                                             <?php endif; ?>
 
                                         <?php endif ?>
 
                                         
                                         
-                                        <?php if ($user['status'] == 1): ?>
-                                            <a href="<?php echo base_url('admin/user/deactive/'.$user['id']) ?>" data-toggle="tooltip" data-original-title="Deactive"> <i class="fa fa-close text-danger m-r-10"></i> </a>
-                                        <?php else: ?>
-                                            <a href="<?php echo base_url('admin/user/active/'.$user['id']) ?>" data-toggle="tooltip" data-original-title="Active"> <i class="fa fa-check text-info m-r-10"></i> </a>
-                                        <?php endif ?>
                                         
                                     </td>
                                 </tr>
@@ -179,9 +165,9 @@
 
 
 
-<?php foreach ($users as $user): ?>
+<?php foreach ($stores as $store): ?>
  
-<div class="modal fade" id="confirm_delete_<?php echo $user['id'];?>">
+<div class="modal fade" id="confirm_delete_<?php echo $store['id'];?>">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -197,7 +183,7 @@
                 
                 Are you sure want to delete? <br> <hr>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a href="<?php echo base_url('admin/user/delete/'.$user['id']) ?>" class="btn btn-danger"> Delete</a>
+                <a href="<?php echo base_url('admin/store/delete/'.$store['id']) ?>" class="btn btn-danger"> Delete</a>
                 
             </div>
 

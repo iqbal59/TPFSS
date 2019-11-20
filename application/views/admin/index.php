@@ -11,7 +11,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/favicon.png">
-    <title>Metrovic Admin</title>
+    <title> <?php echo isset($page_title)?$page_title:"tumbledry"; ?></title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- chartist CSS -->
@@ -140,9 +140,16 @@
                             <div class="dropdown-menu scale-up-left">
                                 <ul class="mega-dropdown-menu row">
                                     <li class="col-lg-3 col-xlg-2 m-b-30">
-                                        <h4 class="m-b-20">CAROUSEL</h4>
+                                        <h4 class="m-b-20">REPORTS</h4>
+                                        <ul class="list-style-none">
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Link</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Give link</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Another Give link</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Forth link</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Another fifth link</a></li>
+                                        </ul>
                                         <!-- CAROUSEL -->
-                                        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                        <!-- <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
                                             <div class="carousel-inner" role="listbox">
                                                 <div class="carousel-item active">
                                                     <div class="container"> <img class="d-block img-fluid" src="<?php echo base_url() ?>assets/images/big/img1.jpg" alt="First slide"></div>
@@ -156,13 +163,13 @@
                                             </div>
                                             <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev"> <span class="carousel-control-prev-icon" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
                                             <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next"> <span class="carousel-control-next-icon" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
-                                        </div>
+                                        </div> -->
                                         <!-- End CAROUSEL -->
                                     </li>
                                     <li class="col-lg-3 m-b-30">
-                                        <h4 class="m-b-20">ACCORDION</h4>
+                                        <h4 class="m-b-20">REPORTS</h4>
                                         <!-- Accordian -->
-                                        <div id="accordion" class="nav-accordion" role="tablist" aria-multiselectable="true">
+                                        <!-- <div id="accordion" class="nav-accordion" role="tablist" aria-multiselectable="true">
                                             <div class="card">
                                                 <div class="card-header" role="tab" id="headingOne">
                                                     <h5 class="mb-0">
@@ -196,12 +203,12 @@
                                                     <div class="card-body"> Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </li>
                                     <li class="col-lg-3  m-b-30">
-                                        <h4 class="m-b-20">CONTACT US</h4>
+                                        <h4 class="m-b-20">REPORTS</h4>
                                         <!-- Contact -->
-                                        <form>
+                                        <!-- <form>
                                             <div class="form-group">
                                                 <input type="text" class="form-control" id="exampleInputname1" placeholder="Enter Name"> </div>
                                             <div class="form-group">
@@ -210,13 +217,13 @@
                                                 <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Message"></textarea>
                                             </div>
                                             <button type="submit" class="btn btn-info">Submit</button>
-                                        </form>
+                                        </form> -->
                                     </li>
                                     <li class="col-lg-3 col-xlg-4 m-b-30">
-                                        <h4 class="m-b-20">List style</h4>
+                                        <h4 class="m-b-20">REPORTS</h4>
                                         <!-- List style -->
                                         <ul class="list-style-none">
-                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> You can give link</a></li>
+                                            <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Link</a></li>
                                             <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Give link</a></li>
                                             <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Another Give link</a></li>
                                             <li><a href="javascript:void(0)"><i class="fa fa-check text-success"></i> Forth link</a></li>
@@ -240,9 +247,9 @@
                         <!-- Comment -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-message"></i>
+                            <!-- <a class="nav-link dropdown-toggle text-muted text-muted waves-effect waves-dark" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-message"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                            </a>
+                            </a> -->
                             <div class="dropdown-menu dropdown-menu-right mailbox scale-up">
                                 <ul>
                                     <li>
@@ -289,9 +296,9 @@
                         <!-- Messages -->
                         
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-email"></i>
+                            <!-- <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="#" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="mdi mdi-email"></i>
                                 <div class="notify"> <span class="heartbit"></span> <span class="point"></span> </div>
-                            </a>
+                            </a> -->
                             <div class="dropdown-menu mailbox dropdown-menu-right scale-up" aria-labelledby="2">
                                 <ul>
                                     <li>
@@ -352,11 +359,11 @@
                                     </li>
                                     <li role="separator" class="divider"></li>
                                     <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
-                                    <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
-                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li>
-                                    <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li>
-                                    <li role="separator" class="divider"></li>
+                                    <!-- <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
+                                    <li><a href="#"><i class="ti-email"></i> Inbox</a></li> -->
+                                    <!-- <li role="separator" class="divider"></li> -->
+                                    <!-- <li><a href="#"><i class="ti-settings"></i> Account Setting</a></li> -->
+                                    <!-- <li role="separator" class="divider"></li> -->
                                     <li><a href="<?php echo base_url('auth/logout') ?>"><i class="fa fa-power-off"></i> Logout</a></li>
                                 </ul>
                             </div>
@@ -419,11 +426,42 @@
                             </ul>
                         </li>
 
-                        <li>
-                            <a class="waves-effect waves-dark" href="<?php echo base_url('admin/dashboard/backup') ?>" aria-expanded="false"><i class="fa fa-cloud-download"></i><span class="hide-menu">Backup Database</span></a>
-                        </li>
 
                         <li>
+                            <a class="has-arrow waves-effect waves-dark" href="<?php echo base_url('admin/store') ?>" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span class="hide-menu">Store</span></a>
+                            <ul aria-expanded="false" class="collapse">
+
+                                <?php if ($this->session->userdata('role') == 'admin'): ?>
+                                    <li><a href="<?php echo base_url('admin/store/add') ?>"><i class="fa fa-angle-right"></i> Add Store </a></li>
+                                   <?php else: ?>
+                                    <?php if(check_power(1)):?>
+                                        <li><a href="<?php echo base_url('store/add') ?>"><i class="fa fa-angle-right"></i> Add Store </a></li>
+                                    <?php endif; ?>
+                                <?php endif ?>
+
+                                <li><a href="<?php echo base_url('admin/store') ?>"><i class="fa fa-angle-right"></i> All Store</a></li>
+                            </ul>
+                        </li>                    
+
+
+                        <li>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Vouchers</span></a>
+                            <ul aria-expanded="false" class="collapse">
+
+                                
+                                <li><a href="#"><i class="fa fa-angle-right"></i> Payment</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i> Debit Note</a></li>
+                                <li><a href="#"><i class="fa fa-angle-right"></i> Credit Note</a></li>
+                            </ul>
+                        </li>                    
+              
+
+
+                        <!-- <li>
+                            <a class="waves-effect waves-dark" href="<?php echo base_url('admin/dashboard/backup') ?>" aria-expanded="false"><i class="fa fa-cloud-download"></i><span class="hide-menu">Backup Database</span></a>
+                        </li> -->
+
+                        <!-- <li>
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-file"></i><span class="hide-menu">Forms</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="<?php echo base_url('admin/form/general') ?>"><i class="fa fa-angle-right"></i> Form Basic Layout </a></li>
@@ -502,13 +540,13 @@
                                 <li><a href="<?php echo base_url('admin/ui/calender') ?>"><i class="fa fa-angle-right"></i> Calendar</a></li>
                                 <li><a href="<?php echo base_url('admin/ui/contact') ?>"><i class="fa fa-angle-right"></i> Contact / Employee</a></li>
                             </ul>
-                        </li>
+                        </li> -->
 
                         <!-- <li class="nav-devider"></li>
                         <li class="nav-small-cap">EXTRA COMPONENTS</li> -->
                         
                         
-                        <li>
+                        <!-- <li>
                             <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="mdi mdi-arrange-send-backward"></i><span class="hide-menu">Multi level dd</span></a>
                             <ul aria-expanded="false" class="collapse">
                                 <li><a href="#">item 1.1</a></li>
@@ -524,7 +562,7 @@
                                 </li>
                                 <li><a href="#">item 1.4</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -535,7 +573,7 @@
                 <!-- item-->
                 <a href="#" class="link" data-toggle="tooltip" title="Settings"><i class="ti-settings"></i></a>
                 <!-- item-->
-                <a href="#" class="link" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a>
+                <a href="#" class="link" data-toggle="tooltip" title="My Profile"><i class="ti-user"></i></a>
                 <!-- item-->
                 <a href="<?php echo base_url('auth/logout') ?>" class="link" data-toggle="tooltip" title="Logout"><i class="mdi mdi-power"></i></a>
             </div>
@@ -576,7 +614,7 @@
             <!-- footer -->
             
             <footer class="footer">
-                © 2018 Macrotech Metrovic Admin Dashboard
+                © 2019 !< 
             </footer>
             
             <!-- End footer -->

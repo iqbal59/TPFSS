@@ -12,7 +12,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/favicon.png">
-    <title>Metrovic login</title>
+    <title>tumbledry</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -43,7 +43,7 @@
     <section id="wrapper">
         
 
-        <div class="login-register" style="background-image:url(<?php echo base_url() ?>assets/images/background/login-register.jpg);">        
+        <div class="login-register" style="background:#e4b320;">        
             <div class="login-box card">
             <div class="card-body">
                 
@@ -54,7 +54,9 @@
                 <?php endif ?>
 
                 <form class="form-horizontal form-material" id="login-form" action="<?php echo base_url('auth/log'); ?>" method="post">
-                    <h2 class="box-title m-b-40 text-center">Sign In Metrovic</h2>
+                    <h2 class="box-title m-b-40 text-center">
+                   <img src="<?php echo base_url() ?>assets/images/logo-light-login.png" alt="loginpage" />
+                    </h2>
                     <div class="form-group ">
                         <div class="col-xs-12">
                             <input class="form-control" type="email" name="user_name" required="" placeholder="Username"> </div>
@@ -120,11 +122,11 @@
     <script src="<?php echo base_url() ?>assets/plugins/bootstrap/js/popper.min.js"></script>
     <script src="<?php echo base_url() ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="<?php echo base_url() ?>js/jquery.slimscroll.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.slimscroll.js"></script>
     <!--Wave Effects -->
-    <script src="<?php echo base_url() ?>js/waves.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/waves.js"></script>
     <!--Menu sidebar -->
-    <script src="<?php echo base_url() ?>js/sidebarmenu.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/sidebarmenu.js"></script>
     <!--stickey kit -->
     <!-- Sweet-Alert  -->
     <script src="<?php echo base_url() ?>assets/plugins/sweetalert/sweetalert.min.js"></script>
