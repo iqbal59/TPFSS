@@ -30,9 +30,7 @@
                         <h4 class="m-t-0 text-primary"><?php echo $count->inactive_user; ?></h4>
                     </div>
                 </div>
-                <div class="">
-                    <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
-                </div>
+                
             </div>
         </div>
     </div>

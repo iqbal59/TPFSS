@@ -7292,6 +7292,9 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
   margin-bottom: 10px;
   display: inline-block; }
 
+.thwidth{
+  font-size: 20px;
+}
 [type="checkbox"] + label {
   padding-left: 26px;
   height: 25px;

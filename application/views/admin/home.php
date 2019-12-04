@@ -107,62 +107,11 @@
     </div>
     </a>
 
-    <!-- Row -->
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Total Visits</h4>
-                    <div id="visitfromworld" style="width:100%!important; height:415px"></div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Browser Stats</h4>
-                    <table class="table browser m-t-30 no-border">
-                        <tbody>
-                            <tr>
-                                <td style="width:40px"><img src="<?php echo base_url() ?>assets/images/browser/chrome-logo.png" alt=logo /></td>
-                                <td>Google Chrome</td>
-                                <td class="text-right"><span class="label label-light-info">23%</span></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<?php echo base_url() ?>assets/images/browser/firefox-logo.png" alt=logo /></td>
-                                <td>Mozila Firefox</td>
-                                <td class="text-right"><span class="label label-light-success">15%</span></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<?php echo base_url() ?>assets/images/browser/safari-logo.png" alt=logo /></td>
-                                <td>Apple Safari</td>
-                                <td class="text-right"><span class="label label-light-primary">07%</span></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<?php echo base_url() ?>assets/images/browser/internet-logo.png" alt=logo /></td>
-                                <td>Internet Explorer</td>
-                                <td class="text-right"><span class="label label-light-warning">09%</span></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<?php echo base_url() ?>assets/images/browser/opera-logo.png" alt=logo /></td>
-                                <td>Opera mini</td>
-                                <td class="text-right"><span class="label label-light-danger">23%</span></td>
-                            </tr>
-                            <tr>
-                                <td><img src="<?php echo base_url() ?>assets/images/browser/internet-logo.png" alt=logo /></td>
-                                <td>Microsoft edge</td>
-                                <td class="text-right"><span class="label label-light-megna">09%</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-    </div>
+    
     <!-- Row -->
     <div class="row">
         <!-- Column -->
-        <div class="col-lg-8">
+        <!-- <div class="col-lg-8">
             <div class="card">
                 <div class="card-body">
                     <ul class="list-inline pull-right">
@@ -181,9 +130,9 @@
                     <div class="total-sales" style="height: 365px;"></div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Column -->
-        <div class="col-lg-4">
+        <!-- <div class="col-lg-4">
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -220,137 +169,17 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <!-- Column -->
     </div>
     
-    <!-- Row -->
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <div id="calendar"></div>
-                    <!-- BEGIN MODAL -->
-                    <div class="modal fade none-border" id="my-event">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title"><strong>Add Event</strong></h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                </div>
-                                <div class="modal-body"></div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Close</button>
-                                    <button type="button" class="btn btn-success save-event waves-effect waves-light">Create event</button>
-                                    <button type="button" class="btn btn-danger delete-event waves-effect waves-light" data-dismiss="modal">Delete</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Modal Add Category -->
-                    <div class="modal fade none-border" id="add-new-event">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h4 class="modal-title"><strong>Add</strong> a category</h4>
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-6">
-                                                <label class="control-label">Category Name</label>
-                                                <input class="form-control form-white" placeholder="Enter name" type="text" name="category-name" />
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label class="control-label">Choose Category Color</label>
-                                                <select class="form-control form-white" data-placeholder="Choose a color..." name="category-color">
-                                                    <option value="success">Success</option>
-                                                    <option value="danger">Danger</option>
-                                                    <option value="info">Info</option>
-                                                    <option value="primary">Primary</option>
-                                                    <option value="warning">Warning</option>
-                                                    <option value="inverse">Inverse</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-danger waves-effect waves-light save-category" data-dismiss="modal">Save</button>
-                                    <button type="button" class="btn btn-white waves-effect" data-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- END MODAL -->
-                </div>
-            </div>
-        </div>
-        
-    </div>
     <!-- Row -->
     
     <!-- ============================================================== -->
     <!-- End PAge Content -->
     <!-- ============================================================== -->
     <!-- ============================================================== -->
-    <!-- Right sidebar -->
-    <!-- ============================================================== -->
-    <!-- .right-sidebar -->
-    <div class="right-sidebar">
-        <div class="slimscrollright">
-            <div class="rpanel-title"> Service Panel <span><i class="ti-close right-side-toggle"></i></span> </div>
-            <div class="r-panel-body">
-                <ul id="themecolors" class="m-t-20">
-                    <li><b>With Light sidebar</b></li>
-                    <li><a href="javascript:void(0)" data-theme="default" class="default-theme">1</a></li>
-                    <li><a href="javascript:void(0)" data-theme="green" class="green-theme">2</a></li>
-                    <li><a href="javascript:void(0)" data-theme="red" class="red-theme">3</a></li>
-                    <li><a href="javascript:void(0)" data-theme="blue" class="blue-theme working">4</a></li>
-                    <li><a href="javascript:void(0)" data-theme="purple" class="purple-theme">5</a></li>
-                    <li><a href="javascript:void(0)" data-theme="megna" class="megna-theme">6</a></li>
-                    <li class="d-block m-t-30"><b>With Dark sidebar</b></li>
-                    <li><a href="javascript:void(0)" data-theme="default-dark" class="default-dark-theme">7</a></li>
-                    <li><a href="javascript:void(0)" data-theme="green-dark" class="green-dark-theme">8</a></li>
-                    <li><a href="javascript:void(0)" data-theme="red-dark" class="red-dark-theme">9</a></li>
-                    <li><a href="javascript:void(0)" data-theme="blue-dark" class="blue-dark-theme">10</a></li>
-                    <li><a href="javascript:void(0)" data-theme="purple-dark" class="purple-dark-theme">11</a></li>
-                    <li><a href="javascript:void(0)" data-theme="megna-dark" class="megna-dark-theme ">12</a></li>
-                </ul>
-                <ul class="m-t-20 chatonline">
-                    <li><b>Chat option</b></li>
-                    <li>
-                        <a href="javascript:void(0)"><img src="<?php echo base_url() ?>assets/images/users/1.jpg" alt="user-img" class="img-circle"> <span>Varun Dhavan <small class="text-success">online</small></span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><img src="<?php echo base_url() ?>assets/images/users/2.jpg" alt="user-img" class="img-circle"> <span>Genelia Deshmukh <small class="text-warning">Away</small></span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><img src="<?php echo base_url() ?>assets/images/users/3.jpg" alt="user-img" class="img-circle"> <span>Ritesh Deshmukh <small class="text-danger">Busy</small></span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><img src="<?php echo base_url() ?>assets/images/users/4.jpg" alt="user-img" class="img-circle"> <span>Arijit Sinh <small class="text-muted">Offline</small></span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><img src="<?php echo base_url() ?>assets/images/users/5.jpg" alt="user-img" class="img-circle"> <span>Govinda Star <small class="text-success">online</small></span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><img src="<?php echo base_url() ?>assets/images/users/6.jpg" alt="user-img" class="img-circle"> <span>John Abraham<small class="text-success">online</small></span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><img src="<?php echo base_url() ?>assets/images/users/7.jpg" alt="user-img" class="img-circle"> <span>Hritik Roshan<small class="text-success">online</small></span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><img src="<?php echo base_url() ?>assets/images/users/8.jpg" alt="user-img" class="img-circle"> <span>Pwandeep rajan <small class="text-success">online</small></span></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-    <!-- ============================================================== -->
-    <!-- End Right sidebar -->
-    <!-- ============================================================== -->
+   
 </div>
 <!-- ============================================================== -->
 <!-- End Container fluid  -->
