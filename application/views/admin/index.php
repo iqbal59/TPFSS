@@ -428,33 +428,45 @@
 
 
                         <li>
-                            <a class="has-arrow waves-effect waves-dark" href="<?php echo base_url('admin/store') ?>" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span class="hide-menu">Store</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-shopping-cart"></i><span class="hide-menu">Master</span></a>
                             <ul aria-expanded="false" class="collapse">
 
-                                <?php if ($this->session->userdata('role') == 'admin'): ?>
-                                    <li><a href="<?php echo base_url('admin/store/add') ?>"><i class="fa fa-angle-right"></i> Add Store </a></li>
-                                   <?php else: ?>
-                                    <?php if(check_power(1)):?>
-                                        <li><a href="<?php echo base_url('store/add') ?>"><i class="fa fa-angle-right"></i> Add Store </a></li>
-                                    <?php endif; ?>
-                                <?php endif ?>
-
-                                <li><a href="<?php echo base_url('admin/store') ?>"><i class="fa fa-angle-right"></i> All Store</a></li>
+                            
+                            <li><a href="<?php echo base_url('admin/store') ?>"><i class="fa fa-angle-right"></i> Stores</a></li>
+                            
+                            <li><a href="<?php echo base_url('admin/service') ?>"><i class="fa fa-angle-right"></i> Services</a></li>
                             </ul>
                         </li>                    
 
 
                         <li>
-                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Vouchers</span></a>
+                            <a class="has-arrow waves-effect waves-dark" href="<?php echo base_url('admin/voucher') ?>" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Voucher</span></a>
                             <ul aria-expanded="false" class="collapse">
 
                                 
-                                <li><a href="#"><i class="fa fa-angle-right"></i> Payment</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i> Debit Note</a></li>
-                                <li><a href="#"><i class="fa fa-angle-right"></i> Credit Note</a></li>
+                                <li><a href="<?php echo base_url('admin/voucher/add') ?>"><i class="fa fa-angle-right"></i> Add Voucher</a></li>
+                                <li><a href="<?php echo base_url('admin/voucher') ?>"><i class="fa fa-angle-right"></i> Voucher List</a></li>
+                                
                             </ul>
                         </li>                    
               
+
+                        <li>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Import</span></a>
+                            <ul aria-expanded="false" class="collapse">
+
+                                
+                                <li><a href="<?php echo base_url('admin/import/storesales') ?>"><i class="fa fa-angle-right"></i> Import Data</a></li>
+                                <li><a href="<?php echo base_url('admin/import/paytmdata') ?>"><i class="fa fa-angle-right"></i> Paytm data</a></li>
+                                <li><a href="<?php echo base_url('admin/import/pharatpedata') ?>"><i class="fa fa-angle-right"></i> Bharat Pe data</a></li>
+                                <li><a href="<?php echo base_url('admin/import/mbdata') ?>"><i class="fa fa-angle-right"></i> Material Bill data</a></li> 
+                                <li><a href="<?php echo base_url('admin/import/saledata') ?>"><i class="fa fa-angle-right"></i> Sale data</a></li>       
+
+                                <!-- <li><a href="#"><i class="fa fa-angle-right"></i> Credit Note</a></li> -->
+                            </ul>
+                        </li>                    
+                       
+                                        
 
 
                         <!-- <li>

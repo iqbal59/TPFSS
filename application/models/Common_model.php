@@ -1,6 +1,25 @@
 <?php
 class Common_model extends CI_Model {
 
+
+    function get_all_count_by_table($table)
+    {
+        $this->db->from($table);
+        return $this->db->count_all_results();
+    }
+      
+    function get_all_by_table($table, $params = array())
+    {
+        $this->db->order_by('id', 'desc');
+        if(isset($params) && !empty($params))
+        {
+            $this->db->limit($params['limit'], $params['offset']);
+        }
+        return $this->db->get($table)->result_array();
+    }
+        
+
+
     //-- insert function
 	public function insert($data,$table){
         $this->db->insert($table,$data);        
