@@ -83,22 +83,34 @@
 
 
 
-                    <div class="table-responsive m-t-40">
-                       
-                       
-                       
-<table border="1" width="100%">
-    <tr>
-		<th>Sr. No.</th>
-		<th>Name</th>
-		<th>Code</th>
-		<th>Sac Code</th>
-		<th>Royality</th>
-		<th>Actions</th>
-    </tr>
+<div class="table-responsive m-t-40">
+    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+        <thead>
+            <tr>
+		      <th>Sr. No.</th>
+		      <th>Name</th>
+		      <th>Code</th>
+		      <th>Sac Code</th>
+		      <th>Royality</th>
+		      <th>Actions</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+              <th>Sr. No.</th>
+              <th>Name</th>
+              <th>Code</th>
+              <th>Sac Code</th>
+              <th>Royality</th>
+              <th>Actions</th>
+            </tr>
+        </tfoot>
+
     <?php
     $i=1;
+
     foreach($services as $s){ ?>
+    <tbody>
     <tr>
 		<td><?php echo $i++; ?></td>
 		<td><?php echo $s['name']; ?></td>
@@ -106,11 +118,16 @@
 		<td><?php echo $s['sac_code']; ?></td>
 		<td><?php echo $s['royality']; ?></td>
 		<td>
-            <a href="<?php echo site_url('admin/service/edit/'.$s['id']); ?>">Edit</a> | 
+            <!-- <a href="<?php //echo site_url('admin/service/edit/'.$s['id']); ?>">Edit</a> | -->
+            <a href="<?php echo base_url('admin/service/edit/'.$s['id']); ?>" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-success m-r-10"></i> </a> 
+
             <a href="<?php echo site_url('admin/service/remove/'.$s['id']); ?>">Delete</a>
-        </td>
+<!--              <a id="delete" data-toggle="modal" data-target="#confirm_delete_<?php //echo $user['id'];?>" href="#"  data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-trash text-danger m-r-10"></i> </a>
+ -->        </td>
     </tr>
 	<?php } ?>
+</tbody>
+
 </table>
                        
                        
@@ -124,5 +141,37 @@
     <!-- End Page Content -->
 
 </div>
+
+<?php //foreach ($users as $user): ?>
+ 
+<!-- <div class="modal fade" id="confirm_delete_<?php //echo $user['id'];?>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+       
+            <div class="form-body">
+                
+                Are you sure want to delete? <br> <hr>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="<?php //echo base_url('admin/user/delete/'.$user['id']) ?>" class="btn btn-danger"> Delete</a>
+                
+            </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+ -->
+
+<?php //endforeach ?>
+
 
 

@@ -633,9 +633,7 @@
                 
             <!-- footer -->
             
-            <footer class="footer">
-                © 2019 !< 
-            </footer>
+            <footer class="footer">© 2019 Tumbledry</footer>
             
             <!-- End footer -->
             

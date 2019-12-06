@@ -41,65 +41,176 @@
                 <div class="card-body">
                 <?php echo form_open('admin/store/edit/'.$store['id']); ?>
 
-<div>
-    Store Code : 
-    <input type="text" name="store_code" value="<?php echo ($this->input->post('store_code') ? $this->input->post('store_code') : $store['store_code']); ?>" />
-    <span class="text-danger"><?php echo form_error('store_code');?></span>
-</div>
-<div>
-    Store Name : 
-    <input type="text" name="store_name" value="<?php echo ($this->input->post('store_name') ? $this->input->post('store_name') : $store['store_name']); ?>" />
-</div>
-<div>
-    Store Crm Code : 
-    <input type="text" name="store_crm_code" value="<?php echo ($this->input->post('store_crm_code') ? $this->input->post('store_crm_code') : $store['store_crm_code']); ?>" />
-</div>
-<div>
-    Firm Name : 
-    <input type="text" name="firm_name" value="<?php echo ($this->input->post('firm_name') ? $this->input->post('firm_name') : $store['firm_name']); ?>" />
-</div>
-<div>
-    Store City : 
-    <input type="text" name="store_city" value="<?php echo ($this->input->post('store_city') ? $this->input->post('store_city') : $store['store_city']); ?>" />
-</div>
-<div>
-    Store State : 
-    <input type="text" name="store_state" value="<?php echo ($this->input->post('store_state') ? $this->input->post('store_state') : $store['store_state']); ?>" />
-</div>
-<div>
-    Email Id : 
-    <input type="text" name="email_id" value="<?php echo ($this->input->post('email_id') ? $this->input->post('email_id') : $store['email_id']); ?>" />
-</div>
-<div>
-    Gstin No : 
-    <input type="text" name="gstin_no" value="<?php echo ($this->input->post('gstin_no') ? $this->input->post('gstin_no') : $store['gstin_no']); ?>" />
-</div>
-<div>
-    Contact Number : 
-    <input type="text" name="contact_number" value="<?php echo ($this->input->post('contact_number') ? $this->input->post('contact_number') : $store['contact_number']); ?>" />
-</div>
-<div>
-    Paytm Mid1 : 
-    <input type="text" name="paytm_mid1" value="<?php echo ($this->input->post('paytm_mid1') ? $this->input->post('paytm_mid1') : $store['paytm_mid1']); ?>" />
-</div>
-<div>
-    Paytm Mid2 : 
-    <input type="text" name="paytm_mid2" value="<?php echo ($this->input->post('paytm_mid2') ? $this->input->post('paytm_mid2') : $store['paytm_mid2']); ?>" />
-</div>
-<div>
-    Paytm Mid3 : 
-    <input type="text" name="paytm_mid3" value="<?php echo ($this->input->post('paytm_mid3') ? $this->input->post('paytm_mid3') : $store['paytm_mid3']); ?>" />
-</div>
-<div>
-    Bharatpay Id : 
-    <input type="text" name="bharatpay_id" value="<?php echo ($this->input->post('bharatpay_id') ? $this->input->post('bharatpay_id') : $store['bharatpay_id']); ?>" />
-</div>
-<div>
-    Store Address : 
-    <textarea name="store_address"><?php echo ($this->input->post('store_address') ? $this->input->post('store_address') : $store['store_address']); ?></textarea>
-</div>
+                    <div class="form-body">
+                        <br>
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Store Code <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="store_code" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('store_code') ? $this->input->post('store_code') : $store['store_code']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
-<button type="submit">Save</button>
+
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Store Name  <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="store_name" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('store_name') ? $this->input->post('store_name') : $store['store_name']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Store Crm Code   <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="store_crm_code" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('store_crm_code') ? $this->input->post('store_crm_code') : $store['store_crm_code']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Firm Name   <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="firm_name" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('firm_name') ? $this->input->post('firm_name') : $store['firm_name']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Store City <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="store_city" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('store_city') ? $this->input->post('store_city') : $store['store_city']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Store State <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="store_state" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('store_state') ? $this->input->post('store_state') : $store['store_state']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Email Id <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="email_id" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('email_id') ? $this->input->post('email_id') : $store['email_id']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Gstin No<span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="gstin_no" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('gstin_no') ? $this->input->post('gstin_no') : $store['gstin_no']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Contact Number<span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="contact_number" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('contact_number') ? $this->input->post('contact_number') : $store['contact_number']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Paytm Mid1 <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="paytm_mid1" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('paytm_mid1') ? $this->input->post('paytm_mid1') : $store['paytm_mid1']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Paytm Mid2 <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="paytm_mid2" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('paytm_mid2') ? $this->input->post('paytm_mid2') : $store['paytm_mid2']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Paytm Mid3 <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="paytm_mid3" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('paytm_mid3') ? $this->input->post('paytm_mid3') : $store['paytm_mid3']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Bharatpay Id <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="bharatpay_id" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('bharatpay_id') ? $this->input->post('bharatpay_id') : $store['bharatpay_id']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      <div class="row">
+                            <div class="col-md-9">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Store Address <span class="text-danger">*</span></label>
+                                    <div class="col-md-9 controls">
+                                        <input type="text" name="store_address" class="form-control" required data-validation-required-message="First Name is required" value="<?php echo ($this->input->post('store_address') ? $this->input->post('store_address') : $store['store_address']); ?>" >
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3"></label>
+                                        <div class="controls">
+                                            <button type="submit" class="btn btn-success">Update</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+<!-- <button type="submit">Save</button> -->
 
 <?php echo form_close(); ?>
                 </div>

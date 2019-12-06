@@ -77,7 +77,8 @@
 
                     <div class="table-responsive m-t-40">
                         
-                    <table border="1" width="100%">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+ <thead>
     <tr>
 		<th>ID</th>
 		<th>Store Code</th>
@@ -96,6 +97,28 @@
 		<th>Store Address</th>
 		<th>Actions</th>
     </tr>
+    </thead>
+      <tfoot>
+     <tr>
+        <th>ID</th>
+        <th>Store Code</th>
+        <th>Store Name</th>
+        <th>Store Crm Code</th>
+        <th>Firm Name</th>
+        <th>Store City</th>
+        <th>Store State</th>
+        <th>Email Id</th>
+        <th>Gstin No</th>
+        <th>Contact Number</th>
+        <th>Paytm Mid1</th>
+        <th>Paytm Mid2</th>
+        <th>Paytm Mid3</th>
+        <th>Bharatpay Id</th>
+        <th>Store Address</th>
+        <th>Actions</th>
+    </tr>
+     </tfoot>
+     <tbody>       
 	<?php foreach($stores as $s){ ?>
     <tr>
 		<td><?php echo $s['id']; ?></td>
@@ -114,12 +137,19 @@
 		<td><?php echo $s['bharatpay_id']; ?></td>
 		<td><?php echo $s['store_address']; ?></td>
 		<td>
-            <a href="<?php echo site_url('admin/store/edit/'.$s['id']); ?>">Edit</a> | 
-            <a href="<?php echo site_url('admin/store/remove/'.$s['id']); ?>">Delete</a> |
+            <!-- <a href="<?php //echo site_url('admin/store/edit/'.$s['id']); ?>">Edit</a> | -->
+            <a href="<?php echo base_url('admin/store/edit/'.$s['id']); ?>" data-toggle="tooltip" data-original-title="Edit"> 
+                <i class="fa fa-pencil text-success m-r-10"></i></a>
+
+             <a href="<?php echo site_url('admin/store/remove/'.$s['id']); ?>">Delete</a>
+
+<!--             <a id="delete" data-toggle="modal" data-target="#confirm_delete_<?php //echo $s['id'];?>" href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-trash text-danger m-r-10"></i> </a>
+ -->|
             <a href="<?php echo site_url('admin/store/royalty/'.$s['id']); ?>">Royalty</a>
         </td>
     </tr>
 	<?php } ?>
+    </tbody>
 </table>
 <div class="pull-right">
     <?php echo $this->pagination->create_links(); ?>    
@@ -136,3 +166,34 @@
 
 </div>
 
+<!-- <?php //foreach ($users as $user): ?>
+ 
+<div class="modal fade" id="confirm_delete_<?php// echo $s['id'];?>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <div class="modal-body">
+       
+            <div class="form-body">
+                
+                Are you sure want to delete? <br> <hr>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="<?php// echo base_url('admin/store/remove/'.$s['id']); ?>" class="btn btn-danger"> Delete</a>
+                
+            </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<?php //endforeach ?>
+ -->

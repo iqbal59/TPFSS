@@ -1,5 +1,3 @@
-
-
 <!-- Container fluid  -->
 
 <div class="container-fluid">
@@ -14,7 +12,6 @@
                 <li class="breadcrumb-item active">Add New User</li>
             </ol>
         </div>
-        
     </div>
     
     <!-- End Bread crumb and right sidebar toggle -->

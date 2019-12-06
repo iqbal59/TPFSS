@@ -52,8 +52,8 @@ class Auth extends CI_Controller {
         $data['page'] = 'logout';
         $this->load->view('admin/login', $data);
     }
-    function test1{
-        $x=10;
-    }
+    // function test1{
+    //     $x=10;
+    // }
 
 }
