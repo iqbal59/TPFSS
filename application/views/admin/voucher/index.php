@@ -77,7 +77,8 @@
 
                     <div class="table-responsive m-t-40">
                         
-                    <table border="1" width="100%">
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
     <tr>
 		<th>ID</th>
 		<th>Voucher Type</th>
@@ -86,6 +87,19 @@
 		<th>Create Date</th>
 		<th>Actions</th>
     </tr>
+    </thead>
+    <tfoot>
+    <tr>
+        <th>ID</th>
+        <th>Voucher Type</th>
+        <th>Store Id</th>
+        <th>Amount</th>
+        <th>Create Date</th>
+        <th>Actions</th>
+    </tr>
+    </tfoot>
+    <tbody>
+
 	<?php foreach($vouchers as $v){ ?>
     <tr>
 		<td><?php echo $v['id']; ?></td>
@@ -94,11 +108,15 @@
 		<td><?php echo $v['amount']; ?></td>
 		<td><?php echo $v['create_date']; ?></td>
 		<td>
-            <a href="<?php echo site_url('admin/voucher/edit/'.$v['id']); ?>">Edit</a> | 
-            <a href="<?php echo site_url('admin/voucher/remove/'.$v['id']); ?>">Delete</a>
+            <!-- <a href="<?php //echo site_url('admin/voucher/edit/'.$v['id']); ?>">Edit</a> -->  
+            <a href="<?php echo base_url('admin/voucher/edit/'.$v['id']); ?>" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-success m-r-10"></i> </a>
+
+            <!-- <a href="<?php //echo site_url('admin/voucher/remove/'.$v['id']); ?>">Delete</a> -->
+            <a id="delete" data-toggle="modal" data-target="#confirm_delete_<?php echo $v['id'];?>" href="#"  data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-trash text-danger m-r-10"></i> </a>
         </td>
     </tr>
 	<?php } ?>
+</tbody>
 </table>
 <div class="pull-right">
     <?php echo $this->pagination->create_links(); ?>    
@@ -114,4 +132,36 @@
     <!-- End Page Content -->
 
 </div>
+
+<?php foreach ($vouchers as $v): ?>
+ 
+<div class="modal fade" id="confirm_delete_<?php echo $v['id'];?>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title"></h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       
+            <div class="form-body">
+                
+                Are you sure want to delete? <br> <hr>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <a href="<?php echo base_url('admin/voucher/remove/'.$v['id']); ?>" class="btn btn-danger"> Delete</a>
+                
+            </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<?php endforeach ?>
 

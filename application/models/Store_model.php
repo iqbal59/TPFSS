@@ -78,7 +78,7 @@ class Store_model extends CI_Model
            foreach($store_royality as $key => $royalty){
                if($params['royality'][$id][$key]==$royalty)
                continue;
-            $query="insert into royalties (service_id, store_id, store_royalty)values('$key', '$id', '$royalty') on duplicate key update store_royalty='$royalty'";
+          echo  $query="insert into royalties (service_id, store_id, store_royalty)values('$key', '$id', '$royalty') on duplicate key update store_royalty='$royalty'";
             $this->db->query($query);    
         }
        }

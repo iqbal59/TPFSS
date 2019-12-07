@@ -42,12 +42,92 @@
             
                 <?php echo form_open('admin/voucher/add'); ?>
 
-	<div>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3"><span class="text-danger">*</span>Voucher Type </label>
+                                        <div class="col-md-9 controls">
+                                            <div class="form-group has-success">
+                                                <select class="form-control custom-select" name="voucher_type" aria-invalid="false">
+													<option value="">select</option>
+														<?php 
+															$voucher_type_values = array(
+																'C'=>'Credit',
+																'R'=>'Receipt',
+																'D'=>'Debit',
+															);
+
+															foreach($voucher_type_values as $value => $display_text)
+															{
+																$selected = ($value == $this->input->post('voucher_type')) ? ' selected="selected"' : "";
+																echo '<option value="'.$value.'" '.$selected.'>'.$display_text.'</option>';
+															} 
+														?>
+											        </select>
+											        <span class="text-danger"><?php echo form_error('voucher_type');?></span>                                    
+                                            	</div>
+                                        	</div>
+                                    	</div>
+                                	</div>
+	                            </div>
+
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3"><span class="text-danger">*</span>Store Id </label>
+                                        <div class="col-md-9 controls">
+                                            <div class="form-group has-success">
+                                                <select class="form-control custom-select" name="store_id" aria-invalid="false">
+													<option value="">select</option>
+													<?php 
+													foreach($stores as $s)
+													{
+														$selected = ($s['id'] == $this->input->post('store_id')) ? ' selected="selected"' : "";
+
+														echo '<option value="'.$s['id'].'" '.$selected.'>'.$s['store_name'].' '.$s['store_crm_code'].'</option>';
+													} 
+													?>
+											        </select>
+											        <span class="text-danger"><?php echo form_error('store_id');?></span>
+                                    
+                                            	</div>
+                                        	</div>
+                                    	</div>
+                                	</div>
+	                            </div>
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3"><span class="text-danger">*</span>Amount </label>
+                                        <div class="col-md-9 controls">
+                                            <input type="text" name="amount" class="form-control" value="<?php echo $this->input->post('amount'); ?>">
+                                		<span class="text-danger"><?php echo form_error('amount');?></span>
+            
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-6"></label>
+                                        <div class="controls">
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+<!-- 	<div>
 		<span class="text-danger">*</span>Voucher Type : 
 		<select name="voucher_type">
 			<option value="">select</option>
 			<?php 
-			$voucher_type_values = array(
+			/*$voucher_type_values = array(
 				'C'=>'Credit',
 				'R'=>'Receipt',
 				'D'=>'Debit',
@@ -58,36 +138,41 @@
 				$selected = ($value == $this->input->post('voucher_type')) ? ' selected="selected"' : "";
 
 				echo '<option value="'.$value.'" '.$selected.'>'.$display_text.'</option>';
-			} 
+			}*/ 
 			?>
 		</select>
-		<span class="text-danger"><?php echo form_error('voucher_type');?></span>
+		<span class="text-danger"><?php //echo form_error('voucher_type');?></span>
 	</div>
-	<div>
+ -->
+
+<!-- 	<div>
 		<span class="text-danger">*</span>Store Id : 
 		
 		
         <select name="store_id">
 			<option value="">select</option>
 			<?php 
-			foreach($stores as $s)
+			/*foreach($stores as $s)
 			{
 				$selected = ($s['id'] == $this->input->post('store_id')) ? ' selected="selected"' : "";
 
 				echo '<option value="'.$s['id'].'" '.$selected.'>'.$s['store_name'].' '.$s['store_crm_code'].'</option>';
-			} 
+			}*/ 
 			?>
 		</select>
         
-        <span class="text-danger"><?php echo form_error('store_id');?></span>
+        <span class="text-danger"><?php //echo form_error('store_id');?></span>
 	</div>
-	<div>
+ -->
+
+
+<!--  	<div>
 		<span class="text-danger">*</span>Amount : 
-		<input type="text" name="amount" value="<?php echo $this->input->post('amount'); ?>" />
-		<span class="text-danger"><?php echo form_error('amount');?></span>
-	</div>
+		<input type="text" name="amount" value="<?php //echo $this->input->post('amount'); ?>" />
+		<span class="text-danger"><?php //echo form_error('amount');?></span>
+ 	</div>-->
 	
-	<button type="submit">Save</button>
+	<!-- <button type="submit">Save</button> -->
 
 <?php echo form_close(); ?>
 

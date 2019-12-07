@@ -41,7 +41,8 @@
                 <div class="card-body">
                 <?php echo form_open('admin/store/royalty/'.$store['id']); ?>
 
-                <table border="1" width="100%">
+                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+     <thead>
     <tr>
 		
 		<th>Service Code</th>
@@ -51,9 +52,21 @@
 		
 	
     </tr>
+    </thead>
+      <tfoot>
+     <tr>
+        <th>Service Code</th>
+        <th>Service Name</th>
+        <th>Defualt Royalty (%)</th>
+        <th>Royalty (%)</th>
+    </tr>
+     </tfoot>
+     <tbody>       
+
     <?php
     // print_r($services);
     foreach($services as $s){
+       // print_r($s);
     ?>
     
     <tr>
@@ -63,15 +76,29 @@
              <td>
              
              <input type="hidden" name="royality[<?php echo $store['id']; ?>][<?php echo $s['id']; ?>]" value="<?php echo  $s['royality']; ?>" />
-             <input type="text" naxme="store_royalty[<?php echo $store['id']; ?>][<?php echo $s['id']; ?>]" value="<?php echo ($this->input->post('store_royalty') ? $this->input->post('store_royalty') : $s['store_royalty']); ?>" min="1" max="100" class="numeric" />
+             <input type="text" name="store_royalty[<?php echo $store['id']; ?>][<?php echo $s['id']; ?>]" value="<?php echo ($this->input->post('store_royalty') ? $this->input->post('store_royalty') : $s['store_royalty']); ?>" />
              
              </td>   
     </tr>
     <?php }?>
+    </tbody>
 
     </table> 
 <br/><br />
-                <button type="submit">Save</button>
+                            <!-- <hr> -->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-5"></label>
+                                        <div class="controls">
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                <!-- <button type="submit">Save</button> -->
 
                     <?php echo form_close(); ?>
                 </div>

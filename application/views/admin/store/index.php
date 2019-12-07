@@ -141,10 +141,10 @@
             <a href="<?php echo base_url('admin/store/edit/'.$s['id']); ?>" data-toggle="tooltip" data-original-title="Edit"> 
                 <i class="fa fa-pencil text-success m-r-10"></i></a>
 
-             <a href="<?php echo site_url('admin/store/remove/'.$s['id']); ?>">Delete</a>
+             <!-- <a href="<?php //echo site_url('admin/store/remove/'.$s['id']); ?>">Delete</a> -->
 
-<!--             <a id="delete" data-toggle="modal" data-target="#confirm_delete_<?php //echo $s['id'];?>" href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-trash text-danger m-r-10"></i> </a>
- -->|
+            <a id="delete" data-toggle="modal" data-target="#confirm_delete_<?php echo $s['id'];?>" href="#" data-toggle="tooltip" data-original-title="Delete"> <i class="fa fa-trash text-danger m-r-10"></i> </a>
+|
             <a href="<?php echo site_url('admin/store/royalty/'.$s['id']); ?>">Royalty</a>
         </td>
     </tr>
@@ -166,9 +166,9 @@
 
 </div>
 
-<!-- <?php //foreach ($users as $user): ?>
+<?php foreach ($stores as $s): ?>
  
-<div class="modal fade" id="confirm_delete_<?php// echo $s['id'];?>">
+<div class="modal fade" id="confirm_delete_<?php echo $s['id'];?>">
   <div class="modal-dialog">
     <div class="modal-content">
 
@@ -183,7 +183,7 @@
                 
                 Are you sure want to delete? <br> <hr>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                <a href="<?php// echo base_url('admin/store/remove/'.$s['id']); ?>" class="btn btn-danger"> Delete</a>
+                <a href="<?php echo base_url('admin/store/remove/'.$s['id']); ?>" class="btn btn-danger"> Delete</a>
                 
             </div>
 
@@ -195,5 +195,4 @@
 </div>
 
 
-<?php //endforeach ?>
- -->
+<?php endforeach ?>
