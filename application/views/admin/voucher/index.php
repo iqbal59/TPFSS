@@ -94,8 +94,8 @@
 		<td><?php echo $v['amount']; ?></td>
 		<td><?php echo $v['create_date']; ?></td>
 		<td>
-            <a href="<?php echo site_url('admin/voucher/edit/'.$v['id']); ?>">Edit</a> | 
-            <a href="<?php echo site_url('admin/voucher/remove/'.$v['id']); ?>">Delete</a>
+            <a href="<?php echo site_url('admin/voucher/edit/'.$v['id']); ?>">Edit</a> 
+            <!-- <a href="<?php echo site_url('admin/voucher/remove/'.$v['id']); ?>">Delete</a> -->
         </td>
     </tr>
 	<?php } ?>

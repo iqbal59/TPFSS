@@ -59,7 +59,7 @@ class Service extends CI_Controller{
         {
             $this->load->library('form_validation');
 
-			$this->form_validation->set_rules('code','Code','required|is_unique[services.code]');
+			$this->form_validation->set_rules('code','Code','required|edit_unique[services.code.'.$data['service']['id'].']');
 		
 			if($this->form_validation->run())     
             {   

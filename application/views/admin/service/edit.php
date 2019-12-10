@@ -55,7 +55,7 @@
 </div>
 <div>
     Royality : 
-    <input type="text" name="royality" value="<?php echo ($this->input->post('royality') ? $this->input->post('royality') : $service['royality']); ?>" />
+    <input type="number" name="royality" value="<?php echo ($this->input->post('royality') ? $this->input->post('royality') : $service['royality']); ?>" required min=0 max=100 step=0.01   />
 </div>
 
 <button type="submit">Save</button>

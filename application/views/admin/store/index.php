@@ -115,7 +115,7 @@
 		<td><?php echo $s['store_address']; ?></td>
 		<td>
             <a href="<?php echo site_url('admin/store/edit/'.$s['id']); ?>">Edit</a> | 
-            <a href="<?php echo site_url('admin/store/remove/'.$s['id']); ?>">Delete</a> |
+            <!-- <a href="<?php echo site_url('admin/store/remove/'.$s['id']); ?>">Delete</a> | -->
             <a href="<?php echo site_url('admin/store/royalty/'.$s['id']); ?>">Royalty</a>
         </td>
     </tr>

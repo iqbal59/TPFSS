@@ -63,7 +63,7 @@
              <td>
              
              <input type="hidden" name="royality[<?php echo $store['id']; ?>][<?php echo $s['id']; ?>]" value="<?php echo  $s['royality']; ?>" />
-             <input type="text" name="store_royalty[<?php echo $store['id']; ?>][<?php echo $s['id']; ?>]" value="<?php echo ($this->input->post('store_royalty') ? $this->input->post('store_royalty') : $s['store_royalty']); ?>" />
+             <input type="number" name="store_royalty[<?php echo $store['id']; ?>][<?php echo $s['id']; ?>]" value="<?php echo ($this->input->post('store_royalty') ? $this->input->post('store_royalty') : $s['store_royalty']); ?>" required min=0 max=100 step=0.01  />
              
              </td>   
     </tr>

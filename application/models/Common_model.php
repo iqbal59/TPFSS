@@ -2,6 +2,21 @@
 class Common_model extends CI_Model {
 
 
+    function add_import_sale($param)
+    {
+          // foreach($params as $key => $value){
+              
+            $query="insert into storesales (order_date, order_no, store_name, taxable_amount, net_amount, service_code, status)values('$param[order_date]', '$param[order_no]', '$param[store_name]', '$param[taxable_amount]', '$param[net_amount]', '$param[service_code]', '$param[status]') on duplicate key update 
+            taxable_amount='".$param['taxable_amount']."', net_amount='".$param['net_amount']."', service_code='".$param['service_code']."', status='".$param['status']."' where is_bill=0";
+            $this->db->query($query);    
+       // }
+       
+    }
+    
+    
+    
+    
+    
     function get_all_count_by_table($table)
     {
         $this->db->from($table);

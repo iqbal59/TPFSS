@@ -60,7 +60,7 @@
                                         <div class="col-md-9 controls">
                                             <select name="data_type" class="form-control" required data-validation-required-message="field is required">
                                             <option value="">--Select--</option>
-                                            <option value="1">Customer Invoice by Franchise</option>
+                                            <option value="1">Sales Data</option>
                                             <option value="2">Material Bill</option>
                                             <option value="3">Paytm</option>
                                             <option value="4">Bharat Pe</option>

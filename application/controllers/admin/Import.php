@@ -42,15 +42,18 @@ class Import extends CI_Controller{
                         $row=0;
                         while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
                         {
-                           if($row++ < 3) 
+                           if($row++ < 3 || $filesop[3]=='') 
                            continue;
                           $data['store_name'] = $filesop[1];
                           $data['order_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
                           $data['order_no'] = $filesop[3];
+                          $data['taxable_amount'] = ($filesop[12]-$filesop[13]);
                           $data['net_amount'] = $filesop[15];
-                          $data['service_code'] = $filesop[34];
+                          list($service_code)=explode(",", $filesop[34]);
+                          $data['service_code'] = $service_code;
+                          $data['status'] = $filesop[36];
                           
-                        $this->common_model->insert($data,'storesales');
+                        $this->common_model->add_import_sale($data);
                             
                         //print_r($data);
                         }

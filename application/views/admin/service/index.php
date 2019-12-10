@@ -106,8 +106,8 @@
 		<td><?php echo $s['sac_code']; ?></td>
 		<td><?php echo $s['royality']; ?></td>
 		<td>
-            <a href="<?php echo site_url('admin/service/edit/'.$s['id']); ?>">Edit</a> | 
-            <a href="<?php echo site_url('admin/service/remove/'.$s['id']); ?>">Delete</a>
+            <a href="<?php echo site_url('admin/service/edit/'.$s['id']); ?>">Edit</a> 
+            <!-- <a href="<?php echo site_url('admin/service/remove/'.$s['id']); ?>">Delete</a> -->
         </td>
     </tr>
 	<?php } ?>

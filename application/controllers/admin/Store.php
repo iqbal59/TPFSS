@@ -39,9 +39,17 @@ class Store extends CI_Controller{
     {   
         $this->load->library('form_validation');
 
-		$this->form_validation->set_rules('store_crm_code','Store CRM Code','is_unique[stores.store_crm_code]');
-		
-		if($this->form_validation->run())     
+        $this->form_validation->set_rules('store_code','Store Code','required|is_unique[stores.store_code]');
+        $this->form_validation->set_rules('store_crm_code','Store CRM Code','required|is_unique[stores.store_crm_code]');
+        $this->form_validation->set_rules('store_name','Store Name','required|is_unique[stores.store_name]');
+        $this->form_validation->set_rules('firm_name','Firm Name','required|is_unique[stores.firm_name]');
+        $this->form_validation->set_rules('bharatpay_id','Bharat Pay Id','required|is_unique[stores.bharatpay_id]');
+        $this->form_validation->set_rules('paytm_mid1','Paytm MID1','required|is_unique[stores.paytm_mid1]');
+        $this->form_validation->set_rules('paytm_mid2','Paytm MID2','is_unique[stores.paytm_mid2]');
+        $this->form_validation->set_rules('paytm_mid3','Paytm MID3','is_unique[stores.paytm_mid3]');
+        $this->form_validation->set_rules('email_id','Email ID','required|valid_email|is_unique[stores.email_id]');
+    
+        if($this->form_validation->run())     
         {   
             $params = array(
 				'store_code' => $this->input->post('store_code'),
@@ -57,7 +65,9 @@ class Store extends CI_Controller{
 				'paytm_mid2' => $this->input->post('paytm_mid2'),
 				'paytm_mid3' => $this->input->post('paytm_mid3'),
 				'bharatpay_id' => $this->input->post('bharatpay_id'),
-				'store_address' => $this->input->post('store_address'),
+                'store_address' => $this->input->post('store_address'),
+                'launch_date' => $this->input->post('launch_date'),
+                'pan_no' => $this->input->post('pan_no'),
             );
             
             $store_id = $this->Store_model->add_store($params);
@@ -83,8 +93,16 @@ class Store extends CI_Controller{
         {
             $this->load->library('form_validation');
 
-			$this->form_validation->set_rules('store_code','Store Code','is_unique[stores.store_code]');
-		
+		$this->form_validation->set_rules('store_code','Store Code','required|edit_unique[stores.store_code.'.$data['store']['id'].']');
+        $this->form_validation->set_rules('store_crm_code','Store CRM Code','required|edit_unique[stores.store_crm_code.'.$data['store']['id'].']');
+        $this->form_validation->set_rules('store_name','Store Name','required|edit_unique[stores.store_name.'.$data['store']['id'].']');
+        $this->form_validation->set_rules('firm_name','Firm Name','required|edit_unique[stores.firm_name.'.$data['store']['id'].']');
+        $this->form_validation->set_rules('bharatpay_id','Bharat Pay Id','required|edit_unique[stores.bharatpay_id.'.$data['store']['id'].']');
+        $this->form_validation->set_rules('paytm_mid1','Paytm MID1','required|edit_unique[stores.paytm_mid1.'.$data['store']['id'].']');
+        $this->form_validation->set_rules('paytm_mid2','Paytm MID2','edit_unique[stores.paytm_mid2.'.$data['store']['id'].']');
+        $this->form_validation->set_rules('paytm_mid3','Paytm MID3','edit_unique[stores.paytm_mid3.'.$data['store']['id'].']');
+        $this->form_validation->set_rules('email_id','Email ID','required|valid_email|edit_unique[stores.email_id.'.$data['store']['id'].']');
+    
 			if($this->form_validation->run())     
             {   
                 $params = array(
@@ -101,7 +119,9 @@ class Store extends CI_Controller{
 					'paytm_mid2' => $this->input->post('paytm_mid2'),
 					'paytm_mid3' => $this->input->post('paytm_mid3'),
 					'bharatpay_id' => $this->input->post('bharatpay_id'),
-					'store_address' => $this->input->post('store_address'),
+                    'store_address' => $this->input->post('store_address'),
+                    'launch_date' => $this->input->post('launch_date'),
+                    'pan_no' => $this->input->post('pan_no'),
                 );
 
                 $this->Store_model->update_store($id,$params);  

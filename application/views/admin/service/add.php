@@ -57,7 +57,7 @@
 </div>
 <div>
     Royality : 
-    <input type="text" name="royality" value="<?php echo $this->input->post('royality'); ?>" />
+    <input type="number" name="royality" value="<?php echo $this->input->post('royality'); ?>" required min=0 max=100 step=0.01   />
 </div>
 
 <button type="submit">Save</button>
