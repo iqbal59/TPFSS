@@ -18,11 +18,12 @@ class Store extends CI_Controller{
      */
     function index()
     {
-        $params['limit'] = RECORDS_PER_PAGE; 
+        $params['limit'] = 10; 
+        echo $this->input->get('page');
         $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
         
         $config = $this->config->item('pagination');
-        $config['base_url'] = site_url('admin/store/index/page');
+        $config['base_url'] = site_url('/admin/store/index');
         $config['total_rows'] = $this->Store_model->get_all_stores_count();
         $this->pagination->initialize($config);
 

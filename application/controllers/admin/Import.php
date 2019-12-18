@@ -65,19 +65,27 @@ class Import extends CI_Controller{
                     $row=0;
                         while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
                         {
-                           if($row++ < 1 || $filesop[6] != 'SUCCESS\'' || $filesop[19] == '') 
+                           if($row++ < 1 || $filesop[6] != 'SUCCESS\'' || $filesop[19] == '' || $filesop[20]==''  )
                            continue;
-                          $data['mid_no'] = trim($filesop[7], "'");
+                           $data['transaction_no'] = trim($filesop[0], "'");
+                           $data['mid_no'] = trim($filesop[7], "'");
                           $data['amount'] = trim($filesop[13], "'");
                           $data['commission'] = trim($filesop[14], "'");
                           $data['utr_no'] = trim($filesop[19], "'");
                           $data['transaction_date'] = trim($filesop[3], "'");
-                          $data['settled_date'] = trim($filesop[20], "'");
+                         // $data['settled_date'] = trim($filesop[20], "'");
+                          $data['settled_date'] = date('Y-m-d H:i:s', strtotime($filesop[20]));
                           $data['store_name'] = trim($filesop[8], "'");
                           $data['gst'] = trim($filesop[15], "'");
                           $this->common_model->insert($data,'paytm');
                             
                             //print_r($data);
+                        }
+                        $paytmbankdata=$this->common_model->matchPaytmWithBank();
+                        foreach($paytmbankdata as $p)
+                        {
+                            if($p['ba']==$p['bta'])
+                            $this->common_model->paytmReconcile($p['utr_no']);
                         }
                          $this->session->set_flashdata('msg', "data upload success");
                         redirect('admin/import/storesales');
@@ -89,7 +97,8 @@ class Import extends CI_Controller{
                         {
                            if($row++ < 1 || $filesop[6] != 'SUCCESS') 
                            continue;
-                          $data['utr_no'] = trim($filesop[1], "'");
+                          $data['transaction_no'] = trim($filesop[1], "'");
+                          $data['utr_no'] = trim($filesop[8], "'");
                           $data['amount'] = trim($filesop[3], "'");
                           $data['store_name'] = trim($filesop[10], "'");
                           $data['transaction_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
@@ -99,9 +108,70 @@ class Import extends CI_Controller{
                             
                             //print_r($data);
                         }
+
+                        $bharatpebankdata=$this->common_model->matchBharatpeithBank();
+                            foreach($bharatpebankdata as $b)
+                            {
+                                //if($p['ba']==$p['bta'])
+                                $this->common_model->bharatpeReconcile($b['utr_no']);
+                            }
                          $this->session->set_flashdata('msg', "data upload success");
                          redirect('admin/import/storesales');
                 break;
+
+                case '5':
+                    $row=0;
+                        while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+                        {
+                           if($row++ < 22 ||  $filesop[0] == '' ) 
+                           continue;
+
+                           if(strpos($filesop[1], 'BHARATPE') !== false || strpos($filesop[1], 'RESILIENT INNOVATIONS PRIVATE LIMITED') !== false  || strpos($filesop[1], 'UPI RB') !== false)  
+                            {
+                          $data['ref_no'] = trim($filesop[2], "'");
+                          $data['amount'] = trim($filesop[5], "'");
+                          $data['narration'] = trim($filesop[1], "'");
+                          $data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
+                          $this->common_model->insert($data,'bank_bharatpe');
+                            }
+                        $data=array();
+                        if(strpos($filesop[1], 'ONE97') !== false  ||  strpos($filesop[1], 'ONE 97') !== false  )  
+                            {
+                          $data['ref_no'] = trim($filesop[2], "'");
+                          $data['amount'] = trim($filesop[5], "'");
+                          $data['narration'] = trim($filesop[1], "'");
+                          $data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
+                          $this->common_model->insert($data,'bank_paytm');
+
+
+
+                            }  
+                        
+                            $paytmbankdata=$this->common_model->matchPaytmWithBank();
+                            foreach($paytmbankdata as $p)
+                            {
+                                if($p['ba']==$p['bta'])
+                                $this->common_model->paytmReconcile($p['utr_no']);
+                            }
+
+
+                            $bharatpebankdata=$this->common_model->matchBharatpeithBank();
+                            foreach($bharatpebankdata as $b)
+                            {
+                                //if($p['ba']==$p['bta'])
+                                $this->common_model->bharatpeReconcile($b['utr_no']);
+                            }
+
+                        //  $this->common_model->insert($data,'bank_bharatpe');
+                          //$this->common_model->insert($datap,'bank_paytm');
+                            
+                            //print_r($data);
+                        }
+                         $this->session->set_flashdata('msg', "data upload success");
+                         redirect('admin/import/storesales');
+                break;
+
+
 
                 case '2':
                         $row=0;
@@ -113,9 +183,10 @@ class Import extends CI_Controller{
                           $data['amount'] = trim($filesop[55], "'");
                           $data['invoice_no'] = trim($filesop[1], "'");
                           $data['invoice_date'] = date('Y-m-d', strtotime($filesop[0]));
+                          $data['store_crm_code'] = trim($filesop[60], "'");
                           
                          
-                        $this->common_model->insert($data,'material_invoices');
+                        $this->common_model->insert_ignore($data,'material_invoices');
                             
                            // print_r($data);
                         }

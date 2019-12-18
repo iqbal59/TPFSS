@@ -43,10 +43,10 @@ class Store_model extends CI_Model
     function get_all_stores($params = array())
     {
         $this->db->order_by('id', 'desc');
-        if(isset($params) && !empty($params))
-        {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
+        // if(isset($params) && !empty($params))
+        // {
+        //     $this->db->limit($params['limit'], $params['offset']);
+        // }
         return $this->db->get('stores')->result_array();
     }
         

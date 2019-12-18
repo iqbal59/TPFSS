@@ -7,15 +7,51 @@ class Common_model extends CI_Model {
           // foreach($params as $key => $value){
               
             $query="insert into storesales (order_date, order_no, store_name, taxable_amount, net_amount, service_code, status)values('$param[order_date]', '$param[order_no]', '$param[store_name]', '$param[taxable_amount]', '$param[net_amount]', '$param[service_code]', '$param[status]') on duplicate key update 
-            taxable_amount='".$param['taxable_amount']."', net_amount='".$param['net_amount']."', service_code='".$param['service_code']."', status='".$param['status']."' where is_bill=0";
+            taxable_amount='".$param['taxable_amount']."', net_amount='".$param['net_amount']."', service_code='".$param['service_code']."', status='".$param['status']."'";
             $this->db->query($query);    
        // }
        
     }
     
     
+    function matchPaytmWithBank()
+        {
+            $query="select paytmdata.amount, utr_no, (commission + gst) as fc, (paytmdata.amount-commission-gst) as ba, bank_paytm.amount as bta  from (SELECT sum(paytm.amount) as amount, utr_no, sum(commission) as commission, sum(gst) as gst  FROM `paytm` WHERE 1 and paytm.is_reconcile=0 group by utr_no) as paytmdata left join bank_paytm on (bank_paytm.ref_no=paytmdata.utr_no)";
+
+            return $this->db->query($query)->result_array();
+
+        }
     
+     function paytmReconcile($utr_no){
+                $query="update paytm set is_reconcile=1 where utr_no='$utr_no'";
+                $this->db->query($query);
+     }   
+
+
+     function matchBharatpeithBank()
+        {
+           
+
+            return $this->db->get('bharatpewithbank')->result_array();
+
+        }
     
+     function bharatpeReconcile($utr_no){
+                $query="update bharatpe set is_reconcile=1 where utr_no='$utr_no'";
+                $this->db->query($query);
+     }   
+
+     function bharatpebill($ids){
+        $query="update bharatpe set is_bill=1 where id in($ids)";
+        $this->db->query($query);
+}   
+    
+function paytmbill($ids){
+    $query="update paytm set is_bill=1 where id in($ids)";
+    $this->db->query($query);
+}   
+
+
     
     function get_all_count_by_table($table)
     {
@@ -33,10 +69,19 @@ class Common_model extends CI_Model {
         return $this->db->get($table)->result_array();
     }
         
+//-- insert function
+public function insert_ignore($data,$table){
+        
+    $insert_query = $this->db->insert_string($table, $data);
+    $insert_query = str_replace('INSERT INTO','INSERT IGNORE INTO',$insert_query);
+    $this->db->query($insert_query);       
+    return $this->db->insert_id();
+}
 
 
     //-- insert function
 	public function insert($data,$table){
+
         $this->db->insert($table,$data);        
         return $this->db->insert_id();
     }

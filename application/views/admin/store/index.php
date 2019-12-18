@@ -76,8 +76,12 @@
                 
 
                     <div class="table-responsive m-t-40">
-                        
-                    <table border="1" width="100%">
+                    
+                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                            <thead>
+                   
+                       
+                   
     <tr>
 		<th>ID</th>
 		<th>Store Code</th>
@@ -96,6 +100,8 @@
 		<th>Store Address</th>
 		<th>Actions</th>
     </tr>
+    </thead>
+    <tbody>
 	<?php foreach($stores as $s){ ?>
     <tr>
 		<td><?php echo $s['id']; ?></td>
@@ -120,10 +126,8 @@
         </td>
     </tr>
 	<?php } ?>
+    </tbody>
 </table>
-<div class="pull-right">
-    <?php echo $this->pagination->create_links(); ?>    
-</div>
 
                     </div>
                 </div>

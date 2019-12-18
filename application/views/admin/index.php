@@ -466,7 +466,22 @@
                             </ul>
                         </li>                    
                        
-                                        
+                           
+                        <li>
+                            <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i class="fa fa-pencil-square-o"></i><span class="hide-menu">Accounts</span></a>
+                            <ul aria-expanded="false" class="collapse">
+
+                                
+                            <li><a href="<?php echo base_url('admin/accounts/createinvoices') ?>"><i class="fa fa-angle-right"></i> Create Invoice</a></li>   
+                            <li><a href="<?php echo base_url('admin/accounts/') ?>"><i class="fa fa-angle-right"></i> Invoice</a></li>
+                                <li><a href="<?php echo base_url('admin/accounts/ledger') ?>"><i class="fa fa-angle-right"></i> Customer Ledger</a></li>
+
+                               
+                                <!-- <li><a href="#"><i class="fa fa-angle-right"></i> Credit Note</a></li> -->
+                            </ul>
+                        </li>                    
+                       
+
 
 
                         <!-- <li>
