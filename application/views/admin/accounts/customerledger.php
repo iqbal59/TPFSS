@@ -63,6 +63,52 @@
             <div class="card">
 
                 <div class="card-body">
+
+
+                <form id="ledger_form" method="post" action="<?php echo base_url('admin/accounts/customerledger/'.$storebalance['id']) ?>" class="form-horizontal" enctype="multipart/form-data" novalidate>
+                       
+                       <input type="hidden" id="show_ledger_url" value="<?php echo base_url('admin/accounts/customerledger/'.$storebalance['id']) ?>" />
+                       <input type="hidden" id="print_ledger_url" value="<?php echo base_url('admin/accounts/printledger/'.$storebalance['id']) ?>" />
+                        <div class="form-body">
+                            <br>
+                           
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                        <h5>Enter From Date <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="date" name="from_date" class="form-control" placeholder="MM/DD/YYYY" required  value="<?php echo isset($open_date)?$open_date:date("Y-m-01");?>"> </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                <div class="form-group">
+                                        <h5>Enter To Date <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="date" name="to_date" class="form-control" placeholder="MM/DD/YYYY" required value="<?php echo isset($to_date)?$to_date:date("Y-m-d");?>" > </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-4">
+                                    <div class="form-group ">
+                                    <h5>Actions</h5>
+                                        <div class="controls">
+                                            <button type="button" id="show_ledger" class="btn btn-success">Show</button>
+                                            <button type="button" id="print_ledger" class="btn btn-success">Print</button>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            </div>
+
+
+                            <!-- CSRF token -->
+                            <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>" value="<?=$this->security->get_csrf_hash();?>" />
+
+                            
+                            
+                        
+                    </form>
                 </div>
             </div>
 
@@ -77,9 +123,10 @@
                   <h3><?php echo $storebalance['store_name'];?></h3>
 
                     <div class="table-responsive m-t-40">
-                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                        <table id="" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
+                                    <th>Voucher No.</th>
                                     <th>Voucher Type</th>
                                     <th>Voucher Date</th>
                                     <th>Sale</th>
@@ -102,8 +149,9 @@
                             <tbody>
 
                             <tr>
+                            <td>-</td>
                             <td>Opening Balance</td>
-                            <td><?php echo $open_date;?></td>
+                            <td><?php echo date("d-m-Y", strtotime($open_date));?></td>
                             <td><?php echo $total_balalnce=$storebalance['openbalance'];?></td>
                             <td>-</td>
                             <td>-</td>
@@ -120,13 +168,14 @@
 foreach($ledgerItems as $li){?> 
 
 <tr>
-                            <td><?php echo $li['voucher_type']?></td>
-                            <td><?php echo $li['voucher_date'];?></td>
+                            <td><?php echo $li['voucher_no'];?></td>    
+                            <td><?php echo $li['voucher_type'];?></td>
+                            <td><?php echo date("d-m-Y", strtotime($li['voucher_date']));?></td>
                             <td><?php if($li['voucher_type']=='Sale'){echo $li['np']; $total_balalnce+=$li['np'];}?></td>
                             <td><?php if($li['voucher_type']=='R'){echo $li['np'];$total_balalnce-=$li['np'];}?></td>
                             <td><?php if($li['voucher_type']=='D'){echo $li['np'];$total_balalnce+=$li['np'];}?></td>
                             <td><?php if($li['voucher_type']=='C'){echo $li['np'];$total_balalnce-=$li['np'];}?></td>
-                            <td>-</td>
+                            <td><?php echo  $li['descriptions'];?></td>
                             <td><?php echo $total_balalnce;?></td>
                             
                             </tr>  
@@ -145,6 +194,7 @@ foreach($ledgerItems as $li){?>
                                 <tr>
                                     <th></th>
                                     <th></th>
+                                    <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>

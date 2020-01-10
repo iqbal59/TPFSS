@@ -473,7 +473,7 @@
 
                                 
                             <li><a href="<?php echo base_url('admin/accounts/createinvoices') ?>"><i class="fa fa-angle-right"></i> Create Invoice</a></li>   
-                            <li><a href="<?php echo base_url('admin/accounts/') ?>"><i class="fa fa-angle-right"></i> Invoice</a></li>
+                            <li><a href="<?php echo base_url('admin/accounts/') ?>"><i class="fa fa-angle-right"></i> Royalty Invoice</a></li>
                                 <li><a href="<?php echo base_url('admin/accounts/ledger') ?>"><i class="fa fa-angle-right"></i> Customer Ledger</a></li>
 
                                

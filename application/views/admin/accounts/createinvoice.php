@@ -54,11 +54,18 @@
                            
 
                             <div class="row">
-                                <div class="col-md-9">
+                                <div class="col-md-6">
                                 <div class="form-group">
-                                        <h5>Enter Date <span class="text-danger">*</span></h5>
+                                        <h5>Enter From Date <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="date" name="invoice_date" class="form-control" placeholder="MM/DD/YYYY" required > </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                <div class="form-group">
+                                        <h5>Enter To Date <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="date" name="invoice_to_date" class="form-control" placeholder="MM/DD/YYYY" required > </div>
                                     </div>
                                 </div>
                                 <!--/span-->

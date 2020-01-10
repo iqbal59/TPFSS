@@ -5,6 +5,7 @@ class Accounts extends CI_Controller{
         parent::__construct();
         check_login_user();
         $this->load->model('Accounts_model');
+        $this->load->model('Common_model');
     } 
 
 function index(){
@@ -24,25 +25,52 @@ function ledger(){
 
 
 function customerledger($id){
-    $data['open_date']='2019-11-01';
+    if($this->input->post('from_date'))
+    $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+    else
+    $data['open_date']=date('Y-m-01');
+
+    if($this->input->post('to_date'))
+    $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+    else
+    $data['to_date']=date('Y-m-d');
+
     $data['storebalance']=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-    $data['ledgerItems']=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date'])))    , $id);
+    $data['ledgerItems']=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))),  $data['to_date']   , $id);
     $data['main_content'] = $this->load->view('admin/accounts/customerledger', $data, TRUE);
     $this->load->view('admin/index',$data);
 }
+
+function printledger($id){
+    if($this->input->post('from_date'))
+    $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+    else
+    $data['open_date']=date('Y-m-01');
+
+    if($this->input->post('to_date'))
+    $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+    else
+    $data['to_date']=date('Y-m-d');
+
+    $data['storebalance']=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
+    $data['ledgerItems']=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))),  $data['to_date']   , $id);
+    $this->load->view('admin/accounts/printledger', $data);
+    
+}
+
 
 function createinvoices()
     {
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('invoice_date','Invoice Date','required');
-      
+        $this->form_validation->set_rules('invoice_to_date','Invoice Date','required');
         if($this->form_validation->run())     
         {
 
+            
 
-
-            $data['storesales']=$this->Accounts_model->get_all_sale_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))));
+            $data['storesales']=$this->Accounts_model->get_all_sale_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))),date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
             //print_r($data['storesales']);
            
             foreach($data['storesales'] as $s)
@@ -54,25 +82,32 @@ function createinvoices()
                 
                 $data['invoice'][$s['id']][]=$item;
             }
-            $this->Accounts_model->saveInvoice($data['invoice']);
+
+            if(!is_array($data['invoice']))
+            $data['invoice']=array();
+            $data['period']=date('d-m-Y', strtotime($this->input->post('invoice_date')))." to ".date('d-m-Y', strtotime($this->input->post('invoice_to_date')));
+            $this->Accounts_model->saveInvoice($data['invoice'], $data['period']);
 
             //BHARATE PE
-            $bharatpe=$this->Accounts_model->get_bharatpe_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))));
+            $bharatpe=$this->Accounts_model->get_bharatpe_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))),date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
             
             foreach($bharatpe as $bp)
                 {
-                        $this->Common_model->insert(array('store_id'=>$bp['store_id'], 'voucher_type'=>'R', 'amount'=>$bp['amount'], 'descriptions'=>'Bharate Pe'), "vouchers");
+                        $this->Common_model->insert(array('store_id'=>$bp['store_id'], 'voucher_type'=>'R', 'amount'=>$bp['amount'], 'descriptions'=>'Bharate Pe '.$data['period']), "vouchers");
 
                         $this->Common_model->bharatpebill($bp['ids']);
                 }
 
 
             //PAYTM    
-            $paytm=$this->Accounts_model->get_paytm_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))));
+            $paytm=$this->Accounts_model->get_paytm_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))),date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
 
             foreach($paytm as $p)
             {
-                    $this->Common_model->insert(array('store_id'=>$p['store_id'], 'voucher_type'=>'R', 'amount'=>$p['final_amount'], 'descriptions'=>'Paytm'), "vouchers");
+                if($p['store_id']==null)
+                continue;
+                    $this->Common_model->insert(array('store_id'=>$p['store_id'], 'voucher_type'=>'R', 'amount'=>$p['final_amount'], 'descriptions'=>'Paytm '.$data['period']), "vouchers");
+                    $this->Common_model->insert(array('store_id'=>$p['store_id'], 'voucher_type'=>'C', 'amount'=>($p['paytmcommission']*7.5/100), 'descriptions'=>'Paytm '.$p['paytmcommission']." @7.5% ".$data['period'] ), "vouchers");
 
                     $this->Common_model->paytmbill($p['ids']);
             }
@@ -87,6 +122,13 @@ function createinvoices()
         }
 
        
+    }
+
+function invoicepdf($id)
+    {
+        $data['invoice']=$this->Accounts_model->get_invoice_by_id($id);
+        $data['invoiceitems']=$this->Accounts_model->get_invoice_item_by_id($id);
+        $this->load->view('admin/accounts/invoice',$data);
     }
 
 

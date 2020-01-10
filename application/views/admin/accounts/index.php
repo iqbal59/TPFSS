@@ -73,6 +73,7 @@
                                     <th>Date</th>
                                     <th>Store Name</th>
                                     <th>Net Amount</th>
+                                    <th>Action</th>
                                     
                                     <!-- <th>Action</th> -->
                                 </tr>
@@ -83,6 +84,7 @@
                                     <th>Date</th>
                                     <th>Store Name</th>
                                     <th>Net Amount</th>
+                                    <th>Action</th>
                                     
                                     <!-- <th>Action</th> -->
                                 </tr>
@@ -105,11 +107,11 @@
                                     <td><?php echo $invoice['net_amount']; ?></td>
 
                                     
-<!--                                     
+                                    
                                     <td class="text-nowrap">
 
                                         
-                                            <a href="<?php echo base_url('admin/accounts/invoicepdf/'.$invoice['id']) ?>" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pdf text-success m-r-10"></i> </a>
+                                            <a href="<?php echo base_url('admin/accounts/invoicepdf/'.$invoice['id']) ?>" target="_blank" data-toggle="tooltip" data-original-title="View"> <i class="fa fa-file-text  text-success m-r-10"></i> </a>
 
                                         
 
@@ -117,7 +119,7 @@
                                         
 
                                             
-                                    </td> -->
+                                    </td>
                                 </tr>
 
                             <?php endforeach ?>

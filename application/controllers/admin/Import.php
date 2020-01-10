@@ -63,10 +63,14 @@ class Import extends CI_Controller{
              
                 case '3':
                     $row=0;
-                        while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+                  //  echo "AA";
+                        while(($filesop = fgetcsv($handle, 10000, ",")) !== false)
                         {
-                           if($row++ < 1 || $filesop[6] != 'SUCCESS\'' || $filesop[19] == '' || $filesop[20]==''  )
-                           continue;
+                          // if($row++ < 1 || $filesop[6] != 'SUCCESS\'' || !isset($filesop[19]) || !isset($filesop[20])  )
+                           //echo trim($filesop[6], "'");
+                           if($row++ < 1 || trim($filesop[6], "'") != 'SUCCESS' || !$filesop[19] || !$filesop[20]  )
+                          continue;
+                           
                            $data['transaction_no'] = trim($filesop[0], "'");
                            $data['mid_no'] = trim($filesop[7], "'");
                           $data['amount'] = trim($filesop[13], "'");
@@ -74,10 +78,10 @@ class Import extends CI_Controller{
                           $data['utr_no'] = trim($filesop[19], "'");
                           $data['transaction_date'] = trim($filesop[3], "'");
                          // $data['settled_date'] = trim($filesop[20], "'");
-                          $data['settled_date'] = date('Y-m-d H:i:s', strtotime($filesop[20]));
+                          $data['settled_date'] = date('Y-m-d H:i:s', strtotime(trim($filesop[20], "'")));
                           $data['store_name'] = trim($filesop[8], "'");
                           $data['gst'] = trim($filesop[15], "'");
-                          $this->common_model->insert($data,'paytm');
+                         $this->common_model->insert($data,'paytm');
                             
                             //print_r($data);
                         }
@@ -95,7 +99,7 @@ class Import extends CI_Controller{
                     $row=0;
                         while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
                         {
-                           if($row++ < 1 || $filesop[6] != 'SUCCESS') 
+                           if($row++ < 1 || trim($filesop[6], "'") != 'SUCCESS') 
                            continue;
                           $data['transaction_no'] = trim($filesop[1], "'");
                           $data['utr_no'] = trim($filesop[8], "'");
