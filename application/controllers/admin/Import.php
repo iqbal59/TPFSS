@@ -212,15 +212,15 @@ class Import extends CI_Controller{
 
 public function saledata(){
 
-    $params['limit'] = 100; 
-    $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
+    // $params['limit'] = 100; 
+    // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
     
-    $config = $this->config->item('pagination');
-    $config['base_url'] = site_url('admin/import/saledata/page');
-    $config['total_rows'] = $this->common_model->get_all_count_by_table('storesales');
-    $this->pagination->initialize($config);
+    // $config = $this->config->item('pagination');
+    // $config['base_url'] = site_url('admin/import/saledata/page');
+    // $config['total_rows'] = $this->common_model->get_all_count_by_table('storesales');
+    // $this->pagination->initialize($config);
 
-    $data['salesdata'] = $this->common_model->get_all_by_table('storesales', $params);
+    $data['salesdata'] = $this->common_model->getSaleOrderData();
     
     $data['main_content'] = $this->load->view('admin/import/saledata', $data, TRUE);
     $this->load->view('admin/index',$data);
@@ -230,20 +230,52 @@ public function saledata(){
 
 public function paytmdata(){
 
-    $params['limit'] = 100; 
-    $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
+    // $params['limit'] = 100; 
+    // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
     
-    $config = $this->config->item('pagination');
-    $config['base_url'] = site_url('admin/import/paytmdata/page');
-    $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
-    $this->pagination->initialize($config);
+    // $config = $this->config->item('pagination');
+    // $config['base_url'] = site_url('admin/import/paytmdata/page');
+    // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
+    // $this->pagination->initialize($config);
 
-    $data['paytmdata'] = $this->common_model->get_all_by_table('paytm', $params);
+    $data['paytmdata'] = $this->common_model->getPaytmData();
     
     $data['main_content'] = $this->load->view('admin/import/paytmdata', $data, TRUE);
     $this->load->view('admin/index',$data);
 }
 
+
+public function bharatpedata(){
+
+    // $params['limit'] = 100; 
+    // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
+    
+    // $config = $this->config->item('pagination');
+    // $config['base_url'] = site_url('admin/import/paytmdata/page');
+    // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
+    // $this->pagination->initialize($config);
+
+    $data['bharatpedata'] = $this->common_model->getBharatPeData();
+    
+    $data['main_content'] = $this->load->view('admin/import/bharatpe', $data, TRUE);
+    $this->load->view('admin/index',$data);
+}
+
+public function mbdata(){
+
+    // $params['limit'] = 100; 
+    // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
+    
+    // $config = $this->config->item('pagination');
+    // $config['base_url'] = site_url('admin/import/paytmdata/page');
+    // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
+    // $this->pagination->initialize($config);
+
+    $data['mbdata'] = $this->common_model->getMbData();
+    
+    $data['main_content'] = $this->load->view('admin/import/mbdata', $data, TRUE);
+    $this->load->view('admin/index',$data);
+}
 
 
 }

@@ -11,7 +11,7 @@
             <h3 class="text-themecolor m-b-0 m-t-0">Data</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Store Sale Data</li>
+                <li class="breadcrumb-item active">Bharatepe Data</li>
             </ol>
         </div>
         <div class="col-md-7 col-4 align-self-center">
@@ -66,37 +66,43 @@
 
                     <div class="table-responsive m-t-40">
                         
-                    <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+    
    
-   <thead>
+   
+                   <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                   <thead>
     <tr>
 		
-		<th>Order Date</th>
-		<th>Order No.</th>
+        <th>Transaction No.</th>
+        <th>Transaction Date</th>
+        <th>Is Reconcile</th>
+       
+        
+		<th>Amount</th>
+		
+		<th>UTR No</th>
 		<th>Store Code</th>
-		<th>Service Code</th>
-        <th>Taxable Amount</th>
-		<th>Net Amount</th>
-        <th>Is Bill</th>
 		
     </tr>
     </thead>
     <tbody>
-	<?php foreach($salesdata as $s){ ?>
+	<?php foreach($bharatpedata as $s){ ?>
     <tr>
 		
-		<td><?php echo date("d-m-Y", strtotime($s['order_date'])); ?></td>
-		<td><?php echo $s['order_no']; ?></td>
+        <td><?php echo $s['transaction_no']; ?></td>
+        <td><?php echo date("d-m-Y", strtotime($s['transaction_date'])); ?></td>
+        <td><?php if($s['is_reconcile']=='1'){echo 'Yes';}else{echo 'No';} ?></td>
+        
+		<td><?php echo $s['amount']; ?></td>
+		
+		<td><?php echo $s['utr_no']; ?></td>
 		<td><?php echo $s['store_code']; ?></td>
-		<td><?php echo $s['service_code']; ?></td>
-		<td><?php echo $s['taxable_amount']; ?></td>
-        <td><?php echo $s['net_amount']; ?></td>
-        <td><?php if($s['is_bill']=='1'){echo 'Yes';}else{echo 'No';} ?></td>
 		
     </tr>
 	<?php } ?>
     </tbody>
 </table>
+
 
                     </div>
                 </div>

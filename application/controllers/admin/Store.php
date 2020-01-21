@@ -153,7 +153,7 @@ class Store extends CI_Controller{
         {
             $this->load->library('form_validation');
 
-			$this->form_validation->set_rules('store_royalty[]','Store Royalty','trim|required');
+			$this->form_validation->set_rules('store_royalty[]','Store Royalty','required');
 		
 			if($this->form_validation->run())     
             {   
@@ -163,7 +163,7 @@ class Store extends CI_Controller{
 					'royality' => $this->input->post('royality'),
 					
                 );
-
+//print_r($params['store_royalty']);
                 $this->Store_model->update_store_royality($id,$params);  
                 $this->session->set_flashdata('msg', 'Royality updated Successfully');                     
                 redirect('admin/store/index');

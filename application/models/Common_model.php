@@ -1,6 +1,33 @@
 <?php
 class Common_model extends CI_Model {
 
+    /**************REPORTS***************/
+
+    function getPaytmData(){
+       
+        $query = $this->db->query('SELECT * FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) order by transaction_date DESC')->result_array();  
+        return $query;
+    }
+
+
+    function getBharatPeData(){
+       
+        $query = $this->db->query('SELECT * FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) order by transaction_date DESC')->result_array();  
+        return $query;
+    }
+
+    function getMbData(){
+       
+        $query = $this->db->query('SELECT * FROM material_invoices LEFT join stores on(material_invoices.store_crm_code=stores.store_crm_code) order by invoice_date DESC')->result_array();  
+        return $query;
+    }
+
+    function getSaleOrderData(){
+       
+        $query = $this->db->query('SELECT * FROM storesales LEFT join stores on(storesales.store_name=stores.store_name) order by order_date DESC')->result_array();  
+        return $query;
+    }
+/**************REPORTS END***************/
 
     function add_import_sale($param)
     {

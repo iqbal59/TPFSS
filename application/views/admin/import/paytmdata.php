@@ -11,7 +11,7 @@
             <h3 class="text-themecolor m-b-0 m-t-0">Data</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Customer Sale Data</li>
+                <li class="breadcrumb-item active">Paytm Data</li>
             </ol>
         </div>
         <div class="col-md-7 col-4 align-self-center">
@@ -66,31 +66,43 @@
 
                     <div class="table-responsive m-t-40">
                         
-                    <table border="1" width="100%">
-    <tr style='font-size:20px;'>
+    
+   
+   
+                   <table id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
+                   <thead>
+    <tr>
 		
-		<th>MID Noß</th>
+        <th>Transaction No.</th>
+        <th>Transaction Date</th>
+        <th>Is Reconcile</th>
+       
+        <th>MID No</th>
 		<th>Amount</th>
 		<th>Commission</th>
 		<th>UTR No</th>
-		<th>Store Name</th>
+		<th>Store Code</th>
 		
     </tr>
+    </thead>
+    <tbody>
 	<?php foreach($paytmdata as $s){ ?>
     <tr>
 		
-		<td><?php echo $s['mid_no']; ?></td>
+        <td><?php echo $s['transaction_no']; ?></td>
+        <td><?php echo date("d-m-Y", strtotime($s['transaction_date'])); ?></td>
+        <td><?php if($s['is_reconcile']=='1'){echo 'Yes';}else{echo 'No';} ?></td>
+        <td><?php echo $s['mid_no']; ?></td>
 		<td><?php echo $s['amount']; ?></td>
 		<td><?php echo $s['commission']; ?></td>
 		<td><?php echo $s['utr_no']; ?></td>
-		<td><?php echo $s['store_name']; ?></td>
+		<td><?php echo $s['store_code']; ?></td>
 		
     </tr>
 	<?php } ?>
+    </tbody>
 </table>
-<div class="pull-right">
-    <?php echo $this->pagination->create_links(); ?>    
-</div>
+
 
                     </div>
                 </div>

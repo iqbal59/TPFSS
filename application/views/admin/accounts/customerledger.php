@@ -129,8 +129,8 @@
                                     <th>Voucher No.</th>
                                     <th>Voucher Type</th>
                                     <th>Voucher Date</th>
-                                    <th>Sale</th>
-                                    <th>Receipt</th>
+                                    <!-- <th>Sale</th>
+                                    <th>Receipt</th> -->
                                     <th>Debit</th>
                                     <th>Credit</th>
                                     <th>Descriptions</th>
@@ -153,8 +153,8 @@
                             <td>Opening Balance</td>
                             <td><?php echo date("d-m-Y", strtotime($open_date));?></td>
                             <td><?php echo $total_balalnce=$storebalance['openbalance'];?></td>
-                            <td>-</td>
-                            <td>-</td>
+                            <!-- <td>-</td>
+                            <td>-</td> -->
                             <td>-</td>
                             <td>-</td>
                             <td><?php echo $total_balalnce=$storebalance['openbalance'];?></td>
@@ -169,12 +169,21 @@ foreach($ledgerItems as $li){?>
 
 <tr>
                             <td><?php echo $li['voucher_no'];?></td>    
-                            <td><?php echo $li['voucher_type'];?></td>
+                            <td><?php
+                            
+                            if($li['voucher_type']=='C')
+                            echo 'Credit';
+                            elseif($li['voucher_type']=='R')
+                            echo 'Receipt';
+                            elseif($li['voucher_type']=='D')
+                            echo 'Debit';
+                            else
+                            echo $li['voucher_type'];
+                            ?></td>
                             <td><?php echo date("d-m-Y", strtotime($li['voucher_date']));?></td>
-                            <td><?php if($li['voucher_type']=='Sale'){echo $li['np']; $total_balalnce+=$li['np'];}?></td>
-                            <td><?php if($li['voucher_type']=='R'){echo $li['np'];$total_balalnce-=$li['np'];}?></td>
-                            <td><?php if($li['voucher_type']=='D'){echo $li['np'];$total_balalnce+=$li['np'];}?></td>
-                            <td><?php if($li['voucher_type']=='C'){echo $li['np'];$total_balalnce-=$li['np'];}?></td>
+                            
+                            <td><?php if($li['voucher_type']=='D' or $li['voucher_type']=='Sale'){echo $li['np'];$total_balalnce+=$li['np'];}?></td>
+                            <td><?php if($li['voucher_type']=='C' or  $li['voucher_type']=='R'){echo $li['np'];$total_balalnce-=$li['np'];}?></td>
                             <td><?php echo  $li['descriptions'];?></td>
                             <td><?php echo $total_balalnce;?></td>
                             
@@ -194,8 +203,8 @@ foreach($ledgerItems as $li){?>
                                 <tr>
                                     <th></th>
                                     <th></th>
-                                    <th>-</th>
-                                    <th>-</th>
+                                    <!-- <th>-</th>
+                                    <th>-</th> -->
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>

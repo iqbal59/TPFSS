@@ -78,7 +78,7 @@ function createinvoices()
                 if(!$s['id'] || !$s['store_royalty'])
                 continue;
 
-                $item=array('amount'=>$s['amount'], 'service_code'=>$s['service_code'], 'store_royalty'=>$s['store_royalty'], 'order_ids'=>$s['order_nos'], 'item_name'=>'Royalty @'.$s['store_royalty'], 'rate'=>($s['amount']*$s['store_royalty']/100));
+                $item=array('amount'=>$s['amount'], 'service_code'=>$s['service_code'], 'store_royalty'=>$s['store_royalty'], 'order_ids'=>$s['order_nos'], 'item_name'=>$s['service_code'].' Royalty @'.$s['store_royalty'], 'rate'=>($s['amount']*$s['store_royalty']/100));
                 
                 $data['invoice'][$s['id']][]=$item;
             }

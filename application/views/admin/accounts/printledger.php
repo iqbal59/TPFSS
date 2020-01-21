@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en" xml:lang="en">
 <head>
-<title>Dioptres Unlimited</title>
+<title>TUMBLEDRY</title>
 <link rel="stylesheet" type="text/css" href="view/stylesheet/stylesheet.css" />
 <style type="text/css">
 html {
@@ -651,15 +651,14 @@ CIN U74999DL2019PTC347046
 <table id="" class="list" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                    <td>Voucher No.</td>
-                                    <td>Voucher Type</td>
-                                    <td>Voucher Date</td>
-                                    <td>Sale</td>
-                                    <td>Receipt</td>
-                                    <td>Debit</td>
-                                    <td>Credit</td>
-                                    <td>Descriptions</td>
-                                    <td>Total</td>
+                                    <td class="center">Voucher No.</td>
+                                    <td class="center">Voucher Type</td>
+                                    <td class="center">Voucher Date</td>
+                                    
+                                    <td class="center">Debit</td>
+                                    <td class="center">Credit</td>
+                                    <td class="center">Descriptions</td>
+                                    <td class="center">Balance</td>
                                    
                                 </tr>
                             </thead>
@@ -678,8 +677,7 @@ CIN U74999DL2019PTC347046
                             <td>Opening Balance</td>
                             <td><?php echo date("d-m-Y", strtotime($open_date));?></td>
                             <td><?php echo $total_balalnce=$storebalance['openbalance'];?></td>
-                            <td>-</td>
-                            <td>-</td>
+                            
                             <td>-</td>
                             <td>-</td>
                             <td><?php echo $total_balalnce=$storebalance['openbalance'];?></td>
@@ -694,12 +692,20 @@ foreach($ledgerItems as $li){?>
 
 <tr>
                             <td><?php echo $li['voucher_no'];?></td>    
-                            <td><?php echo $li['voucher_type'];?></td>
+							<td><?php 
+							if($li['voucher_type']=='C')
+                            echo 'Credit';
+                            elseif($li['voucher_type']=='R')
+                            echo 'Receipt';
+                            elseif($li['voucher_type']=='D')
+                            echo 'Debit';
+                            else
+                            echo $li['voucher_type'];
+							?></td>
                             <td><?php echo date("d-m-Y", strtotime($li['voucher_date']));?></td>
-                            <td><?php if($li['voucher_type']=='Sale'){echo $li['np']; $total_balalnce+=$li['np'];}?></td>
-                            <td><?php if($li['voucher_type']=='R'){echo $li['np'];$total_balalnce-=$li['np'];}?></td>
-                            <td><?php if($li['voucher_type']=='D'){echo $li['np'];$total_balalnce+=$li['np'];}?></td>
-                            <td><?php if($li['voucher_type']=='C'){echo $li['np'];$total_balalnce-=$li['np'];}?></td>
+                            
+                            <td><?php if($li['voucher_type']=='D' or $li['voucher_type']=='Sale'){echo $li['np'];$total_balalnce+=$li['np'];}?></td>
+                            <td><?php if($li['voucher_type']=='C' or $li['voucher_type']=='R'){echo $li['np'];$total_balalnce-=$li['np'];}?></td>
                             <td><?php echo  $li['descriptions'];?></td>
                             <td><?php echo $total_balalnce;?></td>
                             
@@ -719,13 +725,12 @@ foreach($ledgerItems as $li){?>
                                 <tr>
                                     <th></th>
                                     <th></th>
+                                   
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
                                     <th>-</th>
-                                    <th>-</th>
-                                    <th>-</th>
-                                    <th><strong><?php echo $total_balalnce;?></strong></th>
+                                    <th class="left"><strong><?php echo $total_balalnce;?></strong></th>
                                    
                                 </tr>
                             </tfoot>

@@ -93,7 +93,7 @@ function get_all_sale_by_store($date, $date_to)
                 foreach($items as $item){
 
                     //print_r($item);
-                    $this->db->insert('invoice_item', array('invoice_id'=>$invoice_id, 'item_name'=>$item['item_name'], 'rate'=>$item['rate'], 'order_nos'=>$item['order_ids'])); 
+                    $this->db->insert('invoice_item', array('invoice_id'=>$invoice_id, 'item_name'=>$item['item_name'], 'rate'=>$item['rate'], 'order_nos'=>$item['order_ids'], 'amount'=>$item['amount'], 'service_code'=>$item['service_code'], 'royalty'=>$item['store_royalty'])); 
 
                     $total_amount+=$item['rate'];
                     $this->db->query("update storesales set is_bill=1 where store_name='$storeData[store_name]' and order_no in($item[order_ids])");

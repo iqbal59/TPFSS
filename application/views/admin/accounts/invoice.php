@@ -1,228 +1,454 @@
-
- <html>
-
-<head>
-<link href="<?php echo base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<style>
-.invoice-title h2, .invoice-title h3 {
-    display: inline-block;
-}
-
-.table > tbody > tr > .no-line {
-    border-top: none;
-}
-
-.table > thead > tr > .no-line {
-    border-bottom: none;
-}
-
-.table > tbody > tr > .thick-line {
-    border-top: 2px solid;
-}
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link type="text/css" rel="stylesheet" href="resources/sheet.css">
+<style type="text/css">
+    .ritz .waffle a {
+        color: inherit;
+    }
+    
+    .ritz .waffle .s6 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #f0f0f0;
+        text-align: right;
+        color: #000000;
+        font-family: 'Arial';
+        font-size: 7pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s14 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: right;
+        color: #000000;
+        font-family: 'Times New Roman';
+        font-size: 10pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s0 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+		border-top: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: center;
+        color: #000000;
+        font-family: 'Arial';
+        font-size: 12pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s5 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #f0f0f0;
+        text-align: left;
+        color: #000000;
+        font-family: 'Arial';
+        font-size: 7pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s13 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'Arial';
+        font-size: 10pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s9 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #f0f0f0;
+        text-align: left;
+        color: #000000;
+        font-family: 'Arial';
+        font-size: 9pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s7 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'Times New Roman';
+        font-size: 10pt;
+        vertical-align: top;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s10 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #f0f0f0;
+        text-align: left;
+        color: #000000;
+        font-family: 'docs-Calibri', Arial;
+        font-size: 9pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s1 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: right;
+        color: #ff0000;
+        font-family: 'Arial';
+        font-size: 10pt;
+        vertical-align: top;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s12 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'docs-Calibri', Arial;
+        font-size: 10pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s3 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'Times New Roman';
+        font-size: 10pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s15 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: right;
+        color: #000000;
+        font-family: 'Times New Roman';
+        font-size: 10pt;
+        vertical-align: top;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s2 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: center;
+        color: #000000;
+        font-family: 'Times New Roman';
+        font-size: 10pt;
+        vertical-align: top;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s8 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: center;
+        color: #000000;
+        font-family: 'docs-Calibri', Arial;
+        font-size: 9pt;
+        vertical-align: middle;
+        white-space: nowrap;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s11 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: center;
+        color: #000000;
+        font-family: 'Times New Roman';
+        font-size: 10pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
+    
+    .ritz .waffle .s4 {
+        border-bottom: 1px SOLID #000000;
+        border-right: 1px SOLID #000000;
+		border-left: 1px SOLID #000000;
+        background-color: #ffffff;
+        text-align: left;
+        color: #000000;
+        font-family: 'docs-Calibri', Arial;
+        font-size: 9pt;
+        vertical-align: top;
+        white-space: normal;
+        overflow: hidden;
+        word-wrap: break-word;
+        direction: ltr;
+        padding: 0px 3px 0px 3px;
+    }
 </style>
-</head>
-
- <body onload="window.print();">
- 
-<div class="container">
-	
-    <div class="row">
-        <div class="col-xs-12">
-	        <div align="center"><h3 class="center">TAX INVOICE</h3></div>
-    		<div class="invoice-title">
-    			<!-- <h2><img src="<?php echo base_url();?>/assets/images/logo.jpg"/></h2> -->
-    			<h3 class="pull-right">Invoice No. # <?php echo $invoice->id;?></h3>
-    		</div>
-    		<hr>
-    		<div class="row">
-    			<div class="col-xs-6">
-    			    <address>
-    				<strong>Billed To:</strong><br>
-    			    				
-    				
-                    <?php echo $invoice->firm_name;?> <br>
-                    <?php echo $invoice->contact_number;?> <br>
-    					
-                    <span><?php echo $invoice->store_address;?></span> <br/>
-						
-    				</address>
-    			    			</div>
-    			<div class="col-xs-6 text-right">
-    				<address>
-<!--         			<strong>Laundry </strong><br> -->
-    					<div style="width:300px;float:right;font-size:11px;"> 
-<!-- 							<span style='font-weight:bold;'> tumbledry </span> <br/> -->
-							<span styl='font-size:11px;'>
-							TUMBLEDRY SOLUTIONS PRIVATE LIMITED<br>
-5, 512-B, 98-MODI TOWER, NEHRU PLACE, NEW DELHI,<br>
-South East Delhi, New Delhi, Delhi 110019<br>
-01204317564<br>
-GSTIN 07AAHCT2140E1ZP<br>
-PAN AAHCT2140E<br>
-CIN U74999DL2019PTC347046
-							 </span> 
-				
-						</div>
-    					
-    				</address>
-    			</div>
-    		</div>
-    		<div class="row">
-    			<div class="col-xs-6">
-    				<address>
-					<strong>Order Date:</strong>
-    					<?php echo date("d-m-Y", strtotime($invoice->invoice_date));?> <br><br>    				</address>
-    			</div>
-    			<div class="col-xs-6 text-right">
-    				
-    			</div>
-    			
-    			
-    		</div>
-    	</div>
-    </div>
-    
-    
-    
-    <div class="row">
-    	<div class="col-md-12">
-    		<div class="panel panel-default">
-    			<div class="panel-heading">
-    				<h3 class="panel-title"><strong>Summary</strong></h3>
-    			</div>
-    			<div class="panel-body">
-    				<div class="table-responsive">
-    					<table class="table table-condensed">
-    						<thead>
-                                <tr>
-        							<td><strong>Sr. No.</strong></td>
-        						
-									<td style='width:200px;'><strong>Description</strong></td>
-        							<td ><strong>SAC Code</strong></td>
-        							<td class="text-center"><strong>Qty</strong></td>
-									<td class="text-center"><strong>Rate/Unit</strong></td>
-        							<td class="text-right"><strong>Taxable Value</strong></td>
-                                </tr>
-    						</thead>
-    						<tbody>
-							<tr><td colspan="7"></td></tr>
-    										
-                                            
-                                            <?php 
-                                            $i=1;
-                                            $qty=0;
-                                            foreach ($invoiceitems as $ord) {?>
-                                            	<tr>
-													<td class="no-line"> <?php echo $i++;?> </td> 
-													
-													
-													<td class="no-line" style='width:250px;' > 
-																											
-														<?php echo $ord->item_name;?>
-														
-													</td> 
-													
-													<td class="no-line" > 
-														
-													- </td>	
-													<td class="no-line text-center" > 	<?php echo $ord->qty; $qty+=$ord->qty;?> </td>
-													 
-													<td class=" no-line text-center" > 	<?php echo $ord->rate;?> </td> 
-													
-													
-													
-													
-													
-													<td class=" no-line text-right" > 
-                                                    <?php echo sprintf("%0.2f",($ord->qty*$ord->rate));?>
-													
-														
-													
-													</td> 													
-													
-													
-													</tr>
+<div class="ritz grid-container" dir="ltr">
+    <table class="waffle" cellspacing="0" cellpadding="0">
+        <thead>
+           
+        </thead>
+        <tbody>
+            <tr style='height:16px;'>
+                <th id="855174894R0" style="height: 16px;" class="row-headers-background">
+                    
+                </th>
+                <td class="s0" colspan="9"><span style="font-size:12pt;font-family:Arial;">TAX INVOICE</span></td>
+            </tr>
+            <tr style='height:16px;'>
+                <th id="855174894R1" style="height: 16px;" class="row-headers-background">
+                  
+                </th>
+                <td class="s1" colspan="9">ORIGINAL FOR RECIPIENT</td>
+            </tr>
+            <tr style='height:16px;'>
+                <th id="855174894R2" style="height: 16px;" class="row-headers-background">
+                  
+                </th>
+                <td class="s2" colspan="9"></td>
+            </tr>
+            <tr style='height:83px;'>
+                <th id="855174894R3" style="height: 83px;" class="row-headers-background">
+                  
+                </th>
+                <td class="s3" colspan="3" rowspan="2"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">From<br></span><span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE LIMITED<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">5, 512-B,98-MODI TOWER, NEHRU PLACE,NEW DELHI 110019<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">GSTIN                </span><span style="font-size:9pt;font-family:Arial;">07AAHCT2140E1ZP<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">PAN                    </span><span style="font-size:9pt;font-family:Arial;">AAHCT2140E</span></td>
+                <td class="s4" colspan="2"><span style="font-size:9pt;font-family:Calibri,Arial;">Invoice No. <br>Invoice Date<br>  <!-- Reference No.<br> Place of supply<br> Due Date</span> --></td>
+               <td class="s3" colspan="4"><span style="font-size:9pt;font-family:Calibri,Arial;">:    </span><span style="font-size:9pt;font-family:Arial;"><?php echo $invoice->id;?><br></span><span style="font-size:9pt;font-family:Calibri,Arial;">: </span><span style="font-size:9pt;font-family:Arial;"><?php echo date('d/m/Y', strtotime($invoice->invoice_date));?> <br></span> <!-- <span style="font-size:9pt;font-family:Calibri,Arial;">:    PI/NO/19-20/49<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">:    06-Haryana<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">:    03/01/2020</span>--></td> 
+            </tr>
+            <tr style='height:83px;'>
+                <th id="855174894R4" style="height: 83px;" class="row-headers-background">
+                  
+                </th>
+                <td class="s3" colspan="2"><span style="font-size:9pt;font-family:Calibri,Arial;">Transport Name Mode<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">LR No &amp; Date<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">STORE CODE</span></td>
+                <td class="s3" colspan="4"><span style="font-size:9pt;font-family:Calibri,Arial;">:    BY HAND<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">:    BY HAND<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">:    <?php echo $invoice->store_code;?></span></td>
+            </tr>
+            <tr style='height:89px;'>
+                <th id="855174894R5" style="height: 89px;" class="row-headers-background">
+                   
+                </th>
+                <td class="s3" colspan="3"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Billing Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s <?php echo $invoice->firm_name;?><br></span><span style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address;?></span></td>
+                <td class="s3" colspan="6"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Shipping Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s <?php echo $invoice->firm_name;?><br></span><span style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address;?></span></td>
+            </tr>
+            <tr style='height:16px;'>
+                <th id="855174894R6" style="height: 16px;" class="row-headers-background">
+                   
+                </th>
+                <td class="s5"><span style="font-size:7pt;font-family:Arial;">#</span></td>
+                <td class="s5"><span style="font-size:7pt;font-family:Arial;">Description</span></td>
+                <td class="s5"><span style="font-size:7pt;font-family:Arial;">HSN / SAC</span></td>
+                <td class="s6">Order Value</td>
+                <td class="s6">Royalty percenatge</td>
+                <td class="s5"><span style="font-size:7pt;font-family:Arial;">Taxable Value</span></td>
+                <td class="s6">SGST</td>
+                <td class="s6">CGST</td>
+                <td class="s5"><span style="font-size:7pt;font-family:Arial;">Total Amount</span></td>
+            </tr>
+           
+		   <?php 
+			 $i=1; 
+			 $ot=0;
+			 $sgst_total=0;
+			 $cgst_total=0;
+			 $taxable_total=0;
+			 $total=0; 
+		   foreach($invoiceitems as $inv){?>
+		   
+		    <tr style='height:16px;'>
+                <th id="855174894R7" style="height: 16px;" class="row-headers-background">
+                   
+                </th>
+                <td class="s7"><?php echo $i++;?></td>
+                <td class="s7"><?php echo $inv->service_code;?></td>
+                <td class="s7"></td>
+                <td class="s8"><?php echo $inv->amount;$ot+=$inv->amount;?></td>
+                <td class="s8"><?php echo $inv->royalty;?></td>
+                <td class="s8"><?php echo $inv->rate; $taxable_total+=$inv->rate;?></td>
+                <td class="s7">
+				<?php echo $sgst=$inv->rate*9/100; $sgst_total+=$inv->rate*9/100;?>
+				</td>
+                <td class="s7"><?php echo $cgst=$inv->rate*9/100; $cgst_total+=$inv->rate*9/100;?></td>
+                <td class="s7"><?php echo ($inv->rate+$sgst+$cgst); $total+=($inv->rate+$sgst+$cgst); ?></td>
+            </tr>
+		   <?php }?>
 
 
-
-                                            <?php }?>
-
-														
-                                                        
-                                                        
-                                                        		<tr>
-
-
-
-
-
-
-    								<td colspan="4"></td>
-    								
-    								
-<!--     								<td class=" text-center"></td> -->
-									<td class=" text-center">Sub Total : </td>
-    								
-    								<td class=" text-right">Rs. <?php echo $invoice->amount;?>  </td>
-    							</tr>
-								
-								
-								
-								
-								<tr>
-																		
-													
-													
-													
-														  
-													
-													
-													<!-- Percentage Section --> 
-													
-																										   												
-													
-													
-																									
-												
-																										
-															<!-- End Percentage Section -->
-													
-													
-												<!-- Amount Section --> 
-													 
-													<!-- End Amount Section -->
-													
-													
-													
-													
-													<tr> <td  colspan='4'></td> <td style='text-align:center;'>SGST(9%) : </td><td style='text-align:right;'>Rs. <?php echo $invoice->tax_amount/2;?></td></tr>	
-                                                    <tr> <td  colspan='4'></td> <td style='text-align:center;'>CGST(9%) : </td><td style='text-align:right;'>Rs. <?php echo $invoice->tax_amount/2;?></td></tr>	
-											
-												
-											
-    							<tr>
-    								
-    								<td class="thick-line" colspan="4"></td>
-    							
-    								<td class="thick-line text-center"><strong>Net Amount </strong></td>
-    								<td class="thick-line text-right">  Rs. <?php echo $invoice->net_amount;?> </td>
-									
-								</tr>
-								<tr> <td class="thick-line" colspan="7"></td></tr>
-								
-    						</tbody>
-    					</table>
-    				</div>
-    			</div>
-    			
-    			<center> Toll Free: 1800-1031-831 email: hello@tumbledry.in web: www.tumbledry.in</center> <br/>
-    			
-				<center style="font-size: 9px;"> This is computer generated Invoice no signature required </center> <br/>
-    		</div>
-    	</div>
-    </div>
+            <tr style='height:33px;'>
+                <th id="855174894R14" style="height: 33px;" class="row-headers-background">
+                    
+                </th>
+                <td class="s9" colspan="2"><span style="font-size:9pt;font-family:Arial;">TOTAL (₹)</span></td>
+                <td class="s10"></td>
+                <td class="s10"><?php echo $ot;?></td>
+                <td class="s10"></td>
+                <td class="s10"><?php echo $taxable_total;?></td>
+                <td class="s10"><?php echo $sgst_total;?></td>
+                <td class="s10"><?php echo $cgst_total;?></td>
+                <td class="s10"><?php echo $total;?></td>
+            </tr>
+            <tr style='height:16px;'>
+                <th id="855174894R15" style="height: 16px;" class="row-headers-background">
+                   
+                </th>
+                <td class="s11" colspan="6" rowspan="2"></td>
+                <td class="s12" colspan="2"><span style="font-size:10pt;font-family:Calibri,Arial;">Taxable Amount</span></td>
+                <td class="s7"><?php echo $taxable_total;?></td>
+            </tr>
+            <tr style='height:16px;'>
+                <th id="855174894R16" style="height: 16px;" class="row-headers-background">
+                   
+                </th>
+                <td class="s12" colspan="2"><span style="font-size:10pt;font-family:Calibri,Arial;">Total Tax</span></td>
+                <td class="s7"><?php echo $cgst_total+$sgst_total;?></td>
+            </tr>
+            <tr style='height:37px;'>
+                <th id="855174894R17" style="height: 37px;" class="row-headers-background">
+                    
+                </th>
+                <td class="s3" colspan="6"><span style="font-size:10pt;font-family:Calibri,Arial;">Total amount (in       </span><span style="font-size:10pt;font-family:Arial;">Seven Lakh Eighty Thousand Two Hundred Seventy Five<br></span><span style="font-size:10pt;font-family:Calibri,Arial;">words)                         </span><span style="font-size:10pt;font-family:Arial;">Rupees and Nine Paise Only</span></td>
+                <td class="s13" colspan="2"><span style="font-size:10pt;font-family:Arial;">Total Amount</span></td>
+                <td class="s7"><?php echo $total;?></td>
+            </tr>
+            <tr style='height:157px;'>
+                <th id="855174894R18" style="height: 157px;" class="row-headers-background">
+                    
+                </th>
+                <td class="s14" colspan="9"><span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE<br></span><span style="font-size:9pt;font-family:Arial;">LIMITED<br></span><span style="font-size:7pt;font-family:Calibri,Arial;">Authorised Signatory</span></td>
+            </tr>
+            <tr style='height:16px;'>
+                <th id="855174894R19" style="height: 16px;" class="row-headers-background">
+                    
+                </th>
+                <td class="s3" colspan="9" rowspan="2">TUMBLEDRY SOLUTIONS PRIVATE LIMITED, 1007-08- 09, Tower B, Advant Navis Business Park, Plot No-7, Sector 142, Noida, Uttar Pradesh, INDIA, 201301</td>
+            </tr>
+            <tr style='height:16px;'>
+                <th id="855174894R20" style="height: 16px;" class="row-headers-background">
+                   
+                </th>
+            </tr>
+           
+        </tbody>
+    </table>
 </div>
-         
-</body>
-<html>
+<script type='text/javascript' nonce='d0MFPQ3jh8bDejXk719E1g'>
+    function posObj(sheet, id, row, col, x, y) {
+        var rtl = false;
+        var sheetElement = document.getElementById(sheet);
+        if (!sheetElement) {
+            sheetElement = document.getElementById(sheet + '-grid-container');
+        }
+        if (sheetElement) {
+            rtl = sheetElement.getAttribute('dir') == 'rtl';
+        }
+        var r = document.getElementById(sheet + 'R' + row);
+        var c = document.getElementById(sheet + 'C' + col);
+        if (r && c) {
+            var objElement = document.getElementById(id);
+            var s = objElement.style;
+            var t = y;
+            while (r && r != sheetElement) {
+                t += r.offsetTop;
+                r = r.offsetParent;
+            }
+            var offsetX = x;
+            while (c && c != sheetElement) {
+                offsetX += c.offsetLeft;
+                c = c.offsetParent;
+            }
+            if (rtl) {
+                offsetX -= objElement.offsetWidth;
+            }
+            s.left = offsetX + 'px';
+            s.top = t + 'px';
+            s.display = 'block';
+            s.border = '1px solid #000000';
+        }
+    };
 
+    function posObjs() {};
+    posObjs();
+</script>
