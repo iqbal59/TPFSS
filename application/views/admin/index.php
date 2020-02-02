@@ -457,6 +457,7 @@
 
                                 
                                 <li><a href="<?php echo base_url('admin/import/storesales') ?>"><i class="fa fa-angle-right"></i> Import Data</a></li>
+                                <li><a href="<?php echo base_url('admin/import/saleimportdata') ?>"><i class="fa fa-angle-right"></i> Import Sale Data</a></li>
                                 <li><a href="<?php echo base_url('admin/import/paytmdata') ?>"><i class="fa fa-angle-right"></i> Paytm data</a></li>
                                 <li><a href="<?php echo base_url('admin/import/bharatpedata') ?>"><i class="fa fa-angle-right"></i> Bharat Pe data</a></li>
                                 <li><a href="<?php echo base_url('admin/import/mbdata') ?>"><i class="fa fa-angle-right"></i> Material Bill data</a></li> 

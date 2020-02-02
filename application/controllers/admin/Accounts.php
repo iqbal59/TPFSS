@@ -88,6 +88,21 @@ function createinvoices()
             $data['period']=date('d-m-Y', strtotime($this->input->post('invoice_date')))." to ".date('d-m-Y', strtotime($this->input->post('invoice_to_date')));
             $this->Accounts_model->saveInvoice($data['invoice'], $data['period']);
 
+
+            //REFUND SALES
+            $data['refundSales']=$this->Accounts_model->get_all_refund_sales();
+            foreach($data['refundSales'] as $r)
+                {
+                    $item=array('amount'=>$r['amount'], 'service_code'=>$r['service_code'], 'store_royalty'=>$r['store_royalty'], 'order_ids'=>$r['order_nos'], 'item_name'=>$r['service_code'].' Royalty @'.$r['store_royalty'], 'rate'=>($r['amount']*$r['store_royalty']/100));
+                    $data['rsales'][$r['id']][]=$item;
+                }
+
+
+
+            $this->Accounts_model->refundInvoice($data['rsales']);
+
+            //END REFUND
+            
             //BHARATE PE
             $bharatpe=$this->Accounts_model->get_bharatpe_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))),date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
             

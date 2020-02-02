@@ -1,8 +1,46 @@
 <?php
 class Common_model extends CI_Model {
 
+  
+  
+  /********Sale Data logic*******/
+  function saleRefund($from_dt, $to_dt){
+    $sql="insert into refundsales(order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill) select order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill from storesales where date(order_date) between '".$from_dt."' and '".$to_dt."' and is_bill=1";
+    $query=$this->db->query($sql);
+    $query=$this->db->query("delete from storesales where  date(order_date) between '".$from_dt."' and '".$to_dt."'");
+    return $query;
+
+}
+
+
+function refundAdjust($from_dt, $to_dt){
+
+     $sql="SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `refundsales` WHERE 1 and date(order_date) BETWEEN '".$from_dt."' and '".$to_dt."' and is_refund=0
+    union all 
+    SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `storesales` WHERE 1 and date(order_date) BETWEEN '".$from_dt."' and '".$to_dt."' 
+    group by order_no, store_name, taxable_amount, net_amount, service_code HAVING count(*) > 1";
+    $query=$this->db->query($sql)->result_array();
+    foreach($query as $row)
+    {
+         $linequery="update storesales set is_bill='1' where order_no='".$row['order_no']."' and store_name='".$row['store_name']."'";
+         $this->db->query($linequery);
+         $linequery="delete from refundsales where order_no='".$row['order_no']."' and store_name='".$row['store_name']."'";
+         $this->db->query($linequery);
+    }
+}
+
+
+  /******sale data end logic*********/
+  
+  
+  
     /**************REPORTS***************/
 
+  
+  
+  
+  
+  
     function getPaytmData(){
        
         $query = $this->db->query('SELECT * FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) order by transaction_date DESC')->result_array();  

@@ -105,5 +105,52 @@ function get_all_sale_by_store($date, $date_to)
             
         }
 
+
+        function refundInvoice($data){
+
+            foreach ($data as $store_id=>$items)
+            {
+                $total_amount=0;
+                $tax_amount=0;
+                $net_amount=0;
+                $order_string='';
+                // $this->db->insert('invoices', array('store_id'=>$store_id));
+                // $invoice_id=$this->db->insert_id();
+                 $storeData=$this->db->get_where('stores',array('id'=>$store_id))->row_array();
+                foreach($items as $item){
+
+                    //print_r($item);
+                   // $this->db->insert('invoice_item', array('invoice_id'=>$invoice_id, 'item_name'=>$item['item_name'], 'rate'=>$item['rate'], 'order_nos'=>$item['order_ids'], 'amount'=>$item['amount'], 'service_code'=>$item['service_code'], 'royalty'=>$item['store_royalty'])); 
+
+                    $total_amount+=$item['rate'];
+                    $sql="update refundsales set is_refund=1 where store_name='$storeData[store_name]' and order_no in($item[order_ids])";
+                   
+                    $this->db->query($sql);
+                    $order_string.=$item['order_ids'];
+                }
+                    $tax_amount=$total_amount*18/100;
+                    $net_amount=$total_amount+$tax_amount;
+                    $this->db->insert("vouchers",array("amount"=>$net_amount, "voucher_type"=>'C', "descriptions"=>$order_string, "store_id"=>$store_id ));
+            }
+
+
+        }
+
+        function get_all_refund_sales(){
+            $sql="select store_service_sale.store_name, amount, service_code,  s.royality,  ifnull(royalties.store_royalty, s.royality) as store_royalty, order_nos, stores.id from 
+
+            (SELECT store_name, sum(taxable_amount) as amount, service_code, GROUP_CONCAT(QUOTE(order_no)) as order_nos FROM `refundsales` where is_refund=0  group by store_name, service_code ORDER BY `store_name` asc) 
+            
+            as store_service_sale 
+            
+            
+            left join stores on (stores.store_name = store_service_sale.store_name ) 
+            
+            left join services as s on (s.code=store_service_sale.service_code) 
+            left join royalties on (royalties.service_id = s.id and royalties.store_id=stores.id)";
+
+            return $query=$this->db->query($sql)->result_array();
+        }
+
 }
 ?>

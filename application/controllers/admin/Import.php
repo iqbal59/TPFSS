@@ -9,7 +9,7 @@ class Import extends CI_Controller{
     }
 
    
-   
+    
     public function storesales()
     {
         // $data['users'] = $this->common_model->get_all_user();
@@ -20,13 +20,22 @@ class Import extends CI_Controller{
         $this->load->view('admin/index', $data);
     }
 
+    public function saleimportdata()
+    {
+        // $data['users'] = $this->common_model->get_all_user();
+       // $data['stores'] = $this->common_model->select('stores');
+        // $data['count'] = $this->common_model->get_user_total();
+       // $data='';
+        $data['main_content'] = $this->load->view('admin/import/addsale', null, TRUE);
+        $this->load->view('admin/index', $data);
+    }
 
    
 
     public function addstoresale(){
 
         $dataType=$this->input->post('data_type');
-
+      
         if($_FILES){
             $file=$_FILES['excel_file']['tmp_name'];
             if ($file == NULL) {
@@ -39,10 +48,16 @@ class Import extends CI_Controller{
             switch($dataType)
             {
                 case '1':
+                        $s_from_date=$this->input->post('s_from_date');
+                        $s_to_date=$this->input->post('s_to_date');
+                
+                        $this->common_model->saleRefund($s_from_date, $s_to_date);
                         $row=0;
                         while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
                         {
-                           if($row++ < 3 || $filesop[3]=='') 
+
+                            $odate=date('Y-m-d', strtotime($filesop[2]));
+                           if($row++ < 3 || $filesop[3]=='' || !(strtotime($odate)>=strtotime($s_from_date) && strtotime($odate)<=strtotime($s_to_date))) 
                            continue;
                           $data['store_name'] = $filesop[1];
                           $data['order_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
@@ -57,8 +72,9 @@ class Import extends CI_Controller{
                             
                         //print_r($data);
                         }
+                        $this->common_model->refundAdjust($s_from_date, $s_to_date);
                         $this->session->set_flashdata('msg', "data upload success");
-                       redirect('admin/import/storesales');
+                       redirect('admin/import/saleimportdata');
                 break;
              
                 case '3':
@@ -239,7 +255,6 @@ public function paytmdata(){
     // $this->pagination->initialize($config);
 
     $data['paytmdata'] = $this->common_model->getPaytmData();
-    
     $data['main_content'] = $this->load->view('admin/import/paytmdata', $data, TRUE);
     $this->load->view('admin/index',$data);
 }

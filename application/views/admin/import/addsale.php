@@ -59,12 +59,12 @@
                                         <label class="control-label text-right col-md-3">Select Data Type <span class="text-danger">*</span></label>
                                         <div class="col-md-9 controls">
                                             <select name="data_type" class="form-control" required data-validation-required-message="field is required">
-                                            <option value="">--Select--</option>
-                                            <!-- <option value="1">Sales Data</option> -->
-                                            <option value="2">Material Bill</option>
+                                            <!-- <option value="">--Select--</option> -->
+                                            <option value="1">Sales Data</option>
+                                            <!-- <option value="2">Material Bill</option>
                                             <option value="3">Paytm</option>
                                             <option value="4">Bharat Pe</option>
-                                            <option value="5">Bank Statement</option>
+                                            <option value="5">Bank Statement</option> -->
                                             </select>
                                         </div>
                                     </div>
@@ -72,6 +72,39 @@
                                 <!--/span-->
                             </div>
 
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Choose Period <span class="text-danger">*</span></label>
+                                        <div class="col-md-9 controls">
+                                           
+
+                                        <div class="row" >
+                                <div class="col-md-6">
+                                <div class="form-group">
+                                        <h5>Enter From Date <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="date" name="s_from_date" class="form-control" placeholder="MM/DD/YYYY" required > </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                <div class="form-group">
+                                        <h5>Enter To Date <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="date" name="s_to_date" class="form-control" placeholder="MM/DD/YYYY" required > </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
+
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                            </div>
 
                           
                             <div class="row">
