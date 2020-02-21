@@ -91,6 +91,7 @@ function createinvoices()
 
             //REFUND SALES
             $data['refundSales']=$this->Accounts_model->get_all_refund_sales();
+            if($data['refundSales']){
             foreach($data['refundSales'] as $r)
                 {
                     $item=array('amount'=>$r['amount'], 'service_code'=>$r['service_code'], 'store_royalty'=>$r['store_royalty'], 'order_ids'=>$r['order_nos'], 'item_name'=>$r['service_code'].' Royalty @'.$r['store_royalty'], 'rate'=>($r['amount']*$r['store_royalty']/100));
@@ -98,9 +99,9 @@ function createinvoices()
                 }
 
 
-
+            //if($data['rsales'])
             $this->Accounts_model->refundInvoice($data['rsales']);
-
+            }
             //END REFUND
             
             //BHARATE PE
