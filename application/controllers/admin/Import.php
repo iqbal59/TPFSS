@@ -62,9 +62,14 @@ class Import extends CI_Controller{
                           $data['store_name'] = $filesop[1];
                           $data['order_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
                           $data['order_no'] = $filesop[3];
-                          $data['taxable_amount'] = ($filesop[12]-$filesop[13]);
+                          $data['taxable_amount'] = (($filesop[12]-$filesop[13])/1.18);
                           $data['net_amount'] = $filesop[15];
-                          list($service_code)=explode(",", $filesop[34]);
+                          //list($service_code)=explode(",", $filesop[34]);
+                          $service_list=explode(",", $filesop[34]);
+                          if(in_array('DC', $service_list))
+                          $service_code='DC';
+                          else
+                          list($service_code)=service_list;
                           $data['service_code'] = $service_code;
                           $data['status'] = $filesop[36];
                           
