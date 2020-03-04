@@ -69,7 +69,7 @@ class Import extends CI_Controller{
                           if(in_array('DC', $service_list))
                           $service_code='DC';
                           else
-                          list($service_code)=service_list;
+                          list($service_code)=$service_list;
                           $data['service_code'] = $service_code;
                           $data['status'] = $filesop[36];
                           
