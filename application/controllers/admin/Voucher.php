@@ -21,7 +21,7 @@ class Voucher extends CI_Controller{
         $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
         
         $config = $this->config->item('pagination');
-        $config['base_url'] = site_url('admin/voucher/index?');
+        $config['base_url'] = site_url('admin/voucher/index');
         $config['total_rows'] = $this->Voucher_model->get_all_vouchers_count();
         $this->pagination->initialize($config);
 
