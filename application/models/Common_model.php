@@ -15,9 +15,9 @@ class Common_model extends CI_Model {
 
 function refundAdjust($from_dt, $to_dt){
 
-     $sql="SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `refundsales` WHERE 1 and date(order_date) BETWEEN '".$from_dt."' and '".$to_dt."' and is_refund=0
+     $sql="select * from (SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `refundsales` WHERE 1 and date(order_date) BETWEEN '".$from_dt."' and '".$to_dt."' and is_refund=0
     union all 
-    SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `storesales` WHERE 1 and date(order_date) BETWEEN '".$from_dt."' and '".$to_dt."' 
+    SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `storesales` WHERE 1 and date(order_date) BETWEEN '".$from_dt."' and '".$to_dt."' ) as temp
     group by order_no, store_name, taxable_amount, net_amount, service_code HAVING count(*) > 1";
     $query=$this->db->query($sql)->result_array();
     foreach($query as $row)
