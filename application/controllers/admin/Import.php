@@ -62,6 +62,7 @@ class Import extends CI_Controller{
                           $data['store_name'] = $filesop[1];
                           $data['order_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
                           $data['order_no'] = $filesop[3];
+                          $data['mobile_no'] = $filesop[6];
                           $data['taxable_amount'] = (($filesop[12]-$filesop[13])/1.18);
                           $data['net_amount'] = $filesop[15];
                           //list($service_code)=explode(",", $filesop[34]);
@@ -221,6 +222,53 @@ class Import extends CI_Controller{
                         }
                          $this->session->set_flashdata('msg', "data upload success");
                          redirect('admin/import/storesales');
+                break;
+
+                case '6':
+                    $row=0;
+                  //  echo "AA";
+                        while(($filesop = fgetcsv($handle, 10000, ",")) !== false)
+                        {
+                          // if($row++ < 1 || $filesop[6] != 'SUCCESS\'' || !isset($filesop[19]) || !isset($filesop[20])  )
+                           //echo trim($filesop[6], "'");
+                           if($row++ < 1 || trim($filesop[6], "'") != 'SUCCESS' || !$filesop[19] || !$filesop[20]  )
+                          continue;
+                           
+                           $data['transaction_no'] = trim($filesop[0], "'");
+                         
+                           $order_no = trim($filesop[1], "'");
+                           $order_no=substr( $order_no, strpos($order_no, 'T'));
+                           if(strpos($order_no,'_')!==false)
+                           $order_no=substr( $order_no,0, (strpos($order_no, '_')));
+                           
+                           if(strpos( $order_no,'@') !== false)
+                           $order_no=substr( $order_no,0, (strpos( $order_no, '@')));    
+                         
+                        //  echo $order_no;
+                        //  echo $customer_mobile_no = trim($filesop[11], "'");
+
+                         $data['mid_no'] = $this->common_model->getMidNo($order_no, $customer_mobile_no);
+                          //$data['mid_no'] = $this->common_model->getMidNo('T1515', '111');
+                          $data['amount'] = trim($filesop[13], "'");
+                          $data['commission'] = trim($filesop[14], "'");
+                          $data['utr_no'] = trim($filesop[19], "'");
+                          $data['transaction_date'] = trim($filesop[3], "'");
+                         // $data['settled_date'] = trim($filesop[20], "'");
+                          $data['settled_date'] = date('Y-m-d H:i:s', strtotime(trim($filesop[20], "'")));
+                          $data['store_name'] = trim($filesop[8], "'");
+                          $data['gst'] = trim($filesop[15], "'");
+                         $this->common_model->insert($data,'paytm');
+                            
+                            //print_r($data);
+                        }
+                        $paytmbankdata=$this->common_model->matchPaytmWithBank();
+                        foreach($paytmbankdata as $p)
+                        {
+                            if($p['ba']==$p['bta'])
+                            $this->common_model->paytmReconcile($p['utr_no']);
+                        }
+                         $this->session->set_flashdata('msg', "data upload success");
+                        redirect('admin/import/storesales');
                 break;
 
             }

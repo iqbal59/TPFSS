@@ -37,10 +37,10 @@ class Voucher_model extends CI_Model
         
         $this->db->join('stores', 'stores.id=vouchers.store_id', 'left');
         $this->db->order_by('id', 'desc');
-        if(isset($params) && !empty($params))
-        {
-            $this->db->limit($params['limit'], $params['offset']);
-        }
+        // if(isset($params) && !empty($params))
+        // {
+        //     $this->db->limit($params['limit'], $params['offset']);
+        // }
         return $this->db->get('vouchers')->result_array();
     }
         

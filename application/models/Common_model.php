@@ -32,7 +32,14 @@ function refundAdjust($from_dt, $to_dt){
 
   /******sale data end logic*********/
   
-  
+  /***********GET MID NO */
+
+  function getMidNo($order_no, $mobile_no){
+        $sql="SELECT storesales.store_name, stores.paytm_mid1 FROM `storesales` LEFT join stores on (storesales.store_name = stores.store_name) WHERE order_no='".$order_no."' and mobile_no='".$mobile_no."'";
+        $query=$this->db->query($sql)->row_array();
+        return $query['paytm_mid1'];
+  }
+  /***********END MID NO */
   
     /**************REPORTS***************/
 
@@ -71,7 +78,7 @@ function refundAdjust($from_dt, $to_dt){
     {
           // foreach($params as $key => $value){
               
-            $query="insert into storesales (order_date, order_no, store_name, taxable_amount, net_amount, service_code, status)values('$param[order_date]', '$param[order_no]', '$param[store_name]', '$param[taxable_amount]', '$param[net_amount]', '$param[service_code]', '$param[status]') on duplicate key update 
+            $query="insert into storesales (order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, mobile_no)values('$param[order_date]', '$param[order_no]', '$param[store_name]', '$param[taxable_amount]', '$param[net_amount]', '$param[service_code]', '$param[status]', '$param[mobile_no]') on duplicate key update 
             taxable_amount='".$param['taxable_amount']."', net_amount='".$param['net_amount']."', service_code='".$param['service_code']."', status='".$param['status']."'";
             $this->db->query($query);    
        // }

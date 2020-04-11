@@ -311,8 +311,9 @@
                 <th id="855174894R5" style="height: 89px;" class="row-headers-background">
                    
                 </th>
-                <td class="s3" colspan="3"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Billing Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s <?php echo $invoice->firm_name;?><br></span><span style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address;?></span></td>
-                <td class="s3" colspan="6"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Shipping Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s <?php echo $invoice->firm_name;?><br></span><span style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address;?></span></td>
+                <td class="s3" colspan="3"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Billing Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s <?php echo $invoice->firm_name;?><br></span><span style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address;?></span><br/>
+                <span style="font-size:9pt;font-family:Calibri,Arial;">GSTIN NO. <?php echo $invoice->gstin_no; ?></span></td>
+                <td class="s3" colspan="6"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Shipping Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s <?php echo $invoice->firm_name;?><br></span><span style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address;?></span><br><span style="font-size:9pt;font-family:Calibri,Arial;">GSTIN NO. <?php echo $invoice->gstin_no; ?></span></td>
             </tr>
             <tr style='height:16px;'>
                 <th id="855174894R6" style="height: 16px;" class="row-headers-background">
@@ -349,9 +350,12 @@
                 <td class="s8"><?php echo $inv->royalty;?></td>
                 <td class="s8"><?php echo $inv->rate; $taxable_total+=$inv->rate;?></td>
                 <td class="s7">
-				<?php echo $sgst=$inv->rate*9/100; $sgst_total+=$inv->rate*9/100;?>
+                <?php 
+                echo $sgst=round($inv->rate*9/100,2); 
+                $sgst_total+=$sgst;
+                ?>
 				</td>
-                <td class="s7"><?php echo $cgst=$inv->rate*9/100; $cgst_total+=$inv->rate*9/100;?></td>
+                <td class="s7"><?php echo $cgst=round($inv->rate*9/100,2); $cgst_total+=$cgst;?></td>
                 <td class="s7"><?php echo ($inv->rate+$sgst+$cgst); $total+=($inv->rate+$sgst+$cgst); ?></td>
             </tr>
 		   <?php }?>
@@ -389,7 +393,8 @@
                 <th id="855174894R17" style="height: 37px;" class="row-headers-background">
                     
                 </th>
-                <td class="s3" colspan="6"><span style="font-size:10pt;font-family:Calibri,Arial;">Total amount (in       </span><span style="font-size:10pt;font-family:Arial;">Seven Lakh Eighty Thousand Two Hundred Seventy Five<br></span><span style="font-size:10pt;font-family:Calibri,Arial;">words)                         </span><span style="font-size:10pt;font-family:Arial;">Rupees and Nine Paise Only</span></td>
+                <td class="s3" colspan="6"><span style="font-size:10pt;font-family:Calibri,Arial;">Total amount (in  words) :</span>      
+                <span style="font-size:10pt;font-family:Arial;"><?php echo convert_number($total);?></span></td>
                 <td class="s13" colspan="2"><span style="font-size:10pt;font-family:Arial;">Total Amount</span></td>
                 <td class="s7"><?php echo $total;?></td>
             </tr>
@@ -397,13 +402,13 @@
                 <th id="855174894R18" style="height: 157px;" class="row-headers-background">
                     
                 </th>
-                <td class="s14" colspan="9"><span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE<br></span><span style="font-size:9pt;font-family:Arial;">LIMITED<br></span><span style="font-size:7pt;font-family:Calibri,Arial;">Authorised Signatory</span></td>
+                <td class="s14" colspan="9"><span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE<br></span><span style="font-size:9pt;font-family:Arial;">LIMITED<br><br><br><br></span><span style="font-size:7pt;font-family:Calibri,Arial;">Authorised Signatory</span></td>
             </tr>
             <tr style='height:16px;'>
                 <th id="855174894R19" style="height: 16px;" class="row-headers-background">
                     
                 </th>
-                <td class="s3" colspan="9" rowspan="2">TUMBLEDRY SOLUTIONS PRIVATE LIMITED, 1007-08- 09, Tower B, Advant Navis Business Park, Plot No-7, Sector 142, Noida, Uttar Pradesh, INDIA, 201301</td>
+                <!-- <td class="s3" colspan="9" rowspan="2">TUMBLEDRY SOLUTIONS PRIVATE LIMITED, 1007-08- 09, Tower B, Advant Navis Business Park, Plot No-7, Sector 142, Noida, Uttar Pradesh, INDIA, 201301</td> -->
             </tr>
             <tr style='height:16px;'>
                 <th id="855174894R20" style="height: 16px;" class="row-headers-background">

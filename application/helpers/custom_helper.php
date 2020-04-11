@@ -22,10 +22,87 @@
 	    }
     } 
 
+
+//CONVERT NUMBER
+if(!function_exists('convert_number')){
+function convert_number($number)
+{
+if (($number < 0) || ($number > 999999999))
+{
+throw new Exception("Number is out of range");
+}
+ 
+$Gn = floor($number / 100000);  /* Millions (giga) */
+$number -= $Gn * 100000;
+$kn = floor($number / 1000);     /* Thousands (kilo) */
+$number -= $kn * 1000;
+$Hn = floor($number / 100);      /* Hundreds (hecto) */
+$number -= $Hn * 100;
+$Dn = floor($number / 10);       /* Tens (deca) */
+$n = $number % 10;               /* Ones */
+ 
+$res = "";
+ 
+if ($Gn)
+{
+$res .= convert_number($Gn) . " Lacs";
+}
+ 
+if ($kn)
+{
+$res .= (empty($res) ? "" : " ") .
+convert_number($kn) . " Thousand";
+}
+ 
+if ($Hn)
+{
+$res .= (empty($res) ? "" : " ") .
+convert_number($Hn) . " Hundred";
+}
+ 
+$ones = array("", "One", "Two", "Three", "Four", "Five", "Six",
+"Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen",
+"Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen",
+"Nineteen");
+$tens = array("", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty",
+"Seventy", "Eighty", "Ninety");
+ 
+if ($Dn || $n)
+{
+if (!empty($res))
+{
+$res .= " and ";
+}
+ 
+if ($Dn < 2)
+{
+$res .= $ones[$Dn * 10 + $n];
+}
+else
+{
+$res .= $tens[$Dn];
+ 
+if ($n)
+{
+$res .= " " . $ones[$n];
+}
+}
+}
+ 
+if (empty($res))
+{
+$res = "zero";
+}
+ 
+return $res;
+}
+}
+//END CONVERT NUMBER
+
 	//-- current date time function
 	if(!function_exists('current_datetime')){
 	    function current_datetime(){        
-	        $dt = new DateTime('now', new DateTimezone('Asia/Dhaka'));
+	        $dt = new DateTime('now', new DateTimezone('Asia/Kolkata'));
 	        $date_time = $dt->format('Y-m-d H:i:s');      
 	        return $date_time;
 	    }
