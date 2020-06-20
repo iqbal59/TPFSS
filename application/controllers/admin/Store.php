@@ -72,7 +72,7 @@ class Store extends CI_Controller{
             );
             
             $store_id = $this->Store_model->add_store($params);
-            $this->session->set_flashdata('msg', 'Store Add Successfully');           
+            $this->session->set_flashdata('msg', 'Store added Successfully');           
             redirect('admin/store/index');
         }
         else

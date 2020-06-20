@@ -243,9 +243,11 @@ class Import extends CI_Controller{
                            
                            if(strpos( $order_no,'@') !== false)
                            $order_no=substr( $order_no,0, (strpos( $order_no, '@')));    
+                           if(strpos( $order_no,'.') !== false)
+                           $order_no=substr( $order_no,0, (strpos( $order_no, '.')));    
                          
                         //  echo $order_no;
-                        //  echo $customer_mobile_no = trim($filesop[11], "'");
+                          $customer_mobile_no = trim($filesop[11], "'");
 
                          $data['mid_no'] = $this->common_model->getMidNo($order_no, $customer_mobile_no);
                           //$data['mid_no'] = $this->common_model->getMidNo('T1515', '111');
@@ -259,7 +261,7 @@ class Import extends CI_Controller{
                           $data['gst'] = trim($filesop[15], "'");
                          $this->common_model->insert($data,'paytm');
                             
-                            //print_r($data);
+                          //  print_r($data);
                         }
                         $paytmbankdata=$this->common_model->matchPaytmWithBank();
                         foreach($paytmbankdata as $p)
