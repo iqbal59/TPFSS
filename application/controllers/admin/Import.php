@@ -213,7 +213,7 @@ class Import extends CI_Controller{
                           $data['amount'] = trim($filesop[55], "'");
                           $data['invoice_no'] = trim($filesop[1], "'");
                           $data['invoice_date'] = date('Y-m-d', strtotime($filesop[0]));
-                          $data['store_crm_code'] = trim($filesop[60], "'");
+                          $data['store_crm_code'] = trim($filesop[61], "'");
                           
                          
                         $this->common_model->insert_ignore($data,'material_invoices');
