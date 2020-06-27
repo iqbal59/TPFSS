@@ -103,7 +103,7 @@ class Store extends CI_Controller{
         $this->form_validation->set_rules('paytm_mid1','Paytm MID1','required|edit_unique[stores.paytm_mid1.'.$data['store']['id'].']');
         $this->form_validation->set_rules('paytm_mid2','Paytm MID2','edit_unique[stores.paytm_mid2.'.$data['store']['id'].']');
         $this->form_validation->set_rules('paytm_mid3','Paytm MID3','edit_unique[stores.paytm_mid3.'.$data['store']['id'].']');
-        $this->form_validation->set_rules('email_id','Email ID','required|valid_email|edit_unique[stores.email_id.'.$data['store']['id'].']');
+        //$this->form_validation->set_rules('email_id','Email ID','required|valid_email|edit_unique[stores.email_id.'.$data['store']['id'].']');
     
 			if($this->form_validation->run())     
             {   
