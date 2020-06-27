@@ -123,7 +123,7 @@
 
 
 <div>
-    Pan No. : 
+Opening Balance : 
     <input type="text" name="opening_balance" value="<?php echo $this->input->post('opening_balance'); ?>" />
     <span class="text-danger"><?php echo form_error('opening_balance');?></span>
 </div>
