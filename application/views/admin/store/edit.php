@@ -121,6 +121,12 @@
     <textarea name="store_address"><?php echo ($this->input->post('store_address') ? $this->input->post('store_address') : $store['store_address']); ?></textarea>
 </div>
 
+<div>
+    Opening Balance : 
+    <input type="text" name="opening_balance" value="<?php echo ($this->input->post('opening_balance') ? $this->input->post('opening_balance') : $store['opening_balance']); ?>" />
+</div>
+
+
 <button type="submit">Save</button>
 
 <?php echo form_close(); ?>
