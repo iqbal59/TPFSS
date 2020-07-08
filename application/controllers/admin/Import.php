@@ -156,12 +156,13 @@ class Import extends CI_Controller{
                            if($row++ < 22 ||  $filesop[0] == '' ) 
                            continue;
 
-                           if(strpos($filesop[1], 'BHARATPE') !== false || strpos($filesop[1], 'RESILIENT INNOVATIONS PRIVATE LIMITED') !== false  || strpos($filesop[1], 'UPI RB') !== false)  
+                           if(strpos($filesop[1], 'BHARATPE') !== false || strpos($filesop[1], 'RESILIENT INNOVATION') !== false  || strpos($filesop[1], 'UPI RB') !== false)  
                             {
                           $data['ref_no'] = trim($filesop[2], "'");
                           $data['amount'] = trim($filesop[5], "'");
                           $data['narration'] = trim($filesop[1], "'");
-                          $data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
+                          //$data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
+                          $data['date'] = DateTime::createFromFormat('d/m/y', $filesop[0])->format('Y-m-d');
                           $this->common_model->insert($data,'bank_bharatpe');
                             }
                         $data=array();
