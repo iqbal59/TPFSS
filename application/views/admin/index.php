@@ -712,9 +712,9 @@
     <script src="<?php echo base_url() ?>assets/js/toastr.js"></script>
 
     <!-- google maps api -->
-    <script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&amp;sensor=true"></script>
-    <script src="<?php echo base_url() ?>assets/plugins/gmaps/gmaps.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/plugins/gmaps/jquery.gmaps.js"></script>
+    <!-- <script src="https://maps.google.com/maps/api/js?key=AIzaSyCUBL-6KdclGJ2a_UpmB2LXvq7VOcPT7K4&amp;sensor=true"></script> -->
+    <!-- <script src="<?php echo base_url() ?>assets/plugins/gmaps/gmaps.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/gmaps/jquery.gmaps.js"></script> -->
 
     <!-- Vector map JavaScript -->
     <script src="<?php echo base_url() ?>assets/plugins/vectormap/jquery-jvectormap-2.0.2.min.js"></script>
@@ -757,7 +757,7 @@
     <script src="<?php echo base_url() ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
     <script src="http://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
     <script src="http://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script> -->
     <script src="http://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
     <script src="http://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="http://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
