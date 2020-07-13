@@ -40,6 +40,14 @@ function refundAdjust($from_dt, $to_dt){
         return $query['paytm_mid1'];
   }
   /***********END MID NO */
+
+
+  function getStoreId($store_crm_code){
+    $sql="SELECT id FROM `stores`  WHERE store_crm_code='".$store_crm_code."'";
+    $query=$this->db->query($sql)->row_array();
+    return $query['id'];
+}
+
   
     /**************REPORTS***************/
 

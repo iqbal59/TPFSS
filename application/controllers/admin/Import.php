@@ -274,6 +274,31 @@ class Import extends CI_Controller{
                         redirect('admin/import/storesales');
                 break;
 
+                case '7':
+                    $row=0;
+                    while(($filesop = fgetcsv($handle, 10000, ",")) !== false)
+                    {
+                       if($row++ < 1 ) 
+                       continue;
+                     //print_r($filesop);
+                     
+                      $data['store_id'] = $this->common_model->getStoreId(trim($filesop[0], "'")); 
+                      if(!$data['store_id'])
+                      continue;
+                      $data['amount'] = trim($filesop[2], "'");
+                      $data['create_date'] = date('Y-m-d', strtotime($filesop[1]));
+                      $data['descriptions'] = trim($filesop[4], "'");
+                      $data['voucher_type'] = trim($filesop[3], "'");
+                      
+                     
+                    $this->common_model->insert($data,'vouchers');
+                        
+                     // print_r($data);
+                    }
+                    $this->session->set_flashdata('msg', "data upload success");
+                    redirect('admin/voucher');
+            break;
+
             }
                 
             }   

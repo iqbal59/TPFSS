@@ -66,6 +66,7 @@
                                             <option value="4">Bharat Pe</option>
                                             <option value="5">Bank Statement</option>
                                             <option value="6">Paytm App</option>
+                                            <option value="7">Voucher Data</option>
                                             </select>
                                         </div>
                                     </div>

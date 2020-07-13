@@ -41,9 +41,14 @@
                 <div class="card-body">
                 <?php echo form_open('admin/voucher/edit/'.$voucher['id']); ?>
 
-	<div>
-		<span class="text-danger">*</span>Voucher Type : 
-		<select name="voucher_type">
+	
+	
+						<div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Voucher Type :  </label>
+                                        <div class="col-md-9 controls">
+										<select name="voucher_type" class="form-control">
 			<option value="">select</option>
 			<?php 
 			$voucher_type_values = array(
@@ -61,10 +66,19 @@
 			?>
 		</select>
 		<span class="text-danger"><?php echo form_error('voucher_type');?></span>
-	</div>
-	<div>
-		<span class="text-danger">*</span>Store Id : 
-        <select name="store_id">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+							</div>
+							
+	
+							<div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Store Id : </label>
+                                        <div class="col-md-9 controls">
+										<select name="store_id" class="form-control"  id="store_id_voucher">
 			<option value="">select</option>
 			<?php 
 			foreach($stores as $s)
@@ -77,14 +91,44 @@
 		</select>
        
 		<span class="text-danger"><?php echo form_error('store_id');?></span>
-	</div>
-	<div>
-		<span class="text-danger">*</span>Amount : 
-		<input type="text" name="amount" value="<?php echo ($this->input->post('amount') ? $this->input->post('amount') : $voucher['amount']); ?>" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+							</div>
+
+							<div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3">Amount : </label>
+                                        <div class="col-md-9 controls">
+										<input type="text" name="amount" class="form-control" value="<?php echo ($this->input->post('amount') ? $this->input->post('amount') : $voucher['amount']); ?>" />
 		<span class="text-danger"><?php echo form_error('amount');?></span>
-	</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+							</div>
 	
-	<button type="submit">Save</button>
+	
+	
+	
+	
+
+
+
+
+							<hr/>
+	<div class="row">
+                                <div class="col-md-9">
+                                    <div class="form-group row">
+                                        <label class="control-label text-right col-md-3"></label>
+                                        <div class="controls">
+                                            <button type="submit" class="btn btn-success">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 	
 <?php echo form_close(); ?>
                 </div>

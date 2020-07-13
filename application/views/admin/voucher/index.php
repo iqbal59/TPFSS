@@ -78,7 +78,8 @@
                     <div class="table-responsive m-t-40">
                         
                     <table  id="example23" class="display nowrap table table-hover table-striped table-bordered" cellspacing="0" width="100%">
-    <tr>
+         <thead>
+                    <tr>
 		<th>ID</th>
 		<th>Voucher Type</th>
 		<th>Store Id</th>
@@ -86,6 +87,8 @@
 		<th>Create Date</th>
 		<th>Actions</th>
     </tr>
+                    </thead>
+                    <tbody>
 	<?php foreach($vouchers as $v){ ?>
     <tr>
 		<td><?php echo $v['id']; ?></td>
@@ -98,10 +101,11 @@
             <!-- <a href="<?php echo site_url('admin/voucher/remove/'.$v['id']); ?>">Delete</a> -->
         </td>
     </tr>
-	<?php } ?>
+    <?php } ?>
+    </tbody>
 </table>
 <!-- <div class="pull-right">
-    <?php echo $this->pagination->create_links(); ?>    
+    <?php //echo $this->pagination->create_links(); ?>    
 </div> -->
 
                     </div>

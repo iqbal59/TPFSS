@@ -800,6 +800,8 @@
                     table.order([2, 'asc']).draw();
                 }
             });
+
+           
         });
     });
     $('#example23').DataTable({
@@ -856,6 +858,10 @@
 
         //summernone text editor
         jQuery(document).ready(function() {
+
+            $('#store_id_voucher').select2({
+  placeholder: 'Select Store ID'
+});
 
         $('.summernote').summernote({
             height: 350, // set editor height
