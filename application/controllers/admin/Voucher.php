@@ -10,6 +10,7 @@ class Voucher extends CI_Controller{
         parent::__construct();
         $this->load->model('Voucher_model');
         $this->load->model('Store_model');
+        
     } 
 
     /*
@@ -116,5 +117,125 @@ class Voucher extends CI_Controller{
         else
             show_error('The voucher you are trying to delete does not exist.');
     }
+
+
+//IMPORT VOUCHER
+
+function importvoucher(){
+            $this->load->library('form_validation');
+            
+            if (empty($_FILES['excel_file']['name']))
+            { 
+            $this->form_validation->set_rules('excel_file','Excel File','required');
+            }
+			$this->form_validation->set_rules('voucher_type','Voucher Type','required');
+		
+			if($this->form_validation->run())     
+            {   
+                $voucherType=$this->input->post('voucher_type');
+                $file=$_FILES['excel_file']['tmp_name'];
+
+                $handle = fopen($file, "r") or die("err");
+
+
+                switch($voucherType){
+                    case 'C':
+                        $row=0;
+                        while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+                        {
+                            if($row++ < 7 )
+                            continue;
+
+                         $storeCode=$this->Store_model->get_store_by_code(trim($filesop[13]));
+
+                            if(!$storeCode)
+                            continue;
+
+                             $params = array(
+					'voucher_type' => $voucherType,
+					'store_id' =>$storeCode['id'],
+                    'amount' => trim($filesop[5]),
+                    'create_date' => date('Y-m-d' ,strtotime($filesop[0]))
+                );
+
+                //print_r($params);
+
+                $this->Voucher_model->add_voucher($params);
+
+                        }
+              
+               redirect('admin/voucher/index');
+                    break;
+                    case 'D':
+                        $row=0;
+                        while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+                        {
+                            if($row++ < 7 )
+                            continue;
+
+                         $storeCode=$this->Store_model->get_store_by_code(trim($filesop[15]));
+
+                            if(!$storeCode)
+                            continue;
+
+                             $params = array(
+					'voucher_type' => $voucherType,
+					'store_id' =>$storeCode['id'],
+                    'amount' => trim($filesop[6]),
+                  	'create_date' => date('Y-m-d' ,strtotime($filesop[0]))
+                );
+
+               // print_r($params);
+
+                $this->Voucher_model->add_voucher($params);
+
+                        }
+              
+                redirect('admin/voucher/index');
+
+                    break;
+                    case 'R':
+                        $row=0;
+                        while(($filesop = fgetcsv($handle, 1000, ",")) !== false)
+                        {
+                            if($row++ < 1 )
+                            continue;
+
+                         $storeCode=$this->Store_model->get_store_by_code(trim($filesop[5]));
+
+                            if(!$storeCode)
+                            continue;
+
+                             $params = array(
+					'voucher_type' => $voucherType,
+					'store_id' =>$storeCode['id'],
+                    'amount' => trim($filesop[4]),
+                    'create_date' => date('Y-m-d' ,strtotime($filesop[0])),
+                    'descriptions' => trim($filesop[6])
+                );
+
+               // print_r($params);
+
+                $this->Voucher_model->add_voucher($params);
+
+                        }
+              
+                redirect('admin/voucher/index');
+                    break;
+                }    
+
+
+               
+            }
+            else
+            {
+                $data['main_content'] = $this->load->view('admin/voucher/import', null, TRUE);
+                $this->load->view('admin/index',$data);
+            }
+
+           
+}
+
+
     
 }

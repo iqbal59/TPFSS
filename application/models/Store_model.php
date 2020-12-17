@@ -16,6 +16,16 @@ class Store_model extends CI_Model
         return $this->db->get_where('stores',array('id'=>$id))->row_array();
     }
     
+
+/*
+     * Get store by code
+     */
+    function get_store_by_code($id)
+    {
+        return $this->db->get_where('stores',array('store_crm_code'=>$id))->row_array();
+    }
+    
+
     /*
      * Get all stores count
      */

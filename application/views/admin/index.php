@@ -446,6 +446,7 @@
                                 
                                 <li><a href="<?php echo base_url('admin/voucher/add') ?>"><i class="fa fa-angle-right"></i> Add Voucher</a></li>
                                 <li><a href="<?php echo base_url('admin/voucher') ?>"><i class="fa fa-angle-right"></i> Voucher List</a></li>
+                                <li><a href="<?php echo base_url('admin/voucher/importvoucher') ?>"><i class="fa fa-angle-right"></i> Import Voucher</a></li>
                                 
                             </ul>
                         </li>                    
