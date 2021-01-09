@@ -208,13 +208,13 @@ class Import extends CI_Controller{
                         $row=0;
                         while(($filesop = fgetcsv($handle, 10000, ",")) !== false)
                         {
-                           if($row++ < 7 ) 
+                           if($row++ < 1 ) 
                            continue;
                          //print_r($filesop);
                           $data['amount'] = trim($filesop[5], "'");
                           $data['invoice_no'] = trim($filesop[3], "'");
                           $data['invoice_date'] = date('Y-m-d', strtotime($filesop[0]));
-                          $data['store_crm_code'] = trim($filesop[30], "'");
+                          $data['store_crm_code'] = trim($filesop[6], "'");
                           
                          
                         $this->common_model->insert_ignore($data,'material_invoices');
