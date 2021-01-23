@@ -180,6 +180,12 @@ public function insert_ignore($data,$table){
         return;
     } 
 
+    function updateStoreOpenBalance($store_id, $open_bal){
+         $query="update stores set opening_balance=$open_bal where store_crm_code='".$store_id."'";
+         $this->db->query($query);
+    } 
+
+
     //-- delete function
     function delete($id,$table){
         $this->db->delete($table, array('id' => $id));

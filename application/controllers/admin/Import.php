@@ -299,6 +299,29 @@ class Import extends CI_Controller{
                     redirect('admin/voucher');
             break;
 
+            case '8':
+                $row=0;
+                while(($filesop = fgetcsv($handle, 10000, ",")) !== false)
+                {
+                   if($row++ < 1 ) 
+                   continue;
+                 //print_r($filesop);
+                 
+                  
+                  $store_id = trim($filesop[0], "'");
+                  $open_bal = trim($filesop[1], "'");
+                  
+                  
+                 
+                $this->common_model->updateStoreOpenBalance($store_id, $open_bal);
+                    
+                 // print_r($data);
+                }
+                $this->session->set_flashdata('msg', "data upload success");
+                redirect('admin/store');
+        break;
+
+
             }
                 
             }   
