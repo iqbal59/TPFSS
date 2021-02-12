@@ -114,7 +114,7 @@ class Import extends CI_Controller{
                         $paytmbankdata=$this->common_model->matchPaytmWithBank();
                         foreach($paytmbankdata as $p)
                         {
-                            if($p['ba']==$p['bta'] or  $p['ba'] > $p['bta'] or $p['ba'] < $p['bta'])
+                            if($p['ba']==$p['bta'] or  ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta']))
                             $this->common_model->paytmReconcile($p['utr_no']);
                         }
                          $this->session->set_flashdata('msg', "data upload success");
@@ -267,7 +267,8 @@ class Import extends CI_Controller{
                         $paytmbankdata=$this->common_model->matchPaytmWithBank();
                         foreach($paytmbankdata as $p)
                         {
-                            if($p['ba']==$p['bta'])
+                            //if($p['ba']==$p['bta'])
+                            if($p['ba']==$p['bta'] or  ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta']))
                             $this->common_model->paytmReconcile($p['utr_no']);
                         }
                          $this->session->set_flashdata('msg', "data upload success");
