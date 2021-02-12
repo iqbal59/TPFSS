@@ -63,7 +63,7 @@ class Import extends CI_Controller{
                           $data['order_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
                           $data['order_no'] = $filesop[3];
                           $data['mobile_no'] = $filesop[6];
-                          $data['taxable_amount'] = (($filesop[12]-$filesop[13])/1.18);
+                          $data['taxable_amount'] = (($filesop[12]-$filesop[13]-$filesop[18])/1.18);
                           $data['net_amount'] = $filesop[15];
                           //list($service_code)=explode(",", $filesop[34]);
                           $service_list=array_map("trim", explode(",", $filesop[34]));
@@ -114,7 +114,7 @@ class Import extends CI_Controller{
                         $paytmbankdata=$this->common_model->matchPaytmWithBank();
                         foreach($paytmbankdata as $p)
                         {
-                            if($p['ba']==$p['bta'])
+                            if($p['ba']==$p['bta'] or  $p['ba'] > $p['bta'] or $p['ba'] < $p['bta'])
                             $this->common_model->paytmReconcile($p['utr_no']);
                         }
                          $this->session->set_flashdata('msg', "data upload success");
