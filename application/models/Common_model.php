@@ -5,7 +5,7 @@ class Common_model extends CI_Model {
   
   /********Sale Data logic*******/
   function saleRefund($from_dt, $to_dt){
-    $sql="insert into refundsales(order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill) select order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill from storesales where date(order_date) between '".$from_dt."' and '".$to_dt."' and is_bill=1";
+    $sql="insert into refundsales(order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill, customer_id) select order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill, customer_id from storesales where date(order_date) between '".$from_dt."' and '".$to_dt."' and is_bill=1";
     $query=$this->db->query($sql);
     $query=$this->db->query("delete from storesales where  date(order_date) between '".$from_dt."' and '".$to_dt."'");
     return $query;
@@ -86,8 +86,8 @@ function refundAdjust($from_dt, $to_dt){
     {
           // foreach($params as $key => $value){
               
-            $query="insert into storesales (order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, mobile_no)values('$param[order_date]', '$param[order_no]', '$param[store_name]', '$param[taxable_amount]', '$param[net_amount]', '$param[service_code]', '$param[status]', '$param[mobile_no]') on duplicate key update 
-            taxable_amount='".$param['taxable_amount']."', net_amount='".$param['net_amount']."', service_code='".$param['service_code']."', status='".$param['status']."'";
+            $query="insert into storesales (order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, mobile_no, customer_id)values('$param[order_date]', '$param[order_no]', '$param[store_name]', '$param[taxable_amount]', '$param[net_amount]', '$param[service_code]', '$param[status]', '$param[mobile_no]', '$param[customer_id]') on duplicate key update 
+            taxable_amount='".$param['taxable_amount']."', net_amount='".$param['net_amount']."', service_code='".$param['service_code']."', status='".$param['status']."', customer_id='".$param['customer_id']."'";
             $this->db->query($query);    
        // }
        
