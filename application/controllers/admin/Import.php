@@ -170,6 +170,8 @@ class Import extends CI_Controller{
                         if(strpos($filesop[1], 'ONE97') !== false  ||  strpos($filesop[1], 'ONE 97') !== false ||  strpos($filesop[1], 'UPI-PAYTM-PAYOUTS@PAYTM') !== false)  
                             {
                           $data['ref_no'] = trim($filesop[2], "'");
+                          if(is_numeric($data['ref_no']))
+                          $data['ref_no'] = ltrim($filesop[2], "0");
                           $data['amount'] = trim($filesop[5], "'");
                           $data['narration'] = trim($filesop[1], "'");
                           $data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
