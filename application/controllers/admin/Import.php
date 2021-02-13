@@ -167,7 +167,7 @@ class Import extends CI_Controller{
                           $this->common_model->insert($data,'bank_bharatpe');
                             }
                         $data=array();
-                        if(strpos($filesop[1], 'ONE97') !== false  ||  strpos($filesop[1], 'ONE 97') !== false ||  strpos($filesop[1], 'UPI-PAYTM-PAYOUTS@PAYTM') !== false)  
+                        if(strpos($filesop[1], 'ONE97') !== false  ||  strpos($filesop[1], 'ONE 97') !== false ||  strpos($filesop[1], 'PAYTM') !== false)  
                             {
                           $data['ref_no'] = trim($filesop[2], "'");
                           if(is_numeric($data['ref_no']))
