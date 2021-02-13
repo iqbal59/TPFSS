@@ -34,8 +34,8 @@ function refundAdjust($from_dt, $to_dt){
   
   /***********GET MID NO */
 
-  function getMidNo($order_no, $mobile_no){
-        $sql="SELECT storesales.store_name, stores.paytm_mid1 FROM `storesales` LEFT join stores on (storesales.store_name = stores.store_name) WHERE order_no='".$order_no."' and mobile_no='".$mobile_no."'";
+  function getMidNo($order_no, $mobile_no, $customer_id){
+        $sql="SELECT storesales.store_name, stores.paytm_mid1 FROM `storesales` LEFT join stores on (storesales.store_name = stores.store_name) WHERE (order_no='".$order_no."' and mobile_no='".$mobile_no."') or storesales.customer_id='".$customer_id."' order by order_date desc limit 0,1";
         $query=$this->db->query($sql)->row_array();
         return $query['paytm_mid1'];
   }

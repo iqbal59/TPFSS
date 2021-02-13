@@ -75,6 +75,7 @@ class Import extends CI_Controller{
                           //print_r($service_list);
                           $data['service_code'] = $service_code;
                           $data['status'] = $filesop[36];
+                          $data['customer_id'] = $filesop[37];
                           //print_r($data);
                          // echo "<br>";
 
@@ -249,8 +250,9 @@ class Import extends CI_Controller{
                          
                         //  echo $order_no;
                           $customer_mobile_no = trim($filesop[11], "'");
+                          $customer_id = trim($filesop[9], "'");
 
-                         $data['mid_no'] = $this->common_model->getMidNo($order_no, $customer_mobile_no);
+                         $data['mid_no'] = $this->common_model->getMidNo($order_no, $customer_mobile_no, $customer_id);
                           //$data['mid_no'] = $this->common_model->getMidNo('T1515', '111');
                           $data['amount'] = trim($filesop[13], "'");
                           $data['commission'] = trim($filesop[14], "'");
