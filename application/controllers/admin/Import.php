@@ -102,7 +102,11 @@ class Import extends CI_Controller{
                            $data['mid_no'] = trim($filesop[7], "'");
                           $data['amount'] = trim($filesop[13], "'");
                           $data['commission'] = trim($filesop[14], "'");
-                          $data['utr_no'] = trim($filesop[19], "'");
+                          $utr_no=trim($filesop[19], "'");
+                          if(is_numeric($utr_no))
+                          $utr_no = ltrim($utr_no, "0");
+                          $data['utr_no'] = $utr_no;
+                          //$data['utr_no'] = trim($filesop[19], "'");
                           $data['transaction_date'] = trim($filesop[3], "'");
                          // $data['settled_date'] = trim($filesop[20], "'");
                           $data['settled_date'] = date('Y-m-d H:i:s', strtotime(trim($filesop[20], "'")));
@@ -258,7 +262,10 @@ class Import extends CI_Controller{
                           //$data['mid_no'] = $this->common_model->getMidNo('T1515', '111');
                           $data['amount'] = trim($filesop[13], "'");
                           $data['commission'] = trim($filesop[14], "'");
-                          $data['utr_no'] = trim($filesop[19], "'");
+                          $utr_no=trim($filesop[19], "'");
+                          if(is_numeric($utr_no))
+                          $utr_no = ltrim($utr_no, "0");
+                          $data['utr_no'] = $utr_no;
                           $data['transaction_date'] = trim($filesop[3], "'");
                          // $data['settled_date'] = trim($filesop[20], "'");
                           $data['settled_date'] = date('Y-m-d H:i:s', strtotime(trim($filesop[20], "'")));
