@@ -211,7 +211,7 @@ function importvoucher(){
 					'store_id' =>$storeCode['id'],
                     'amount' => trim($filesop[4]),
                     'create_date' => date('Y-m-d' ,strtotime($filesop[0])),
-                    'descriptions' => trim($filesop[1])
+                    'descriptions' => trim($filesop[6])
                 );
 
                // print_r($params);
