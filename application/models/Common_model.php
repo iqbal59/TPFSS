@@ -75,9 +75,9 @@ function refundAdjust($from_dt, $to_dt){
         return $query;
     }
 
-    function getSaleOrderData(){
-       
-        $query = $this->db->query('SELECT * FROM storesales LEFT join stores on(storesales.store_name=stores.store_name) order by order_date DESC')->result_array();  
+    function getSaleOrderData($param){
+        $sql='SELECT * FROM storesales LEFT join stores on(storesales.store_name=stores.store_name) where date(order_date) between \''.$param['from_dt'].'\'  and \''.$param['to_dt'].'\' order by order_date DESC';
+        $query = $this->db->query($sql)->result_array();  
         return $query;
     }
 /**************REPORTS END***************/

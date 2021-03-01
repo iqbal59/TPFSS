@@ -358,8 +358,16 @@ public function saledata(){
     // $config['total_rows'] = $this->common_model->get_all_count_by_table('storesales');
     // $this->pagination->initialize($config);
 
-    $data['salesdata'] = $this->common_model->getSaleOrderData();
-    
+    $data=array();
+    $condition_array=array('from_dt'=>$this->input->get('from_date'), 'to_dt'=>$this->input->get('to_date'));
+   
+    if(!empty($condition_array['from_dt']) && !empty($condition_array['to_dt'])){
+    $data['salesdata'] = $this->common_model->getSaleOrderData($condition_array);
+    $data['search_query']=$condition_array;  
+  
+    }
+
+   
     $data['main_content'] = $this->load->view('admin/import/saledata', $data, TRUE);
     $this->load->view('admin/index',$data);
 }
