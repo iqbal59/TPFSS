@@ -43,7 +43,7 @@ function get_all_sale_by_store($date, $date_to)
 
             UNION
             
-            SELECT material_invoices.id, material_invoices.amount as np ,'Sale' as voucher_type, material_invoices.invoice_date as voucher_date, 'Material' as descriptions, invoice_no as voucher_no from material_invoices LEFT join stores on (stores.store_crm_code=material_invoices.store_crm_code)  WHERE 1 and material_invoices.invoice_date >= '$date' and material_invoices.invoice_date <= '$date_to' and stores.id=$sotreid
+            SELECT material_invoices.id, material_invoices.amount as np ,'Sale' as voucher_type, material_invoices.invoice_date as voucher_date, case when material_description is not null then material_description else 'Material' end as descriptions, invoice_no as voucher_no from material_invoices LEFT join stores on (stores.store_crm_code=material_invoices.store_crm_code)  WHERE 1 and material_invoices.invoice_date >= '$date' and material_invoices.invoice_date <= '$date_to' and stores.id=$sotreid
             
             
             UNION
