@@ -1,5 +1,4 @@
 <?php
-ini_set('memory_limit', '256M');
 class Import extends CI_Controller{
 
     public function __construct(){
