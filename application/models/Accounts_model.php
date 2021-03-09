@@ -33,7 +33,7 @@ function get_all_sale_by_store($date, $date_to)
 
   function get_paytm_by_store($date, $date_to)
   {
-      return $this->db->query("select mid_no, (amount-commission-gst) as final_amount, (commission+gst) as  paytmcommission, stores.id as store_id, ids  from (SELECT  mid_no, sum(amount) as amount, sum(commission) as commission, sum(gst) as gst, group_concat(paytm.id) as ids FROM `paytm` where is_reconcile=1 and is_bill=0 AND date(transaction_date) >= '$date' and date(transaction_date) <= '$date_to' GROUP by mid_no) as temptable left join stores on (stores.paytm_mid1=mid_no or stores.paytm_mid2=mid_no or stores.paytm_mid3=mid_no) ")->result_array();
+      return $this->db->query("select mid_no, (amount-commission-gst) as final_amount, (commission+gst) as  paytmcommission, stores.id as store_id, ids  from (SELECT  mid_no, sum(amount) as amount, sum(commission) as commission, sum(gst) as gst, group_concat(paytm.id) as ids FROM `paytm` where is_reconcile=1 and is_bill=0 and mid_no != '' AND date(transaction_date) >= '$date' and date(transaction_date) <= '$date_to' GROUP by mid_no) as temptable left join stores on (stores.paytm_mid1=mid_no or stores.paytm_mid2=mid_no or stores.paytm_mid3=mid_no) ")->result_array();
   }
 
 
