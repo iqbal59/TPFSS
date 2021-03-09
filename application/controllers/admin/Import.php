@@ -112,7 +112,7 @@ class Import extends CI_Controller{
                           $data['settled_date'] = date('Y-m-d H:i:s', strtotime(trim($filesop[20], "'")));
                           $data['store_name'] = trim($filesop[8], "'");
                           $data['gst'] = trim($filesop[15], "'");
-                         $this->common_model->insert($data,'paytm');
+                         $this->common_model->insert_ignore($data,'paytm');
                             
                             //print_r($data);
                         }
@@ -133,13 +133,18 @@ class Import extends CI_Controller{
                            if($row++ < 1 || trim($filesop[6], "'") != 'SUCCESS') 
                            continue;
                           $data['transaction_no'] = trim($filesop[1], "'");
-                          $data['utr_no'] = trim($filesop[8], "'");
+                         // $data['utr_no'] = trim($filesop[8], "'");
+                         $utr_no=trim($filesop[8], "'");
+                         if(is_numeric($utr_no))
+                         $utr_no = ltrim($utr_no, "0");
+                         $data['utr_no'] = $utr_no;
+
                           $data['amount'] = trim($filesop[3], "'");
                           $data['store_name'] = trim($filesop[10], "'");
                           $data['transaction_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
                           $data['settled_date'] = date('Y-m-d H:i:s', strtotime($filesop[9]));
                          
-                         $this->common_model->insert($data,'bharatpe');
+                         $this->common_model->insert_ignore($data,'bharatpe');
                             
                             //print_r($data);
                         }
@@ -164,11 +169,13 @@ class Import extends CI_Controller{
                            if(strpos($filesop[1], 'BHARATPE') !== false || strpos($filesop[1], 'RESILIENT INNOVATION') !== false  || strpos($filesop[1], 'UPI RB') !== false)  
                             {
                           $data['ref_no'] = trim($filesop[2], "'");
+                          if(is_numeric($data['ref_no']))
+                          $data['ref_no'] = ltrim($filesop[2], "0");
                           $data['amount'] = trim($filesop[5], "'");
                           $data['narration'] = trim($filesop[1], "'");
                           //$data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
                           $data['date'] = DateTime::createFromFormat('d/m/y', $filesop[0])->format('Y-m-d');
-                          $this->common_model->insert($data,'bank_bharatpe');
+                          $this->common_model->insert_ignore($data,'bank_bharatpe');
                             }
                         $data=array();
                         if(strpos($filesop[1], 'ONE97') !== false  ||  strpos($filesop[1], 'ONE 97') !== false ||  strpos($filesop[1], 'PAYTM') !== false)  
@@ -179,7 +186,7 @@ class Import extends CI_Controller{
                           $data['amount'] = trim($filesop[5], "'");
                           $data['narration'] = trim($filesop[1], "'");
                           $data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
-                          $this->common_model->insert($data,'bank_paytm');
+                          $this->common_model->insert_ignore($data,'bank_paytm');
 
 
 
@@ -272,7 +279,7 @@ class Import extends CI_Controller{
                           $data['settled_date'] = date('Y-m-d H:i:s', strtotime(trim($filesop[20], "'")));
                           $data['store_name'] = trim($filesop[8], "'");
                           $data['gst'] = trim($filesop[15], "'");
-                         $this->common_model->insert($data,'paytm');
+                         $this->common_model->insert_ignore($data,'paytm');
                             
                           //  print_r($data);
                         }
