@@ -81,7 +81,7 @@
                                     <th>Amount</th>
                                     <th>Store Code</th>
                                     <th>Desc</th>
-
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,6 +97,7 @@
 
                                     <td><?php echo $s['store_code']; ?></td>
                                     <td><?php echo $s['material_description']; ?></td>
+                                    <td><a href="<?php echo base_url('admin/import/editmb/'.$s['id'])?>">Edit</a></td>
 
                                 </tr>
                                 <?php } ?>

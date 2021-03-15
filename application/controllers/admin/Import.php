@@ -429,5 +429,47 @@ public function mbdata(){
 }
 
 
+public function editmb($id)
+    {   
+        // check if the store exists before trying to edit it
+        $data['store'] = $this->common_model->get_material_by_id($id);
+      
+        
+        if(isset($data['store']['id']))
+        {
+            $this->load->library('form_validation');
+
+		 $this->form_validation->set_rules('invoice_no','Invoice No.','required|edit_unique[material_invoices.invoice_no.'.$data['store']['id'].']');
+         $this->form_validation->set_rules('store_crm_code','Store CRM Code','required');
+         $this->form_validation->set_rules('invoice_date','Invoice Date (YYYY-MM-DD)','required');
+         $this->form_validation->set_rules('amount','Amount','required');
+       
+    
+			if($this->form_validation->run())     
+            {   
+                $params = array(
+					'invoice_no' => $this->input->post('invoice_no'),
+					'store_crm_code' => $this->input->post('store_crm_code'),
+					'invoice_date' => $this->input->post('invoice_date'),
+					'amount' => $this->input->post('amount'),
+					'material_description' => $this->input->post('material_description'),
+                );
+
+                $this->common_model->update_material($id,$params);  
+                $this->session->set_flashdata('msg', 'Material Invoice updated Successfully');                     
+                redirect('admin/import/mbdata');
+            }
+            else
+            {
+                $data['main_content'] = $this->load->view('admin/import/editmb', $data, TRUE);
+                $this->load->view('admin/index',$data);
+            }
+        }
+        else
+            show_error('The Material Invoice you are trying to edit does not exist.');
+    } 
+
+
+
 }
 ?>

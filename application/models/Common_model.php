@@ -71,7 +71,7 @@ function refundAdjust($from_dt, $to_dt){
 
     function getMbData(){
        
-        $query = $this->db->query('SELECT * FROM material_invoices LEFT join stores on(material_invoices.store_crm_code=stores.store_crm_code) order by invoice_date DESC')->result_array();  
+        $query = $this->db->query('SELECT  mi.id, mi.amount, mi.invoice_date, mi.invoice_no, s.store_code, mi.material_description FROM material_invoices mi LEFT join stores s on(mi.store_crm_code=s.store_crm_code) order by invoice_date DESC')->result_array();  
         return $query;
     }
 
@@ -148,7 +148,22 @@ function paytmbill($ids){
         }
         return $this->db->get($table)->result_array();
     }
-        
+     
+    
+    function get_material_by_id($id)
+    {
+        return $this->db->get_where('material_invoices',array('id'=>$id))->row_array();
+    }
+
+
+    function update_material($id,$params)
+    {
+        $this->db->where('id',$id);
+        return $this->db->update('material_invoices',$params);
+    }
+
+
+
 //-- insert function
 public function insert_ignore($data,$table){
         
