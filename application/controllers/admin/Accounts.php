@@ -59,6 +59,9 @@ function printledger($id){
 }
 
 
+
+
+
 function createinvoices()
     {
         $this->load->library('form_validation');
@@ -148,6 +151,332 @@ function invoicepdf($id)
     }
 
 
+    function downloadledger($id){
+
+        if($this->input->post('from_date'))
+        $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+        else
+        $data['open_date']=date('Y-m-01');
+    
+        if($this->input->post('to_date'))
+        $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+        else
+        $data['to_date']=date('Y-m-d');
+    
+        $openBalance=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $ledgerItems=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))),  $data['to_date']   , $id);
+
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetTitle('Customer Ledger');
+        $pdf->SetHeaderMargin(30);
+        $pdf->SetTopMargin(20);
+        $pdf->setFooterMargin(20);
+        $pdf->SetAutoPageBreak(true);
+        $pdf->SetAuthor('tumbledry');
+       // $pdf->SetDisplayMode('real', 'default');
+        //$pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        $pdf->SetFont('dejavusans', '', 10);
+        $pdf->AddPage();
+
+
+
+
+        $html = '<p align="center"><strong>Ledger Period : '.date("d-m-Y", strtotime($data['open_date'])).' to
+                '.date("d-m-Y", strtotime( $data['to_date'])).'</strong></p>
+        <div style="font-size:14px;">
+            <div align="right" style="font-size:12px;">
+                <b class="title_name">TUMBLEDRY SOLUTIONS PRIVATE LIMITED</b><br />
+
+                5, 512-B, 98-MODI TOWER, NEHRU PLACE, NEW DELHI,<br>
+                South East Delhi, New Delhi, Delhi 110019<br>
+                01204317564<br>
+                GSTIN 07AAHCT2140E1ZP<br>
+                PAN AAHCT2140E<br>
+                CIN U74999DL2019PTC347046
+            </div>
+            <hr />
+
+
+            <b class="title_name"> '.$openBalance['firm_name'].' </b>
+            <BR />
+           '.$openBalance['store_address'].'
+
+
+
+        </div>
+        <br /><br />
+        <table id="" class="list" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <td class="center">Voucher No.</td>
+                    <td class="center">Voucher Type</td>
+                    <td class="center">Voucher Date</td>
+
+                    <td class="center">Debit</td>
+                    <td class="center">Credit</td>
+                    <td class="center">Descriptions</td>
+                    <td class="center">Balance</td>
+
+                </tr>
+            </thead>
+            <!-- <tfoot>
+                                <tr>
+                                <th>Customer Name</th>
+                                    <th>Balance</th>
+                                    <th>Action</th>
+                                </tr>
+                            </tfoot>
+                             -->
+            <tbody>
+
+                <tr>
+                    <td>-</td>
+                    <td>Opening Balance</td>
+                    <td>'.date("d-m-Y", strtotime($data['open_date'])).'</td>
+                    <td class="right">'.$openBalance['openbalance'].'</td>
+
+                    <td>-</td>
+                    <td>-</td>
+                    <td class="right">'.$openBalance['openbalance'].'</td>
+
+                </tr>';
+
+                $total_balalnce=$openBalance['openbalance'];
+
+                $saleInvoice=array();
+                $paytmR=array();
+                $bharatpeR=array();
+
+                foreach($ledgerItems as $li){
+                    if ( preg_match("~\bTMBLR\b~",$li['voucher_no']) )
+
+                        {
+                            $saleInvoice[]=$li['id'];
+                        }
+
+                        if ( preg_match("~\bBharate Pe\b~",$li['descriptions']) && $li['voucher_type'] =='R')
+
+                        {
+                            $bharatpeR[]=$li['descriptions'];
+                        }
+
+                        if ( preg_match("~\bPaytm\b~",$li['descriptions'])  && $li['voucher_type'] =='R')
+
+                        {
+                            $paytmR[]=$li['descriptions'];
+                        }
+
+
+                    $html.='<tr>
+                        <td>'.$li['voucher_no'].'</td>
+                        <td>';
+                                if($li['voucher_type']=='C')
+                                $voucher_type= 'Credit';
+                                elseif($li['voucher_type']=='R')
+                                $voucher_type= 'Receipt';
+                                elseif($li['voucher_type']=='D')
+                                $voucher_type= 'Debit';
+                                else
+                                $voucher_type= $li['voucher_type'];
+                            $html.= $voucher_type.'</td>
+                        <td>'.date("d-m-Y", strtotime($li['voucher_date'])).'</td>
+    
+                        ';
+                        
+
+                        if($li['voucher_type']=='D' or $li['voucher_type']=='Sale')
+                        {
+                            $total_balalnce+=$li['np']; 
+                            $html.='<td class="right">'.$li['np'].'</td>';
+                        }
+                        else
+                        {
+                            $html.='<td>-</td>';
+                        }
+
+                        if($li['voucher_type']=='C' or $li['voucher_type']=='R')
+                        {
+                            $total_balalnce-=$li['np']; 
+                            $html.='<td class="right">'.$li['np'].'</td>';
+                        }
+                        else
+                        {
+                            $html.='<td>-</td>';
+                        }
+                        
+                        
+
+
+$html.='<td>'.$li['descriptions'].'</td>
+<td class="right">'.$total_balalnce.'</td>
+
+</tr>';
 }
+
+$html.='</tbody>
+
+
+<tfoot>
+    <tr>
+        <th></th>
+        <th></th>
+
+        <th>-</th>
+        <th>-</th>
+        <th>-</th>
+        <th>-</th>
+        <th class="right"><strong>'.$total_balalnce.'</strong></th>
+
+    </tr>
+</tfoot>
+
+
+</table>
+';
+
+// output the HTML content
+$pdf->writeHTML($html, true, false, true, false, '');
+
+if(!empty($saleInvoice)){
+
+foreach($saleInvoice as $sv){
+$pdf->lastPage();
+$pdf->AddPage();
+$invoice=$this->Accounts_model->get_invoice_by_id($sv);
+$invoiceItems=$this->Accounts_model->get_invoice_item_by_id($sv);
+
+$orderNos=array();
+foreach($invoiceItems as $item){
+$rawOrderNo=$item->order_nos;
+$rawOrderNo=explode(',', $rawOrderNo);
+    foreach($rawOrderNo as $orderNo)
+    {
+        //echo trim($orderNo, '\'');
+        $orderNos[]=$orderNo;
+    }
+}
+$saleRoyaltyData=$this->Accounts_model->get_royalty_sale_data($orderNos, $invoice->store_name);
+$html='<h4 align="center">Sale Data ('.$invoice->descriptions.')</h4>';
+$html.='<table id="" class="list" cellspacing="0" width="100%">
+<thead>
+    <tr>
+        <td class="center">Order Date</td>
+        <td class="center">Order No.</td>
+        <td class="center">Taxable Amount</td>
+
+        <td class="center">Net Amount</td>
+        <td class="center">Service Code</td>
+        
+
+    </tr>
+</thead>
+<tbody>';
+foreach($saleRoyaltyData as $data){
+$html.='<tr>
+        <td>'.date('d-m-Y', strtotime($data['order_date'])).'</td>
+        <td>'.$data['order_no'].'</td>
+        <td>'.$data['taxable_amount'].'</td>
+        <td>'.$data['net_amount'].'</td>
+        <td>'.$data['service_code'].'</td>
+</tr>';
+}
+$html.='</tbody></table>';
+$pdf->writeHTML($html, true, false, true, false, '');
+}
+}
+
+//Paytm
+
+if(!empty($paytmR)){
+
+    foreach($paytmR as $sv){
+    $pdf->lastPage();
+    $pdf->AddPage();
+    
+    $paytmRawData=explode(' ', $sv);
+    $fromDate=date('Y-m-d', strtotime($paytmRawData[1]));
+    $toDate=date('Y-m-d', strtotime($paytmRawData[3]));
+    $paytmRoyaltyData=$this->Accounts_model->get_royalty_paytm_data($openBalance['paytm_mid1'], $openBalance['paytm_mid2'], $openBalance['paytm_mid3'], $fromDate ,$toDate);
+    $html='<h4 align="center">'.$sv.'</h4>';
+    $html.='<table id="" class="list" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <td class="center">Transaction Date</td>
+            <td class="center">UTR No.</td>
+            <td class="center">Amount</td>
+    
+            <td class="center">Commission</td>
+            <td class="center">GST</td>
+            
+    
+        </tr>
+    </thead>
+    <tbody>';
+    foreach($paytmRoyaltyData as $data){
+    $html.='<tr>
+            <td>'.date('d-m-Y', strtotime($data['transaction_date'])).'</td>
+            <td>'.$data['utr_no'].'</td>
+            <td>'.$data['amount'].'</td>
+            <td>'.$data['commission'].'</td>
+            <td>'.$data['gst'].'</td>
+    </tr>';
+    }
+    $html.='</tbody></table>';
+    $pdf->writeHTML($html, true, false, true, false, '');
+    }
+    }
+
+    //Bharate Pe
+
+if(!empty($bharatpeR)){
+
+    foreach($bharatpeR as $sv){
+    $pdf->lastPage();
+    $pdf->AddPage();
+    
+    
+    $bharatRawData=explode(' ', $sv);
+    $fromDate=date('Y-m-d', strtotime($bharatRawData[2]));
+    $toDate=date('Y-m-d', strtotime($bharatRawData[4]));
+    $bharatRoyaltyData=$this->Accounts_model->get_royalty_bharatPe_data($openBalance['bharatpay_id'], $fromDate ,$toDate);
+    $html='<h4 align="center">'.$sv.'</h4>';
+    $html.='<table id="" class="list" cellspacing="0" width="100%">
+    <thead>
+        <tr>
+            <td class="center">Transaction Date</td>
+            <td class="center">UTR No.</td>
+            <td class="center">Amount</td>
+    
+            
+    
+        </tr>
+    </thead>
+    <tbody>';
+    foreach($bharatRoyaltyData as $data){
+    $html.='<tr>
+            <td>'.date('d-m-Y', strtotime($data['transaction_date'])).'</td>
+            <td>'.$data['utr_no'].'</td>
+            <td>'.$data['amount'].'</td>
+           
+    </tr>';
+    }
+    $html.='</tbody></table>';
+    $pdf->writeHTML($html, true, false, true, false, '');
+    }
+    }
+
+$pdf->Output('pdfexample.pdf', 'I');
+
+
+}
+
+}
+
+
+
+
+
+
 
 ?>
