@@ -39,7 +39,7 @@ function get_all_sale_by_store($date, $date_to)
 
     function ledgerItem($date, $date_to, $sotreid)
         {
-            return $this->db->query("SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat('Royalty', ' ', descriptions) as descriptions, concat('TMBLR', '-', id) as voucher_no FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
+            return $this->db->query("select * from (SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat('Royalty', ' ', descriptions) as descriptions, concat('TMBLR', '-', id) as voucher_no FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
 
             UNION
             
@@ -48,7 +48,7 @@ function get_all_sale_by_store($date, $date_to)
             
             UNION
             
-            SELECT vouchers.id, vouchers.amount as np, vouchers.voucher_type  , date(vouchers.create_date) as voucher_date, descriptions, concat('TMBLV', '-', id) as voucher_no from vouchers WHERE 1 and date(vouchers.create_date) >= '$date' and date(vouchers.create_date) <='$date_to' and vouchers.store_id=$sotreid")->result_array();
+            SELECT vouchers.id, vouchers.amount as np, vouchers.voucher_type  , date(vouchers.create_date) as voucher_date, descriptions, concat('TMBLV', '-', id) as voucher_no from vouchers WHERE 1 and date(vouchers.create_date) >= '$date' and date(vouchers.create_date) <='$date_to' and vouchers.store_id=$sotreid) as temp order by voucher_date asc")->result_array();
         }
 
     function get_all_invoice(){
