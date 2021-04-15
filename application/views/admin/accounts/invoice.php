@@ -19,7 +19,7 @@
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s14 {
@@ -36,7 +36,7 @@
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s0 {
@@ -54,7 +54,7 @@
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s5 {
@@ -71,7 +71,7 @@
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s13 {
@@ -88,7 +88,7 @@
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s9 {
@@ -97,15 +97,16 @@
     border-left: 1px SOLID #000000;
     background-color: #f0f0f0;
     text-align: left;
+    vertical-align: middle;
     color: #000000;
     font-family: 'Arial';
     font-size: 9pt;
-    vertical-align: top;
+
     white-space: normal;
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s7 {
@@ -120,7 +121,7 @@
     vertical-align: top;
     white-space: nowrap;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s10 {
@@ -130,14 +131,15 @@
     background-color: #f0f0f0;
     text-align: left;
     color: #000000;
+    vertical-align: middle;
     font-family: 'docs-Calibri', Arial;
     font-size: 9pt;
-    vertical-align: top;
+
     white-space: normal;
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s1 {
@@ -152,7 +154,7 @@
     vertical-align: top;
     white-space: nowrap;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s12 {
@@ -169,7 +171,7 @@
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s3 {
@@ -186,7 +188,7 @@
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s15 {
@@ -201,7 +203,7 @@
     vertical-align: top;
     white-space: nowrap;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s2 {
@@ -216,7 +218,7 @@
     vertical-align: top;
     white-space: nowrap;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s8 {
@@ -231,7 +233,7 @@
     vertical-align: middle;
     white-space: nowrap;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s11 {
@@ -248,7 +250,7 @@
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .ritz .waffle .s4 {
@@ -265,7 +267,7 @@
     overflow: hidden;
     word-wrap: break-word;
     direction: ltr;
-    padding: 0px 3px 0px 3px;
+    padding: 3px 3px 0px 3px;
 }
 
 .right {
@@ -357,7 +359,7 @@
                 <th id="855174894R6" style="height: 16px;" class="row-headers-background">
 
                 </th>
-                <td class="s5"><span style="font-size:7pt;font-family:Arial;">#</span></td>
+                <td class="s5"><span style="font-size:7pt;font-family:Arial;">Sr. No.</span></td>
                 <td class="s5"><span style="font-size:7pt;font-family:Arial;">Description</span></td>
                 <td class="s5"><span style="font-size:7pt;font-family:Arial;">HSN / SAC</span></td>
                 <td class="s6">Order Value</td>
