@@ -479,7 +479,7 @@ if(!empty($bharatpeR)){
     }
     }
 
-$pdf->Output($openBalance['store_name'].'.pdf', 'I');
+$pdf->Output($openBalance['store_name'].'.pdf', 'D');
 
 
 }
