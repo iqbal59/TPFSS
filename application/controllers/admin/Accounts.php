@@ -170,22 +170,22 @@ function invoicepdf($id)
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
         $pdf->SetTitle('Customer Ledger');
         $pdf->SetHeaderMargin(30);
-        $pdf->SetTopMargin(20);
+        $pdf->SetTopMargin(10);
         $pdf->setFooterMargin(20);
         $pdf->SetAutoPageBreak(true);
         $pdf->SetAuthor('tumbledry');
        // $pdf->SetDisplayMode('real', 'default');
         //$pdf->Write(5, 'CodeIgniter TCPDF Integration');
-        $pdf->SetFont('dejavusans', '', 10);
+        $pdf->SetFont('dejavusans', '', 8);
         $pdf->AddPage();
 
 
+        $html='<p align="right"><img src="'.base_url('assets/images/logo-light-login.png').'"/></p>' ;
 
-
-        $html = '<p align="center"><strong>Ledger Period : '.date("d-m-Y", strtotime($data['open_date'])).' to
+        $html .= '<p align="center"><strong>Ledger Period : '.date("d-m-Y", strtotime($data['open_date'])).' to
                 '.date("d-m-Y", strtotime( $data['to_date'])).'</strong></p>
-        <div style="font-size:14px;">
-            <div align="right" style="font-size:12px;">
+        <div style="font-size:9px;">
+            <div align="right" style="font-size:9px;">
                 <b class="title_name">TUMBLEDRY SOLUTIONS PRIVATE LIMITED</b><br />
 
                 5, 512-B, 98-MODI TOWER, NEHRU PLACE, NEW DELHI,<br>
@@ -314,6 +314,10 @@ $html.='<td>'.$li['descriptions'].'</td>
 </tr>';
 }
 
+$color='#FF0000';
+if($total_balalnce < 0)
+$color='#008000';
+
 $html.='</tbody>
 
 
@@ -326,7 +330,7 @@ $html.='</tbody>
         <th>-</th>
         <th>-</th>
         <th>-</th>
-        <th class="right"><strong>'.$total_balalnce.'</strong></th>
+        <th class="right" style="color:'.$color.';" ><strong>'.$total_balalnce.'</strong></th>
 
     </tr>
 </tfoot>
@@ -334,6 +338,9 @@ $html.='</tbody>
 
 </table>
 ';
+
+$html.='<p><strong>Note :-</strong> <em>If Balance is in Negative then tumbledry will Pay to Franchise or if Balance is in Positive then Franchise has to Pay to Tumbledry)</em></p>';
+
 
 // output the HTML content
 $pdf->writeHTML($html, true, false, true, false, '');
@@ -466,7 +473,7 @@ if(!empty($bharatpeR)){
     }
     }
 
-$pdf->Output($openBalance['store_name'].'.pdf', 'D');
+$pdf->Output($openBalance['store_name'].'.pdf', 'I');
 
 
 }
