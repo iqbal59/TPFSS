@@ -71,8 +71,9 @@ function get_all_sale_by_store($date, $date_to)
     }
 
     function get_invoice_item_by_id($id){
-        $this->db->select("*");
+        $this->db->select("item_name, qty, rate,order_nos, amount, service_code, royalty, sac_code");
         $this->db->from("invoice_item");
+        $this->db->join("services", "services.code=invoice_item.service_code", "inner");
         
         
         $this->db->where('invoice_id', $id);

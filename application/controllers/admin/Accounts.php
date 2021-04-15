@@ -209,36 +209,28 @@ function invoicepdf($id)
         <table id="" class="list" cellspacing="0" width="100%">
             <thead>
                 <tr>
-                    <td class="center">Voucher No.</td>
-                    <td class="center">Voucher Type</td>
-                    <td class="center">Voucher Date</td>
-
-                    <td class="center">Debit</td>
-                    <td class="center">Credit</td>
-                    <td class="center">Descriptions</td>
-                    <td class="center">Balance</td>
+                    <td class="center" width="10%">Voucher No.</td>
+                    <td class="center" width="15%">Voucher Type</td>
+                    <td class="center" width="15%">Voucher Date</td>
+                    <td class="center" width="10%">Debit</td>
+                    <td class="center" width="10%">Credit</td>
+                    <td class="center" width="30%">Descriptions</td>
+                    <td class="center" width="20%">Balance</td>
 
                 </tr>
             </thead>
-            <!-- <tfoot>
-                                <tr>
-                                <th>Customer Name</th>
-                                    <th>Balance</th>
-                                    <th>Action</th>
-                                </tr>
-                            </tfoot>
-                             -->
+          
             <tbody>
 
                 <tr>
-                    <td>-</td>
-                    <td>Opening Balance</td>
-                    <td>'.date("d-m-Y", strtotime($data['open_date'])).'</td>
-                    <td class="right">'.$openBalance['openbalance'].'</td>
+                    <td width="10%">-</td>
+                    <td width="15%">Opening Balance</td>
+                    <td width="15%">'.date("d-m-Y", strtotime($data['open_date'])).'</td>
+                    <td class="right" width="10%">'.$openBalance['openbalance'].'</td>
 
-                    <td>-</td>
-                    <td>-</td>
-                    <td class="right">'.$openBalance['openbalance'].'</td>
+                    <td width="10%">-</td>
+                    <td width="30%">-</td>
+                    <td class="right" width="10%">'.$openBalance['openbalance'].'</td>
 
                 </tr>';
 
@@ -269,8 +261,8 @@ function invoicepdf($id)
 
 
                     $html.='<tr>
-                        <td>'.$li['voucher_no'].'</td>
-                        <td>';
+                        <td width="10%">'.$li['voucher_no'].'</td>
+                        <td width="15%">';
                                 if($li['voucher_type']=='C')
                                 $voucher_type= 'Credit';
                                 elseif($li['voucher_type']=='R')
@@ -280,7 +272,7 @@ function invoicepdf($id)
                                 else
                                 $voucher_type= $li['voucher_type'];
                             $html.= $voucher_type.'</td>
-                        <td>'.date("d-m-Y", strtotime($li['voucher_date'])).'</td>
+                        <td width="15%">'.date("d-m-Y", strtotime($li['voucher_date'])).'</td>
     
                         ';
                         
@@ -288,7 +280,7 @@ function invoicepdf($id)
                         if($li['voucher_type']=='D' or $li['voucher_type']=='Sale')
                         {
                             $total_balalnce+=$li['np']; 
-                            $html.='<td class="right">'.$li['np'].'</td>';
+                            $html.='<td class="right" width="10%">'.$li['np'].'</td>';
                         }
                         else
                         {
@@ -298,18 +290,18 @@ function invoicepdf($id)
                         if($li['voucher_type']=='C' or $li['voucher_type']=='R')
                         {
                             $total_balalnce-=$li['np']; 
-                            $html.='<td class="right">'.$li['np'].'</td>';
+                            $html.='<td class="right" width="10%">'.$li['np'].'</td>';
                         }
                         else
                         {
-                            $html.='<td>-</td>';
+                            $html.='<td width="10%">-</td>';
                         }
                         
                         
 
 
-$html.='<td>'.$li['descriptions'].'</td>
-<td class="right">'.$total_balalnce.'</td>
+$html.='<td width="30%">'.$li['descriptions'].'</td>
+<td class="right" width="10%">'.$total_balalnce.'</td>
 
 </tr>';
 }
@@ -379,7 +371,11 @@ $html.='<table id="" class="list" cellspacing="0" width="100%">
     </tr>
 </thead>
 <tbody>';
+$txt=0;
+$ntt=0;
 foreach($saleRoyaltyData as $data){
+$txt+=$data['taxable_amount'];
+$ntt+=$data['net_amount'];
 $html.='<tr>
         <td>'.date('d-m-Y', strtotime($data['order_date'])).'</td>
         <td>'.$data['order_no'].'</td>
@@ -388,6 +384,16 @@ $html.='<tr>
         <td>'.$data['service_code'].'</td>
 </tr>';
 }
+
+$html.='<tr>
+        <td><strong>Total</strong></td>
+        <td>-</td>
+        <td><strong>'.number_format($txt, 2).'</strong></td>
+        <td><strong>'.number_format($ntt, 2).'</strong></td>
+        <td>-</td>
+</tr>';
+
+
 $html.='</tbody></table>';
 $pdf->writeHTML($html, true, false, true, false, '');
 }
