@@ -182,8 +182,10 @@ function invoicepdf($id)
 
         $html='<p align="right"><img src="'.base_url('assets/images/logo-light-login.png').'"/></p>' ;
 
-        $html .= '<p align="center"><strong>Ledger Period : '.date("d-m-Y", strtotime($data['open_date'])).' to
-                '.date("d-m-Y", strtotime( $data['to_date'])).'</strong></p>
+        // $html .= '<p align="center"><strong>FSS Period : '.date("d-m-Y", strtotime($data['open_date'])).' to
+        //         '.date("d-m-Y", strtotime( $data['to_date'])).'</strong></p>
+
+        $html .= '<p align="center"><strong>FSS Period : 05-04-2021 to 11-04-2021</strong></p>
         <div style="font-size:9px;">
             <div align="right" style="font-size:9px;">
                 <b class="title_name">TUMBLEDRY SOLUTIONS PRIVATE LIMITED</b><br />
