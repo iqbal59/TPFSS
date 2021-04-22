@@ -85,10 +85,10 @@ body {
 
 
 <div>
+    <table cellspacing="0" class="list" cellpadding="0" align="center">
+        <thead>
 
-    <p align="right"><img src="<?php echo base_url('assets/images/logo-light-login.png'); ?>" /></p>
-    <table class="list">
-
+        </thead>
         <tbody>
             <tr style='height:16px;'>
 
@@ -96,46 +96,43 @@ body {
             </tr>
             <tr>
 
-                <td class="right" colspan="9">ORIGINAL FOR RECIPIENT</td>
+                <td colspan="9">ORIGINAL FOR RECIPIENT</td>
             </tr>
             <tr>
 
                 <td colspan="9">&nbsp;</td>
             </tr>
 
-            <tr>
-                <td colspan="5" rowspan="2">
-                    <span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">From<br></span><span
+            <tr style='height:83px;'>
+                <td colspan="3" rowspan="2"><span
+                        style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">From<br></span><span
                         style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE LIMITED<br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;">5, 512-B,98-MODI TOWER, NEHRU PLACE,NEW DELHI
                         110019<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">GSTIN </span><span
                         style="font-size:9pt;font-family:Arial;">07AAHCT2140E1ZP<br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;">PAN </span><span
-                        style="font-size:9pt;font-family:Arial;">AAHCT2140E</span><br />
+                        style="font-size:9pt;font-family:Arial;">AAHCT2140E</span></td>
+                <td class="s4" colspan="2"><span style="font-size:9pt;font-family:Calibri,Arial;">Invoice No.
+                        <br>Invoice Date<br>
                 </td>
-                <td colspan="2">
-                    <span style="font-size:9pt;font-family:Calibri,Arial;">Invoice No.<br /></span>
-                    <span style="font-size:9pt;font-family:Calibri,Arial;">Invoice Date</span><br />
-                </td>
-                <td colspan="2">
-                    <span style="font-size:9pt;font-family:Calibri,Arial;">:
-                        TMBLR-<?php echo $invoice->id;?><br /></span>
-                    <span style="font-size:9pt;font-family:Calibri,Arial;">:
-                        <?php echo date('d/m/Y', strtotime($invoice->invoice_date));?></span><br />
+                <td colspan="4"><span style="font-size:9pt;font-family:Calibri,Arial;">: </span><span
+                        style="font-size:9pt;font-family:Arial;"><?php echo $invoice->id;?><br></span><span
+                        style="font-size:9pt;font-family:Calibri,Arial;">: </span><span
+                        style="font-size:9pt;font-family:Arial;"><?php echo date('d/m/Y', strtotime($invoice->invoice_date));?>
+                        <br></span>
+
                 </td>
             </tr>
-
-            <tr>
+            <tr style='height:83px;'>
 
                 <td colspan="2"><span style="font-size:9pt;font-family:Calibri,Arial;">Transport Name
                         Mode<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">LR No &amp;
                         Date<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">STORE CODE</span></td>
-                <td colspan="2"><span style="font-size:9pt;font-family:Calibri,Arial;">: BY
+                <td colspan="4"><span style="font-size:9pt;font-family:Calibri,Arial;">: BY
                         HAND<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">: BY HAND<br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;">: <?php echo $invoice->store_code;?></span>
                 </td>
             </tr>
-
             <tr style='height:89px;'>
 
                 <td colspan="3"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Billing
@@ -152,9 +149,6 @@ body {
                         style="font-size:9pt;font-family:Calibri,Arial;">GSTIN NO.
                         <?php echo $invoice->gstin_no; ?></span></td>
             </tr>
-
-
-
             <tr style='height:16px;'>
 
                 <td class="s5"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">Sr. No.</span></td>
@@ -205,7 +199,7 @@ body {
 
             <tr style='height:33px;'>
 
-                <td class="s9 left" colspan="2"><span style="font-size:9pt;font-family:Arial;">TOTAL (₹)</span></td>
+                <td class="s9" colspan="2"><span style="font-size:9pt;font-family:Arial;">TOTAL (₹)</span></td>
                 <td class="s10"></td>
                 <td class="s10 right"><?php echo number_format($ot,2);?></td>
                 <td class="s10"></td>
@@ -217,7 +211,7 @@ body {
             <tr style='height:16px;'>
 
                 <td class="s11" colspan="6" rowspan="2"></td>
-                <td class="s12 " colspan="2"><span style="font-size:10pt;font-family:Calibri,Arial;">Taxable
+                <td class="s12" colspan="2"><span style="font-size:10pt;font-family:Calibri,Arial;">Taxable
                         Amount</span></td>
                 <td class="s7 right"><?php echo number_format($taxable_total,2);?></td>
             </tr>
@@ -229,7 +223,7 @@ body {
             </tr>
             <tr style='height:37px;'>
 
-                <td class="s3 left" colspan="6"><span style="font-size:10pt;font-family:Calibri,Arial;">Total amount (in
+                <td class="s3" colspan="6"><span style="font-size:10pt;font-family:Calibri,Arial;">Total amount (in
                         words) :</span>
                     <span style="font-size:10pt;font-family:Arial;"><?php echo convert_number($total);?></span>
                 </td>
@@ -238,7 +232,7 @@ body {
             </tr>
             <tr style='height:157px;'>
 
-                <td class="s14 left" colspan="9"><span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS
+                <td class="s14" colspan="9"><span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS
                         PRIVATE<br></span><span
                         style="font-size:9pt;font-family:Arial;">LIMITED<br><br><br><br></span><span
                         style="font-size:7pt;font-family:Calibri,Arial;">Authorised Signatory</span></td>

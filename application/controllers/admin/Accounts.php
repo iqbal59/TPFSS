@@ -3,13 +3,13 @@ class Accounts extends CI_Controller{
     function __construct()
     {
         parent::__construct();
-        check_login_user();
+       
         $this->load->model('Accounts_model');
         $this->load->model('Common_model');
     } 
 
 function index(){
-           
+    check_login_user();
             $data['invoices']=$this->Accounts_model->get_all_invoice();
             $data['main_content'] = $this->load->view('admin/accounts/index', $data, TRUE);
             $this->load->view('admin/index',$data);
@@ -17,7 +17,7 @@ function index(){
 
 
 function ledger(){
-    
+    check_login_user();
     $data['ledgers']=$this->Accounts_model->calculate_balance_by_date(date('Y-m-d'));
     $data['main_content'] = $this->load->view('admin/accounts/ledger', $data, TRUE);
     $this->load->view('admin/index',$data);
@@ -25,6 +25,7 @@ function ledger(){
 
 
 function customerledger($id){
+    check_login_user();
     if($this->input->post('from_date'))
     $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
     else
@@ -42,6 +43,7 @@ function customerledger($id){
 }
 
 function printledger($id){
+    check_login_user();
     if($this->input->post('from_date'))
     $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
     else
@@ -64,6 +66,7 @@ function printledger($id){
 
 function createinvoices()
     {
+        check_login_user();
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('invoice_date','Invoice Date','required');
@@ -151,8 +154,34 @@ function invoicepdf($id)
     }
 
 
-    function downloadledger($id){
+    function invoicepdfdownload($id)
+    {
+        check_login_user();
+        $invoiceData=$this->Accounts_model->get_invoice_by_id($id);
+       // print_r($invoiceData);
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetTitle('Inovice');
+        $pdf->SetHeaderMargin(30);
+        $pdf->SetTopMargin(10);
+        $pdf->setFooterMargin(20);
+        $pdf->SetAutoPageBreak(true);
+        $pdf->SetAuthor('tumbledry');
+       // $pdf->SetDisplayMode('real', 'default');
+        //$pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        $pdf->SetFont('dejavusans', '', 8);
+        $pdf->AddPage();
 
+        $html=file_get_contents(base_url('admin/accounts/invoicepdf/'.$id));
+        //$html="<p>AAA</p>";
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->Output($invoiceData->firm_name.'_'.$invoiceData->id.'.pdf', 'D');
+    }
+
+
+    function downloadledger($id){
+        check_login_user();
         if($this->input->post('from_date'))
         $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
         else
@@ -176,7 +205,7 @@ function invoicepdf($id)
         $pdf->SetAuthor('tumbledry');
        // $pdf->SetDisplayMode('real', 'default');
         //$pdf->Write(5, 'CodeIgniter TCPDF Integration');
-        $pdf->SetFont('dejavusans', '', 8);
+        $pdf->SetFont('dejavusans', '', 7);
         $pdf->AddPage();
 
 
