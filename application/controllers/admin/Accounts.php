@@ -214,7 +214,7 @@ function invoicepdf($id)
         // $html .= '<p align="center"><strong>FSS Period : '.date("d-m-Y", strtotime($data['open_date'])).' to
         //         '.date("d-m-Y", strtotime( $data['to_date'])).'</strong></p>
 
-        $html .= '<p align="center"><strong>FSS Period : 05-04-2021 to 11-04-2021</strong></p>
+        $html .= '<p align="center"><strong>FSS Period : 12-04-2021 to 18-04-2021</strong></p>
         <div style="font-size:9px;">
             <div align="right" style="font-size:9px;">
                 <b class="title_name">TUMBLEDRY SOLUTIONS PRIVATE LIMITED</b><br />
