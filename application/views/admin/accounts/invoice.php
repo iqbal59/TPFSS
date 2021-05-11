@@ -103,29 +103,30 @@ body {
                 <td colspan="9">&nbsp;</td>
             </tr>
 
-            <tr>
-                <td colspan="5" rowspan="2">
+            <tr style='height:89px;'>
+                <td colspan="5">
                     <span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">From<br></span><span
                         style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE LIMITED<br></span><span
-                        style="font-size:9pt;font-family:Calibri,Arial;">5, 512-B,98-MODI TOWER, NEHRU PLACE,NEW DELHI
+                        style="font-size:9pt;font-family:Calibri,Arial;">FF-42, Gardenia Glory,Sector 46, Noida,Gautam
+                        Buddha Nagar, Uttar Pradesh, 201301
                         110019<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">GSTIN </span><span
-                        style="font-size:9pt;font-family:Arial;">07AAHCT2140E1ZP<br></span><span
+                        style="font-size:9pt;font-family:Arial;">09AAHCT2140E1ZL<br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;">PAN </span><span
                         style="font-size:9pt;font-family:Arial;">AAHCT2140E</span><br />
                 </td>
-                <td colspan="2">
+                <td colspan="2" style="vertical-align:top">
                     <span style="font-size:9pt;font-family:Calibri,Arial;">Invoice No.<br /></span>
                     <span style="font-size:9pt;font-family:Calibri,Arial;">Invoice Date</span><br />
                 </td>
-                <td colspan="2">
+                <td colspan="2" style="vertical-align:top">
                     <span style="font-size:9pt;font-family:Calibri,Arial;">:
-                        TMBLR-<?php echo $invoice->id;?><br /></span>
+                        TD/R-<?php echo $invoice->id;?>/21-22<br /></span>
                     <span style="font-size:9pt;font-family:Calibri,Arial;">:
                         <?php echo date('d/m/Y', strtotime($invoice->invoice_date));?></span><br />
                 </td>
             </tr>
 
-            <tr>
+            <!-- <tr>
 
                 <td colspan="2"><span style="font-size:9pt;font-family:Calibri,Arial;">Transport Name
                         Mode<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">LR No &amp;
@@ -134,7 +135,7 @@ body {
                         HAND<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">: BY HAND<br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;">: <?php echo $invoice->store_code;?></span>
                 </td>
-            </tr>
+            </tr> -->
 
             <tr style='height:89px;'>
 
@@ -150,7 +151,7 @@ body {
                         <?php echo $invoice->firm_name;?><br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address;?></span><br><span
                         style="font-size:9pt;font-family:Calibri,Arial;">GSTIN NO.
-                        <?php echo $invoice->gstin_no; ?></span></td>
+                        <?php echo $invoice->gstin_no;  $stcode=substr($invoice->gstin_no, 0, 2);?></span></td>
             </tr>
 
 
@@ -158,15 +159,23 @@ body {
             <tr style='height:16px;'>
 
                 <td class="s5"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">Sr. No.</span></td>
-                <td class="s5"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">Description</span></td>
+                <td class="s5" <?php echo  $stcode=='09'?"":"colspan='2'";?>><span
+                        style="font-size:7pt;font-weight:bold;font-family:Arial;">Description</span></td>
                 <td class="s5"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">HSN / SAC</span></td>
                 <td class="s6"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">Order Value</span></td>
                 <td class="s6"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">Royalty percenatge</span>
                 </td>
                 <td class="s5 center"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">Taxable
                         Value</span></td>
+
+                <?php if($stcode=='09'){?>
                 <td class="s6 center"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">SGST</span></td>
                 <td class="s6 center"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">CGST</span></td>
+
+                <?php } else {?>
+                <td class="s6 center"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">IGST</span></td>
+                <?php }?>
+
                 <td class="s5 center"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">Total
                         Amount</span></td>
             </tr>
@@ -176,6 +185,7 @@ body {
 			 $ot=0;
 			 $sgst_total=0;
 			 $cgst_total=0;
+             $igst_total=0;
 			 $taxable_total=0;
 			 $total=0; 
 		   foreach($invoiceitems as $inv){?>
@@ -183,11 +193,13 @@ body {
             <tr style='height:16px;'>
 
                 <td class="s7"><?php echo $i++;?></td>
-                <td class="s7"><?php echo $inv->service_code;?></td>
+                <td class="s7" <?php echo  $stcode=='09'?"":"colspan='2'";?>><?php echo $inv->name;?></td>
                 <td class="s7"><?php echo $inv->sac_code;?></td>
                 <td class="s8" align="right"><?php echo number_format($inv->amount,2);$ot+=$inv->amount;?></td>
                 <td class="s8" align="right"><?php echo $inv->royalty;?></td>
                 <td class="s8" align="right"><?php echo number_format($inv->rate,2); $taxable_total+=$inv->rate;?></td>
+
+                <?php if($stcode=='09'){?>
                 <td class="s7 right">
                     <?php 
                  $sgst=round($inv->rate*9/100,2); 
@@ -197,6 +209,10 @@ body {
                 </td>
                 <td class="s7 right">
                     <?php  $cgst=round($inv->rate*9/100,2); echo number_format($cgst, 2); $cgst_total+=$cgst;?></td>
+                <?php } else {?>
+                <td class="s7 right">
+                    <?php  $igst=round($inv->rate*18/100,2); echo number_format($igst, 2); $igst_total+=$igst;?></td>
+                <?php }?>
                 <td class="s7 right">
                     <?php echo number_format(($inv->rate+$sgst+$cgst),2); $total+=($inv->rate+$sgst+$cgst); ?></td>
             </tr>
@@ -205,13 +221,20 @@ body {
 
             <tr style='height:33px;'>
 
-                <td class="s9 left" colspan="2"><span style="font-size:9pt;font-family:Arial;">TOTAL (₹)</span></td>
+                <td class="s9 left" <?php echo  $stcode=='09'?"colspan='2'":"colspan='3'";?>><span
+                        style="font-size:9pt;font-family:Arial;">TOTAL (₹)</span></td>
                 <td class="s10"></td>
                 <td class="s10 right"><?php echo number_format($ot,2);?></td>
                 <td class="s10"></td>
                 <td class="s10 right"><?php echo number_format($taxable_total,2);?></td>
+                <?php if($stcode=='09'){?>
                 <td class="s10 right"><?php echo number_format($sgst_total,2);?></td>
                 <td class="s10 right"><?php echo number_format($cgst_total,2);?></td>
+                <?php } else {?>
+
+                <td class="s10 right"><?php echo number_format($igst_total,2);?></td>
+                <?php }?>
+
                 <td class="s10 right"><?php echo number_format($total,2);?></td>
             </tr>
             <tr style='height:16px;'>
@@ -225,7 +248,7 @@ body {
 
                 <td class="s12" colspan="2"><span style="font-size:10pt;font-family:Calibri,Arial;">Total Tax</span>
                 </td>
-                <td class="s7 right"><?php echo number_format($cgst_total+$sgst_total,2);?></td>
+                <td class="s7 right"><?php echo number_format($cgst_total+$sgst_total+$igst_total,2);?></td>
             </tr>
             <tr style='height:37px;'>
 
@@ -238,13 +261,19 @@ body {
             </tr>
             <tr style='height:157px;'>
 
-                <td class="s14 left" colspan="9"><span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS
+                <td class="s14 left" colspan="9">
+                    <strong>Remarks:</strong><br />
+                    <p>Royalty for the period of <?php echo $invoice->descriptions;?>.</p>
+
+                    <span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS
                         PRIVATE<br></span><span
                         style="font-size:9pt;font-family:Arial;">LIMITED<br><br><br><br></span><span
-                        style="font-size:7pt;font-family:Calibri,Arial;">Authorised Signatory</span></td>
+                        style="font-size:7pt;font-family:Calibri,Arial;">Authorised Signatory</span>
+                </td>
             </tr>
 
 
         </tbody>
     </table>
+    <p><em>It’s a computer generated invoice and does not require any signature.</em></p>
 </div>
