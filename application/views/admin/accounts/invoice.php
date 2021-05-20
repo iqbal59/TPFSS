@@ -107,7 +107,7 @@ body {
                 <td colspan="5">
                     <span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">From<br></span><span
                         style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE LIMITED<br></span><span
-                        style="font-size:9pt;font-family:Calibri,Arial;">FF-42, Gardenia Glory,Sector 46, Noida,Gautam
+                        style="font-size:9pt;font-family:Calibri,Arial;">FF-42, Gardenia Glory, Sector 46, Noida, Gautam
                         Buddha Nagar, Uttar Pradesh, 201301
                         110019<br></span><span style="font-size:9pt;font-family:Calibri,Arial;">GSTIN </span><span
                         style="font-size:9pt;font-family:Arial;">09AAHCT2140E1ZL<br></span><span
@@ -120,7 +120,7 @@ body {
                 </td>
                 <td colspan="2" style="vertical-align:top">
                     <span style="font-size:9pt;font-family:Calibri,Arial;">:
-                        TD/R-<?php echo $invoice->id;?>/21-22<br /></span>
+                        TD/R-<?php echo $invoice->invoice_no;?>/21-22<br /></span>
                     <span style="font-size:9pt;font-family:Calibri,Arial;">:
                         <?php echo date('d/m/Y', strtotime($invoice->invoice_date));?></span><br />
                 </td>
@@ -159,7 +159,7 @@ body {
             <tr style='height:16px;'>
 
                 <td class="s5"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">Sr. No.</span></td>
-                <td class="s5" <?php echo  $stcode=='09'?"":"colspan='2'";?>><span
+                <td class="s5" <?php echo  $stcode=='09'?'':'colspan="2"';?>><span
                         style="font-size:7pt;font-weight:bold;font-family:Arial;">Description</span></td>
                 <td class="s5"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">HSN / SAC</span></td>
                 <td class="s6"><span style="font-size:7pt;font-weight:bold;font-family:Arial;">Order Value</span></td>
@@ -193,7 +193,7 @@ body {
             <tr style='height:16px;'>
 
                 <td class="s7"><?php echo $i++;?></td>
-                <td class="s7" <?php echo  $stcode=='09'?"":"colspan='2'";?>><?php echo $inv->name;?></td>
+                <td class="s7" <?php echo  $stcode=='09'?'':'colspan="2"';?>><?php echo $inv->name;?></td>
                 <td class="s7"><?php echo $inv->sac_code;?></td>
                 <td class="s8" align="right"><?php echo number_format($inv->amount,2);$ot+=$inv->amount;?></td>
                 <td class="s8" align="right"><?php echo $inv->royalty;?></td>
@@ -221,8 +221,11 @@ body {
 
             <tr style='height:33px;'>
 
-                <td class="s9 left" <?php echo  $stcode=='09'?"colspan='2'":"colspan='3'";?>><span
+                <td class="s9 left" <?php echo  $stcode=='09'?'colspan="2"':'colspan="3"';?>><span
                         style="font-size:9pt;font-family:Arial;">TOTAL (₹)</span></td>
+
+
+
                 <td class="s10"></td>
                 <td class="s10 right"><?php echo number_format($ot,2);?></td>
                 <td class="s10"></td>
@@ -254,10 +257,10 @@ body {
 
                 <td class="s3 left" colspan="6"><span style="font-size:10pt;font-family:Calibri,Arial;">Total amount (in
                         words) :</span>
-                    <span style="font-size:10pt;font-family:Arial;"><?php echo convert_number($total);?></span>
+                    <span style="font-size:10pt;font-family:Arial;"><?php echo convert_number(round($total));?></span>
                 </td>
                 <td class="s13" colspan="2"><span style="font-size:10pt;font-family:Arial;">Total Amount</span></td>
-                <td class="s7 right"><?php echo number_format($total,2);?></td>
+                <td class="s7 right"><?php echo number_format(round($total),2);?></td>
             </tr>
             <tr style='height:157px;'>
 
