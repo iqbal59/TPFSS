@@ -105,8 +105,9 @@ body {
 
             <tr style='height:89px;'>
                 <td colspan="5">
-                    <span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">From<br></span><span
-                        style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE LIMITED<br></span><span
+                    <p> <span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">From</span>
+                    </p>
+                    <span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE LIMITED<br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;">FF-42, Gardenia Glory, Sector 46, Noida, Gautam
                         Buddha Nagar, Uttar Pradesh, 201301<br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;">GSTIN </span><span
@@ -115,13 +116,13 @@ body {
                         style="font-size:9pt;font-family:Arial;">AAHCT2140E</span><br />
                 </td>
                 <td colspan="2" style="vertical-align:top">
-                    <span style="font-size:9pt;font-family:Calibri,Arial;">Invoice No.<br /></span>
+                    <p><span style="font-size:9pt;font-family:Calibri,Arial;">Invoice No.<br /></span></p>
                     <span style="font-size:9pt;font-family:Calibri,Arial;">&nbsp;Invoice Date</span><br />
                 </td>
                 <td colspan="2" style="vertical-align:top">
-                    <span style="font-size:9pt;font-family:Calibri,Arial;">:
-                        TD/R-<?php echo $invoice->invoice_no;?>/21-22<br /></span>
-                    <span style="font-size:9pt;font-family:Calibri,Arial;">&nbsp;:
+                    <p><span style="font-size:9pt;font-family:Calibri,Arial;">:
+                            TD/R-<?php echo $invoice->invoice_no;?>/21-22<br /></span></p>
+                    <span style="font-size:9pt;font-family:Calibri,Arial;">
                         <?php echo date('d/m/Y', strtotime($invoice->invoice_date));?></span><br />
                 </td>
             </tr>
@@ -269,7 +270,7 @@ body {
             <tr style='height:157px;'>
 
                 <td class="s14 left" colspan="9">
-
+                    <p><strong>Remarks:</strong></p>
                     <p><strong>Royalty for the period of <?php echo $invoice->descriptions;?>.</strong></p>
 
                     <span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS
