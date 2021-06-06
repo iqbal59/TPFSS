@@ -269,7 +269,7 @@ body {
             <tr style='height:157px;'>
 
                 <td class="s14 left" colspan="9">
-                    <strong>Remarks:</strong>
+
                     <p><strong>Royalty for the period of <?php echo $invoice->descriptions;?>.</strong></p>
 
                     <span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS
