@@ -260,7 +260,8 @@ body {
 
                 <td class="s3 left" colspan="6"><span style="font-size:9pt;font-family:Calibri,Arial;">Total amount (in
                         words) :</span>
-                    <span style="font-size:9pt;font-family:Arial;"><?php echo convert_number(round($total));?></span>
+                    <span style="font-size:9pt;font-family:Arial;"><?php echo convert_number(round($total));?>
+                        Only</span>
                 </td>
                 <td class="s13" colspan="2"><span style="font-size:9pt;font-family:Arial;">Total Amount</span></td>
                 <td class="s7 right"><?php echo number_format(round($total),2);?></td>
@@ -268,7 +269,7 @@ body {
             <tr style='height:157px;'>
 
                 <td class="s14 left" colspan="9">
-                    <strong>Remarks:</strong><br />
+                    <strong>Remarks:</strong>
                     <p><strong>Royalty for the period of <?php echo $invoice->descriptions;?>.</strong></p>
 
                     <span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS
