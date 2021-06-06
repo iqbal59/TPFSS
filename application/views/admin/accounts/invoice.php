@@ -122,7 +122,7 @@ body {
                 </td>
                 <td colspan="2" style="vertical-align:top">
                     <p><span style="font-size:9pt;font-family:Calibri,Arial;">:
-                            TD/R-<?php echo $invoice->invoice_no;?>/21-22<br /></span></p>
+                            TD/TMBLR-<?php echo $invoice->invoice_no;?>/21-22<br /></span></p>
                     <span style="font-size:9pt;font-family:Calibri,Arial;">:
                         <?php echo date('d/m/Y', strtotime($invoice->invoice_date));?></span><br />
                 </td>
