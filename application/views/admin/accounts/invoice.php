@@ -105,7 +105,8 @@ body {
 
             <tr style='height:89px;'>
                 <td colspan="5">
-                    <p> <span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">From</span>
+                    <p style="margin-top:0; margin-bottom:0;"><span
+                            style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">From</span>
                     </p>
                     <span style="font-size:9pt;font-family:Arial;">TUMBLEDRY SOLUTIONS PRIVATE LIMITED<br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;">FF-42, Gardenia Glory, Sector 46, Noida, Gautam
@@ -117,13 +118,13 @@ body {
                 </td>
                 <td colspan="2" style="vertical-align:top">
                     <p><span style="font-size:9pt;font-family:Calibri,Arial;">Invoice No.<br /></span></p>
-                    <span style="font-size:9pt;font-family:Calibri,Arial;">&nbsp;Invoice Date</span><br />
+                    <span style="font-size:9pt;font-family:Calibri,Arial;">Invoice Date</span><br />
                 </td>
                 <td colspan="2" style="vertical-align:top">
                     <p><span style="font-size:9pt;font-family:Calibri,Arial;">:
                             TD/R-<?php echo $invoice->invoice_no;?>/21-22<br /></span></p>
                     <span style="font-size:9pt;font-family:Calibri,Arial;">
-                        <?php echo date('d/m/Y', strtotime($invoice->invoice_date));?></span><br />
+                        : <?php echo date('d/m/Y', strtotime($invoice->invoice_date));?></span><br />
                 </td>
             </tr>
 
