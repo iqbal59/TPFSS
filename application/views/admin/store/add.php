@@ -128,7 +128,15 @@ Opening Balance :
     <span class="text-danger"><?php echo form_error('opening_balance');?></span>
 </div>
 
+<div>
+    Status : 
 
+    <select name="is_active">
+    <option value="0" <?php echo ($this->input->post('is_active')=='0' ? "selected" : ""); ?>>Inactive</option>
+    <option value="1" <?php echo ($this->input->post('is_active')=='1' ? "selected" : ""); ?>>Active</option>
+    </select>
+   
+</div>
 <button type="submit">Save</button>
 
 <?php echo form_close(); ?>

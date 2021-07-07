@@ -39,7 +39,7 @@ function get_all_sale_by_store($date, $date_to)
 
     function ledgerItem($date, $date_to, $sotreid)
         {
-            return $this->db->query("select * from (SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat('Royalty', ' ', descriptions) as descriptions, concat('TMBLR', '-', id) as voucher_no FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
+            return $this->db->query("select * from (SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat('Royalty', ' ', descriptions) as descriptions, concat('TD', '-', id) as voucher_no FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
 
             UNION
             

@@ -56,16 +56,17 @@ function refundAdjust($from_dt, $to_dt){
   
   
   
-    function getPaytmData(){
+    function getPaytmData($f_dt, $t_dt){
+
        
-        $query = $this->db->query('SELECT * FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) order by transaction_date DESC')->result_array();  
+        $query = $this->db->query("SELECT * FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) where  date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."'  order by transaction_date DESC")->result_array();  
         return $query;
     }
 
 
-    function getBharatPeData(){
+    function getBharatPeData($f_dt, $t_dt){
        
-        $query = $this->db->query('SELECT * FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) order by transaction_date DESC')->result_array();  
+        $query = $this->db->query("SELECT * FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) where  date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."' order by transaction_date DESC")->result_array();  
         return $query;
     }
 

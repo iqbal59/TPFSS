@@ -127,6 +127,16 @@
 </div>
 
 
+
+<div>
+    Status : 
+
+    <select name="is_active">
+    <option value="0" <?php echo ($store['is_active']=='0' ? "selected" : ($this->input->post('is_active')=='0'?"selected":"")); ?>>Inactive</option>
+    <option value="1" <?php echo ($store['is_active']=='1' ? "selected" : ($this->input->post('is_active')=='1'?"selected":"")); ?>>Active</option>
+    </select>
+   
+</div>
 <button type="submit">Save</button>
 
 <?php echo form_close(); ?>

@@ -390,7 +390,18 @@ public function paytmdata(){
     // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
     // $this->pagination->initialize($config);
 
-    $data['paytmdata'] = $this->common_model->getPaytmData();
+
+    if($this->input->post('from_date'))
+    $data['from_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+    else
+    $data['from_date']=date('Y-m-01');
+
+    if($this->input->post('to_date'))
+    $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+    else
+    $data['to_date']=date('Y-m-d');
+
+    $data['paytmdata'] = $this->common_model->getPaytmData($data['from_date'], $data['to_date'] );
     $data['main_content'] = $this->load->view('admin/import/paytmdata', $data, TRUE);
     $this->load->view('admin/index',$data);
 }
@@ -406,7 +417,17 @@ public function bharatpedata(){
     // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
     // $this->pagination->initialize($config);
 
-    $data['bharatpedata'] = $this->common_model->getBharatPeData();
+    if($this->input->post('from_date'))
+    $data['from_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+    else
+    $data['from_date']=date('Y-m-01');
+
+    if($this->input->post('to_date'))
+    $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+    else
+    $data['to_date']=date('Y-m-d');
+
+    $data['bharatpedata'] = $this->common_model->getBharatPeData($data['from_date'], $data['to_date']);
     
     $data['main_content'] = $this->load->view('admin/import/bharatpe', $data, TRUE);
     $this->load->view('admin/index',$data);

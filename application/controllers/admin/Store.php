@@ -70,6 +70,7 @@ class Store extends CI_Controller{
                 'launch_date' => $this->input->post('launch_date'),
                 'pan_no' => $this->input->post('pan_no'),
                 'opening_balance' => $this->input->post('opening_balance'),
+                'is_active' => $this->input->post('is_active'),
             );
             
             $store_id = $this->Store_model->add_store($params);
@@ -125,6 +126,7 @@ class Store extends CI_Controller{
                     'launch_date' => $this->input->post('launch_date'),
                     'pan_no' => $this->input->post('pan_no'),
                     'opening_balance' => $this->input->post('opening_balance'),
+                    'is_active' => $this->input->post('is_active'),
                 );
 
                 $this->Store_model->update_store($id,$params);  

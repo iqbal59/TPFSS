@@ -272,7 +272,7 @@ function invoicepdf($id)
                 $bharatpeR=array();
 
                 foreach($ledgerItems as $li){
-                    if ( preg_match("~\bTMBLR\b~",$li['voucher_no']) )
+                    if ( preg_match("~\bTD\b~",$li['voucher_no']) )
 
                         {
                             $saleInvoice[]=$li['id'];

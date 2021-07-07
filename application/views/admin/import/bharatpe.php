@@ -58,6 +58,69 @@
                 </div>
             <?php endif ?>
 
+
+
+
+            <div class="card">
+
+<div class="card-body">
+
+
+    <form id="ledger_form" method="post"
+        action="<?php echo base_url('admin/import/bharatpedata') ?>"
+        class="form-horizontal" enctype="multipart/form-data" novalidate>
+
+    
+        <div class="form-body">
+            <br>
+
+
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h5>Enter From Date <span class="text-danger">*</span></h5>
+                        <div class="controls">
+                            <input type="date" name="from_date" class="form-control"
+                                placeholder="MM/DD/YYYY" required
+                                value="<?php echo isset($from_date)?$from_date:date("Y-m-01");?>">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <h5>Enter To Date <span class="text-danger">*</span></h5>
+                        <div class="controls">
+                            <input type="date" name="to_date" class="form-control"
+                                placeholder="MM/DD/YYYY" required
+                                value="<?php echo isset($to_date)?$to_date:date("Y-m-d");?>">
+                        </div>
+                    </div>
+                </div>
+                <!--/span-->
+                <div class="col-md-4">
+                    <div class="form-group ">
+                        <h5>Actions</h5>
+                        <div class="controls">
+                            <button type="submit" class="btn btn-success">Show</button>
+                           
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- CSRF token -->
+            <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>"
+                value="<?=$this->security->get_csrf_hash();?>" />
+
+
+
+
+    </form>
+</div>
+</div>
+
             <div class="card">
 
                 <div class="card-body">
