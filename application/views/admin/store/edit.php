@@ -126,7 +126,10 @@
     <input type="text" name="opening_balance" value="<?php echo ($this->input->post('opening_balance') ? $this->input->post('opening_balance') : $store['opening_balance']); ?>" />
 </div>
 
-
+<div>
+GST State CODE : 
+    <input type="text" name="gst_st_code" value="<?php echo ($this->input->post('gst_st_code') ? $this->input->post('gst_st_code') : $store['gst_st_code']); ?>" />
+</div>
 
 <div>
     Status : 

@@ -71,6 +71,7 @@ class Store extends CI_Controller{
                 'pan_no' => $this->input->post('pan_no'),
                 'opening_balance' => $this->input->post('opening_balance'),
                 'is_active' => $this->input->post('is_active'),
+                'gst_st_code' => $this->input->post('gst_st_code'),
             );
             
             $store_id = $this->Store_model->add_store($params);
@@ -127,6 +128,7 @@ class Store extends CI_Controller{
                     'pan_no' => $this->input->post('pan_no'),
                     'opening_balance' => $this->input->post('opening_balance'),
                     'is_active' => $this->input->post('is_active'),
+                    'gst_st_code' => $this->input->post('gst_st_code'),
                 );
 
                 $this->Store_model->update_store($id,$params);  

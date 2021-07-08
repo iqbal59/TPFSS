@@ -153,7 +153,7 @@ body {
                         <?php echo $invoice->firm_name;?><br></span><span
                         style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address;?></span><br><span
                         style="font-size:9pt;font-family:Calibri,Arial;">GSTIN NO.
-                        <?php echo $invoice->gstin_no;  $stcode=substr($invoice->gstin_no, 0, 2);?></span></td>
+                        <?php echo $invoice->gstin_no;  $stcode=trim($invoice->gst_st_code);   ?></span></td>
             </tr>
 
 

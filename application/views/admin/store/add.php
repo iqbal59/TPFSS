@@ -129,6 +129,13 @@ Opening Balance :
 </div>
 
 <div>
+GST State CODE : 
+    <input type="text" name="gst_st_code" value="<?php echo $this->input->post('gst_st_code'); ?>" />
+    <span class="text-danger"><?php echo form_error('gst_st_code');?></span>
+</div>
+
+
+<div>
     Status : 
 
     <select name="is_active">
