@@ -510,7 +510,7 @@ if(!empty($bharatpeR)){
     }
     }
 
-$pdf->Output($openBalance['firm_name'].'.pdf', 'D');
+$pdf->Output($openBalance['firm_name'].'-fss.pdf', 'D');
 
 
 }

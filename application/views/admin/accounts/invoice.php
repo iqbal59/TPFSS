@@ -219,7 +219,7 @@ body {
                     <?php  $igst=round($inv->rate*18/100,2); echo number_format($igst, 2); $igst_total+=$igst;?></td>
                 <?php }?>
                 <td class="s7 right">
-                    <?php echo number_format(($inv->rate+$sgst+$cgst),2); $total+=($inv->rate+$sgst+$cgst); ?></td>
+                    <?php echo number_format(($inv->rate+$sgst+$cgst+$igst),2); $total+=($inv->rate+$sgst+$cgst+$igst); ?></td>
             </tr>
             <?php }?>
 
