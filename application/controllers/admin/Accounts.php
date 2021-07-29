@@ -75,8 +75,28 @@ function createinvoices()
         {
 
             
+           
+//REFUND SALES
+$data['refundSales']=$this->Accounts_model->get_all_refund_sales();
+if($data['refundSales']){
+foreach($data['refundSales'] as $r)
+    {
+        $item=array('amount'=>$r['amount'], 'service_code'=>$r['service_code'], 'store_royalty'=>$r['store_royalty'], 'order_ids'=>$r['order_nos'], 'item_name'=>$r['service_code'].' Royalty @'.$r['store_royalty'], 'rate'=>($r['amount']*$r['store_royalty']/100));
+        $data['rsales'][$r['id']][]=$item;
+        $refund_order_ids[]='\''.$r['order_nos'].'\'';
+    }
 
-            $data['storesales']=$this->Accounts_model->get_all_sale_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))),date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
+
+//if($data['rsales'])
+$this->Accounts_model->refundInvoice($data['rsales']);
+}
+//END REFUND
+
+
+            $rids= implode(",", $refund_order_ids);
+
+
+            $data['storesales']=$this->Accounts_model->get_all_sale_by_store($rids, date('Y-m-d', strtotime($this->input->post('invoice_date'))),date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
             //print_r($data['storesales']);
            
             foreach($data['storesales'] as $s)
@@ -95,20 +115,7 @@ function createinvoices()
             $this->Accounts_model->saveInvoice($data['invoice'], $data['period']);
 
 
-            //REFUND SALES
-            $data['refundSales']=$this->Accounts_model->get_all_refund_sales();
-            if($data['refundSales']){
-            foreach($data['refundSales'] as $r)
-                {
-                    $item=array('amount'=>$r['amount'], 'service_code'=>$r['service_code'], 'store_royalty'=>$r['store_royalty'], 'order_ids'=>$r['order_nos'], 'item_name'=>$r['service_code'].' Royalty @'.$r['store_royalty'], 'rate'=>($r['amount']*$r['store_royalty']/100));
-                    $data['rsales'][$r['id']][]=$item;
-                }
-
-
-            //if($data['rsales'])
-            $this->Accounts_model->refundInvoice($data['rsales']);
-            }
-            //END REFUND
+            
             
             //BHARATE PE
             $bharatpe=$this->Accounts_model->get_bharatpe_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))),date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));

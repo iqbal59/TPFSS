@@ -1,10 +1,10 @@
 <?php
 class Accounts_model extends CI_Model {
 
-function get_all_sale_by_store($date, $date_to)
+function get_all_sale_by_store($refund_order_ids, $date, $date_to)
     {
       
-        $query=$this->db->query('CALL get_sale_by_store(?, ?)',array('dt'=>$date, 'dt_to'=>$date_to));
+        $query=$this->db->query('CALL get_sale_by_store(?, ?, ?)',array('dt'=>$date, 'dt_to'=>$date_to, 'r_order_ids'=>$refund_order_ids));
         $res=$query->result_array();
         mysqli_next_result($this->db->conn_id);
 
