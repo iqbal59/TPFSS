@@ -83,7 +83,7 @@ foreach($data['refundSales'] as $r)
     {
         $item=array('amount'=>$r['amount'], 'service_code'=>$r['service_code'], 'store_royalty'=>$r['store_royalty'], 'order_ids'=>$r['order_nos'], 'item_name'=>$r['service_code'].' Royalty @'.$r['store_royalty'], 'rate'=>($r['amount']*$r['store_royalty']/100));
         $data['rsales'][$r['id']][]=$item;
-        $refund_order_ids[]='\''.$r['order_nos'].'\'';
+        $refund_order_ids[]=$r['order_nos'];
     }
 
 
