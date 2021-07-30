@@ -51,10 +51,12 @@ function get_all_sale_by_store($date, $date_to)
             SELECT vouchers.id, vouchers.amount as np, vouchers.voucher_type  , date(vouchers.create_date) as voucher_date, descriptions, concat('TMBLV', '-', id) as voucher_no from vouchers WHERE 1 and date(vouchers.create_date) >= '$date' and date(vouchers.create_date) <='$date_to' and vouchers.store_id=$sotreid) as temp order by voucher_date asc")->result_array();
         }
 
-    function get_all_invoice(){
+    function get_all_invoice($from_dt, $to_dt){
         $this->db->select("invoices.id, net_amount, store_name, invoice_date");
         $this->db->from("invoices");
         $this->db->join("stores", "stores.id=invoices.store_id", "left");
+        $this->db->where('date(invoices.invoice_date) >=', $from_dt);
+        $this->db->where('date(invoices.invoice_date) <=', $to_dt);
        return $this->db->get()->result_array();
 
     }

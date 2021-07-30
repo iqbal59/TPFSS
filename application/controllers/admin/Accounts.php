@@ -10,7 +10,18 @@ class Accounts extends CI_Controller{
 
 function index(){
     check_login_user();
-            $data['invoices']=$this->Accounts_model->get_all_invoice();
+
+    if($this->input->post('from_date'))
+    $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+    else
+    $data['open_date']=date('Y-m-01');
+
+    if($this->input->post('to_date'))
+    $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+    else
+    $data['to_date']=date('Y-m-d');
+
+            $data['invoices']=$this->Accounts_model->get_all_invoice($data['open_date'],  $data['to_date']);
             $data['main_content'] = $this->load->view('admin/accounts/index', $data, TRUE);
             $this->load->view('admin/index',$data);
 }
