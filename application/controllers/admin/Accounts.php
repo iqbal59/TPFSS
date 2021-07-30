@@ -83,20 +83,20 @@ foreach($data['refundSales'] as $r)
     {
         $item=array('amount'=>$r['amount'], 'service_code'=>$r['service_code'], 'store_royalty'=>$r['store_royalty'], 'order_ids'=>$r['order_nos'], 'item_name'=>$r['service_code'].' Royalty @'.$r['store_royalty'], 'rate'=>($r['amount']*$r['store_royalty']/100));
         $data['rsales'][$r['id']][]=$item;
-        $refund_order_ids[]=$r['order_nos'];
+        
     }
 
 
-//if($data['rsales'])
-$this->Accounts_model->refundInvoice($data['rsales']);
+        if($data['rsales'])
+        $this->Accounts_model->refundInvoice($data['rsales']);
 }
 //END REFUND
 
 
-            $rids= implode(",", $refund_order_ids);
+       
 
 
-            $data['storesales']=$this->Accounts_model->get_all_sale_by_store($rids, date('Y-m-d', strtotime($this->input->post('invoice_date'))),date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
+            $data['storesales']=$this->Accounts_model->get_all_sale_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))),date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
             //print_r($data['storesales']);
            
             foreach($data['storesales'] as $s)
