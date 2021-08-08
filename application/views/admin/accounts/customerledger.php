@@ -180,30 +180,37 @@
 
                                 </tr>
 
-                                <?php 
+                                <?php
                         
                           //  print_r($ledgerItems);
 
-foreach($ledgerItems as $li){?>
+foreach ($ledgerItems as $li) {?>
 
                                 <tr>
                                     <td><?php echo $li['voucher_no'];?></td>
                                     <td><?php
                             
-                            if($li['voucher_type']=='C')
-                            echo 'Credit';
-                            elseif($li['voucher_type']=='R')
-                            echo 'Receipt';
-                            elseif($li['voucher_type']=='D')
-                            echo 'Debit';
-                            else
-                            echo $li['voucher_type'];
+                            if ($li['voucher_type']=='C') {
+                                echo 'Credit';
+                            } elseif ($li['voucher_type']=='R') {
+                                echo 'Receipt';
+                            } elseif ($li['voucher_type']=='D') {
+                                echo 'Debit';
+                            } else {
+                                echo $li['voucher_type'];
+                            }
                             ?></td>
                                     <td><?php echo date("d-m-Y", strtotime($li['voucher_date']));?></td>
 
-                                    <td><?php if($li['voucher_type']=='D' or $li['voucher_type']=='Sale'){echo $li['np'];$total_balalnce+=$li['np'];}?>
+                                    <td><?php if ($li['voucher_type']=='D' or $li['voucher_type']=='Sale') {
+                                echo $li['np'];
+                                $total_balalnce+=$li['np'];
+                            }?>
                                     </td>
-                                    <td><?php if($li['voucher_type']=='C' or  $li['voucher_type']=='R'){echo $li['np'];$total_balalnce-=$li['np'];}?>
+                                    <td><?php if ($li['voucher_type']=='C' or  $li['voucher_type']=='R') {
+                                echo $li['np'];
+                                $total_balalnce-=$li['np'];
+                            }?>
                                     </td>
                                     <td><?php echo  $li['descriptions'];?></td>
                                     <td><?php echo $total_balalnce;?></td>

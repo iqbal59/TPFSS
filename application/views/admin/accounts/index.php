@@ -69,7 +69,10 @@
                         action="<?php echo base_url('admin/accounts') ?>"
                         class="form-horizontal" enctype="multipart/form-data" novalidate>
 
-                       
+                        <input type="hidden" id="show_invoice_url"
+                            value="<?php echo base_url('admin/accounts') ?>" />
+                            <input type="hidden" id="download_all_invoice_url"
+                            value="<?php echo base_url('admin/accounts/downloadallinvoice') ?>" />
 
                         <div class="form-body">
                             <br>
@@ -101,8 +104,8 @@
                                     <div class="form-group ">
                                         <h5>Actions</h5>
                                         <div class="controls">
-                                            <button type="submit" id="show_ledger" class="btn btn-success">Show</button>
-                                           
+                                            <button type="button" id="show_invoice" class="btn btn-success">Show</button>
+                                            <button type="button" id="download_all_invoice" class="btn btn-success">Download All Invoice</button>
                                         </div>
                                     </div>
                                 </div>

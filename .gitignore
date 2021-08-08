@@ -16,3 +16,6 @@ application/logs/*
 !application/logs/.htaccess
 /vendor/
 .DS_Store
+uploads/temppdf/*
+uploads/tempinvoice/*
+uploads/.DS_Store

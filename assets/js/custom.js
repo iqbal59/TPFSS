@@ -60,6 +60,27 @@ $(document).ready(function() {
 
 
   
+  $("#download_ledger_all").click(function() {
+    $("#ledger_form").attr("action", $("#download_ledger_url_all").val());
+    $("#ledger_form").attr("target", "_self");
+    $("#ledger_form").submit();
+  });
+
+
+
+  $("#show_invoice").click(function() {
+    $("#ledger_form").attr("action", $("#show_invoice_url").val());
+    $("#ledger_form").attr("target", "_self");
+    $("#ledger_form").submit();
+  });
+
+
+  
+  $("#download_all_invoice").click(function() {
+    $("#ledger_form").attr("action", $("#download_all_invoice_url").val());
+    $("#ledger_form").attr("target", "_self");
+    $("#ledger_form").submit();
+  });
 
 
 });
