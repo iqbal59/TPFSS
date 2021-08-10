@@ -1,4 +1,6 @@
 <?php
+ini_set('max_execution_time', 0);
+ini_set('memory_limit', '2048M');
 class Accounts extends CI_Controller
 {
     public function __construct()
