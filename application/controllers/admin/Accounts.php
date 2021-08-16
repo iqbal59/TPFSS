@@ -68,7 +68,7 @@ class Accounts extends CI_Controller
         
         foreach ($data['storedIds'] as $store_id) {
             $storeData=$this->Store_model->get_store($store_id);
-            savePDF($store_id, $data['open_date'], $data['to_date']);
+            $this->savePDF($store_id, $data['open_date'], $data['to_date']);
             $this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf');
         }
 
