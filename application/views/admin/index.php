@@ -417,7 +417,7 @@
                                     <li><a href="<?php echo base_url('admin/user') ?>"><i class="fa fa-angle-right"></i> Add User </a></li>
                                     <li><a href="<?php echo base_url('admin/user/power') ?>"><i class="fa fa-angle-right"></i> Add User Power</a></li>
                                 <?php else: ?>
-                                    <?php if(check_power(1)):?>
+                                    <?php if (check_power(1)):?>
                                         <li><a href="<?php echo base_url('admin/user') ?>"><i class="fa fa-angle-right"></i> Add User </a></li>
                                     <?php endif; ?>
                                 <?php endif ?>
@@ -477,7 +477,7 @@
                             <li><a href="<?php echo base_url('admin/accounts/createinvoices') ?>"><i class="fa fa-angle-right"></i> Create Invoice</a></li>   
                             <li><a href="<?php echo base_url('admin/accounts/') ?>"><i class="fa fa-angle-right"></i> Royalty Invoice</a></li>
                                 <li><a href="<?php echo base_url('admin/accounts/ledger') ?>"><i class="fa fa-angle-right"></i> Customer Ledger</a></li>
-
+                                <li><a href="<?php echo base_url('admin/accounts/sendemail') ?>"><i class="fa fa-angle-right"></i> Send Email</a></li>
                                
                                 <!-- <li><a href="#"><i class="fa fa-angle-right"></i> Credit Note</a></li> -->
                             </ul>
@@ -756,15 +756,23 @@
     
     <!-- This is data table js -->
     <script src="<?php echo base_url() ?>assets/plugins/datatables/jquery.dataTables.min.js"></script>
-    <script src="http://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
-    <script src="http://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
     <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script> -->
-    <script src="http://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
-    <script src="http://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
-    <script src="http://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
-    <script src="http://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    
     <script>
     $(document).ready(function() {
+
+
+       
+
+  
+
+
         $('#myTable').DataTable();
         $(document).ready(function() {
             var table = $('#example').DataTable({

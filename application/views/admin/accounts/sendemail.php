@@ -6,10 +6,10 @@
 
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
-            <h3 class="text-themecolor m-b-0 m-t-0">Royalty Invoice</h3>
+            <h3 class="text-themecolor m-b-0 m-t-0">Email</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Royalty Invoice</li>
+                <li class="breadcrumb-item active">Send Email Customer Ledger</li>
             </ol>
         </div>
         <div class="col-md-7 col-4 align-self-center">
@@ -65,21 +65,18 @@
             <div class="card">
 
                 <div class="card-body">
-                    <form id="ledger_form" method="post"
-                        action="<?php echo base_url('admin/accounts') ?>"
-                        class="form-horizontal" enctype="multipart/form-data" novalidate>
 
-                        <input type="hidden" id="show_invoice_url"
-                            value="<?php echo base_url('admin/accounts') ?>" />
-                            <input type="hidden" id="download_all_invoice_url"
-                            value="<?php echo base_url('admin/accounts/downloadallinvoice') ?>" />
+
+                    <form id="ledger_form" method="post"
+                        action="<?php echo base_url('admin/accounts/processemail') ?>"
+                        class="form-horizontal" enctype="multipart/form-data" novalidate>
 
                         <div class="form-body">
                             <br>
 
 
                             <div class="row">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <h5>Enter From Date <span class="text-danger">*</span></h5>
                                         <div class="controls">
@@ -89,7 +86,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <h5>Enter To Date <span class="text-danger">*</span></h5>
                                         <div class="controls">
@@ -99,13 +96,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--/span-->
+
                                 <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h5>Store <span class="text-danger">*</span></h5>
+                                        <div style="max-height:300px; border:1px solid #67757c; padding:5px; overflow-y:scroll" >
+
+                                        <div class="form-check">
+  <input class="form-check-input" type="checkbox" id="selectall"  value="" onclick="$('input[name*=\'store_id\']').attr('checked', this.checked);">
+  <label class="form-check-label" for="selectall" >Selelct All</label>
+</div>
+<?php foreach ($stores as $store) {?>
+<div class="form-check">
+  <input class="form-check-input" name="store_id[]" type="checkbox" id="checkbox-<?php echo $store['id'];?>" value="<?php echo $store['id'];?>">
+  <label class="form-check-label" for="checkbox-<?php echo $store['id'];?>"><?php echo $store['store_name'];?></label>
+</div>
+<?php }?>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+                                <div class="col-md-2">
                                     <div class="form-group ">
                                         <h5>Actions</h5>
                                         <div class="controls">
-                                            <button type="button" id="show_invoice" class="btn btn-success">Show</button>
-                                            <button type="button" id="download_all_invoice" class="btn btn-success">Download All Invoice</button>
+                                            <button type="submit"  class="btn btn-success">Send Email</button>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -124,91 +141,9 @@
                 </div>
             </div>
 
-            
-            <div class="card">
-
-                <div class="card-body">
-                
-                    <a href="<?php echo base_url('admin/accounts/createinvoices') ?>" class="btn btn-info pull-right"><i
-                            class="fa fa-plus"></i> Create Invoice</a>
-
-
-                    <div class="table-responsive m-t-40">
-                        <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
-                            cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                   
-                                    <th>Invoice No.</th>
-                                    <th>Date</th>
-                                    <th>Store Name</th>
-                                    <th>Net Amount</th>
-                                    <th>Action</th>
-
-                                    <!-- <th>Action</th> -->
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                  
-                                    <th>Invoice No.</th>
-                                    <th>Date</th>
-                                    <th>Store Name</th>
-                                    <th>Net Amount</th>
-                                    <th>Action</th>
-
-                                    <!-- <th>Action</th> -->
-                                </tr>
-                            </tfoot>
-
-                            <tbody>
 
 
 
-                                <?php
-                            
-                          //  print_r($invoices);
-                            foreach ($invoices as $invoice): ?>
-
-                                <tr>
-                                    
-                                    <td><?php echo $invoice['id']; ?></td>
-                                    <td><?php echo $invoice['invoice_date']; ?></td>
-                                    <td><?php echo $invoice['store_name']; ?></td>
-                                    <td><?php echo $invoice['net_amount']; ?></td>
-
-
-
-                                    <td class="text-nowrap">
-
-
-                                        <a href="<?php echo base_url('admin/accounts/invoicepdf/'.$invoice['id']) ?>"
-                                            target="_blank" data-toggle="tooltip" data-original-title="View"> <i
-                                                class="fa fa-file-text  text-success m-r-10"></i> </a>
-                                        <a href="<?php echo base_url('admin/accounts/invoicepdfdownload/'.$invoice['id']) ?>"
-                                            data-toggle="tooltip" data-original-title="Download"> <i
-                                                class="fa fa-file-pdf-o  text-success m-r-10"></i>
-                                        </a>
-
-
-
-
-
-
-
-                                    </td>
-                                </tr>
-
-                                <?php endforeach ?>
-
-                            </tbody>
-
-
-                        </table>
-                    </div>
-                            
-                </div>
-            </div>
         </div>
     </div>
 

@@ -35,9 +35,102 @@ class Accounts extends CI_Controller
     }
 
 
+    public function sendemail()
+    {
+        check_login_user();
+
+        if ($this->input->post('from_date')) {
+            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+        } else {
+            $data['open_date']=date('Y-m-01');
+        }
+
+        if ($this->input->post('to_date')) {
+            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+        } else {
+            $data['to_date']=date('Y-m-d');
+        }
+        $data['stores']=$this->Store_model->get_all_active_stores();
+        $data['main_content'] = $this->load->view('admin/accounts/sendemail', $data, true);
+        $this->load->view('admin/index', $data);
+    }
 
 
-  
+    public function processemail()
+    {
+        check_login_user();
+
+        
+        $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+        $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+
+        $data['storedIds']=$this->input->post('store_id');
+        
+        foreach ($data['storedIds'] as $store_id) {
+            $storeData=$this->Store_model->get_store($store_id);
+            savePDF($store_id, $data['open_date'], $data['to_date']);
+            $this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf');
+        }
+
+        
+
+
+       
+        $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
+        redirect('admin/accounts/sendemail');
+    }
+
+
+   
+    public function send($content, $attachmentpdf)
+    {
+        // Load PHPMailer library
+        $this->load->library('PHPMailer_Lib');
+
+        // PHPMailer object
+        $mail = $this->phpmailer_lib->load();
+
+        // SMTP configuration
+        $mail->isSMTP();
+        $mail->Host     = 'mail.centuryfasteners.in';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'admin@centuryfasteners.in';
+        $mail->Password = 'B5]DIG&#OcNH';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port     = 465;
+
+        $mail->setFrom('admin@centuryfasteners.in', 'Factory Automation');
+        $mail->addReplyTo('admin@centuryfasteners.in', 'Factory Automation');
+
+        // Add a recipient
+        // $mail->addAddress('Gaurav.Nigam@tumbledry.in');
+        $mail->addAddress('iqbal.alam59@gmail.com');
+
+        // Add cc or bcc
+        // $mail->addCC('Gaurav.Teotia@tumbledry.in');
+        // $mail->addCC('gaurishankarm@gmail.com');
+        // $mail->addBCC('iqbal.alam59@gmail.com');
+        $mail->AddAttachment($attachmentpdf);
+        // Email subject
+        $mail->Subject = "Financial Settlement Sheet for the period 01.08.2021 to 08.08.2021";
+
+        // Set email format to HTML
+        $mail->isHTML(true);
+
+        // Email body content
+        $mailContent = $content;
+            
+        $mail->Body = $mailContent;
+
+        // Send email
+        if (!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            echo 'Message has been sent';
+        }
+    }
+    
 
     public function ledger()
     {
