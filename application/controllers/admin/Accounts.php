@@ -68,21 +68,23 @@ class Accounts extends CI_Controller
         
         foreach ($data['storedIds'] as $store_id) {
             $storeData=$this->Store_model->get_store($store_id);
-            $this->savePDF($store_id, $data['open_date'], $data['to_date']);
-            $this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf');
+            $invoiceData=$this->Accounts_model->get_invoice_by_store($store_id, $data['open_date']);
+            print_r($invoiceData);
+            //$this->savePDF($store_id, $data['open_date'], $data['to_date']);
+            //$this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf');
         }
 
         
 
 
        
-        $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
-        redirect('admin/accounts/sendemail');
+        // $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
+        // redirect('admin/accounts/sendemail');
     }
 
 
    
-    public function send($content, $attachmentpdf)
+    public function send($content, $attachmentpdf, $invoicepdf)
     {
         // Load PHPMailer library
         $this->load->library('PHPMailer_Lib');
@@ -111,6 +113,7 @@ class Accounts extends CI_Controller
         // $mail->addCC('gaurishankarm@gmail.com');
         // $mail->addBCC('iqbal.alam59@gmail.com');
         $mail->AddAttachment($attachmentpdf);
+        $mail->AddAttachment($invoicepdf);
         // Email subject
         $mail->Subject = "Financial Settlement Sheet for the period 01.08.2021 to 08.08.2021";
 
