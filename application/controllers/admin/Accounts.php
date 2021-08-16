@@ -69,16 +69,16 @@ class Accounts extends CI_Controller
         foreach ($data['storedIds'] as $store_id) {
             $storeData=$this->Store_model->get_store($store_id);
             $invoiceData=$this->Accounts_model->get_invoice_by_store($store_id, $data['open_date']);
-            //print_r($invoiceData);
+            print_r($invoiceData);
 
-            $this->savePDF($store_id, $data['open_date'], $data['to_date']);
-            $this->savePDFInvoice($invoiceData->id);
-            $this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$invoiceData->firm_name.'.pdf');
+            // $this->savePDF($store_id, $data['open_date'], $data['to_date']);
+            // $this->savePDFInvoice($invoiceData->id);
+            // $this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$invoiceData->firm_name.'.pdf');
         }
 
         
-        $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
-        redirect('admin/accounts/sendemail');
+        // $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
+        // redirect('admin/accounts/sendemail');
     }
 
 
