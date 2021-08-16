@@ -74,12 +74,9 @@ class Accounts extends CI_Controller
             $this->savePDF($store_id, $data['open_date'], $data['to_date']);
             $this->savePDFInvoice($invoiceData->id);
 
-            $message='<p>Dear Partner <br><br>
- 
- 
-            PFA the Financial Statement along with Royalty invoice for the period '.$data['open_date'].' to '.$data['to_date'].'. Please note that only transactions till '.$data['to_date'].' are considered in the attached statement.</p>';
+            $message='<p>Dear Partner<br><br>PFA the Financial Statement along with Royalty invoice for the period '.$data['open_date'].' to '.$data['to_date'].'. Please note that only transactions till '.$data['to_date'].' are considered in the attached statement.</p>';
 
-            $message.'<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
+            $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
 
             $this->send($data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf');
         }
