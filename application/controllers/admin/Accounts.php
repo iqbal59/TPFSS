@@ -113,7 +113,7 @@ class Accounts extends CI_Controller
         // $mail->addBCC('iqbal.alam59@gmail.com');
         
         $mail->AddAttachment($invoicepdf);
-        $mail->AddAttachment($attachmentpdf);
+        //  $mail->AddAttachment($attachmentpdf);
         // Email subject
         $mail->Subject = "Financial Settlement Sheet for the period 01.08.2021 to 08.08.2021";
 
