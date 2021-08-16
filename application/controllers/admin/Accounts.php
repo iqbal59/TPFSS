@@ -109,12 +109,14 @@ class Accounts extends CI_Controller
 
         // Add a recipient
         $mail->addAddress($to_address);
-        $mail->addAddress('iqbal.alam59@gmail.com');
+        // $mail->addAddress('iqbal.alam59@gmail.com');
 
         // Add cc or bcc
-        // $mail->addCC('Gaurav.Teotia@tumbledry.in');
-        // $mail->addCC('gaurishankarm@gmail.com');
-        // $mail->addBCC('iqbal.alam59@gmail.com');
+        $mail->addCC('Gaurav.Teotia@tumbledry.in');
+        $mail->addCC('Gaurav.Nigam@tumbledry.in');
+        $mail->addCC('Sachin.bhatia@tumbledry.in');
+
+        //$mail->addBCC('iqbal.alam59@gmail.com');
         $mail->AddAttachment($attachmentpdf);
         $mail->AddAttachment($invoicepdf);
          
