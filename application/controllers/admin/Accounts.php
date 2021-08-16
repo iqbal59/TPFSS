@@ -76,7 +76,6 @@ class Accounts extends CI_Controller
             $this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$invoiceData->firm_name.'.pdf');
         }
 
-        
         $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
         redirect('admin/accounts/sendemail');
     }
