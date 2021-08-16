@@ -70,8 +70,10 @@ class Accounts extends CI_Controller
             $storeData=$this->Store_model->get_store($store_id);
             $invoiceData=$this->Accounts_model->get_invoice_by_store($store_id, $data['open_date']);
             print_r($invoiceData);
-            //$this->savePDF($store_id, $data['open_date'], $data['to_date']);
-            //$this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf');
+
+            // $this->savePDF($store_id, $data['open_date'], $data['to_date']);
+            // $this->savePDFInvoice();
+            // $this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf');
         }
 
         
