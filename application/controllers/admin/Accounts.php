@@ -78,7 +78,7 @@ class Accounts extends CI_Controller
 
             $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
 
-            $this->send($data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf');
+            $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf');
         }
 
         $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
@@ -87,7 +87,7 @@ class Accounts extends CI_Controller
 
 
    
-    public function send($from, $to, $content, $attachmentpdf, $invoicepdf)
+    public function send($to_address, $from, $to, $content, $attachmentpdf, $invoicepdf)
     {
         // Load PHPMailer library
         $this->load->library('PHPMailer_Lib');
@@ -108,7 +108,7 @@ class Accounts extends CI_Controller
         $mail->addReplyTo('deepak.verma@tumbledry.in', 'Deepak Verma');
 
         // Add a recipient
-        // $mail->addAddress('Gaurav.Nigam@tumbledry.in');
+        $mail->addAddress($to_address);
         $mail->addAddress('iqbal.alam59@gmail.com');
 
         // Add cc or bcc
