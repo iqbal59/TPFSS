@@ -73,7 +73,15 @@ class Accounts extends CI_Controller
 
             $this->savePDF($store_id, $data['open_date'], $data['to_date']);
             $this->savePDFInvoice($invoiceData->id);
-            $this->send("Hello", FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$invoiceData->firm_name.'.pdf');
+
+            $message='<p>Dear Partner <br><br>
+ 
+ 
+            PFA the Financial Statement along with Royalty invoice for the period '.$data['open_date'].' to '.$data['to_date'].'. Please note that only transactions till '.$data['to_date'].' are considered in the attached statement.</p>';
+
+            $message.'<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
+
+            $this->send($data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf');
         }
 
         $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
@@ -82,7 +90,7 @@ class Accounts extends CI_Controller
 
 
    
-    public function send($content, $attachmentpdf, $invoicepdf)
+    public function send($from, $to, $content, $attachmentpdf, $invoicepdf)
     {
         // Load PHPMailer library
         $this->load->library('PHPMailer_Lib');
@@ -99,8 +107,8 @@ class Accounts extends CI_Controller
         $mail->SMTPSecure = 'ssl';
         $mail->Port     = 465;
 
-        $mail->setFrom('admin@centuryfasteners.in', 'Factory Automation');
-        $mail->addReplyTo('admin@centuryfasteners.in', 'Factory Automation');
+        $mail->setFrom('deepak.verma@tumbledry.in', 'Deepak Verma');
+        $mail->addReplyTo('deepak.verma@tumbledry.in', 'Deepak Verma');
 
         // Add a recipient
         // $mail->addAddress('Gaurav.Nigam@tumbledry.in');
@@ -110,11 +118,11 @@ class Accounts extends CI_Controller
         // $mail->addCC('Gaurav.Teotia@tumbledry.in');
         // $mail->addCC('gaurishankarm@gmail.com');
         // $mail->addBCC('iqbal.alam59@gmail.com');
-        
+        $mail->AddAttachment($attachmentpdf);
         $mail->AddAttachment($invoicepdf);
-        //  $mail->AddAttachment($attachmentpdf);
+         
         // Email subject
-        $mail->Subject = "Financial Settlement Sheet for the period 01.08.2021 to 08.08.2021";
+        $mail->Subject = "Financial Settlement Sheet for the period $from to $to";
 
         // Set email format to HTML
         $mail->isHTML(true);
