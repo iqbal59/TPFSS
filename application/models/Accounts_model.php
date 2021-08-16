@@ -64,7 +64,7 @@ class Accounts_model extends CI_Model
 
     public function get_invoice_by_store($store_id, $desc)
     {
-        echo $sql="select * from invoices where store_id='".$store_id."' and descriptions like '".$desc."%'";
+        echo $sql="select * from invoices where store_id='".$store_id."' and descriptions like '".date('d-m-Y', strotime($desc))."%'";
         return $this->db->query($sql)->result_array();
     }
 
