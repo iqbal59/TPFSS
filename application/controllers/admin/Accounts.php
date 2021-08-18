@@ -74,7 +74,7 @@ class Accounts extends CI_Controller
             $this->savePDF($store_id, $data['open_date'], $data['to_date']);
             $this->savePDFInvoice($invoiceData->id);
 
-            $message='<p>Dear Partner<br><br>PFA the Financial Statement along with Royalty invoice for the period '.$data['open_date'].' to '.$data['to_date'].'. Please note that only transactions till '.$data['to_date'].' are considered in the attached statement.</p>';
+            $message='<p>Dear Partner<br><br>PFA the Financial Statement along with Royalty invoice for the period '.$invoiceData->descriptions.'. Please note that only transactions till '.end(explode(' ', $invoiceData->descriptions)).' are considered in the attached statement.</p>';
 
             $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
 
@@ -192,7 +192,69 @@ class Accounts extends CI_Controller
     }
 
 
+    public function exportledger($id)
+    {
+        check_login_user();
+        header('Content-Type: text/csv; charset=utf-8');
+        header('Content-Disposition: attachment; filename=customer_ledger-'.date('d-m-Y').'.csv');
+        // create a file pointer connected to the output stream
+        $output = fopen('php://output', 'w');
 
+        if ($this->input->post('from_date')) {
+            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+        } else {
+            $data['open_date']=date('Y-m-01');
+        }
+
+        if ($this->input->post('to_date')) {
+            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+        } else {
+            $data['to_date']=date('Y-m-d');
+        }
+
+        
+        
+        // output the column headings
+        fputcsv($output, array('Voucher No.','Voucher Type', 'Voucher Date', 'Debit', 'Credit', 'Description', 'Total'));
+        $data['storebalance']=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $total_balalnce=$$data['storebalance']['openbalance'];
+        $itemrow=array('', 'Opening Balance', date("d-m-Y", strtotime($data['open_date'])), $total_balalnce, '', '', $total_balalnce);
+        fputcsv($output, $itemrow);
+        $data['ledgerItems']=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))), $data['to_date'], $id);
+       
+        foreach ($data['ledgerItems'] as $row) {
+            if ($row['voucher_type']=='C') {
+                $voucher_type= 'Credit';
+            } elseif ($row['voucher_type']=='R') {
+                $voucher_type ='Receipt';
+            } elseif ($row['voucher_type']=='D') {
+                $voucher_type = 'Debit';
+            } else {
+                $voucher_type = $row['voucher_type'];
+            }
+                  
+           
+
+           
+            if ($row['voucher_type']=='D' or $row['voucher_type']=='Sale') {
+                $debit= $row['np'];
+                $total_balalnce+=$row['np'];
+            }
+            
+           
+            if ($row['voucher_type']=='C' or $row['voucher_type']=='R') {
+                $credit= $row['np'];
+                $total_balalnce-=$row['np'];
+            }
+         
+
+
+            $itemrow=array($row['voucher_no'], $voucher_type, date("d-m-Y", strtotime($row['voucher_date'])), $debit ,$credit, $row['descriptions'], $total_balalnce);
+        
+        
+            fputcsv($output, $itemrow);
+        }
+    }
 
 
     public function createinvoices()

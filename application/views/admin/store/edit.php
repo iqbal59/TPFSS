@@ -43,100 +43,106 @@
 
 <div>
     Store Code : 
-    <input type="text" name="store_code" value="<?php echo ($this->input->post('store_code') ? $this->input->post('store_code') : $store['store_code']); ?>" />
+    <input type="text" name="store_code" value="<?php echo($this->input->post('store_code') ? $this->input->post('store_code') : $store['store_code']); ?>" />
     <span class="text-danger"><?php echo form_error('store_code');?></span>
 </div>
 <div>
     Store Name : 
-    <input type="text" name="store_name" value="<?php echo ($this->input->post('store_name') ? $this->input->post('store_name') : $store['store_name']); ?>" />
+    <input type="text" name="store_name" value="<?php echo($this->input->post('store_name') ? $this->input->post('store_name') : $store['store_name']); ?>" />
     <span class="text-danger"><?php echo form_error('store_name');?></span>
 </div>
 <div>
     Store Crm Code : 
-    <input type="text" name="store_crm_code" value="<?php echo ($this->input->post('store_crm_code') ? $this->input->post('store_crm_code') : $store['store_crm_code']); ?>" />
+    <input type="text" name="store_crm_code" value="<?php echo($this->input->post('store_crm_code') ? $this->input->post('store_crm_code') : $store['store_crm_code']); ?>" />
     <span class="text-danger"><?php echo form_error('store_crm_code');?></span>
 </div>
 <div>
     Firm Name : 
-    <input type="text" name="firm_name" value="<?php echo ($this->input->post('firm_name') ? $this->input->post('firm_name') : $store['firm_name']); ?>" />
+    <input type="text" name="firm_name" value="<?php echo($this->input->post('firm_name') ? $this->input->post('firm_name') : $store['firm_name']); ?>" />
     <span class="text-danger"><?php echo form_error('firm_name');?></span>           
 </div>
 <div>
     Store City : 
-    <input type="text" name="store_city" value="<?php echo ($this->input->post('store_city') ? $this->input->post('store_city') : $store['store_city']); ?>" />
+    <input type="text" name="store_city" value="<?php echo($this->input->post('store_city') ? $this->input->post('store_city') : $store['store_city']); ?>" />
 </div>
 <div>
     Store State : 
-    <input type="text" name="store_state" value="<?php echo ($this->input->post('store_state') ? $this->input->post('store_state') : $store['store_state']); ?>" />
+    <input type="text" name="store_state" value="<?php echo($this->input->post('store_state') ? $this->input->post('store_state') : $store['store_state']); ?>" />
 </div>
 <div>
     Email Id : 
-    <input type="text" name="email_id" value="<?php echo ($this->input->post('email_id') ? $this->input->post('email_id') : $store['email_id']); ?>" />
+    <input type="text" name="email_id" value="<?php echo($this->input->post('email_id') ? $this->input->post('email_id') : $store['email_id']); ?>" />
     <span class="text-danger"><?php echo form_error('email_id');?></span> 
 </div>
 <div>
     Gstin No : 
-    <input type="text" name="gstin_no" value="<?php echo ($this->input->post('gstin_no') ? $this->input->post('gstin_no') : $store['gstin_no']); ?>" />
+    <input type="text" name="gstin_no" value="<?php echo($this->input->post('gstin_no') ? $this->input->post('gstin_no') : $store['gstin_no']); ?>" />
 </div>
 <div>
     Contact Number : 
-    <input type="text" name="contact_number" value="<?php echo ($this->input->post('contact_number') ? $this->input->post('contact_number') : $store['contact_number']); ?>" />
+    <input type="text" name="contact_number" value="<?php echo($this->input->post('contact_number') ? $this->input->post('contact_number') : $store['contact_number']); ?>" />
 </div>
 <div>
     Paytm Mid1 : 
-    <input type="text" name="paytm_mid1" value="<?php echo ($this->input->post('paytm_mid1') ? $this->input->post('paytm_mid1') : $store['paytm_mid1']); ?>" />
+    <input type="text" name="paytm_mid1" value="<?php echo($this->input->post('paytm_mid1') ? $this->input->post('paytm_mid1') : $store['paytm_mid1']); ?>" />
     <span class="text-danger"><?php echo form_error('paytm_mid1');?></span> 
 </div>
 <div>
     Paytm Mid2 : 
-    <input type="text" name="paytm_mid2" value="<?php echo ($this->input->post('paytm_mid2') ? $this->input->post('paytm_mid2') : $store['paytm_mid2']); ?>" />
+    <input type="text" name="paytm_mid2" value="<?php echo($this->input->post('paytm_mid2') ? $this->input->post('paytm_mid2') : $store['paytm_mid2']); ?>" />
     <span class="text-danger"><?php echo form_error('paytm_mid2');?></span>
 </div>
 <div>
     Paytm Mid3 : 
-    <input type="text" name="paytm_mid3" value="<?php echo ($this->input->post('paytm_mid3') ? $this->input->post('paytm_mid3') : $store['paytm_mid3']); ?>" />
+    <input type="text" name="paytm_mid3" value="<?php echo($this->input->post('paytm_mid3') ? $this->input->post('paytm_mid3') : $store['paytm_mid3']); ?>" />
     <span class="text-danger"><?php echo form_error('paytm_mid3');?></span>
 </div>
 <div>
     Bharatpay Id : 
-    <input type="text" name="bharatpay_id" value="<?php echo ($this->input->post('bharatpay_id') ? $this->input->post('bharatpay_id') : $store['bharatpay_id']); ?>" />
+    <input type="text" name="bharatpay_id" value="<?php echo($this->input->post('bharatpay_id') ? $this->input->post('bharatpay_id') : $store['bharatpay_id']); ?>" />
     <span class="text-danger"><?php echo form_error('bharatpay_id');?></span>
 </div>
 
 <div>
     Launch Date : 
-    <input type="text" name="launch_date" value="<?php echo ($this->input->post('launch_date') ? $this->input->post('launch_date') : $store['launch_date']); ?>" />   e.g. YYYY-MM-DD
+    <input type="text" name="launch_date" value="<?php echo($this->input->post('launch_date') ? $this->input->post('launch_date') : $store['launch_date']); ?>" />   e.g. YYYY-MM-DD
     <span class="text-danger"><?php echo form_error('launch_date');?></span>
 </div>
 
 <div>
     Pan No : 
-    <input type="text" name="pan_no" value="<?php echo ($this->input->post('pan_no') ? $this->input->post('pan_no') : $store['pan_no']); ?>" />
+    <input type="text" name="pan_no" value="<?php echo($this->input->post('pan_no') ? $this->input->post('pan_no') : $store['pan_no']); ?>" />
 </div>
 
 
 
 <div>
     Store Address : 
-    <textarea name="store_address"><?php echo ($this->input->post('store_address') ? $this->input->post('store_address') : $store['store_address']); ?></textarea>
+    <textarea name="store_address"><?php echo($this->input->post('store_address') ? $this->input->post('store_address') : $store['store_address']); ?></textarea>
 </div>
 
 <div>
     Opening Balance : 
-    <input type="text" name="opening_balance" value="<?php echo ($this->input->post('opening_balance') ? $this->input->post('opening_balance') : $store['opening_balance']); ?>" />
+    <input type="text" name="opening_balance" value="<?php echo($this->input->post('opening_balance') ? $this->input->post('opening_balance') : $store['opening_balance']); ?>" />
 </div>
 
 <div>
 GST State CODE : 
-    <input type="text" name="gst_st_code" value="<?php echo ($this->input->post('gst_st_code') ? $this->input->post('gst_st_code') : $store['gst_st_code']); ?>" />
+    <input type="text" name="gst_st_code" value="<?php echo($this->input->post('gst_st_code') ? $this->input->post('gst_st_code') : $store['gst_st_code']); ?>" />
 </div>
+<div>
+Discount (%): 
+    <input type="text" name="discount" value="<?php echo($this->input->post('discount') ? $this->input->post('discount') : $store['discount']); ?>" />
+    
+</div>
+
 
 <div>
     Status : 
 
     <select name="is_active">
-    <option value="0" <?php echo ($store['is_active']=='0' ? "selected" : ($this->input->post('is_active')=='0'?"selected":"")); ?>>Inactive</option>
-    <option value="1" <?php echo ($store['is_active']=='1' ? "selected" : ($this->input->post('is_active')=='1'?"selected":"")); ?>>Active</option>
+    <option value="0" <?php echo($store['is_active']=='0' ? "selected" : ($this->input->post('is_active')=='0'?"selected":"")); ?>>Inactive</option>
+    <option value="1" <?php echo($store['is_active']=='1' ? "selected" : ($this->input->post('is_active')=='1'?"selected":"")); ?>>Active</option>
     </select>
    
 </div>

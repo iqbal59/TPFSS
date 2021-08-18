@@ -82,5 +82,10 @@ $(document).ready(function() {
     $("#ledger_form").submit();
   });
 
+  $("#export_ledger").click(function() {
+    $("#ledger_form").attr("action", $("#export_ledger_url").val());
+    $("#ledger_form").attr("target", "_self");
+    $("#ledger_form").submit();
+  });
 
 });

@@ -136,11 +136,18 @@ GST State CODE :
 
 
 <div>
+Discount (%): 
+    <input type="text" name="discount" value="<?php echo $this->input->post('discount'); ?>" />
+    <span class="text-danger"><?php echo form_error('discount');?></span>
+</div>
+
+
+<div>
     Status : 
 
     <select name="is_active">
-    <option value="0" <?php echo ($this->input->post('is_active')=='0' ? "selected" : ""); ?>>Inactive</option>
-    <option value="1" <?php echo ($this->input->post('is_active')=='1' ? "selected" : ""); ?>>Active</option>
+    <option value="0" <?php echo($this->input->post('is_active')=='0' ? "selected" : ""); ?>>Inactive</option>
+    <option value="1" <?php echo($this->input->post('is_active')=='1' ? "selected" : ""); ?>>Active</option>
     </select>
    
 </div>
