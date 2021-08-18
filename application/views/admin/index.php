@@ -462,7 +462,9 @@
                                 <li><a href="<?php echo base_url('admin/import/paytmdata') ?>"><i class="fa fa-angle-right"></i> Paytm data</a></li>
                                 <li><a href="<?php echo base_url('admin/import/bharatpedata') ?>"><i class="fa fa-angle-right"></i> Bharat Pe data</a></li>
                                 <li><a href="<?php echo base_url('admin/import/mbdata') ?>"><i class="fa fa-angle-right"></i> Material Bill data</a></li> 
-                                <li><a href="<?php echo base_url('admin/import/saledata') ?>"><i class="fa fa-angle-right"></i> Sale data</a></li>       
+                                <li><a href="<?php echo base_url('admin/import/saledata') ?>"><i class="fa fa-angle-right"></i> Sale data</a></li>     
+                                <li><a href="<?php echo base_url('admin/import/saledatabill') ?>"><i class="fa fa-angle-right"></i> Sale data against Bill</a></li>    
+                                <li><a href="<?php echo base_url('admin/import/creditdata') ?>"><i class="fa fa-angle-right"></i> Credit data</a></li>      
 
                                 <!-- <li><a href="#"><i class="fa fa-angle-right"></i> Credit Note</a></li> -->
                             </ul>
