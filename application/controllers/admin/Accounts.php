@@ -217,7 +217,7 @@ class Accounts extends CI_Controller
         // output the column headings
         fputcsv($output, array('Voucher No.','Voucher Type', 'Voucher Date', 'Debit', 'Credit', 'Description', 'Total'));
         $data['storebalance']=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $total_balalnce=$$data['storebalance']['openbalance'];
+        $total_balalnce=$data['storebalance']['openbalance'];
         $itemrow=array('', 'Opening Balance', date("d-m-Y", strtotime($data['open_date'])), $total_balalnce, '', '', $total_balalnce);
         fputcsv($output, $itemrow);
         $data['ledgerItems']=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))), $data['to_date'], $id);
