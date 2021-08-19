@@ -77,8 +77,8 @@ class Accounts extends CI_Controller
             $message='<p>Dear Partner<br><br>PFA the Financial Statement along with Royalty invoice for the period '.$invoiceData->descriptions.'. Please note that only transactions till '.end(explode(' ', $invoiceData->descriptions)).' are considered in the attached statement.</p>';
 
             $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
-
-            $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf');
+            $subject="Financial Settlement Sheet for the period ".$invoiceData->descriptions;
+            $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
         }
 
         $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
@@ -87,7 +87,7 @@ class Accounts extends CI_Controller
 
 
    
-    public function send($to_address, $from, $to, $content, $attachmentpdf, $invoicepdf)
+    public function send($to_address, $from, $to, $content, $attachmentpdf, $invoicepdf, $subject)
     {
         // Load PHPMailer library
         $this->load->library('PHPMailer_Lib');
@@ -121,7 +121,7 @@ class Accounts extends CI_Controller
         $mail->AddAttachment($invoicepdf);
          
         // Email subject
-        $mail->Subject = "Financial Settlement Sheet for the period $from to $to";
+        $mail->Subject = $subject;
 
         // Set email format to HTML
         $mail->isHTML(true);
