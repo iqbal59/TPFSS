@@ -65,7 +65,7 @@ class Accounts_model extends CI_Model
     public function get_invoice_by_store($store_id, $from_dt, $to_dt)
     {
 
-        $sql="select * from invoices where store_id='".$store_id."' and invoice_date >= $from_dt and invoice_date <=$to_dt";
+        $sql="select * from invoices where store_id='".$store_id."' and date(invoice_date) >= $from_dt and date(invoice_date) <=$to_dt";
         return $this->db->query($sql)->row();
     }
 
