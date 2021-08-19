@@ -97,12 +97,19 @@ class Accounts extends CI_Controller
 
         // SMTP configuration
         $mail->isSMTP();
-        $mail->Host     = 'mail.centuryfasteners.in';
+        // $mail->Host     = 'mail.centuryfasteners.in';
+        // $mail->SMTPAuth = true;
+        // $mail->Username = 'admin@centuryfasteners.in';
+        // $mail->Password = 'B5]DIG&#OcNH';
+        // $mail->SMTPSecure = 'ssl';
+        // $mail->Port     = 465;
+
+        $mail->Host     = 'outlook.office365.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'admin@centuryfasteners.in';
-        $mail->Password = 'B5]DIG&#OcNH';
+        $mail->Username = 'deepak.verma@tumbledry.in';
+        $mail->Password = 'Hellboy@06';
         $mail->SMTPSecure = 'ssl';
-        $mail->Port     = 465;
+        $mail->Port     = 587;
 
         $mail->setFrom('deepak.verma@tumbledry.in', 'Deepak Verma');
         $mail->addReplyTo('deepak.verma@tumbledry.in', 'Deepak Verma');
