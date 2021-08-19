@@ -76,13 +76,13 @@ class Accounts extends CI_Controller
 
             $message='<p>Dear Partner<br><br>PFA the Financial Statement along with Royalty invoice for the period '.$invoiceData->descriptions.'. Please note that only transactions till '.end(explode(' ', $invoiceData->descriptions)).' are considered in the attached statement.</p>';
 
-            echo $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
-            echo  $subject="Financial Settlement Sheet for the period ".$invoiceData->descriptions;
-            // $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
+            $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
+            $subject="Financial Settlement Sheet for the period ".$invoiceData->descriptions;
+            $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
         }
 
-        //  $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
-       // redirect('admin/accounts/sendemail');
+        $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
+        redirect('admin/accounts/sendemail');
     }
 
 
