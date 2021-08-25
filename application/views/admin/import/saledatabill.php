@@ -163,7 +163,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php foreach ($salesdata as $s) { ?>
+                                    <?php foreach ($salesdata as $sales) {
+    foreach ($sales as $s) {
+        ?>
                                     <tr>
                                         <td><?php echo $s['customer_id']; ?></td>
                                         <td><?php echo date("d-m-Y", strtotime($s['order_date'])); ?></td>
@@ -173,13 +175,15 @@
                                         <td><?php echo $s['taxable_amount']; ?></td>
                                         <td><?php echo $s['net_amount']; ?></td>
                                         <td><?php if ($s['is_bill']=='1') {
-    echo 'Yes';
-} else {
-    echo 'No';
-} ?></td>
+            echo 'Yes';
+        } else {
+            echo 'No';
+        } ?></td>
 
                                     </tr>
-                                    <?php } ?>
+                                    <?php
+    }
+}?>
                                 </tbody>
                             </table>
 

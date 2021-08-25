@@ -86,7 +86,18 @@ class Common_model extends CI_Model
 
     public function getSaleBillOrderData($param)
     {
-        $sql='SELECT * FROM storesales LEFT join stores on(storesales.store_name=stores.store_name) where date(order_date) between \''.$param['from_dt'].'\'  and \''.$param['to_dt'].'\' and is_bill=1 order by order_date DESC';
+        $condition=date('d-m-Y', strtotime($param['from_dt']));
+        $condition.=" to ".date('d-m-Y', strtotime($param['to_dt']));
+
+        $sql="SELECT GROUP_CONCAT(order_nos) as order_nos, stores.store_name FROM `invoice_item`, invoices, stores where stores.id=invoices.store_id and invoices.id=invoice_item.invoice_id and invoice_id in (SELECT id from invoices where invoices.descriptions like '".$condition."') group by store_id;";
+        $query = $this->db->query($sql)->result_array();
+        return $query;
+    }
+
+
+    public function getBillOrderData($param, $store_name)
+    {
+        $sql="select * from storesales where store_name='".$store_name."' and order_no in ($param)";
         $query = $this->db->query($sql)->result_array();
         return $query;
     }

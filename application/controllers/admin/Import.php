@@ -380,10 +380,13 @@ class Import extends CI_Controller
         $condition_array=array('from_dt'=>$this->input->get('from_date'), 'to_dt'=>$this->input->get('to_date'));
    
         if (!empty($condition_array['from_dt']) && !empty($condition_array['to_dt'])) {
-            $data['salesdata'] = $this->common_model->getSaleBillOrderData($condition_array);
+            $ordersData= $this->common_model->getSaleBillOrderData($condition_array);
             $data['search_query']=$condition_array;
         }
 
+        foreach ($ordersData as $sale) {
+            $data['salesdata'][]=$this->common_model->getBillOrderData($sale['order_nos'], $sale['store_name']);
+        }
    
         $data['main_content'] = $this->load->view('admin/import/saledatabill', $data, true);
         $this->load->view('admin/index', $data);
