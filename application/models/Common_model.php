@@ -90,8 +90,11 @@ class Common_model extends CI_Model
         $condition.=" to ".date('d-m-Y', strtotime($param['to_dt']));
 
         $query=$this->db->query('CALL gt_orders_by_fss(?)', array('period'=>$condition));
-        $query = $this->db->query($sql)->result_array();
-        return $query;
+        $res=$query->result_array();
+        mysqli_next_result($this->db->conn_id);
+
+        $query->free_result();
+        return $res;
     }
 
 
