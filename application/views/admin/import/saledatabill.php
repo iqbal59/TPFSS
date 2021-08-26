@@ -166,7 +166,6 @@
                                 <tbody>
                                     <?php foreach ($salesdata as $sales) {
     foreach ($sales as $s) {
-        print_r($s)
         ?>
                                     <tr>
                                         <td><?php echo $s['customer_id']; ?></td>
