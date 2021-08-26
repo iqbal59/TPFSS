@@ -100,7 +100,7 @@ class Common_model extends CI_Model
 
     public function getBillOrderData($param, $store_name)
     {
-        $sql="select * from storesales  left join stores on (storesales.store_name=stores.store_name) where store_name='".$store_name."' and order_no in ($param)";
+        $sql="select * from storesales  left join stores on (storesales.store_name=stores.store_name) where storesales.store_name='".$store_name."' and order_no in ($param)";
         $query = $this->db->query($sql)->result_array();
         return $query;
     }
