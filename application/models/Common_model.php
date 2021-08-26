@@ -89,7 +89,7 @@ class Common_model extends CI_Model
         $condition=date('d-m-Y', strtotime($param['from_dt']));
         $condition.=" to ".date('d-m-Y', strtotime($param['to_dt']));
 
-        $sql="SELECT GROUP_CONCAT(order_nos) as order_nos, stores.store_name FROM `invoice_item`, invoices, stores where stores.id=invoices.store_id and invoices.id=invoice_item.invoice_id and invoice_id in (SELECT id from invoices where invoices.descriptions like '".$condition."') group by store_id;";
+        $query=$this->db->query('CALL gt_orders_by_fss(?)', array('period'=>$condition));
         $query = $this->db->query($sql)->result_array();
         return $query;
     }
