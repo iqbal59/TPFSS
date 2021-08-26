@@ -155,6 +155,7 @@
                                         <th>Order Date</th>
                                         <th>Order No.</th>
                                         <th>Store Code</th>
+                                        <th>Firm Name</th>
                                         <th>Service Code</th>
                                         <th>Taxable Amount</th>
                                         <th>Net Amount</th>
@@ -165,12 +166,14 @@
                                 <tbody>
                                     <?php foreach ($salesdata as $sales) {
     foreach ($sales as $s) {
+        print_r($s)
         ?>
                                     <tr>
                                         <td><?php echo $s['customer_id']; ?></td>
                                         <td><?php echo date("d-m-Y", strtotime($s['order_date'])); ?></td>
                                         <td><?php echo $s['order_no']; ?></td>
                                         <td><?php echo $s['store_code']; ?></td>
+                                        <td><?php echo $s['firm_name']; ?></td>
                                         <td><?php echo $s['service_code']; ?></td>
                                         <td><?php echo $s['taxable_amount']; ?></td>
                                         <td><?php echo $s['net_amount']; ?></td>
