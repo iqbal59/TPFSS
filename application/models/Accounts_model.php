@@ -52,7 +52,7 @@ class Accounts_model extends CI_Model
 
     public function get_all_invoice($from_dt, $to_dt)
     {
-        $this->db->select("invoices.id, net_amount, store_name, invoice_date");
+        $this->db->select("invoices.id, net_amount, store_name, invoice_date, firm_name, store_state");
         $this->db->from("invoices");
         $this->db->join("stores", "stores.id=invoices.store_id", "left");
         $this->db->where('date(invoices.invoice_date) >=', $from_dt);
