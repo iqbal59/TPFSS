@@ -761,12 +761,10 @@ table.list1 tbody td:last-child{ width:43px;}
             <div align="right" style="font-size:12px;">
                 <b class="title_name">TUMBLEDRY SOLUTIONS PRIVATE LIMITED</b><br />
 
-                5, 512-B, 98-MODI TOWER, NEHRU PLACE, NEW DELHI,<br>
-                South East Delhi, New Delhi, Delhi 110019<br>
-                01204317564<br>
-                GSTIN 07AAHCT2140E1ZP<br>
-                PAN AAHCT2140E<br>
-                CIN U74999DL2019PTC347046
+                FF-42, Gardenia Glory, Sector 46, Noida,<br>
+                Gautam Buddha Nagar, Uttar Pradesh, 201301<br>
+                GSTIN 09AAHCT2140E1ZL<br>
+                PAN AAHCT2140E
             </div>
             <hr />
 
