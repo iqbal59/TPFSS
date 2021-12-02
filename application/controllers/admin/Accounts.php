@@ -97,12 +97,18 @@ class Accounts extends CI_Controller
 
         // SMTP configuration
         $mail->isSMTP();
-        $mail->Host     = 'mail.centuryfasteners.in';
+        $mail->Host     = 'smtp.office365.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'admin@centuryfasteners.in';
-        $mail->Password = 'B5]DIG&#OcNH';
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port     = 465;
+        $mail->Username = 'deepak.verma@tumbledry.in';
+        $mail->Password = 'Tumb@1234';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port     = 587;
+        // $mail->Host     = 'mail.centuryfasteners.in';
+        // $mail->SMTPAuth = true;
+        // $mail->Username = 'admin@centuryfasteners.in';
+        // $mail->Password = 'B5]DIG&#OcNH';
+        // $mail->SMTPSecure = 'ssl';
+        // $mail->Port     = 465;
 
         // $mail->Host     = 'outlook.office365.com';
         // $mail->SMTPAuth = true;
@@ -148,6 +154,68 @@ class Accounts extends CI_Controller
         }
     }
     
+
+public function sendDemo()
+    {
+        // Load PHPMailer library
+        $this->load->library('PHPMailer_Lib');
+
+        // PHPMailer object
+        $mail = $this->phpmailer_lib->load();
+
+        // SMTP configuration
+        $mail->isSMTP();
+        $mail->Host     = 'smtp.office365.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'deepak.verma@tumbledry.in';
+        $mail->Password = 'Tumb@1234';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port     = 587;
+
+        // $mail->Host     = 'outlook.office365.com';
+        // $mail->SMTPAuth = true;
+        // $mail->Username = 'deepak.verma@tumbledry.in';
+        // $mail->Password = 'Hellboy@06';
+        // $mail->SMTPSecure = 'ssl';
+        // $mail->Port     = 587;
+
+        $mail->setFrom('deepak.verma@tumbledry.in', 'Deepak Verma');
+        $mail->addReplyTo('deepak.verma@tumbledry.in', 'Deepak Verma');
+
+        // Add a recipient
+        $mail->addAddress("iqbal.alam59@gmail.com");
+        // $mail->addAddress('iqbal.alam59@gmail.com');
+
+        // Add cc or bcc
+        // $mail->addCC('Gaurav.Teotia@tumbledry.in');
+        // $mail->addCC('Gaurav.Nigam@tumbledry.in');
+        // $mail->addCC('Sachin.bhatia@tumbledry.in');
+        // $mail->addCC('deepak.verma@tumbledry.in');
+
+        //$mail->addBCC('iqbal.alam59@gmail.com');
+        // $mail->AddAttachment($attachmentpdf);
+        // $mail->AddAttachment($invoicepdf);
+         
+        // Email subject
+        $mail->Subject = "Test email";
+
+        // Set email format to HTML
+        $mail->isHTML(true);
+
+        // Email body content
+        $mailContent = "Hello";
+            
+        $mail->Body = "Demo Email";
+
+        // Send email
+        if (!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            return true;
+        }
+    }
+
 
     public function ledger()
     {
