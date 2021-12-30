@@ -692,7 +692,11 @@ public function sendDemo()
 </table>
 ';
 
-        $html.='<p><strong>Note :-</strong> <em>If Balance is in Negative then tumbledry will Pay to Franchise or if Balance is in Positive then Franchise has to Pay to Tumbledry)</em></p>';
+        $html.='<p><strong>Note :-</strong> <em>If Balance is in Green Color then tumbledry will Pay to Franchise or if Balance is in Red Color then Franchise has to Pay to Tumbledry)<br/>
+
+ 
+
+Please clear your dues within 7 days i-e by next Thursday to avoid inconvenience.In case of any default or delay in clearing your dues; system shall deactivate your CRM account on Friday morning.</em></p>';
 
 
         // output the HTML content
@@ -1018,7 +1022,11 @@ public function sendDemo()
 </table>
 ';
 
-        $html.='<p><strong>Note :-</strong> <em>If Balance is in Negative then tumbledry will Pay to Franchise or if Balance is in Positive then Franchise has to Pay to Tumbledry)</em></p>';
+        $html.='<p><strong>Note :-</strong> <em>If Balance is in Green Color then tumbledry will Pay to Franchise or if Balance is in Red Color then Franchise has to Pay to Tumbledry)<br/><br/>
+
+ 
+
+Please clear your dues within 7 days i-e by next Thursday to avoid inconvenience.In case of any default or delay in clearing your dues; system shall deactivate your CRM account on Friday morning.</em></p>';
 
 
         // output the HTML content
