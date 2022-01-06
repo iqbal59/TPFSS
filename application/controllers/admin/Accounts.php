@@ -692,11 +692,9 @@ public function sendDemo()
 </table>
 ';
 
-        $html.='<p><strong>Note :-</strong> <em>If Balance is in Green Color then tumbledry will Pay to Franchise or if Balance is in Red Color then Franchise has to Pay to Tumbledry)<br/>
+        $html.='<p><strong>Note :-</strong> <em>If Balance is in Green Color then tumbledry will Pay to Franchise or if Balance is in Red Color then Franchise has to Pay to Tumbledry)
 
- 
-
-Please clear your dues within 7 days i-e by next Thursday to avoid inconvenience.In case of any default or delay in clearing your dues; system shall deactivate your CRM account on Friday morning.</em></p>';
+Please clear your dues within 7 days i-e by next Thursday to avoid inconvenience. In case of any default or delay in clearing your dues; system shall deactivate your CRM account on Friday morning and will unblocked the account only after 24Hr once the dues are cleared.</em></p>';
 
 
         // output the HTML content
@@ -1022,11 +1020,9 @@ Please clear your dues within 7 days i-e by next Thursday to avoid inconvenience
 </table>
 ';
 
-        $html.='<p><strong>Note :-</strong> <em>If Balance is in Green Color then tumbledry will Pay to Franchise or if Balance is in Red Color then Franchise has to Pay to Tumbledry)<br/><br/>
+        $html.='<p><strong>Note :-</strong> <em>If Balance is in Green Color then tumbledry will Pay to Franchise or if Balance is in Red Color then Franchise has to Pay to Tumbledry)
 
- 
-
-Please clear your dues within 7 days i-e by next Thursday to avoid inconvenience.In case of any default or delay in clearing your dues; system shall deactivate your CRM account on Friday morning.</em></p>';
+Please clear your dues within 7 days i-e by next Thursday to avoid inconvenience. In case of any default or delay in clearing your dues; system shall deactivate your CRM account on Friday morning and will unblocked the account only after 24Hr once the dues are cleared.</em></p>';
 
 
         // output the HTML content
