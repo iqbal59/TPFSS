@@ -76,6 +76,20 @@ class Accounts extends CI_Controller
 
             $message='<p>Dear Partner<br><br>PFA the Financial Statement along with Royalty invoice for the period '.$invoiceData->descriptions.'. Please note that only transactions till '.end(explode(' ', $invoiceData->descriptions)).' are considered in the attached statement.</p>';
 
+            $message.='<p><strong>Note :-</strong></p>
+
+<em><ul><li>If Balance is in Green Color then Tumbledry will transfer the indicated amount to the Franchise Partner.</li>
+
+<li>If Balance is in Red Color then the Franchise Partner needs to transfer the indicated amount to Tumbledry.</li>
+
+<li>You are requested to clear your dues within 7 days from the date of receiving this statement.</li>
+
+<li>In case of any default or delay in clearing your dues; system shall deactivate your CRM account on 8th Calendar day of releasing this statement.</li>
+
+<li>The account can be unblocked only upon clearing of dues. Unblocking will require 24 Hours post the clearance of dues.</li>
+
+<li>Delay in payments will attract penal charges as per the Franchise agreement.</li></ul></em>';
+
             $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
             $subject="Financial Settlement Sheet for the period ".$invoiceData->descriptions;
             $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
@@ -692,17 +706,19 @@ public function sendDemo()
 </table>
 ';
 
-        $html.='<p><strong>Note :-</strong></p> <blockquote><em>-          If Balance is in Green Color then Tumbledry will transfer the indicated amount to the Franchise Partner.<br>
+        $html.='<p><strong>Note :-</strong></p>
 
--          If Balance is in Red Color then the Franchise Partner needs to transfer the indicated amount to Tumbledry.<br>
+<em><ul><li>If Balance is in Green Color then Tumbledry will transfer the indicated amount to the Franchise Partner.</li>
 
--          You are requested to clear your dues within 7 days from the date of receiving this statement.<br>
+<li>If Balance is in Red Color then the Franchise Partner needs to transfer the indicated amount to Tumbledry.</li>
 
--          In case of any default or delay in clearing your dues; system shall deactivate your CRM account on 8th Calendar day of releasing this statement.<br>
+<li>You are requested to clear your dues within 7 days from the date of receiving this statement.</li>
 
--          The account can be unblocked only upon clearing of dues. Unblocking will require 24 Hours post the clearance of dues.<br>
+<li>In case of any default or delay in clearing your dues; system shall deactivate your CRM account on 8th Calendar day of releasing this statement.</li>
 
--          Delay in payments will attract penal charges as per the Franchise agreement.</em></blockquote>';
+<li>The account can be unblocked only upon clearing of dues. Unblocking will require 24 Hours post the clearance of dues.</li>
+
+<li>Delay in payments will attract penal charges as per the Franchise agreement.</li></ul></em>';
 
 
 
@@ -1029,17 +1045,19 @@ public function sendDemo()
 </table>
 ';
 
-        $html.='<p><strong>Note :-</strong></p> <blockquote><em>-          If Balance is in Green Color then Tumbledry will transfer the indicated amount to the Franchise Partner.<br>
+        $html.='<p><strong>Note :-</strong></p>
 
--          If Balance is in Red Color then the Franchise Partner needs to transfer the indicated amount to Tumbledry.<br>
+<em><ul><li>If Balance is in Green Color then Tumbledry will transfer the indicated amount to the Franchise Partner.</li>
 
--          You are requested to clear your dues within 7 days from the date of receiving this statement.<br>
+<li>If Balance is in Red Color then the Franchise Partner needs to transfer the indicated amount to Tumbledry.</li>
 
--          In case of any default or delay in clearing your dues; system shall deactivate your CRM account on 8th Calendar day of releasing this statement.<br>
+<li>You are requested to clear your dues within 7 days from the date of receiving this statement.</li>
 
--          The account can be unblocked only upon clearing of dues. Unblocking will require 24 Hours post the clearance of dues.<br>
+<li>In case of any default or delay in clearing your dues; system shall deactivate your CRM account on 8th Calendar day of releasing this statement.</li>
 
--          Delay in payments will attract penal charges as per the Franchise agreement.</em></blockquote>';
+<li>The account can be unblocked only upon clearing of dues. Unblocking will require 24 Hours post the clearance of dues.</li>
+
+<li>Delay in payments will attract penal charges as per the Franchise agreement.</li></ul></em>';
 
 
         // output the HTML content
