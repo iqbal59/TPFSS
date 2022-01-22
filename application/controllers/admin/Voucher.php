@@ -85,7 +85,7 @@ class Voucher extends CI_Controller{
 					'voucher_type' => $this->input->post('voucher_type'),
 					'store_id' => $this->input->post('store_id'),
 					'amount' => $this->input->post('amount'),
-					'create_date' => $this->input->post('create_date'),
+					//'create_date' => $this->input->post('create_date'),
                 );
 
                 $this->Voucher_model->update_voucher($id,$params);            

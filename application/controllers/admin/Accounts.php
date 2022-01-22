@@ -675,7 +675,7 @@ public function sendDemo()
 
 
             $html.='<td width="30%">'.$li['descriptions'].'</td>
-<td class="right" width="10%">'.$total_balalnce.'</td>
+<td class="right" width="10%">'.number_format($total_balalnce,2).'</td>
 
 </tr>';
         }
@@ -697,7 +697,7 @@ public function sendDemo()
         <th>-</th>
         <th>-</th>
         <th>-</th>
-        <th class="right" style="color:'.$color.';" ><strong>'.$total_balalnce.'</strong></th>
+        <th class="right" style="color:'.$color.';" ><strong>'.number_format($total_balalnce,2).'</strong></th>
 
     </tr>
 </tfoot>
@@ -1014,7 +1014,7 @@ public function sendDemo()
 
 
             $html.='<td width="30%">'.$li['descriptions'].'</td>
-<td class="right" width="10%">'.$total_balalnce.'</td>
+<td class="right" width="10%">'.number_format($total_balalnce,2).'</td>
 
 </tr>';
         }
@@ -1036,7 +1036,7 @@ public function sendDemo()
         <th>-</th>
         <th>-</th>
         <th>-</th>
-        <th class="right" style="color:'.$color.';" ><strong>'.$total_balalnce.'</strong></th>
+        <th class="right" style="color:'.$color.';" ><strong>'.number_format($total_balalnce,2).'</strong></th>
 
     </tr>
 </tfoot>

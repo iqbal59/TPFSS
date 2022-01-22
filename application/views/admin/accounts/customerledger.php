@@ -65,7 +65,7 @@
             <div class="card">
 
                 <div class="card-body">
-               
+
 
                     <form id="ledger_form" method="post"
                         action="<?php echo base_url('admin/accounts/customerledger/'.$storebalance['id']) ?>"
@@ -78,7 +78,7 @@
                         <input type="hidden" id="download_ledger_url"
                             value="<?php echo base_url('admin/accounts/downloadledger/'.$storebalance['id']) ?>" />
 
-                            <input type="hidden" id="export_ledger_url"
+                        <input type="hidden" id="export_ledger_url"
                             value="<?php echo base_url('admin/accounts/exportledger/'.$storebalance['id']) ?>" />
                         <div class="form-body">
                             <br>
@@ -116,7 +116,7 @@
                                             <button type="button" id="download_ledger"
                                                 class="btn btn-success">Download</button>
 
-                                                <button type="button" id="export_ledger"
+                                            <button type="button" id="export_ledger"
                                                 class="btn btn-success">Export</button>
                                         </div>
                                     </div>
@@ -144,8 +144,8 @@
                 <div class="card-body">
 
 
-                   
-                            <h3><?php echo $storebalance['store_name'];?></h3>
+
+                    <h3><?php echo $storebalance['store_name'];?></h3>
                     <div class="table-responsive m-t-40">
                         <table id="" class="display nowrap table table-hover table-striped table-bordered"
                             cellspacing="0" width="100%">
@@ -219,7 +219,7 @@ foreach ($ledgerItems as $li) {?>
                             }?>
                                     </td>
                                     <td><?php echo  $li['descriptions'];?></td>
-                                    <td><?php echo $total_balalnce;?></td>
+                                    <td><?php echo number_format($total_balalnce,2);?></td>
 
                                 </tr>
 
