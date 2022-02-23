@@ -142,7 +142,7 @@ class Accounts extends CI_Controller
         $mail->addCC('Gaurav.Teotia@tumbledry.in');
         $mail->addCC('Gaurav.Nigam@tumbledry.in');
         $mail->addCC('manmohan.rawat@tumbledry.in');
-        $mail->addCC('deepak.verma@tumbledry.in');
+       // $mail->addCC('deepak.verma@tumbledry.in');
 
         //$mail->addBCC('iqbal.alam59@gmail.com');
         $mail->AddAttachment($attachmentpdf);
