@@ -36,11 +36,14 @@ class Voucher_model extends CI_Model
         $this->db->select('vouchers.*, stores.store_name, stores.store_crm_code');
         
         $this->db->join('stores', 'stores.id=vouchers.store_id', 'left');
+        $this->db->where('date(vouchers.create_date) >=', $params['from_dt']);
+        $this->db->where('date(vouchers.create_date) <=', $params['to_dt']);
         $this->db->order_by('id', 'desc');
         // if(isset($params) && !empty($params))
         // {
         //     $this->db->limit($params['limit'], $params['offset']);
         // }
+        
         return $this->db->get('vouchers')->result_array();
     }
         

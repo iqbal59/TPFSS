@@ -18,16 +18,30 @@ class Voucher extends CI_Controller{
      */
     function index()
     {
-        $params['limit'] = RECORDS_PER_PAGE; 
-        $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
+        // $params['limit'] = RECORDS_PER_PAGE; 
+        // $params['offset'] = ($this->input->get('per_page')) ? $this->input->get('per_page') : 0;
         
-        $config = $this->config->item('pagination');
-        $config['base_url'] = site_url('admin/voucher/index');
-        $config['total_rows'] = $this->Voucher_model->get_all_vouchers_count();
-        $this->pagination->initialize($config);
+        // $config = $this->config->item('pagination');
+        // $config['base_url'] = site_url('admin/voucher/index');
+        // $config['total_rows'] = $this->Voucher_model->get_all_vouchers_count();
+        // $this->pagination->initialize($config);
 
-        $data['vouchers'] = $this->Voucher_model->get_all_vouchers($params);
-       
+
+         $data=array();
+        $condition_array=array('from_dt'=>$this->input->get('from_date'), 'to_dt'=>$this->input->get('to_date'));
+   
+        if (!empty($condition_array['from_dt']) && !empty($condition_array['to_dt'])) {
+             $data['vouchers'] = $this->Voucher_model->get_all_vouchers($condition_array);
+            $data['search_query']=$condition_array;
+        }
+        // else{
+        //      $data['vouchers'] = $this->Voucher_model->get_all_vouchers(array('from_dt'=> date('Y-m-01'), 'to_dt' => date('Y-m-d')));
+        //     $data['search_query']=$condition_array;
+        // }
+
+
+       // $data['vouchers'] = $this->Voucher_model->get_all_vouchers($params);
+       //print_r($this->db->last_query());    
         $data['main_content'] = $this->load->view('admin/voucher/index', $data, TRUE);
         $this->load->view('admin/index',$data);
     }

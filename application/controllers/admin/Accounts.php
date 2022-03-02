@@ -330,11 +330,17 @@ public function sendDemo()
                 $debit= $row['np'];
                 $total_balalnce+=$row['np'];
             }
-            
+            else{
+                $debit= '';
+            }
            
             if ($row['voucher_type']=='C' or $row['voucher_type']=='R') {
                 $credit= $row['np'];
                 $total_balalnce-=$row['np'];
+            }
+            else
+            {
+                $credit='';
             }
          
 
