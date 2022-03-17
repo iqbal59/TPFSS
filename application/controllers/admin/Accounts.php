@@ -257,7 +257,7 @@ public function sendDemo()
         }
 
         $data['storebalance']=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $data['ledgerItems']=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))), $data['to_date'], $id);
+        $data['ledgerItems']=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
         $data['main_content'] = $this->load->view('admin/accounts/customerledger', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -278,7 +278,7 @@ public function sendDemo()
         }
 
         $data['storebalance']=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $data['ledgerItems']=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))), $data['to_date'], $id);
+        $data['ledgerItems']=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
         $this->load->view('admin/accounts/printledger', $data);
     }
 
@@ -311,7 +311,7 @@ public function sendDemo()
         $total_balalnce=$data['storebalance']['openbalance'];
         $itemrow=array('', 'Opening Balance', date("d-m-Y", strtotime($data['open_date'])), $total_balalnce, '', '', $total_balalnce);
         fputcsv($output, $itemrow);
-        $data['ledgerItems']=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))), $data['to_date'], $id);
+        $data['ledgerItems']=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
        
         foreach ($data['ledgerItems'] as $row) {
             if ($row['voucher_type']=='C') {
@@ -557,7 +557,7 @@ public function sendDemo()
         
     
         $openBalance=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $ledgerItems=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))), $data['to_date'], $id);
+        $ledgerItems=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
 
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -895,7 +895,7 @@ public function sendDemo()
         }
     
         $openBalance=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $ledgerItems=$this->Accounts_model->ledgerItem(date('Y-m-d', strtotime("+1 day", strtotime($data['open_date']))), $data['to_date'], $id);
+        $ledgerItems=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
 
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
