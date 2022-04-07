@@ -91,7 +91,7 @@ class Accounts extends CI_Controller
 <li>Delay in payments will attract penal charges as per the Franchise agreement.</li></ul></em>';
 
             $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
-            $subject=$storeData['firm_name']." Financial Settlement Sheet for the period ".$invoiceData->descriptions;
+            $subject=$storeData['firm_name']."-Financial Settlement Sheet for the period ".$invoiceData->descriptions;
             $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
         }
 
