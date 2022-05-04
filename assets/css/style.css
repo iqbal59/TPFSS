@@ -10365,3 +10365,7 @@ div.dataTables_wrapper span.select-item {
     display: block;
   }
 }
+
+.form-control {
+  font-size: 12px !important;
+}

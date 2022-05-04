@@ -176,7 +176,7 @@
 
                                 <tr>
 
-                                    <td><?php echo $invoice['id']; ?></td>
+                                    <td><?php echo $invoice['invoice_no']; ?></td>
                                     <td><?php echo $invoice['invoice_date']; ?></td>
                                     <td><?php echo $invoice['store_name']; ?></td>
                                     <td><?php echo $invoice['firm_name']; ?></td>
