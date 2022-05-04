@@ -65,13 +65,11 @@
             <div class="card">
 
                 <div class="card-body">
-                    <form id="ledger_form" method="post"
-                        action="<?php echo base_url('admin/accounts') ?>"
+                    <form id="ledger_form" method="post" action="<?php echo base_url('admin/accounts') ?>"
                         class="form-horizontal" enctype="multipart/form-data" novalidate>
 
-                        <input type="hidden" id="show_invoice_url"
-                            value="<?php echo base_url('admin/accounts') ?>" />
-                            <input type="hidden" id="download_all_invoice_url"
+                        <input type="hidden" id="show_invoice_url" value="<?php echo base_url('admin/accounts') ?>" />
+                        <input type="hidden" id="download_all_invoice_url"
                             value="<?php echo base_url('admin/accounts/downloadallinvoice') ?>" />
 
                         <div class="form-body">
@@ -104,8 +102,10 @@
                                     <div class="form-group ">
                                         <h5>Actions</h5>
                                         <div class="controls">
-                                            <button type="button" id="show_invoice" class="btn btn-success">Show</button>
-                                            <button type="button" id="download_all_invoice" class="btn btn-success">Download All Invoice</button>
+                                            <button type="button" id="show_invoice"
+                                                class="btn btn-success">Show</button>
+                                            <button type="button" id="download_all_invoice"
+                                                class="btn btn-success">Download All Invoice</button>
                                         </div>
                                     </div>
                                 </div>
@@ -117,18 +117,18 @@
                             <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>"
                                 value="<?=$this->security->get_csrf_hash();?>" />
 
-
+                        </div>
 
 
                     </form>
                 </div>
             </div>
 
-            
+
             <div class="card">
 
                 <div class="card-body">
-                
+
                     <a href="<?php echo base_url('admin/accounts/createinvoices') ?>" class="btn btn-info pull-right"><i
                             class="fa fa-plus"></i> Create Invoice</a>
 
@@ -138,7 +138,7 @@
                             cellspacing="0" width="100%">
                             <thead>
                                 <tr>
-                                   
+
                                     <th>Invoice No.</th>
                                     <th>Date</th>
                                     <th>Store Name</th>
@@ -152,7 +152,7 @@
                             </thead>
                             <tfoot>
                                 <tr>
-                                  
+
                                     <th>Invoice No.</th>
                                     <th>Date</th>
                                     <th>Store Name</th>
@@ -175,7 +175,7 @@
                             foreach ($invoices as $invoice): ?>
 
                                 <tr>
-                                    
+
                                     <td><?php echo $invoice['id']; ?></td>
                                     <td><?php echo $invoice['invoice_date']; ?></td>
                                     <td><?php echo $invoice['store_name']; ?></td>
@@ -212,7 +212,7 @@
 
                         </table>
                     </div>
-                            
+
                 </div>
             </div>
         </div>

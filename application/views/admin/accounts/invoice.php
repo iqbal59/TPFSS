@@ -122,7 +122,7 @@ body {
                 </td>
                 <td colspan="2" style="vertical-align:top">
                     <p><span style="font-size:9pt;font-family:Calibri,Arial;">:
-                            TD/21-22/<?php echo $invoice->invoice_no;?><br /></span></p>
+                            TD/22-23/<?php echo $invoice->invoiceno;?><br /></span></p>
                     <span style="font-size:9pt;font-family:Calibri,Arial;">:
                         <?php echo date('d/m/Y', strtotime($invoice->invoice_date));?></span><br />
                 </td>
@@ -219,7 +219,8 @@ body {
                     <?php  $igst=round($inv->rate*18/100,2); echo number_format($igst, 2); $igst_total+=$igst;?></td>
                 <?php }?>
                 <td class="s7 right">
-                    <?php echo number_format(($inv->rate+$sgst+$cgst+$igst),2); $total+=($inv->rate+$sgst+$cgst+$igst); ?></td>
+                    <?php echo number_format(($inv->rate+$sgst+$cgst+$igst),2); $total+=($inv->rate+$sgst+$cgst+$igst); ?>
+                </td>
             </tr>
             <?php }?>
 

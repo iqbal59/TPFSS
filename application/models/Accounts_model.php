@@ -13,7 +13,7 @@ class Accounts_model extends CI_Model
 
     public function calculate_balance_by_date($date)
     {
-        return $this->db->query("select *, (opening_balance+msales+rsales+debit-receipt-credit) as openbalance from (select stores.id, stores.store_crm_code, stores.store_name, opening_balance, ifnull(msales, 0) as msales, ifnull(rsales, 0) as rsales, ifnull(receipt, 0) as receipt, ifnull(debit, 0) as debit, ifnull(credit, 0) as credit from stores left join (SELECT store_crm_code, sum(amount) as msales FROM `material_invoices` where invoice_date <= '$date'  group by store_crm_code) as mtable on (stores.store_crm_code=mtable.store_crm_code) left join (select sum(net_amount) as rsales, store_id from invoices where date(invoice_date) <= '$date' group by store_id) rtable on (rtable.store_id=stores.id) left join (SELECT store_id, sum(case when voucher_type = 'R' then amount else 0 end) as receipt, sum(case when voucher_type = 'D' then amount else 0 end) as debit, sum(case when voucher_type = 'C' then amount else 0 end) as credit FROM `vouchers` WHERE 1 and date(create_date) <= '$date'  group by store_id
+        return $this->db->query("select *, (opening_balance+msales+rsales+debit-receipt-credit) as openbalance from (select stores.id, stores.store_crm_code, stores.store_name, stores.firm_name, opening_balance, ifnull(msales, 0) as msales, ifnull(rsales, 0) as rsales, ifnull(receipt, 0) as receipt, ifnull(debit, 0) as debit, ifnull(credit, 0) as credit from stores left join (SELECT store_crm_code, sum(amount) as msales FROM `material_invoices` where invoice_date <= '$date'  group by store_crm_code) as mtable on (stores.store_crm_code=mtable.store_crm_code) left join (select sum(net_amount) as rsales, store_id from invoices where date(invoice_date) <= '$date' group by store_id) rtable on (rtable.store_id=stores.id) left join (SELECT store_id, sum(case when voucher_type = 'R' then amount else 0 end) as receipt, sum(case when voucher_type = 'D' then amount else 0 end) as debit, sum(case when voucher_type = 'C' then amount else 0 end) as credit FROM `vouchers` WHERE 1 and date(create_date) <= '$date'  group by store_id
             ) as v on (v.store_id=stores.id)) as openbalancetable")->result_array();
     }
 
@@ -38,7 +38,7 @@ class Accounts_model extends CI_Model
 
     public function ledgerItem($date, $date_to, $sotreid)
     {
-        return $this->db->query("select * from (SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat('Royalty', ' ', descriptions) as descriptions, concat('TD', '-', id) as voucher_no FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
+        return $this->db->query("select * from (SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat('Royalty', ' ', descriptions) as descriptions, concat('TD', '-', invoice_no) as voucher_no FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
 
             UNION
             
@@ -70,7 +70,7 @@ class Accounts_model extends CI_Model
 
     public function get_invoice_by_id($id)
     {
-        $this->db->select("*, invoices.id as invoice_no");
+        $this->db->select("*, invoices.id as invoice_no, invoices.invoice_no as invoiceno");
         $this->db->from("invoices");
         
         $this->db->join("stores", "stores.id=invoices.store_id", "left");
@@ -95,7 +95,8 @@ class Accounts_model extends CI_Model
             $total_amount=0;
             $tax_amount=0;
             $net_amount=0;
-            $this->db->insert('invoices', array('store_id'=>$store_id));
+            $invoice_no=$this->getInvoiceNo();
+            $this->db->insert('invoices', array('store_id'=>$store_id, 'invoice_no'=>$invoice_no));
             $invoice_id=$this->db->insert_id();
             $storeData=$this->db->get_where('stores', array('id'=>$store_id))->row_array();
             foreach ($items as $item) {
@@ -110,6 +111,14 @@ class Accounts_model extends CI_Model
             $net_amount=$total_amount+$tax_amount;
             $this->db->query("update invoices set amount='$total_amount', tax_rate='18', tax_amount='$tax_amount', net_amount='$net_amount', descriptions='$period' where id='$invoice_id'");
         }
+    }
+    public function getInvoiceNo(){
+       $invoice_no=1;
+       $invoiceData=$this->db->query("select max(id) as invoice_no from invoices where date(invoice_date) >= '2022-04-01'")->row();
+       if($invoiceData->invoice_no)
+       $invoice_no+=$invoiceData->invoice_no;
+
+       return $invoice_no;
     }
 
 

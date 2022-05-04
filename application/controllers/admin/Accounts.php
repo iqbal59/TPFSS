@@ -353,6 +353,9 @@ public function sendDemo()
         }
     }
 
+    public function getinvoiceno(){
+       echo $this->Accounts_model->getInvoiceNo();
+    }
 
     public function createinvoices()
     {

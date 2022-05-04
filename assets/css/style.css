@@ -713,6 +713,7 @@ Labels
   line-height: 13px;
   color: #ffffff;
   font-weight: 400;
+  font-size: 12px;
   border-radius: 4px;
   font-size: 75%;
 }
@@ -885,6 +886,10 @@ Table Cell
 .table td,
 .table th {
   border-color: #f3f1f1;
+  font-size: 12px;
+  padding: 5px !important;
+  line-height: 1;
+  vertical-align: middle !important;
 }
 
 .table thead th,
@@ -4318,6 +4323,7 @@ Table-Data Table
   padding: 5px 15px;
   border-radius: 4px;
   background: #009efb;
+  font-size: 12px;
   color: #ffffff;
   margin-right: 3px;
 }
@@ -4328,6 +4334,7 @@ Table-Data Table
 .dataTables_info,
 .dataTables_length {
   display: inline-block;
+  font-size: 12px;
 }
 
 .dataTables_length {
@@ -4484,6 +4491,7 @@ table.dataTable thead .sorting:after {
   text-align: center;
   text-decoration: none;
   cursor: pointer;
+  font-size: 12px;
   *cursor: hand;
   color: #67757c;
   border: 1px solid #ddd;

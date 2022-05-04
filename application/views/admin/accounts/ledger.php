@@ -62,12 +62,15 @@
 
 
 
+
+
+
+
             <div class="card">
 
                 <div class="card-body">
-                    <form id="ledger_form" method="post"
-                        action=""
-                        class="form-horizontal" enctype="multipart/form-data" novalidate>
+                    <form id="ledger_form" method="post" action="" class="form-horizontal" enctype="multipart/form-data"
+                        novalidate>
 
                         <input type="hidden" id="download_ledger_url_all"
                             value="<?php echo base_url('admin/accounts/downloadledgerall') ?>" />
@@ -102,7 +105,7 @@
                                     <div class="form-group ">
                                         <h5>Actions</h5>
                                         <div class="controls">
-                                          
+
                                             <button type="button" id="download_ledger_all"
                                                 class="btn btn-success">Download All</button>
                                         </div>
@@ -117,12 +120,11 @@
                                 value="<?=$this->security->get_csrf_hash();?>" />
 
 
-
+                        </div>
 
                     </form>
                 </div>
             </div>
-
 
 
 
@@ -133,12 +135,13 @@
 
 
 
-                    <div class="table-responsive m-t-40">
+                    <div class="table-responsive">
                         <table id="example23" class="display nowrap table table-hover table-striped table-bordered"
                             cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>Customer Name</th>
+                                    <th>Firm Name</th>
                                     <th>Balance</th>
 
                                     <th>Action</th>
@@ -147,6 +150,7 @@
                             <tfoot>
                                 <tr>
                                     <th>Customer Name</th>
+                                    <th>Firm Name</th>
                                     <th>Balance</th>
                                     <th>Action</th>
                                 </tr>
@@ -154,10 +158,11 @@
 
                             <tbody>
                                 <?php
-                           foreach ($ledgers as $l) {
-                               ?>
+           foreach ($ledgers as $l) {
+               ?>
                                 <tr>
                                     <td><?php echo $l['store_name']?></td>
+                                    <td><?php echo $l['firm_name']?></td>
                                     <td><?php echo $l['openbalance']?></td>
                                     <td> <a href="javascript:void(0)"
                                             onclick="viewledger(<?php echo $l['id']; ?>)">View</a>
@@ -167,8 +172,8 @@
                                 </tr>
 
                                 <?php
-                           }
-                           ?>
+           }
+           ?>
 
 
 
@@ -179,6 +184,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -202,7 +208,4 @@ function viewledger(store_id) {
     $("#ledger_form").attr("target", "_self");
     $("#ledger_form").submit();
 }
-
-
-
 </script>
