@@ -112,13 +112,15 @@ class Accounts_model extends CI_Model
             $this->db->query("update invoices set amount='$total_amount', tax_rate='18', tax_amount='$tax_amount', net_amount='$net_amount', descriptions='$period' where id='$invoice_id'");
         }
     }
-    public function getInvoiceNo(){
-       $invoice_no=1;
-       $invoiceData=$this->db->query("select max(id) as invoice_no from invoices where date(invoice_date) >= '2022-04-01'")->row();
-       if($invoiceData->invoice_no)
-       $invoice_no+=$invoiceData->invoice_no;
+    public function getInvoiceNo()
+    {
+        $invoice_no=1;
+        $invoiceData=$this->db->query("select max(invoice_no) as invoice_no from invoices where date(invoice_date) >= '2022-04-01'")->row();
+        if ($invoiceData->invoice_no) {
+            $invoice_no+=$invoiceData->invoice_no;
+        }
 
-       return $invoice_no;
+        return $invoice_no;
     }
 
 
