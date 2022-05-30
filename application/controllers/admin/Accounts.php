@@ -143,7 +143,7 @@ class Accounts extends CI_Controller
         $mail->addCC('shashank.sharma@tumbledry.in');
         $mail->addCC('Gaurav.Nigam@tumbledry.in');
         $mail->addCC('manmohan.rawat@tumbledry.in');
-       // $mail->addCC('deepak.verma@tumbledry.in');
+        // $mail->addCC('deepak.verma@tumbledry.in');
 
         //$mail->addBCC('iqbal.alam59@gmail.com');
         $mail->AddAttachment($attachmentpdf);
@@ -170,7 +170,7 @@ class Accounts extends CI_Controller
     }
     
 
-public function sendDemo()
+    public function sendDemo()
     {
         // Load PHPMailer library
         $this->load->library('PHPMailer_Lib');
@@ -330,17 +330,14 @@ public function sendDemo()
             if ($row['voucher_type']=='D' or $row['voucher_type']=='Sale') {
                 $debit= $row['np'];
                 $total_balalnce+=$row['np'];
-            }
-            else{
+            } else {
                 $debit= '';
             }
            
             if ($row['voucher_type']=='C' or $row['voucher_type']=='R') {
                 $credit= $row['np'];
                 $total_balalnce-=$row['np'];
-            }
-            else
-            {
+            } else {
                 $credit='';
             }
          
@@ -353,8 +350,9 @@ public function sendDemo()
         }
     }
 
-    public function getinvoiceno(){
-       echo $this->Accounts_model->getInvoiceNo();
+    public function getinvoiceno()
+    {
+        echo $this->Accounts_model->getInvoiceNo();
     }
 
     public function createinvoices()
@@ -450,7 +448,7 @@ public function sendDemo()
 
     public function invoicepdfdownload($id)
     {
-        check_login_user();
+        // check_login_user();
         $invoiceData=$this->Accounts_model->get_invoice_by_id($id);
         // print_r($invoiceData);
         $this->load->library('Pdf');
@@ -476,7 +474,7 @@ public function sendDemo()
 
     public function savePDFInvoice($id)
     {
-        check_login_user();
+        //check_login_user();
         $invoiceData=$this->Accounts_model->get_invoice_by_id($id);
         // print_r($invoiceData);
         $this->load->library('Pdf');
@@ -539,6 +537,32 @@ public function sendDemo()
             $data['to_date']=date('Y-m-d');
         }
         $invoices=$this->Accounts_model->get_all_invoice($data['open_date'], $data['to_date']);
+        
+        foreach ($invoices as $invoice) {
+            //echo $invoice['id'];
+            $this->savePDFInvoice($invoice['id']);
+        }
+
+        $filename = "allinvoice_".date('d_m_Y_H_i_s', strtotime('+ 330 minutes')).".zip";
+        $path = 'uploads/tempinvoice';
+        $this->zip->read_dir($path);
+        $this->zip->download($filename);
+    }
+
+    public function downloadallinvoicebyStore($store_id)
+    {
+        if ($this->input->post('from_date')) {
+            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+        } else {
+            $data['open_date']=date('Y-m-01');
+        }
+    
+        if ($this->input->post('to_date')) {
+            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+        } else {
+            $data['to_date']=date('Y-m-d');
+        }
+        $invoices=$this->Accounts_model->get_all_invoice_by_partner($store_id, $data['open_date'], $data['to_date']);
         
         foreach ($invoices as $invoice) {
             //echo $invoice['id'];
@@ -685,7 +709,7 @@ public function sendDemo()
 
 
             $html.='<td width="30%">'.$li['descriptions'].'</td>
-<td class="right" width="10%">'.number_format($total_balalnce,2).'</td>
+<td class="right" width="10%">'.number_format($total_balalnce, 2).'</td>
 
 </tr>';
         }
@@ -707,7 +731,7 @@ public function sendDemo()
         <th>-</th>
         <th>-</th>
         <th>-</th>
-        <th class="right" style="color:'.$color.';" ><strong>'.number_format($total_balalnce,2).'</strong></th>
+        <th class="right" style="color:'.$color.';" ><strong>'.number_format($total_balalnce, 2).'</strong></th>
 
     </tr>
 </tfoot>
@@ -884,7 +908,7 @@ public function sendDemo()
 
     public function downloadledger($id)
     {
-        check_login_user();
+        //  check_login_user();
         if ($this->input->post('from_date')) {
             $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
@@ -1024,7 +1048,7 @@ public function sendDemo()
 
 
             $html.='<td width="30%">'.$li['descriptions'].'</td>
-<td class="right" width="10%">'.number_format($total_balalnce,2).'</td>
+<td class="right" width="10%">'.number_format($total_balalnce, 2).'</td>
 
 </tr>';
         }
@@ -1046,7 +1070,7 @@ public function sendDemo()
         <th>-</th>
         <th>-</th>
         <th>-</th>
-        <th class="right" style="color:'.$color.';" ><strong>'.number_format($total_balalnce,2).'</strong></th>
+        <th class="right" style="color:'.$color.';" ><strong>'.number_format($total_balalnce, 2).'</strong></th>
 
     </tr>
 </tfoot>

@@ -23,6 +23,27 @@ class Accounts_model extends CI_Model
          ) as v on (v.store_id=stores.id)) as openbalancetable where id=$id")->row_array();
     }
 
+
+    public function calculate_expense_by_partner($month, $year, $id)
+    {
+        return $this->db->query("select * from (select stores.id, stores.store_crm_code, opening_balance, stores.store_name, firm_name, store_address, ifnull(msales, 0) as msales, ifnull(rsales, 0) as rsales, ifnull(receipt, 0) as receipt, ifnull(debit, 0) as debit, ifnull(credit, 0) as credit , stores.bharatpay_id, paytm_mid1, paytm_mid2, paytm_mid3, totalsales from stores left join (SELECT store_crm_code, sum(amount) as msales FROM `material_invoices` where month(invoice_date) = '$month' and year(invoice_date)='$year'  group by store_crm_code) as mtable on (stores.store_crm_code=mtable.store_crm_code) left join (select sum(net_amount) as rsales, store_id from invoices where month(invoice_date) = '$month' and year(invoice_date)='$year'  group by store_id) rtable on (rtable.store_id=stores.id) left join (SELECT store_id, sum(case when voucher_type = 'R' then amount else 0 end) as receipt, sum(case when voucher_type = 'D' then amount else 0 end) as debit, sum(case when voucher_type = 'C' then amount else 0 end) as credit FROM `vouchers` WHERE 1 and month(create_date) = '$month' and year(create_date) = '$year'  group by store_id
+         ) as v on (v.store_id=stores.id) join (select sum(taxable_amount) as totalsales, store_name from storesales WHERE 1 and month(order_date) = '$month' and year(order_date) = '$year' group by store_name) as stsales on (stsales.store_name=stores.store_name)) as openbalancetable where id=$id")->row_array();
+    }
+
+
+    public function calculate_expense_by_partner_new($id, $no_of_month)
+    {
+        $query=$this->db->query('CALL account_summary(?, ?)', array('storeid'=>$id, 'no_of_months'=>$no_of_month));
+        $res=$query->result_array();
+        //print_r($res);
+        mysqli_next_result($this->db->conn_id);
+
+        $query->free_result();
+        return $res;
+    }
+
+
+
     public function get_bharatpe_by_store($date, $date_to)
     {
         return $this->db->query("SELECT sum(amount) as amount, bharatpe.store_name, group_concat(bharatpe.id) as ids, stores.id as store_id FROM `bharatpe` right join stores on (stores.bharatpay_id=bharatpe.store_name) WHERE is_reconcile=1 and date(transaction_date) >= '$date' and date(transaction_date) <= '$date_to' and is_bill=0 group by store_name")->result_array();
@@ -60,6 +81,20 @@ class Accounts_model extends CI_Model
         return $this->db->get()->result_array();
     }
 
+
+
+    public function get_all_invoice_by_partner($user_id, $from_dt, $to_dt)
+    {
+        $this->db->select("invoices.id, net_amount, store_name, invoice_date, firm_name, store_state, invoices.invoice_no");
+        $this->db->from("invoices");
+        $this->db->join("stores", "stores.id=invoices.store_id", "left");
+        $this->db->where('date(invoices.invoice_date) >=', $from_dt);
+        $this->db->where('date(invoices.invoice_date) <=', $to_dt);
+        $this->db->where('store_id', $user_id);
+        $this->db->order_by('invoices.id', "desc");
+
+        return $this->db->get()->result_array();
+    }
 
 
     public function get_invoice_by_store($store_id, $from_dt, $to_dt)

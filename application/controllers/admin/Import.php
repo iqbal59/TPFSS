@@ -40,7 +40,7 @@ class Import extends CI_Controller
         if ($_FILES) {
             $file=$_FILES['excel_file']['tmp_name'];
             if ($file == null) {
-                error(_('Please select a file to import'));
+                show_error('Please select a file to import');
                 $this->session->set_flashdata('error_msg', "Please select file");
                 redirect('admin/import/storesales');
             } else {

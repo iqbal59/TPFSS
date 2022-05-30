@@ -894,7 +894,7 @@ Table Cell
 
 .table thead th,
 .table th {
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .table-hover tbody tr:hover {
@@ -2027,11 +2027,13 @@ Form-control
 }
 
 form label {
-  font-weight: 400;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 00.25rem;
 }
 
 .form-group {
-  margin-bottom: 25px;
+  margin-bottom: 12px;
 }
 
 .form-horizontal label {
@@ -2882,7 +2884,7 @@ ul#themecolors li a.working:before {
  Card title
 *******************/
 .card {
-  margin-bottom: 30px;
+  margin-bottom: 16px;
 }
 .card .card-subtitle {
   font-weight: 300;
@@ -3572,19 +3574,19 @@ Form addons page
 
 .select2-container--default .select2-selection--single {
   border-color: #d9d9d9;
-  height: 38px;
+  height: 28px;
 }
 
 .select2-container--default
   .select2-selection--single
   .select2-selection__rendered {
-  line-height: 38px;
+  line-height: 28px;
 }
 
 .select2-container--default
   .select2-selection--single
   .select2-selection__arrow {
-  height: 33px;
+  height: 23px;
 }
 
 .input-form .btn {
@@ -4393,9 +4395,12 @@ Table-Data Table
   float: right;
   margin-top: 10px;
 }
+.dataTables_filter input.form-control {
+  min-height: 18px !important;
+}
 .dataTables_filter input {
-  border: 0;
-  background-image: -webkit-gradient(
+  /* border: 0; */
+  /* background-image: -webkit-gradient(
       linear,
       left top,
       left bottom,
@@ -4416,15 +4421,15 @@ Table-Data Table
   -webkit-transition: background 0s ease-out;
   -o-transition: background 0s ease-out;
   transition: background 0s ease-out;
-  float: none;
+  float: none; */
   -webkit-box-shadow: none;
   box-shadow: none;
   border-radius: 0;
   margin-left: 10px;
 }
 .dataTables_filter input:focus {
-  outline: none;
-  background-image: -webkit-gradient(
+  /* outline: none; */
+  /* background-image: -webkit-gradient(
       linear,
       left top,
       left bottom,
@@ -4443,7 +4448,7 @@ Table-Data Table
   box-shadow: none;
   -webkit-transition-duration: 0.3s;
   -o-transition-duration: 0.3s;
-  transition-duration: 0.3s;
+  transition-duration: 0.3s; */
 }
 
 table.dataTable thead .sorting,
@@ -4540,20 +4545,25 @@ Table- responsive
 /*******************
 Table- editable table
 ******************/
+.dataTables_filter label {
+  font-size: 12px;
+}
+
 .dt-bootstrap {
   display: block;
 }
 
 .paging_simple_numbers .pagination .paginate_button {
-  padding: 0px;
+  padding: 5px 0px;
+
   background: #ffffff;
 }
 .paging_simple_numbers .pagination .paginate_button:hover {
   background: #ffffff;
 }
 .paging_simple_numbers .pagination .paginate_button a {
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 6px 10px;
+  /* border-radius: 4px; */
   border: 0px;
 }
 .paging_simple_numbers .pagination .paginate_button.active a,
@@ -8288,6 +8298,46 @@ File: scss
   }
 }
 
+.offset-xlg-12 {
+  margin-left: 100%;
+}
+.offset-xlg-11 {
+  margin-left: 91.66666667%;
+}
+.offset-xlg-10 {
+  margin-left: 83.33333333%;
+}
+.offset-xlg-9 {
+  margin-left: 75%;
+}
+.offset-xlg-8 {
+  margin-left: 66.66666667%;
+}
+.offset-xlg-7 {
+  margin-left: 58.33333333%;
+}
+.offset-xlg-6 {
+  margin-left: 50%;
+}
+.offset-xlg-5 {
+  margin-left: 41.66666667%;
+}
+.offset-xlg-4 {
+  margin-left: 33.33333333%;
+}
+.offset-xlg-3 {
+  margin-left: 25%;
+}
+.offset-xlg-2 {
+  margin-left: 16.66666667%;
+}
+.offset-xlg-1 {
+  margin-left: 8.33333333%;
+}
+.offset-xlg-0 {
+  margin-left: 0;
+}
+
 .col-xlg-1,
 .col-xlg-10,
 .col-xlg-11,
@@ -8746,6 +8796,7 @@ File: scss
   top: 0px;
   position: fixed;
   z-index: 99999;
+  opacity: 0.8;
   background: #fff;
 }
 .preloader .cssload-speeding-wheel {
@@ -10368,4 +10419,20 @@ div.dataTables_wrapper span.select-item {
 
 .form-control {
   font-size: 12px !important;
+}
+
+.wrapword {
+  white-space: -moz-pre-wrap !important; /* Mozilla, since 1999 */
+  white-space: -webkit-pre-wrap; /* Chrome & Safari */
+  white-space: -pre-wrap; /* Opera 4-6 */
+  white-space: -o-pre-wrap; /* Opera 7 */
+  white-space: pre-wrap; /* CSS3 */
+  word-wrap: break-word; /* Internet Explorer 5.5+ */
+  word-break: break-all;
+  white-space: normal;
+}
+
+.my-flex-card > div > div.card {
+  height: calc(100% - 15px);
+  margin-bottom: 15px;
 }
