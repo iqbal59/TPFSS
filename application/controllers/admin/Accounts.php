@@ -90,7 +90,8 @@ class Accounts extends CI_Controller
 
 <li>Delay in payments will attract penal charges as per the Franchise agreement.</li></ul></em>';
 
-            $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
+            // $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
+            $message.='<br><br><br><p>Regards<br><br>Thanks<br><a href="mailto:mis@tumbledry.in">mis@tumbledry.in</a></p>';
             $subject=$storeData['firm_name']."-Financial Settlement Sheet for the period ".$invoiceData->descriptions;
             $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
         }
@@ -131,8 +132,8 @@ class Accounts extends CI_Controller
         // $mail->SMTPSecure = 'ssl';
         // $mail->Port     = 587;
 
-        $mail->setFrom('deepak.verma@tumbledry.in', 'Deepak Verma');
-        $mail->addReplyTo('deepak.verma@tumbledry.in', 'Deepak Verma');
+        $mail->setFrom('mis@tumbledry.in', 'MIS');
+        $mail->addReplyTo('mis@tumbledry.in', 'MIS');
 
         // Add a recipient
         $mail->addAddress($to_address);
