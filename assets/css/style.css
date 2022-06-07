@@ -1080,6 +1080,12 @@ html body .waves-notransition {
   background-color: #2f3d4a;
 }
 
+.dropup {
+  width: 100%;
+}
+.multiselect {
+  width: 100% !important;
+}
 /*******************
 Buttons
 ******************/
@@ -1089,10 +1095,10 @@ Buttons
   cursor: pointer;
 }
 
-.btn-group label {
+/* .btn-group label {
   color: #ffffff !important;
   margin-bottom: 0px;
-}
+} */
 .btn-group label.btn-secondary {
   color: #67757c !important;
 }

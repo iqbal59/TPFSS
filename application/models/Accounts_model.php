@@ -225,4 +225,34 @@ class Accounts_model extends CI_Model
 
         return $query=$this->db->query($sql)->result_array();
     }
+
+
+
+    public function save_email_data($data)
+    {
+        $this->db->insert('emailreport', $data);
+    }
+
+
+    public function get_all_email_list()
+    {
+        $sql="select emailreport.*, firm_name from emailreport left join stores on (emailreport.store_id=stores.id)";
+
+        return $query=$this->db->query($sql)->result_array();
+    }
+
+    public function get_send_to_email_list()
+    {
+        $sql="select * from emailreport where email_status=0 limit 0, 10";
+
+        return $query=$this->db->query($sql)->result_array();
+    }
+
+
+
+    public function updateEmailStatus($id, $params)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('emailreport', $params);
+    }
 }

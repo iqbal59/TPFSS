@@ -83,7 +83,8 @@
     <link href="<?php echo base_url() ?>assets/css/colors/blue.css" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-
+    <link href="<?php echo base_url() ?>assets/plugins/bootstrap-multiselect/dist/css/bootstrap-multiselect.min.css"
+        rel="stylesheet" />
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -603,6 +604,11 @@
                                 <li><a href="<?php echo base_url('admin/accounts/sendemail') ?>"><i
                                             class="fa fa-angle-right"></i> Send Email</a></li>
 
+
+
+                                <li><a href="<?php echo base_url('admin/accounts/emailreports') ?>"><i
+                                            class="fa fa-angle-right"></i> Email Reports</a></li>
+
                                 <!-- <li><a href="#"><i class="fa fa-angle-right"></i> Credit Note</a></li> -->
                             </ul>
                         </li>
@@ -873,6 +879,9 @@
     </script>
     <script src="<?php echo base_url() ?>assets/plugins/bootstrap/js/bootstrap.min.js">
     </script>
+
+    <script src="<?php echo base_url() ?>assets/plugins/bootstrap-multiselect/dist/js/bootstrap-multiselect.min.js">
+    </script>
     <!-- slimscrollbar scrollbar JavaScript -->
     <script src="<?php echo base_url() ?>assets/js/jquery.slimscroll.js">
     </script>
@@ -1020,9 +1029,19 @@
     <script>
     $(document).ready(function() {
 
-
+        $('#store_email').multiselect({
+            enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+            dropUp: true
+        });
 
         var table_voucher = $('#table-voucher').DataTable({
+            dom: 'Blfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+
             "processing": true,
             "serverSide": true,
             "ajax": {
@@ -1032,10 +1051,6 @@
                     $('input[name="to_date"]').val(),
                 type: "GET",
             },
-            "dom": 'Blfrtip',
-            "buttons": [
-                'print'
-            ],
             "lengthMenu": [
                 [25, 50, -1],
                 [25, 50, 'All'],
@@ -1190,6 +1205,9 @@
     <script type="text/javascript" src="../assets/plugins/multiselect/js/jquery.multi-select.js"></script>
     <script>
     jQuery(document).ready(function() {
+
+
+
 
         //summernone text editor
         jQuery(document).ready(function() {

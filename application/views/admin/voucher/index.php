@@ -118,7 +118,7 @@
                                 aria-hidden="true">×</span> </button>
                     </div>
                     <?php endif ?>
-                    <?php if ($vouchers) {?>
+                    <?php //if ($vouchers) {?>
                     <div class="card">
 
                         <div class="card-body">
@@ -167,7 +167,7 @@
                             </div>
                         </div>
                     </div>
-                    <?php }?>
+                    <?php //}?>
                 </div>
             </div>
 

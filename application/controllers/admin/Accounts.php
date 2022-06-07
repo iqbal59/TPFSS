@@ -35,6 +35,17 @@ class Accounts extends CI_Controller
     }
 
 
+
+
+    public function emailreports()
+    {
+        check_login_user();
+        $data['emaildata']=$this->Accounts_model->get_all_email_list();
+        $data['main_content'] = $this->load->view('admin/accounts/emailreports', $data, true);
+        $this->load->view('admin/index', $data);
+    }
+
+
     public function sendemail()
     {
         check_login_user();
@@ -56,6 +67,11 @@ class Accounts extends CI_Controller
     }
 
 
+
+
+
+    
+
     public function processemail()
     {
         check_login_user();
@@ -64,9 +80,50 @@ class Accounts extends CI_Controller
         $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
         $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
 
-        $data['storedIds']=$this->input->post('store_id');
+
         
-        foreach ($data['storedIds'] as $store_id) {
+        $data['storedIds']=$this->input->post('store_id');
+        // print_r($data['storedIds']);
+
+        foreach ($data['storedIds'] as $s) {
+            $emailData=array('from_date'=>$data['open_date'] ,'to_date'=> $data['to_date'], 'store_id'=>$s);
+           
+            // print_r($emailData);
+            $this->Accounts_model->save_email_data($emailData);
+            // echo $this->db->last_query();
+        }
+
+        $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
+        redirect('admin/accounts/sendemail');
+    }
+
+
+
+
+    public function processemailnew()
+    {
+        // check_login_user();
+
+        
+        // $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+        // $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+
+
+        
+        // $data['storedIds']=$this->input->post('store_id');
+        //  print_r($data['storedIds']);
+        
+        $data['storedIds']=$this->Accounts_model->get_send_to_email_list();
+        if (!is_array($data['storedIds'])) {
+            $data['storedIds']=array();
+        }
+        foreach ($data['storedIds'] as $s) {
+            $store_id=$s['store_id'];
+
+            $data['open_date']=date("Y-m-d", strtotime($s['from_date']));
+            $data['to_date']=date("Y-m-d", strtotime($s['to_date']));
+
+
             $storeData=$this->Store_model->get_store($store_id);
             $invoiceData=$this->Accounts_model->get_invoice_by_store($store_id, $data['open_date'], $data['to_date']);
         
@@ -93,11 +150,14 @@ class Accounts extends CI_Controller
             // $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
             $message.='<br><br><br><p>Regards<br><br>Thanks<br><a href="mailto:mis@tumbledry.in">mis@tumbledry.in</a></p>';
             $subject=$storeData['firm_name']."-Financial Settlement Sheet for the period ".$invoiceData->descriptions;
-            $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
+            $isSent=$this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
+            if ($isSent) {
+                $this->Accounts_model->updateEmailStatus($s['id'], array('email_status'=>1, 'email_sent_at'=>date('Y-m-d H:i:s')));
+            }
         }
 
-        $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
-        redirect('admin/accounts/sendemail');
+        // $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
+        // redirect('admin/accounts/sendemail');
     }
 
 
@@ -163,8 +223,9 @@ class Accounts extends CI_Controller
 
         // Send email
         if (!$mail->send()) {
-            echo 'Message could not be sent.';
-            echo 'Mailer Error: ' . $mail->ErrorInfo;
+            // echo 'Message could not be sent.';
+            // echo 'Mailer Error: ' . $mail->ErrorInfo;
+            return false;
         } else {
             return true;
         }

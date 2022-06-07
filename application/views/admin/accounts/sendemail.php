@@ -19,13 +19,15 @@
                 <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                     <div class="chart-text m-r-10">
                         <!-- <h6 class="m-b-0"><small>Active User</small></h6>
-                        <h4 class="m-t-0 text-info"><?php echo $count->active_user; ?></h4> -->
+                        <h4 class="m-t-0 text-info"><?php echo $count->active_user; ?>
+                        </h4> -->
                     </div>
                 </div>
                 <div class="d-flex m-r-20 m-l-10 hidden-md-down">
                     <div class="chart-text m-r-10">
                         <!-- <h6 class="m-b-0"><small>Inctive User</small></h6>
-                        <h4 class="m-t-0 text-primary"><?php echo $count->inactive_user; ?></h4> -->
+                        <h4 class="m-t-0 text-primary"><?php echo $count->inactive_user; ?>
+                        </h4> -->
                     </div>
                 </div>
 
@@ -67,8 +69,7 @@
                 <div class="card-body">
 
 
-                    <form id="ledger_form" method="post"
-                        action="<?php echo base_url('admin/accounts/processemail') ?>"
+                    <form id="ledger_form" method="post" action="<?php echo base_url('admin/accounts/processemail') ?>"
                         class="form-horizontal" enctype="multipart/form-data" novalidate>
 
                         <div class="form-body">
@@ -98,22 +99,42 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <div class="form-group">
+                                    <div class="form-group bootstrap-select">
                                         <h5>Store <span class="text-danger">*</span></h5>
-                                        <div style="max-height:300px; border:1px solid #67757c; padding:5px; overflow-y:scroll" >
 
+                                        <select class="form-control" placeholder="--select Store--" name="store_id[]"
+                                            multiple="multiple" id="store_email" style="width:100%;">
+
+                                            <?php
+                                          foreach ($stores as $store) {
+                                              ?>
+                                            <option value="<?php echo $store['id']; ?>">
+                                                <?php echo $store['store_name']; ?>
+                                            </option>
+                                            <?php
+                                          }?>
+
+
+                                        </select>
+                                        <!-- <div
+                                            style="max-height:300px; border:1px solid #67757c; padding:5px; overflow-y:scroll">
+
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" id="selectall" value=""
+                                                    onclick="$('input[name*=\'store_id\']').attr('checked', this.checked);">
+                                                <label class="form-check-label" for="selectall">Selelct All</label>
+                                            </div>
+                                            <?php foreach ($stores as $store) {?>
                                         <div class="form-check">
-  <input class="form-check-input" type="checkbox" id="selectall"  value="" onclick="$('input[name*=\'store_id\']').attr('checked', this.checked);">
-  <label class="form-check-label" for="selectall" >Selelct All</label>
-</div>
-<?php foreach ($stores as $store) {?>
-<div class="form-check">
-  <input class="form-check-input" name="store_id[]" type="checkbox" id="checkbox-<?php echo $store['id'];?>" value="<?php echo $store['id'];?>">
-  <label class="form-check-label" for="checkbox-<?php echo $store['id'];?>"><?php echo $store['store_name'];?></label>
-</div>
-<?php }?>
-
+                                            <input class="form-check-input" name="store_id[]" type="checkbox"
+                                                id="checkbox-<?php echo $store['id'];?>"
+                                                value="<?php echo $store['id'];?>">
+                                            <label class="form-check-label"
+                                                for="checkbox-<?php echo $store['id'];?>"><?php echo $store['store_name'];?></label>
                                         </div>
+                                        <?php }?>
+
+                                    </div> -->
                                     </div>
                                 </div>
                                 <!--/span-->
@@ -121,8 +142,8 @@
                                     <div class="form-group ">
                                         <h5>Actions</h5>
                                         <div class="controls">
-                                            <button type="submit"  class="btn btn-success">Send Email</button>
-                                            
+                                            <button type="submit" class="btn btn-success">Send Email</button>
+
                                         </div>
                                     </div>
                                 </div>

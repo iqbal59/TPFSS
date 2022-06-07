@@ -129,27 +129,25 @@ class Import extends CI_Controller
                 case '4':
                     $row=0;
                         while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
-                            if ($row++ < 1 || strtoupper(trim($filesop[4], "'")) != 'SUCCESS') {
+                            if ($row++ < 1 || trim($filesop[6], "'") != 'SUCCESS') {
                                 continue;
                             }
-                            $data['transaction_no'] = 'NA';
+                            $data['transaction_no'] = trim($filesop[1], "'");
                             // $data['utr_no'] = trim($filesop[8], "'");
-                            $utr_no=trim($filesop[3], "'");
+                            $utr_no=trim($filesop[8], "'");
                             if (is_numeric($utr_no)) {
                                 $utr_no = ltrim($utr_no, "0");
                             }
-                            // $data['utr_no'] = $utr_no;
-                            $data['utr_no']=number_format($utr_no, 0, '', '');
-                            $data['amount'] = trim($filesop[5], "'");
-                           
-                            $data['store_name'] = trim($filesop[0], "'");
-                            $data['settled_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
-                            $data['transaction_date'] = date('Y-m-d H:i:s', strtotime($data['settled_date']. " - 1 days"));
-                            
+                            $data['utr_no'] = $utr_no;
+
+                            $data['amount'] = trim($filesop[3], "'");
+                            $data['store_name'] = trim($filesop[10], "'");
+                            $data['transaction_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
+                            $data['settled_date'] = date('Y-m-d H:i:s', strtotime($filesop[9]));
                          
                             $this->common_model->insert_ignore($data, 'bharatpe');
                             
-                            // print_r($data);
+                            //print_r($data);
                         }
 
                         $bharatpebankdata=$this->common_model->matchBharatpeithBank();
