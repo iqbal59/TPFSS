@@ -122,8 +122,8 @@
                                     <th>To Date</th>
                                     <th>Store Name</th>
                                     <th>Status</th>
-                                    <th>Time</th>
-
+                                    <th>Schedule at</th>
+                                    <th>Sent at</th>
 
                                 </tr>
                             </thead>
@@ -147,15 +147,19 @@
                                     </td>
                                     <td><?php
                                     
-                                    if ($e['status']==0) {
+                                    if ($e['email_status']==0) {
                                         echo 'In-Process';
-                                    } elseif ($e['status']==1) {
+                                    } elseif ($e['email_status']==1) {
                                         echo "Sent";
                                     } ?>
                                     </td>
                                     <td><?php echo date('d-m-Y', strtotime($e['create_date'])); ?>
                                     </td>
 
+                                    <td><?php if ($e['email_sent_at'] != null) {
+                                        echo date('d-m-Y', strtotime($e['email_sent_at']));
+                                    } ?>
+                                    </td>
 
 
 
