@@ -153,11 +153,11 @@
                                         echo "Sent";
                                     } ?>
                                     </td>
-                                    <td><?php echo date('d-m-Y H:i:s', strtotime($e['create_date']. "+ 60*5+30 minutes")); ?>
+                                    <td><?php echo date('d-m-Y H:i:s', strtotime($e['create_date']. "+ ".(60*5+30)." minutes")); ?>
                                     </td>
 
                                     <td><?php if ($e['email_sent_at'] != null) {
-                                        echo date('d-m-Y H:i:s', strtotime($e['email_sent_at']."+ 60*5+30 minutes"));
+                                        echo date('d-m-Y H:i:s', strtotime($e['email_sent_at']."+ ".(60*5+30)." minutes"));
                                     } ?>
                                     </td>
 
