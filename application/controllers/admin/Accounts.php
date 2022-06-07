@@ -639,7 +639,7 @@ class Accounts extends CI_Controller
 
     public function savePDF($id, $from_date, $to_date)
     {
-        check_login_user();
+        // check_login_user();
        
         $data['open_date']=$from_date;
         $data['to_date']=$to_date;
