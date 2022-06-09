@@ -32,10 +32,16 @@
                     <h4 class="m-b-0 text-center">Current Outstanding: ₹
                         <strong><?php echo $storeData['openbalance'];?></strong>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                        <button type="button" class="btn btn-primary">Pay Now</button>
+                        <?php if ($storeData['openbalance'] > 0) {?>
+                        <a href="#" class="btn btn-primary">Pay Now</a> <?php }?>
                     </h4>
 
-
+                    <p class="text-center m-b-0"><?php if ($storeData['openbalance'] > 0) {
+    echo $this->session->userdata('name')." pay to tumbledry";
+} else {
+    echo "tumbledry pay to ".$this->session->userdata('name');
+}?>
+                    </p>
 
 
 

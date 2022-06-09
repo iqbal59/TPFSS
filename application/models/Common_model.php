@@ -58,16 +58,24 @@ class Common_model extends CI_Model
   
   
   
-    public function getPaytmData($f_dt, $t_dt)
+    public function getPaytmData($f_dt, $t_dt, $store_id=null)
     {
-        $query = $this->db->query("SELECT * FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) where  date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."'  order by transaction_date DESC")->result_array();
+        $sql_search='';
+        if ($store_id != null) {
+            $sql_search=" and stores.id=".$store_id;
+        }
+        $query = $this->db->query("SELECT * FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) where 1  $sql_search and date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."'  order by transaction_date DESC")->result_array();
         return $query;
     }
 
 
-    public function getBharatPeData($f_dt, $t_dt)
+    public function getBharatPeData($f_dt, $t_dt, $store_id=null)
     {
-        $query = $this->db->query("SELECT * FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) where  date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."' order by transaction_date DESC")->result_array();
+        $sql_search='';
+        if ($store_id != null) {
+            $sql_search=" and stores.id=".$store_id;
+        }
+        $query = $this->db->query("SELECT * FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) where 1 $sql_search and date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."' order by transaction_date DESC")->result_array();
         return $query;
     }
 

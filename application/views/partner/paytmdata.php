@@ -67,7 +67,7 @@
                 <div class="card-body">
 
 
-                    <form id="ledger_form" method="post" action="<?php echo base_url('admin/import/paytmdata') ?>"
+                    <form id="ledger_form" method="post" action="<?php echo base_url('partner/paytm') ?>"
                         class="form-horizontal" enctype="multipart/form-data" novalidate>
 
 

@@ -138,8 +138,8 @@ class Import extends CI_Controller
                             if (is_numeric($utr_no)) {
                                 $utr_no = ltrim($utr_no, "0");
                             }
-                            // $data['utr_no'] = $utr_no;
-                            $data['utr_no']=number_format($utr_no, 0, '', '');
+                            $data['utr_no'] = $utr_no;
+                            //  $data['utr_no']=number_format($utr_no, 0, '', '');
                             $data['amount'] = trim($filesop[5], "'");
                            
                             $data['store_name'] = trim($filesop[0], "'");

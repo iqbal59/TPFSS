@@ -9,7 +9,7 @@
             <h3 class="text-themecolor m-b-0 m-t-0">Data</h3>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
-                <li class="breadcrumb-item active">Paytm Data</li>
+                <li class="breadcrumb-item active">Bharatepe Data</li>
             </ol>
         </div>
         <div class="col-md-7 col-4 align-self-center">
@@ -62,12 +62,14 @@
             <?php endif ?>
 
 
+
+
             <div class="card">
 
                 <div class="card-body">
 
 
-                    <form id="ledger_form" method="post" action="<?php echo base_url('admin/import/paytmdata') ?>"
+                    <form id="ledger_form" method="post" action="<?php echo base_url('partner/bharatpay') ?>"
                         class="form-horizontal" enctype="multipart/form-data" novalidate>
 
 
@@ -141,16 +143,16 @@
                                     <th>Transaction Date</th>
                                     <th>Is Reconcile</th>
 
-                                    <th>MID No</th>
+
                                     <th>Amount</th>
-                                    <th>Commission</th>
+
                                     <th>UTR No</th>
                                     <th>Store Code</th>
 
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($paytmdata as $s) { ?>
+                                <?php foreach ($bharatpedata as $s) { ?>
                                 <tr>
 
                                     <td><?php echo $s['transaction_no']; ?>
@@ -163,12 +165,10 @@
     echo 'No';
 } ?>
                                     </td>
-                                    <td><?php echo $s['mid_no']; ?>
-                                    </td>
+
                                     <td><?php echo $s['amount']; ?>
                                     </td>
-                                    <td><?php echo $s['commission']; ?>
-                                    </td>
+
                                     <td><?php echo $s['utr_no']; ?>
                                     </td>
                                     <td><?php echo $s['store_code']; ?>

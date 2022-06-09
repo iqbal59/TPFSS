@@ -9,6 +9,7 @@ class Partner extends CI_Controller
         parent::__construct();
         $this->load->model('login_model');
         $this->load->model('accounts_model');
+        $this->load->model('common_model');
     }
 
 
@@ -30,7 +31,7 @@ class Partner extends CI_Controller
                 foreach ($query as $row) {
                     $data = array(
                         'id' => $row->id,
-                        'name' => $row->store_name,
+                        'name' => $row->firm_name,
                         'email' =>$row->email_id,
                         'role' =>'user',
                         'is_partner_login' => true
@@ -245,5 +246,70 @@ class Partner extends CI_Controller
         
             fputcsv($output, $itemrow);
         }
+    }
+
+
+
+
+    public function paytm()
+    {
+        $id=$this->session->userdata('id');
+
+        // $params['limit'] = 100;
+        // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
+    
+        // $config = $this->config->item('pagination');
+        // $config['base_url'] = site_url('admin/import/paytmdata/page');
+        // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
+        // $this->pagination->initialize($config);
+
+
+        if ($this->input->post('from_date')) {
+            $data['from_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+        } else {
+            $data['from_date']=date('Y-m-01');
+        }
+
+        if ($this->input->post('to_date')) {
+            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+        } else {
+            $data['to_date']=date('Y-m-d');
+        }
+
+        $data['paytmdata'] = $this->common_model->getPaytmData($data['from_date'], $data['to_date'], $id);
+        // echo $this->db->last_query();
+        $data['main_content'] = $this->load->view('partner/paytmdata', $data, true);
+        $this->load->view('partner/index', $data);
+    }
+
+
+    public function bharatpay()
+    {
+        $id=$this->session->userdata('id');
+
+        // $params['limit'] = 100;
+        // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
+    
+        // $config = $this->config->item('pagination');
+        // $config['base_url'] = site_url('admin/import/paytmdata/page');
+        // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
+        // $this->pagination->initialize($config);
+
+        if ($this->input->post('from_date')) {
+            $data['from_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+        } else {
+            $data['from_date']=date('Y-m-01');
+        }
+
+        if ($this->input->post('to_date')) {
+            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+        } else {
+            $data['to_date']=date('Y-m-d');
+        }
+
+        $data['bharatpedata'] = $this->common_model->getBharatPeData($data['from_date'], $data['to_date'], $id);
+        //echo $this->db->last_query();
+        $data['main_content'] = $this->load->view('partner/bharatpe', $data, true);
+        $this->load->view('partner/index', $data);
     }
 }

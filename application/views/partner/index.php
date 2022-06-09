@@ -232,29 +232,44 @@
                         <li class="nav-small-cap"></li>
                         <li>
                             <a class="waves-effect waves-dark" href="<?php echo base_url('partner/dashboard') ?>"
-                                aria-expanded="false"><i class="mdi mdi-gauge"></i><span
-                                    class="hide-menu">Dashboard</span></a>
+                                aria-expanded="false"><i class="mdi mdi-home"></i><span
+                                    class="hide-menu">Home</span></a>
                         </li>
 
 
 
                         <li>
                             <a class="waves-effect waves-dark" href="<?php echo base_url('partner/invoice') ?>"
-                                aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Royalty
+                                aria-expanded="false"><i class="mdi mdi-file-document"></i><span
+                                    class="hide-menu">Royalty
                                     Invoice</span></a>
                         </li>
 
                         <li>
                             <a class="waves-effect waves-dark" href="<?php echo base_url('partner/ledger') ?>"
-                                aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Account
+                                aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Account
                                     Statment</span></a>
                         </li>
 
 
                         <li>
                             <a class="waves-effect waves-dark" href="<?php echo base_url('partner/summary') ?>"
-                                aria-expanded="false"><i class="mdi mdi-gauge"></i><span class="hide-menu">Account
+                                aria-expanded="false"><i class="mdi mdi-chart-line"></i><span class="hide-menu">Account
                                     Summary</span></a>
+                        </li>
+
+
+                        <li>
+                            <a class="waves-effect waves-dark" href="<?php echo base_url('partner/paytm') ?>"
+                                aria-expanded="false"><i class="mdi mdi-grid"></i><span class="hide-menu">Paytm
+                                    Data</span></a>
+                        </li>
+
+
+                        <li>
+                            <a class="waves-effect waves-dark" href="<?php echo base_url('partner/bharatpay') ?>"
+                                aria-expanded="false"><i class="mdi mdi-chart-pie"></i><span class="hide-menu">Bharat
+                                    Pay</span></a>
                         </li>
 
 
