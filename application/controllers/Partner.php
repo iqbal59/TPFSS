@@ -67,7 +67,7 @@ class Partner extends CI_Controller
         $data = array();
         $data['page_title'] = 'Dashboard';
         $data['expense'] = $this->accounts_model->calculate_expense_by_partner_new($id, 4);
-        $this->db->last_query();
+        //$this->db->last_query();
         $data['storeData']=$this->accounts_model->calculate_balance_by_store(date('Y-m-d'), $id);
         $data['invoices']=$this->accounts_model->get_all_invoice_by_partner($this->session->userdata('id'), date('Y-m-d', strtotime("-30 days")), date('y-m-d'));
         $data['open_date']=date('Y-m-d', strtotime('-30 days'));
