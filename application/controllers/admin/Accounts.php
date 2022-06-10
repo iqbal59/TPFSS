@@ -131,7 +131,7 @@ class Accounts extends CI_Controller
             $this->savePDF($store_id, $data['open_date'], $data['to_date']);
             $this->savePDFInvoice($invoiceData->id);
 
-            $message='<p>Dear '.$storeData['firm_name'].', <br><br>PFA the Financial Statement along with Royalty invoice for the period '.$invoiceData->descriptions.'. Please note that only transactions till '.end(explode(' ', $invoiceData->descriptions)).' are considered in the attached statement.</p>';
+            $message='<p>Dear '.$storeData['firm_name'].', <br><br>From now onwards for any query regarding the FSS, Please reply on <strong>mis@tumbledry.in</strong><br/> PFA the Financial Statement along with Royalty invoice for the period '.$invoiceData->descriptions.'. Please note that only transactions till '.end(explode(' ', $invoiceData->descriptions)).' are considered in the attached statement.</p>';
 
             $message.='<p><strong>Note :-</strong></p>
 
