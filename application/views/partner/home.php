@@ -13,8 +13,13 @@
                 <li class="breadcrumb-item active">Dashboard</li>
             </ol>
         </div>
+        <div class="col-md-7 col-4 align-self-center">
 
+            <h3 class="text-primary m-b-0 m-t-0">Financial Statement</h3>
+
+        </div>
     </div>
+
     <!-- ============================================================== -->
     <!-- End Bread crumb and right sidebar toggle -->
     <!-- ============================================================== -->
@@ -37,9 +42,9 @@
                     </h4>
 
                     <p class="text-center m-b-0"><?php if ($storeData['openbalance'] > 0) {
-    echo $this->session->userdata('name')." pay to tumbledry";
+    echo $this->session->userdata('name')." pay to Tumbledry";
 } else {
-    echo "tumbledry pay to ".$this->session->userdata('name');
+    echo "Tumbledry pay to ".$this->session->userdata('name');
 }?>
                     </p>
 
@@ -96,7 +101,7 @@
                                     <td><?php echo date('d-m-Y', strtotime($invoice['invoice_date'])); ?>
                                     </td>
 
-                                    <td><?php echo $invoice['net_amount']; ?>
+                                    <td><?php echo number_format($invoice['net_amount'], 2); ?>
                                     </td>
 
 
@@ -137,7 +142,7 @@
 
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title">Account Summary
+                    <h4 class="card-title">Account Summary (including GST)
                     </h4>
 
                     <?php //print_r($expense);?>
@@ -163,17 +168,17 @@
                                 <?php foreach ($expense as $e) { ?>
                                 <tr>
                                     <td><?php echo $e['m'];?>
-                                    <td><?php echo $e['totalsales'];?>
+                                    <td><?php echo number_format($e['totalsales'], 2);?>
                                     </td>
-                                    <td><?php echo($e['msales']+$e['rsales']+$e['debit']-$e['credit']);?>
+                                    <td><?php echo number_format(($e['msales']+$e['rsales']+$e['debit']-$e['credit']), 2);?>
                                     </td>
-                                    <td><?php echo $e['msales'];?>
+                                    <td><?php echo number_format($e['msales'], 2);?>
                                     </td>
-                                    <td><?php echo $e['rsales'];?>
+                                    <td><?php echo number_format($e['rsales'], 2);?>
                                     </td>
-                                    <td><?php echo $e['credit'];?>
+                                    <td><?php echo number_format($e['credit'], 2);?>
                                     </td>
-                                    <td><?php echo $e['debit'];?>
+                                    <td><?php echo number_format($e['debit'], 2);?>
                                     </td>
 
 
@@ -184,6 +189,101 @@
                     </div>
 
                     <a href="<?php echo base_url('partner/summary')?>"
+                        class="btn btn-warning btn-sm pull-right">more</a>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- Column -->
+
+
+
+
+        <!-- Column -->
+        <div class="col-md-6 ">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Paytm
+                    </h4>
+
+                    <?php //print_r($paytm);?>
+
+                    <div class="table-responsive">
+                        <table id="" class="display nowrap table table-hover table-striped table-bordered"
+                            cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Amount</th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php foreach ($paytm as $e) { ?>
+                                <tr>
+                                    <td><?php echo $e['m'];?>
+                                    <td><?php echo number_format($e['total_amt'], 2);?>
+                                    </td>
+
+
+                                </tr>
+                                <?php }?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <a href="<?php echo base_url('partner/paytm')?>" class="btn btn-warning btn-sm pull-right">more</a>
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- Column -->
+
+
+        <!-- Column -->
+        <div class="col-md-6 ">
+
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">BharatPe
+                    </h4>
+
+                    <?php //print_r($bharatpe);?>
+
+                    <div class="table-responsive">
+                        <table id="" class="display nowrap table table-hover table-striped table-bordered"
+                            cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Amount</th>
+
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <?php foreach ($bharatpe as $e) { ?>
+                                <tr>
+                                    <td><?php echo $e['m'];?>
+                                    <td><?php echo number_format($e['total_amt'], 2);?>
+                                    </td>
+
+
+                                </tr>
+                                <?php }?>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <a href="<?php echo base_url('partner/bharatpay')?>"
                         class="btn btn-warning btn-sm pull-right">more</a>
                 </div>
             </div>

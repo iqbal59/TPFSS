@@ -67,6 +67,8 @@ class Partner extends CI_Controller
         $data = array();
         $data['page_title'] = 'Dashboard';
         $data['expense'] = $this->accounts_model->calculate_expense_by_partner_new($id, 4);
+        $data['paytm'] = $this->common_model->getPaytmDataMonthly(date('Y-m-01', strtotime('-6 months')), date('Y-m-d'), $id);
+        $data['bharatpe'] = $this->common_model->getBharatPeDataMonthly(date('Y-m-01', strtotime('-6 months')), date('Y-m-d'), $id);
         //$this->db->last_query();
         $data['storeData']=$this->accounts_model->calculate_balance_by_store(date('Y-m-d'), $id);
         $data['invoices']=$this->accounts_model->get_all_invoice_by_partner($this->session->userdata('id'), date('Y-m-d', strtotime("-30 days")), date('y-m-d'));
@@ -115,6 +117,8 @@ class Partner extends CI_Controller
                 $data['month']=3;
             } elseif ($this->input->post('month')=='YEAR') {
                 $data['month']=$curMonth;
+            } elseif ($this->input->post('month')=='PYEAR') {
+                $data['month']=24;
             }
         } else {
             $data['month']=date('n');

@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/favicon.png">
-    <title>tumbledry</title>
+    <title>Tumbledry</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -96,9 +96,10 @@
 
                         <!-- <div class="form-group m-b-0">
                         <div class="col-sm-12 text-center">
-                            <p>Don't have an account? <a href="<?php echo base_url('admin/pages/register') ?>" class="text-info m-l-5"><b>Sign Up</b></a></p>
-                        </div>
-                    </div> -->
+                            <p>Don't have an account? <a href="<?php echo base_url('admin/pages/register') ?>"
+                        class="text-info m-l-5"><b>Sign Up</b></a></p>
+                </div>
+            </div> -->
                     </form>
 
                     <form class="form-horizontal" id="recoverform" action="#">
@@ -131,30 +132,39 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="<?php echo base_url() ?>assets/plugins/jquery/jquery.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/jquery/jquery.min.js">
+    </script>
     <!-- Bootstrap tether Core JavaScript -->
-    <script src="<?php echo base_url() ?>assets/plugins/bootstrap/js/popper.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/bootstrap/js/popper.min.js">
+    </script>
+    <script src="<?php echo base_url() ?>assets/plugins/bootstrap/js/bootstrap.min.js">
+    </script>
     <!-- slimscrollbar scrollbar JavaScript -->
-    <script src="<?php echo base_url() ?>assets/js/jquery.slimscroll.js"></script>
+    <script src="<?php echo base_url() ?>assets/js/jquery.slimscroll.js">
+    </script>
     <!--Wave Effects -->
     <script src="<?php echo base_url() ?>assets/js/waves.js"></script>
     <!--Menu sidebar -->
     <script src="<?php echo base_url() ?>assets/js/sidebarmenu.js"></script>
     <!--stickey kit -->
     <!-- Sweet-Alert  -->
-    <script src="<?php echo base_url() ?>assets/plugins/sweetalert/sweetalert.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/plugins/sweetalert/jquery.sweet-alert.custom.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/sweetalert/sweetalert.min.js">
+    </script>
+    <script src="<?php echo base_url() ?>assets/plugins/sweetalert/jquery.sweet-alert.custom.js">
+    </script>
 
-    <script src="<?php echo base_url() ?>assets/plugins/sticky-kit-master/dist/sticky-kit.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/sticky-kit-master/dist/sticky-kit.min.js">
+    </script>
+    <script src="<?php echo base_url() ?>assets/plugins/sparkline/jquery.sparkline.min.js">
+    </script>
     <!--Custom JavaScript -->
     <script src="<?php echo base_url() ?>assets/js/custom.min.js"></script>
     <script src="<?php echo base_url() ?>assets/js/custom.js"></script>
     <!-- ============================================================== -->
     <!-- Style switcher -->
     <!-- ============================================================== -->
-    <script src="<?php echo base_url() ?>assets/plugins/styleswitcher/jQuery.style.switcher.js"></script>
+    <script src="<?php echo base_url() ?>assets/plugins/styleswitcher/jQuery.style.switcher.js">
+    </script>
 
     <!-- auto hide message div-->
     <script type="text/javascript">

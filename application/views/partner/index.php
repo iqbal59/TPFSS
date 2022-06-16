@@ -247,29 +247,31 @@
 
                         <li>
                             <a class="waves-effect waves-dark" href="<?php echo base_url('partner/ledger') ?>"
-                                aria-expanded="false"><i class="mdi mdi-chart-bar"></i><span class="hide-menu">Account
+                                aria-expanded="false"><i class="mdi mdi-calendar-text"></i><span
+                                    class="hide-menu">Account
                                     Statment</span></a>
                         </li>
 
 
                         <li>
                             <a class="waves-effect waves-dark" href="<?php echo base_url('partner/summary') ?>"
-                                aria-expanded="false"><i class="mdi mdi-chart-line"></i><span class="hide-menu">Account
+                                aria-expanded="false"><i class="mdi mdi-currency-inr"></i><span
+                                    class="hide-menu">Account
                                     Summary</span></a>
                         </li>
 
 
                         <li>
                             <a class="waves-effect waves-dark" href="<?php echo base_url('partner/paytm') ?>"
-                                aria-expanded="false"><i class="mdi mdi-grid"></i><span class="hide-menu">Paytm
-                                    Data</span></a>
+                                aria-expanded="false"><img src="<?php echo base_url('assets/images/paytm-icon.svg');?>"
+                                    width="27" /><span class="hide-menu">Paytm</span></a>
                         </li>
 
 
                         <li>
                             <a class="waves-effect waves-dark" href="<?php echo base_url('partner/bharatpay') ?>"
-                                aria-expanded="false"><i class="mdi mdi-chart-pie"></i><span class="hide-menu">Bharat
-                                    Pay</span></a>
+                                aria-expanded="false"><img src="<?php echo base_url('assets/images/bharat_pe.png');?>"
+                                    width="27" /><span class="hide-menu">BharatPe</span></a>
                         </li>
 
 
@@ -533,7 +535,7 @@
         });
     });
     $('#example23').DataTable({
-        dom: 'Bfrtip',
+        dom: 'Blfrtip',
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ]

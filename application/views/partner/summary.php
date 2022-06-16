@@ -55,9 +55,15 @@
                                             ?>
 
                                             <select class="form-control form-control-sm selelct2" name="month">
-                                                <option value="MONTH">This Month</option>
-                                                <option value="QUARTER">This Quarter</option>
-                                                <option value="YEAR">This Year</option>
+                                                <option value="MONTH" <?php echo $month==1 ? "selected" : ""; ?>>This
+                                                    Month</option>
+                                                <option value="QUARTER" <?php echo $month==3 ? "selected" : ""; ?>>This
+                                                    Quarter</option>
+                                                <option value="YEAR" <?php echo $month >3 ? "selected" : ""; ?>>This
+                                                    Year</option>
+
+                                                <option value="PYEAR" <?php echo $month > 12 ? "selected" : ""; ?>>Prev
+                                                    Year</option>
                                                 <!-- <option>All Time</option> -->
                                             </select>
                                         </div>

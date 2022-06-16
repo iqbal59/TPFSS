@@ -69,6 +69,17 @@ class Common_model extends CI_Model
     }
 
 
+    public function getPaytmDataMonthly($f_dt, $t_dt, $store_id=null)
+    {
+        $sql_search='';
+        if ($store_id != null) {
+            $sql_search=" and stores.id=".$store_id;
+        }
+        $query = $this->db->query("SELECT date_format(transaction_date, '%b %Y') as m, sum(amount) as total_amt FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) where 1  $sql_search and date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."' and is_reconcile=1 group by month(transaction_date), year(transaction_date) order by transaction_date desc")->result_array();
+        return $query;
+    }
+
+
     public function getBharatPeData($f_dt, $t_dt, $store_id=null)
     {
         $sql_search='';
@@ -79,6 +90,20 @@ class Common_model extends CI_Model
         return $query;
     }
 
+
+
+    public function getBharatPeDataMonthly($f_dt, $t_dt, $store_id=null)
+    {
+        $sql_search='';
+        if ($store_id != null) {
+            $sql_search=" and stores.id=".$store_id;
+        }
+        $query = $this->db->query("SELECT date_format(transaction_date, '%b %Y') as m, sum(amount) as total_amt FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) where 1 $sql_search and date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."' and is_reconcile=1 group by month(transaction_date), year(transaction_date) order by transaction_date desc")->result_array();
+        return $query;
+    }
+
+
+    
     public function getMbData()
     {
         $query = $this->db->query('SELECT  mi.id, mi.amount, mi.invoice_date, mi.invoice_no, s.store_code, mi.material_description FROM material_invoices mi LEFT join stores s on(mi.store_crm_code=s.store_crm_code) order by invoice_date DESC')->result_array();

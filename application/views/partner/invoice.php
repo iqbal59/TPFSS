@@ -84,7 +84,7 @@
                                         <label>Enter From Date (mm/dd/yyyy) <span class="text-danger">*</span></label>
                                         <div class="controls">
                                             <input type="date" name="from_date"
-                                                min="<?php echo date('Y-m-d', strtotime('-365 days'))?>"
+                                                min="<?php echo date('Y-m-d', mktime(0, 0, 0, 4, 1, date('m')==7?(date('Y')-1):(date('Y')-2)))?>"
                                                 class="form-control form-control-sm" placeholder="mm/dd/yyyy" required
                                                 value="<?php echo isset($open_date)?$open_date:date("Y-m-01");?>">
                                         </div>
@@ -95,7 +95,7 @@
                                         <label>Enter To Date (mm/dd/yy)<span class="text-danger">*</span></label>
                                         <div class="controls">
                                             <input type="date" name="to_date"
-                                                min="<?php echo date('Y-m-d', strtotime('-364 days'))?>"
+                                                min="<?php echo date('Y-m-d', mktime(0, 0, 0, 4, 1, date('m')==7?(date('Y')-1):(date('Y')-2)))?>"
                                                 class="form-control form-control-sm" placeholder="mm/dd/yy" required
                                                 value="<?php echo isset($to_date)?$to_date:date("Y-m-d");?>">
                                         </div>
@@ -176,7 +176,7 @@
                                     </td>
                                     <td><?php echo $invoice['store_state']; ?>
                                     </td> -->
-                                    <td><?php echo $invoice['net_amount']; ?>
+                                    <td><?php echo number_format($invoice['net_amount'], 2); ?>
                                     </td>
 
 

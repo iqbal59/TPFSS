@@ -83,6 +83,7 @@
                                         <h5>Enter From Date <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="date" name="from_date" class="form-control"
+                                                min="<?php echo date('Y-m-d', mktime(0, 0, 0, 4, 1, date('m')==7?(date('Y')-1):(date('Y')-2)))?>"
                                                 placeholder="MM/DD/YYYY" required
                                                 value="<?php echo isset($from_date)?$from_date:date("Y-m-01");?>">
                                         </div>
@@ -93,6 +94,7 @@
                                         <h5>Enter To Date <span class="text-danger">*</span></h5>
                                         <div class="controls">
                                             <input type="date" name="to_date" class="form-control"
+                                                min="<?php echo date('Y-m-d', mktime(0, 0, 0, 4, 1, date('m')==7?(date('Y')-1):(date('Y')-2)))?>"
                                                 placeholder="MM/DD/YYYY" required
                                                 value="<?php echo isset($to_date)?$to_date:date("Y-m-d");?>">
                                         </div>

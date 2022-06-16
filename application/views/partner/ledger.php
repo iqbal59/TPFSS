@@ -50,7 +50,7 @@
                                         <label>Enter From Date <span class="text-danger">*</span></label>
                                         <div class="controls">
                                             <input type="date" name="from_date"
-                                                min="<?php echo date('Y-m-d', strtotime('-365 days'))?>"
+                                                min="<?php echo date('Y-m-d', mktime(0, 0, 0, 4, 1, date('m')==7?(date('Y')-1):(date('Y')-2)))?>"
                                                 class="form-control form-control-sm" placeholder="mm/dd/yyyy" required
                                                 value="<?php echo isset($open_date)?$open_date:date("Y-m-01");?>">
                                         </div>
@@ -60,7 +60,8 @@
                                     <div class="form-group">
                                         <label>Enter To Date <span class="text-danger">*</span></label>
                                         <div class="controls">
-                                            <input type="date" min="<?php echo date('Y-m-d', strtotime('-364 days'))?>"
+                                            <input type="date"
+                                                min="<?php echo date('Y-m-d', mktime(0, 0, 0, 4, 1, date('m')==7?(date('Y')-1):(date('Y')-2)))?>"
                                                 name="to_date" class="form-control form-control-sm"
                                                 placeholder="mm/dd/yyyy" required
                                                 value="<?php echo isset($to_date)?$to_date:date("Y-m-d");?>">
@@ -74,13 +75,13 @@
                                         <div class="controls">
                                             <button type="button" id="show_ledger"
                                                 class="btn btn-sm btn-success">Show</button>
-                                            <button type="button" id="print_ledger"
-                                                class="btn btn-sm btn-success">Print</button>
+                                            <!-- <button type="button" id="print_ledger"
+                                                class="btn btn-sm btn-success">Print</button> -->
                                             <button type="button" id="download_ledger"
                                                 class="btn btn-sm btn-success">Download</button>
 
-                                            <button type="button" id="export_ledger"
-                                                class="btn btn-sm btn-success">Export</button>
+                                            <!-- <button type="button" id="export_ledger"
+                                                class="btn btn-sm btn-success">Export</button> -->
                                         </div>
                                     </div>
                                 </div>
