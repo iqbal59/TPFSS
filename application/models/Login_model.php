@@ -64,7 +64,7 @@ class Login_model extends CI_Model
         $this->db->select('*');
         $this->db->from('stores');
         $this->db->where('store_crm_code', $this->input->post('user_name'));
-        // $this->db->where('password', md5($this->input->post('password')));
+        $this->db->where('password', md5($this->input->post('password')));
         $this->db->limit(1);
         $query = $this->db->get();
         

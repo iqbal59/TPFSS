@@ -89,6 +89,16 @@ class Store_model extends CI_Model
         return $this->db->update('stores', $params);
     }
     
+
+    public function change_password($id, $params, $old_password)
+    {
+        $this->db->where('id', $id);
+        $this->db->where('password', md5($old_password));
+        $this->db->update('stores', $params);
+        return $this->db->affected_rows();
+    }
+    
+
     /*
     * function to update store
     */

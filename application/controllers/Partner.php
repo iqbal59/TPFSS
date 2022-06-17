@@ -9,6 +9,7 @@ class Partner extends CI_Controller
         parent::__construct();
         $this->load->model('login_model');
         $this->load->model('accounts_model');
+        $this->load->model('store_model');
         $this->load->model('common_model');
     }
 
@@ -19,6 +20,69 @@ class Partner extends CI_Controller
         $data['page'] = 'Login';
         $this->load->view('partner/login', $data);
     }
+
+
+
+    // public function profile()
+    // {
+    //     check_login_partner();
+    //     $id=$this->session->userdata('id');
+    //     $data = array();
+    //     $data['page'] = 'Profile';
+    //     $data['storeData']=$this->store_model->get_store($id);
+    //     //echo $this->db->last_query();
+    //     $data['main_content'] = $this->load->view('partner/profile', $data, true);
+    //     $this->load->view('partner/index', $data);
+    // }
+
+
+
+
+    public function profile()
+    {
+        check_login_partner();
+        $id=$this->session->userdata('id');
+        $data = array();
+        $data['page'] = 'Profile';
+        $data['storeData']=$this->store_model->get_store($id);
+        
+        
+        if (isset($data['storeData']['id'])) {
+            $this->load->library('form_validation');
+
+            $this->form_validation->set_rules('cur_password', 'Current Password', 'required');
+            
+            $this->form_validation->set_rules('new_password', 'Password', 'required|min_length[6]');
+            $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[new_password]');
+    
+            if ($this->form_validation->run()) {
+                $params = array(
+                  
+                    'password' => md5($this->input->post('new_password'))
+                   
+                   
+                );
+
+                if ($this->store_model->change_password($id, $params, $this->input->post('cur_password'))) {
+                    $this->session->set_flashdata('msg', 'Password updated Successfully');
+                    redirect('partner/profile');
+                } else {
+                    $this->session->set_flashdata('error_msg', 'Current Passoword is Wrong');
+                    redirect('partner/profile');
+                }
+                echo $this->db->last_query();
+            } else {
+                $data['main_content'] = $this->load->view('partner/profile', $data, true);
+                $this->load->view('partner/index', $data);
+            }
+        } else {
+            show_error('The store you are trying to edit does not exist.');
+        }
+    }
+
+
+
+
 
     public function log()
     {

@@ -180,13 +180,14 @@
                                                 <h4><?php echo $this->session->userdata('name'); ?>
                                                 </h4>
                                                 <p class="text-muted"><?php echo $this->session->userdata('email'); ?>
-                                                </p><a href="profile.html"
+                                                </p><a href="<?php echo base_url('partner/profile')?>"
                                                     class="btn btn-rounded btn-danger btn-sm">View Profile</a>
                                             </div>
                                         </div>
                                     </li>
                                     <li role="separator" class="divider"></li>
-                                    <li><a href="#"><i class="ti-user"></i> My Profile</a></li>
+                                    <li><a href="<?php echo base_url('partner/profile')?>"><i class="ti-user"></i> My
+                                            Profile</a></li>
                                     <!-- <li><a href="#"><i class="ti-wallet"></i> My Balance</a></li>
                                     <li><a href="#"><i class="ti-email"></i> Inbox</a></li> -->
                                     <!-- <li role="separator" class="divider"></li> -->
