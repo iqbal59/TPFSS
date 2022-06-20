@@ -38,7 +38,9 @@
                         <strong><?php echo $storeData['openbalance'];?></strong>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <?php if ($storeData['openbalance'] > 0) {?>
-                        <a href="#" class="btn btn-primary">Pay Now</a> <?php }?>
+                        <a href="<?php echo base_url('payment/pay/'.base64_encode($storeData['id']));?>"
+                            class="btn btn-primary" target="_blank">Pay
+                            Now</a> <?php }?>
                     </h4>
 
                     <p class="text-center m-b-0"><?php if ($storeData['openbalance'] > 0) {
@@ -155,10 +157,12 @@
                                     <th>Month</th>
                                     <th>Revenue</th>
                                     <th>Total Expense</th>
-                                    <th>Consumable</th>
+
                                     <th>Royalty</th>
-                                    <th>Credit</th>
+                                    <th>Consumable</th>
                                     <th>Debit</th>
+                                    <th>Credit</th>
+
 
 
                                 </tr>
@@ -170,15 +174,17 @@
                                     <td><?php echo $e['m'];?>
                                     <td><?php echo number_format($e['totalsales'], 2);?>
                                     </td>
-                                    <td><?php echo number_format(($e['msales']+$e['rsales']+$e['debit']-$e['credit']), 2);?>
+                                    <td><?php echo number_format(($e['msales']+$e['rsales']), 2);?>
+                                    </td>
+
+                                    <td><?php echo number_format($e['rsales'], 2);?>
                                     </td>
                                     <td><?php echo number_format($e['msales'], 2);?>
                                     </td>
-                                    <td><?php echo number_format($e['rsales'], 2);?>
-                                    </td>
-                                    <td><?php echo number_format($e['credit'], 2);?>
-                                    </td>
                                     <td><?php echo number_format($e['debit'], 2);?>
+                                    </td>
+
+                                    <td><?php echo number_format($e['credit'], 2);?>
                                     </td>
 
 

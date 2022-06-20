@@ -85,7 +85,7 @@
                         </h4>
                         <div class="container">
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-12">
 
 
 
@@ -94,13 +94,13 @@
                                             <span class="input-group-addon">₹</span>
 
                                             <input class="form-control form-control-lg" type="number" min="1" step="any"
-                                                name="pay_amount" required=""
+                                                name="pay_amount" required="" readonly
                                                 value="<?php echo $storeData['openbalance']; ?>" placeholder="Amount">
                                         </div>
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <!-- <div class="col-md-6">
                                     <div class="form-group">
                                         <select name="pay_type" class="form-control  form-control-lg">
                                             <option value="Royalty">Royalty</option>
@@ -108,7 +108,7 @@
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
                         </div>

@@ -1299,4 +1299,45 @@ class Accounts extends CI_Controller
 
         $pdf->Output($openBalance['firm_name'].'-fss.pdf', 'D');
     }
+
+
+    public function sms($to, $message)
+    {
+        $url = 'https://alerts.qikberry.com/api/v2/';
+
+        $fields = array(
+      'to'   => $to,
+      'message'   => urlencode($message),
+      'sender' => urlencode('TMBDRY'),
+      'service'      => 'T'
+     );
+
+        $fields_string = '';
+
+        //url-ify the data for the POST
+        foreach ($fields as $key=>$value) {
+            $fields_string .= $key.'='.$value.'&';
+        }
+
+        rtrim($fields_string, '&');
+
+        //open connection
+        $ch = curl_init();
+
+        //set the url, number of POST vars, POST data
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+            'Content-Type: application/x-www-form-urlencoded',
+            'Authorization: Bearer 75d0ff626c3f8df921030692c3630f6b'
+            ));
+        curl_setopt($ch, CURLOPT_URL, $url.'sms/send');
+        curl_setopt($ch, CURLOPT_POST, count($fields));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+
+        //execute post
+        $result = curl_exec($ch);
+
+        //close connection
+        curl_close($ch);
+        echo $result;
+    }
 }
