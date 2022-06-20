@@ -146,7 +146,7 @@
                                     <td><?php echo $e['m'];?>
                                     <td><?php echo $e['totalsales'];?>
                                     </td>
-                                    <td><?php echo($e['msales']+$e['rsales']+$e['debit']-$e['credit']);?>
+                                    <td><?php echo($e['msales']+$e['rsales']);?>
                                     </td>
                                     <td><?php echo $e['msales'];?>
                                     </td>

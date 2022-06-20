@@ -55,6 +55,16 @@
         padding: 20px;
         max-width: 300px;
     }
+
+    footer {
+        background: #a5cd39;
+    }
+
+
+    footer a {
+        /* color: #ffc10e; */
+        color: #fff;
+    }
     </style>
 </head>
 
@@ -160,7 +170,7 @@
         <div class="album bg-light">
             <div class="container">
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-4">
                     <div class="col">
                         <div class="card shadow-sm">
 
