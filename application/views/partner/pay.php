@@ -100,6 +100,7 @@
                                     </div>
                                 </div>
 
+                                <input type="hidden" name="pay_type" value="Royalty" />
                                 <!-- <div class="col-md-6">
                                     <div class="form-group">
                                         <select name="pay_type" class="form-control  form-control-lg">
