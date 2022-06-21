@@ -131,10 +131,12 @@
                                     <th>Month</th>
                                     <th>Revenue</th>
                                     <th>Total Expense</th>
-                                    <th>Consumable</th>
                                     <th>Royalty</th>
-                                    <th>Credit</th>
+                                    <th>Consumable</th>
+                                    <th>Others</th>
                                     <th>Debit</th>
+                                    <th>Credit</th>
+
 
 
                                 </tr>
@@ -144,17 +146,19 @@
                                 <?php foreach ($expense as $e) { ?>
                                 <tr>
                                     <td><?php echo $e['m'];?>
-                                    <td><?php echo $e['totalsales'];?>
+                                    <td><?php echo number_format($e['totalsales'], 2);?>
                                     </td>
-                                    <td><?php echo($e['msales']+$e['rsales']);?>
+                                    <td><?php echo number_format(($e['msales']+$e['rsales']+$e['osales']), 2);?>
                                     </td>
-                                    <td><?php echo $e['msales'];?>
+                                    <td><?php echo number_format($e['rsales'], 2);?>
                                     </td>
-                                    <td><?php echo $e['rsales'];?>
+                                    <td><?php echo number_format($e['msales'], 2);?>
                                     </td>
-                                    <td><?php echo $e['credit'];?>
+                                    <td><?php echo number_format($e['osales'], 2);?>
                                     </td>
-                                    <td><?php echo $e['debit'];?>
+                                    <td><?php echo number_format($e['debit'], 2);?>
+                                    </td>
+                                    <td><?php echo number_format($e['credit'], 2);?>
                                     </td>
 
 

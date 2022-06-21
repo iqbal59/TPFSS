@@ -34,7 +34,7 @@
             <div class="card">
                 <div class="card-body">
                     <?php //print_r($storeData);?>
-                    <h4 class="m-b-0 text-center">Current Outstanding: ₹
+                    <h4 class="m-b-0 text-center">Current Outstanding: <i class="mdi mdi-currency-inr"></i>
                         <strong><?php echo $storeData['openbalance'];?></strong>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <?php if ($storeData['openbalance'] > 0) {?>
@@ -160,6 +160,7 @@
 
                                     <th>Royalty</th>
                                     <th>Consumable</th>
+                                    <th>Others</th>
                                     <th>Debit</th>
                                     <th>Credit</th>
 
@@ -174,12 +175,14 @@
                                     <td><?php echo $e['m'];?>
                                     <td><?php echo number_format($e['totalsales'], 2);?>
                                     </td>
-                                    <td><?php echo number_format(($e['msales']+$e['rsales']), 2);?>
+                                    <td><?php echo number_format(($e['msales']+$e['rsales']+$e['osales']), 2);?>
                                     </td>
 
                                     <td><?php echo number_format($e['rsales'], 2);?>
                                     </td>
                                     <td><?php echo number_format($e['msales'], 2);?>
+                                    </td>
+                                    <td><?php echo number_format($e['osales'], 2);?>
                                     </td>
                                     <td><?php echo number_format($e['debit'], 2);?>
                                     </td>

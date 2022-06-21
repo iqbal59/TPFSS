@@ -22,6 +22,119 @@ class Partner extends CI_Controller
     }
 
 
+    public function recover()
+    {
+        $data = array();
+        $data['page'] = 'Forget Password';
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('email_id', 'Email ID', 'trim|required|valid_email');
+            
+           
+    
+        if ($this->form_validation->run()) {
+            if ($storeData=$this->store_model->get_store_by_email_id($this->input->post('email_id'))) {
+                $password=$this->random_password(6);
+                $params = array(
+                  
+                    'password' => md5($password)
+                   
+                   
+                );
+
+                $this->store_model->forget_password($storeData['id'], $params);
+
+             
+
+                $message="Hi ".$storeData['firm_name'].",<br/><br/>";
+                $message.="Please find below the password for Login ID : ".$storeData['store_crm_code']." <br/><br/>Password :
+                 <strong>".$password."</strong>
+                <br/><br/>
+                Thanks<br/>
+                Tumbledry";
+
+
+               
+                if ($this->sendEmail($storeData['email_id'], "Forget Password", $message)) {
+                    $this->session->set_flashdata('msg', 'Password has been sent to your registerd email id');
+                    redirect('partner/recover');
+                } else {
+                    $this->session->set_flashdata('error_msg', 'Something went wrong. Please try again');
+                    redirect('partner/recover');
+                }
+            } else {
+                $this->session->set_flashdata('error_msg', 'Email Id does not exist.');
+                redirect('partner/recover');
+            }
+            // echo $this->db->last_query();
+        } else {
+            $this->load->view('partner/recover', $data);
+        }
+    }
+
+
+
+    public function sendEmail($to, $subject, $content)
+    {
+        // Load PHPMailer library
+        $this->load->library('PHPMailer_Lib');
+
+        // PHPMailer object
+        $mail = $this->phpmailer_lib->load();
+
+        // SMTP configuration
+        $mail->isSMTP();
+        $mail->Host     = 'smtp.office365.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'mis@tumbledry.in';
+        $mail->Password = '3@Million';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port     = 587;
+
+        // $mail->Host     = 'outlook.office365.com';
+        // $mail->SMTPAuth = true;
+        // $mail->Username = 'deepak.verma@tumbledry.in';
+        // $mail->Password = 'Hellboy@06';
+        // $mail->SMTPSecure = 'ssl';
+        // $mail->Port     = 587;
+
+        $mail->setFrom('mis@tumbledry.in', 'MIS');
+        $mail->addReplyTo('mis@tumbledry.in', 'MIS');
+
+
+        // Add a recipient
+        $mail->addAddress($to);
+        // $mail->addAddress('iqbal.alam59@gmail.com');
+
+        // Add cc or bcc
+        // $mail->addCC('Gaurav.Teotia@tumbledry.in');
+        // $mail->addCC('Gaurav.Nigam@tumbledry.in');
+        // $mail->addCC('Sachin.bhatia@tumbledry.in');
+        // $mail->addCC('deepak.verma@tumbledry.in');
+
+        //$mail->addBCC('iqbal.alam59@gmail.com');
+        // $mail->AddAttachment($attachmentpdf);
+        // $mail->AddAttachment($invoicepdf);
+         
+        // Email subject
+        $mail->Subject = $subject;
+
+        // Set email format to HTML
+        $mail->isHTML(true);
+
+        // Email body content
+        $mailContent = $content;
+            
+        $mail->Body =$mailContent;
+
+        // Send email
+        if (!$mail->send()) {
+            echo 'Message could not be sent.';
+            echo 'Mailer Error: ' . $mail->ErrorInfo;
+        } else {
+            return true;
+        }
+    }
+
 
     // public function profile()
     // {
@@ -36,7 +149,12 @@ class Partner extends CI_Controller
     // }
 
 
-
+    public function random_password($length = 8)
+    {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()_+=-<>?/,.';
+        $password = str_shuffle($alphabet);
+        return substr($password, 0, $length);
+    }
 
     public function profile()
     {
@@ -70,7 +188,7 @@ class Partner extends CI_Controller
                     $this->session->set_flashdata('error_msg', 'Current Passoword is Wrong');
                     redirect('partner/profile');
                 }
-                echo $this->db->last_query();
+                //echo $this->db->last_query();
             } else {
                 $data['main_content'] = $this->load->view('partner/profile', $data, true);
                 $this->load->view('partner/index', $data);

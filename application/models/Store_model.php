@@ -24,6 +24,12 @@ class Store_model extends CI_Model
     {
         return $this->db->get_where('stores', array('store_crm_code'=>$id))->row_array();
     }
+
+
+    public function get_store_by_email_id($email_id)
+    {
+        return $this->db->get_where('stores', array('email_id'=>$email_id))->row_array();
+    }
     
 
     /*
@@ -96,6 +102,13 @@ class Store_model extends CI_Model
         $this->db->where('password', md5($old_password));
         $this->db->update('stores', $params);
         return $this->db->affected_rows();
+    }
+
+
+    public function forget_password($id, $params)
+    {
+        $this->db->where('id', $id);
+        return  $this->db->update('stores', $params);
     }
     
 

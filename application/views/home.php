@@ -343,7 +343,14 @@
                         </div>
                     </div>
 
-
+                    <div class="mb-3">
+                        <div class="col-md-12">
+                            <a href="<?php echo base_url('partner/recover') ?>" id="to-recover"
+                                class="text-dark float-end">
+                                <i class="fa fa-lock m-r-5"></i> Forgot password?
+                            </a>
+                        </div>
+                    </div>
                 </form>
 
             </div>

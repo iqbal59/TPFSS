@@ -13,7 +13,7 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/favicon.png">
-    <title>Payment</title>
+    <title>Forget Password</title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
@@ -58,30 +58,40 @@
             <div class="login-box card">
                 <div class="card-body">
 
-                    <?php if (isset($page) && $page == "logout"): ?>
-                    <div class="alert alert-success hide_msg pull" style="width: 100%"> <i
-                            class="fa fa-check-circle"></i> Logout Successfully &nbsp;
+                    <?php $msg = $this->session->flashdata('msg'); ?>
+                    <?php if (isset($msg)): ?>
+                    <div class="alert alert-success delete_msg pull" style="width: 100%"> <i
+                            class="fa fa-check-circle"></i>
+                        <?php echo $msg; ?> &nbsp;
+                        <a href="<?php echo base_url();?>">Login
+                            now</a>
+
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                                aria-hidden="true">×</span> </button>
+                    </div>
+                    <?php endif ?>
+
+                    <?php $error_msg = $this->session->flashdata('error_msg'); ?>
+                    <?php if (isset($error_msg)): ?>
+                    <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
+                        <?php echo $error_msg; ?> &nbsp;
                         <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
                                 aria-hidden="true">×</span> </button>
                     </div>
                     <?php endif ?>
 
 
-                    <?php //print_r($storeData);?>
 
-                    <form class="" id="pay-form" action="https://orderattumbledry.in/sales/fsspaynow" method="post">
 
-                        <input type="hidden" name="customer_id" value="<?php echo $storeData['store_crm_code'];?>" />
-                        <input type="hidden" name="customer_mobile" value="" />
-                        <input type="hidden" name="customer_email" value="" />
-                        <input type="hidden" name="order_id"
-                            value="<?php echo $storeData['store_crm_code']."-".time();?>" />
+                    <form class="" action="<?php echo base_url('partner/recover')?>" method="post">
+
 
 
                         <h2 class="box-title m-b-10 text-center">
                             <img src="<?php echo base_url() ?>assets/images/logo-light-login.png" alt="loginpage" />
                         </h2>
-                        <h4 class="text-center"><?php  echo $storeData['store_name'];?>
+                        <h4 class="text-center">
+                            Forget Password?
                         </h4>
                         <div class="container">
                             <div class="row">
@@ -91,35 +101,30 @@
 
                                     <div class="form-group">
                                         <div class="input-group">
-                                            <span class="input-group-addon">₹</span>
+                                            <span class="input-group-addon"><i class="mdi mdi-email-outline"></i></span>
 
-                                            <input class="form-control form-control-lg" type="number" min="1" step="any"
-                                                name="pay_amount" required="" readonly
-                                                value="<?php echo $storeData['openbalance']; ?>" placeholder="Amount">
+                                            <input class="form-control form-control-lg" type="email" name="email_id"
+                                                required="" placeholder="Email Id" />
+
                                         </div>
+                                        <span class="text-danger"><?php echo form_error('email_id');?></span>
                                     </div>
                                 </div>
 
-                                <!-- <div class="col-md-6">
-                                    <div class="form-group">
-                                        <select name="pay_type" class="form-control  form-control-lg">
-                                            <option value="Royalty">Royalty</option>
-                                            <option value="Material">Material</option>
-                                            <option value="Other">Other</option>
-                                        </select>
-                                    </div>
-                                </div> -->
 
                             </div>
                         </div>
 
 
+                        <!-- CSRF token -->
+                        <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>"
+                            value="<?=$this->security->get_csrf_hash();?>" />
 
 
                         <div class="form-group text-center m-t-50">
                             <div class="col-xs-12">
                                 <button class="btn btn-info text-uppercase waves-effect waves-light"
-                                    type="submit">Pay</button>
+                                    type="submit">Reset</button>
                             </div>
                         </div>
 
