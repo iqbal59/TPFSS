@@ -276,6 +276,12 @@
                         </li>
 
 
+                        <li>
+                            <a class="waves-effect waves-dark" href="<?php echo base_url('assets/faq.pdf') ?>"
+                                aria-expanded="false" target="_blank"><i class="mdi mdi-help-circle-outline"></i><span
+                                    class="hide-menu">FAQ</span></a>
+                        </li>
+
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
