@@ -176,7 +176,8 @@ class Partner extends CI_Controller
             if ($this->form_validation->run()) {
                 $params = array(
                   
-                    'password' => md5($this->input->post('new_password'))
+                    'password' => md5($this->input->post('new_password')),
+                    'is_first_login' => 0
                    
                    
                 );
@@ -218,8 +219,15 @@ class Partner extends CI_Controller
                         'role' =>'user',
                         'is_partner_login' => true
                     );
+
+
+
                     $this->session->set_userdata($data);
-                    $url = base_url('partner/dashboard');
+                    if ($row->is_first_login) {
+                        $url = base_url('partner/profile');
+                    } else {
+                        $url = base_url('partner/dashboard');
+                    }
                 }
                 echo json_encode(array('st'=>1,'url'=> $url)); //--success
             } else {
