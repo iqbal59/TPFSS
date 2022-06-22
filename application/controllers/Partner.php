@@ -36,7 +36,8 @@ class Partner extends CI_Controller
                 $password=$this->random_password(6);
                 $params = array(
                   
-                    'password' => md5($password)
+                    'password' => md5($password),
+                    'is_first_login' => 1
                    
                    
                 );
