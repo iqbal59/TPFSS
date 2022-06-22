@@ -162,7 +162,9 @@ class Accounts extends CI_Controller
             $to=$storeData['contact_number'];
             $smsText="Tumbledry has requested payment of INR ".$openBalance['openbalance'].", for Weekly Financial Settlement. You can pay by clicking the link below: 
                 https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id']);
-            $this->sms($to, $smsText);
+            if ($openBalance['openbalance'] > 0) {
+                $this->sms($to, $smsText);
+            }
         }
 
        
