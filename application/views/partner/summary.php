@@ -134,8 +134,8 @@
                                     <th>Royalty</th>
                                     <th>Consumable</th>
                                     <th>Others</th>
-                                    <th>Debit</th>
-                                    <th>Credit</th>
+                                    <!-- <th>Debit</th>
+                                    <th>Credit</th> -->
 
 
 
@@ -156,10 +156,10 @@
                                     </td>
                                     <td><?php echo number_format($e['osales'], 2);?>
                                     </td>
-                                    <td><?php echo number_format($e['debit'], 2);?>
-                                    </td>
-                                    <td><?php echo number_format($e['credit'], 2);?>
-                                    </td>
+                                    <!-- <td><?php echo number_format($e['debit'], 2);?>
+                        </td>
+                        <td><?php echo number_format($e['credit'], 2);?>
+                        </td> -->
 
 
                                 </tr>

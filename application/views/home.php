@@ -57,7 +57,7 @@
     }
 
     footer {
-        background: #a5cd39;
+        background: #D3D3D3;
     }
 
 
@@ -172,20 +172,22 @@
 
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-4">
                     <div class="col">
-                        <div class="card shadow-sm">
+                        <a href="https://designwithtumbledry.in/" target="_blank">
+                            <div class="card shadow-sm">
 
 
-                            <img src="<?php echo base_url('assets/images/tumbledry-logo-white.png')?>" class="p-5"
-                                width="100%" />
+                                <img src="<?php echo base_url('assets/images/tumbledry-logo-white.png')?>" class="p-5"
+                                    width="100%" />
 
-                            <div class="card-body">
-                                <h5 class="card-title">Design with tumbledry</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <a href="https://designwithtumbledry.in/" target="_blank"
-                                    class="btn btn-primary float-end">Go</a>
+                                <div class="card-body">
+                                    <h5 class="card-title">Design with tumbledry</h5>
+                                    <p class="card-text">Some quick example text to build on the card title and make up
+                                        the
+                                        bulk of the card's content.</p>
+
+                                </div>
                             </div>
-                        </div>
+                        </a>
                     </div>
                     <div class="col">
                         <div class="card shadow-sm">
