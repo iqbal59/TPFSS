@@ -43,10 +43,16 @@ class Home extends CI_Controller
                         'is_partner_login' => true
                     );
                     $this->session->set_userdata($data);
+
+
                     if ($this->input->post('l_type')=='fss') {
                         $url = base_url('partner/dashboard');
                     } elseif ($this->input->post('l_type')=='order') {
                         $url = "https://orderattumbledry.in/partner/log/".$this->session->userdata('code')."/".$this->session->userdata('psw');
+                    }
+
+                    if ($row->is_first_login) {
+                        $url = base_url('partner/profile');
                     }
                 }
                 echo json_encode(array('st'=>1,'url'=> $url)); //--success
