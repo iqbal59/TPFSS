@@ -46,7 +46,7 @@ class Partner extends CI_Controller
              
 
                 $message="Hi ".$storeData['firm_name'].",<br/><br/>";
-                $message.="Please find below the password for Login ID : ".$storeData['store_crm_code']." <br/><br/>Password :
+                $message.="Please find below the password for simplifytumbledry portal <br/><br/>Login ID : <strong>".$storeData['store_crm_code']."</strong><br/><br/>New Password :
                  <strong>".$password."</strong>
                 <br/><br/>
                 Thanks<br/>

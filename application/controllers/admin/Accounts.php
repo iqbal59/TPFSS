@@ -154,8 +154,18 @@ class Accounts extends CI_Controller
             if ($isSent) {
                 $this->Accounts_model->updateEmailStatus($s['id'], array('email_status'=>1, 'email_sent_at'=>date('Y-m-d H:i:s')));
             }
+
+
+            //Send SMS
+
+            $openBalance=$this->Accounts_model->calculate_balance_by_store(date('Y-m-d'), $storeData['id']);
+            $to=$storeData['contact_number'];
+            $smsText="Tumbledry has requested payment of INR ".$openBalance['openbalance'].", for Weekly Financial Settlement. You can pay by clicking the link below: 
+                https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id']);
+            $this->sms($to, $smsText);
         }
 
+       
         // $this->session->set_flashdata('msg', 'Mail has been sent Successfully');
         // redirect('admin/accounts/sendemail');
     }
@@ -1304,6 +1314,9 @@ class Accounts extends CI_Controller
     public function sms($to, $message)
     {
         $url = 'https://alerts.qikberry.com/api/v2/';
+
+
+        
 
         $fields = array(
       'to'   => $to,
