@@ -331,7 +331,7 @@
                                     <th>Debit</th>
                                     <th>Credit</th>
                                     <th>Descriptions</th>
-                                    <th>Total</th>
+                                    <th>Balance</th>
 
                                 </tr>
                             </thead>

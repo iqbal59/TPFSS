@@ -46,7 +46,7 @@ class Partner extends CI_Controller
              
 
                 $message="Hi ".$storeData['firm_name'].",<br/><br/>";
-                $message.="Please find below the password for simplifytumbledry portal <br/><br/>Login ID : <strong>".$storeData['store_crm_code']."</strong><br/><br/>New Password :
+                $message.="Please find below the password for <a href='https://simplifytumbledry.in'>simplifytumbledry.in</a> portal <br/><br/>Login ID : <strong>".$storeData['store_crm_code']."</strong><br/><br/>New Password :
                  <strong>".$password."</strong>
                 <br/><br/>
                 Thanks<br/>
@@ -55,7 +55,7 @@ class Partner extends CI_Controller
 
                
                 if ($this->sendEmail($storeData['email_id'], "Forget Password", $message)) {
-                    $this->session->set_flashdata('msg', 'Password has been sent to your registerd email id');
+                    $this->session->set_flashdata('msg', 'Password has been sent to your registerd email id '.$storeData['email_id']);
                     redirect('partner/recover');
                 } else {
                     $this->session->set_flashdata('error_msg', 'Something went wrong. Please try again');
