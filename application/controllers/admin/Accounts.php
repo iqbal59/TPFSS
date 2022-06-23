@@ -152,7 +152,7 @@ class Accounts extends CI_Controller
                 $message.="<br>To Pay your pending balance, click <a href='https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id'])."'>https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id'])."</a><br>";
             }
          
-            $message.='<br>To make payments and check FSS statements, account statements, ledger, invoices, you can login our centralized portal “Simplify Tumbledry” using link:  <a href="https://simplifytumbledry.in/
+            $message.='<br>To make payments and check FSS statements, account statements, ledger, invoices, you can login our centralized portal "Simplify Tumbledry" using link:  <a href="https://simplifytumbledry.in/
                 ">https://simplifytumbledry.in</a> <br><br><br><p>Regards<br><br>Thanks<br><a href="mailto:mis@tumbledry.in">mis@tumbledry.in</a></p>';
            
            
