@@ -217,14 +217,14 @@ class Accounts extends CI_Controller
         $mail->addReplyTo('mis@tumbledry.in', 'MIS');
 
         // Add a recipient
-        //$mail->addAddress($to_address);
-        $mail->addAddress('iqbal.alam59@gmail.com');
+        $mail->addAddress($to_address);
+        //$mail->addAddress('iqbal.alam59@gmail.com');
 
         // Add cc or bcc
         //$mail->addCC('Gaurav.Teotia@tumbledry.in');
-        // $mail->addCC('shashank.sharma@tumbledry.in');
-        // $mail->addCC('Gaurav.Nigam@tumbledry.in');
-        // $mail->addCC('manmohan.rawat@tumbledry.in');
+        $mail->addCC('shashank.sharma@tumbledry.in');
+        $mail->addCC('Gaurav.Nigam@tumbledry.in');
+        $mail->addCC('manmohan.rawat@tumbledry.in');
         // $mail->addCC('deepak.verma@tumbledry.in');
 
         //$mail->addBCC('iqbal.alam59@gmail.com');
