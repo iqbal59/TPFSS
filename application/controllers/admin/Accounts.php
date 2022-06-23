@@ -130,7 +130,7 @@ class Accounts extends CI_Controller
 
             $this->savePDF($store_id, $data['open_date'], $data['to_date']);
             $this->savePDFInvoice($invoiceData->id);
-
+            $openBalance=$this->Accounts_model->calculate_balance_by_store(date('Y-m-d'), $storeData['id']);
             $message='<p>Dear '.$storeData['firm_name'].', <br><br>PFA the Financial Statement along with Royalty invoice for the period '.$invoiceData->descriptions.'. Please note that only transactions till '.end(explode(' ', $invoiceData->descriptions)).' are considered in the attached statement.</p>';
 
             $message.='<p><strong>Note :-</strong></p>
@@ -148,8 +148,18 @@ class Accounts extends CI_Controller
 <li>Delay in payments will attract penal charges as per the Franchise agreement.</li></ul></em>';
 
             // $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
-            $message.='<br><br><br><p>Regards<br><br>Thanks<br><a href="mailto:mis@tumbledry.in">mis@tumbledry.in</a></p>';
+            if ($openBalance['openbalance'] > 0) {
+                $message."<br>To Pay your pending balance, click <a href='https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id'])."'>https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id'])."</a><br>";
+            }
+         
+            $message.='<br>To make payments and check FSS statements, account statements, ledger, invoices, you can login our centralized portal “Simplify Tumbledry” using link:  <a href="https://simplifytumbledry.in/
+                ">https://simplifytumbledry.in</a> <br><br><br><p>Regards<br><br>Thanks<br><a href="mailto:mis@tumbledry.in">mis@tumbledry.in</a></p>';
+           
+           
             $subject=$storeData['firm_name']."-Financial Settlement Sheet for the period ".$invoiceData->descriptions;
+           
+           
+           
             $isSent=$this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
             if ($isSent) {
                 $this->Accounts_model->updateEmailStatus($s['id'], array('email_status'=>1, 'email_sent_at'=>date('Y-m-d H:i:s')));
@@ -157,8 +167,7 @@ class Accounts extends CI_Controller
 
 
             //Send SMS
-
-            $openBalance=$this->Accounts_model->calculate_balance_by_store(date('Y-m-d'), $storeData['id']);
+          
             $to=$storeData['contact_number'];
             $smsText="Tumbledry has requested payment of INR ".$openBalance['openbalance'].", for Weekly Financial Settlement. You can pay by clicking the link below: 
                 https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id']);
@@ -208,14 +217,14 @@ class Accounts extends CI_Controller
         $mail->addReplyTo('mis@tumbledry.in', 'MIS');
 
         // Add a recipient
-        $mail->addAddress($to_address);
-        // $mail->addAddress('iqbal.alam59@gmail.com');
+        // $mail->addAddress($to_address);
+        $mail->addAddress('iqbal.alam59@gmail.com');
 
         // Add cc or bcc
         //$mail->addCC('Gaurav.Teotia@tumbledry.in');
-        $mail->addCC('shashank.sharma@tumbledry.in');
-        $mail->addCC('Gaurav.Nigam@tumbledry.in');
-        $mail->addCC('manmohan.rawat@tumbledry.in');
+        // $mail->addCC('shashank.sharma@tumbledry.in');
+        // $mail->addCC('Gaurav.Nigam@tumbledry.in');
+        // $mail->addCC('manmohan.rawat@tumbledry.in');
         // $mail->addCC('deepak.verma@tumbledry.in');
 
         //$mail->addBCC('iqbal.alam59@gmail.com');
