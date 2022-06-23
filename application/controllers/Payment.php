@@ -22,7 +22,7 @@ class Payment extends CI_Controller
             //   $var_to_encode=$this->encryption->decrypt(base64_decode($url_val));
 
             $data = array();
-            $data['storeData']=$this->accounts_model->calculate_balance_by_store(date('Y-m-d'), $customer_id);
+            $data['storeData']=$this->accounts_model->calculate_balance_by_store(date('Y-m-d', strtotime('+1 day')), $customer_id);
             $data['page'] = 'Pay Partner';
             $this->load->view('partner/pay', $data);
         }
