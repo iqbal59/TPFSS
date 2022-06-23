@@ -81,8 +81,12 @@
                         <h2 class="box-title m-b-10 text-center">
                             <img src="<?php echo base_url() ?>assets/images/logo-light-login.png" alt="loginpage" />
                         </h2>
-                        <h4 class="text-center"><?php  echo $storeData['store_name'];?>
+                        <h4 class="text-center"><?php  echo $storeData['store_crm_code']." ".$storeData['firm_name'];?>
                         </h4>
+
+                        <h5 class="text-center"><?php  echo $storeData['store_name'];?>
+                        </h5>
+
                         <div class="container">
                             <div class="row">
                                 <div class="col-md-12">

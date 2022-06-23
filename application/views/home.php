@@ -57,13 +57,48 @@
     }
 
     footer {
-        background: #D3D3D3;
+        background: #404040;
     }
 
+    .shadow-sm {
+        cursor: pointer;
+    }
 
-    footer a {
-        /* color: #ffc10e; */
-        color: #fff;
+    .row.equal-cols {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-wrap: wrap;
+        -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+    }
+
+    .row.equal-cols:before,
+    .row.equal-cols:after {
+        display: block;
+    }
+
+    .row.equal-cols>[class*='col-'] {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+
+    .row.equal-cols>[class*='col-']>* {
+        -webkit-flex: 1 1 auto;
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+    }
+
+    .card-text {
+        font-size: 14px;
+    }
+
+    .bg-top {
+        background-color: #212121;
     }
     </style>
 </head>
@@ -74,10 +109,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-8 col-md-7 py-4">
-                        <h4 class="text-white">About</h4>
-                        <p class="text-white">A laundry and dry clean e-commerce organization founded with an intent to
-                            revolutionize the unorganized laundry service provided by maids, dhobis, and other stores
-                            into an organized professionally managed retail and e-commerce service.</p>
+                        <h4 class="text-white">About SimplifyTumbledry</h4>
+                        <p class="text-white">Your business will be a ZERO-hassle affair with Tumbledry’s tech-oriented
+                            360 degree support ecosystem. We aim to empower you to technologically run and grow your
+                            business with just few clicks. Be it developeing creatives for whatsapp marketing or
+                            managing your inventory procurement or managing your store financials, SimplifyTumbledry
+                            provides solutions to all needs in one central system which is completely transparent and
+                            easy to use.</p>
                     </div>
                     <div class="col-sm-4 offset-md-1 py-4">
                         <h4 class="text-white">Contact</h4>
@@ -157,10 +195,15 @@
 
     <main>
 
-        <section class="py-5 text-center container">
-            <div class="row py-lg-5">
+        <section class="py-5 text-center container-fluid bg-top">
+            <div class="row ">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">Making Business Easy For You</h1>
+                    <img class="" width="100%" src="<?php echo base_url('assets/images/cover_new.jpg')?>" />
+
+                    <!-- <img class="d-block d-md-none" width="100%"
+                        src="<?php echo base_url('assets/images/cover-mobile.jpg')?>"
+                    /> -->
+                    <!-- <h1 class="fw-light">Making Business Easy For You</h1> -->
                     <!--<p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>-->
 
                 </div>
@@ -170,56 +213,55 @@
         <div class="album bg-light">
             <div class="container">
 
-                <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mb-4">
-                    <div class="col">
-                        <a href="https://designwithtumbledry.in/" target="_blank">
-                            <div class="card shadow-sm">
+                <div class="row row-cols-1 equal-cols row-cols-sm-2 row-cols-md-3 g-3 mb-4">
+                    <div class="col-md-4">
+
+                        <div class="card shadow-sm" onclick="window.open('https://designwithtumbledry.in/', '_blank');">
 
 
-                                <img src="<?php echo base_url('assets/images/tumbledry-logo-white.png')?>" class="p-5"
-                                    width="100%" />
-
-                                <div class="card-body">
-                                    <h5 class="card-title">Design with tumbledry</h5>
-                                    <p class="card-text">Some quick example text to build on the card title and make up
-                                        the
-                                        bulk of the card's content.</p>
-
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="<?php echo base_url('assets/images/tumbledry-logo-white.png')?>" class="p-5"
-                                width="100%" />
+                            <img src="<?php echo base_url('assets/images/design-with-tumbledry.jpg')?>"
+                                class="card-img-top" />
 
                             <div class="card-body">
-                                <h5 class="card-title">SCM</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
-                                <button type="button" class="btn btn-primary float-end" onclick="goToPage('order');">
-                                    Go
-                                </button>
+                                <h5 class="card-title">Marketing Creatives</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">DIY Design Tool<br /><br /></h6>
+                                <p class="card-text">Easily make unique social media designs in a flash using 100s of
+                                    templates, images, trending design assets, and more.</p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card shadow-sm" onclick="goToPage('order');">
+                            <img src="<?php echo base_url('assets/images/scm.jpg')?>" />
+
+                            <div class="card-body">
+                                <h5 class="card-title">Procurement</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Order - Pay - Track<br /><br /></h6>
+
+                                <p class="card-text">A convenient online portal to order supplies, make online payments
+                                    and track shipment at a click of a button.</p>
 
                             </div>
                         </div>
                     </div>
 
-                    <div class="col">
-                        <div class="card shadow-sm">
-                            <img src="<?php echo base_url('assets/images/tumbledry-logo-white.png')?>" class="p-5"
-                                width="100%" />
+                    <div class="col-md-4">
+                        <div class="card shadow-sm" onclick="goToPage('fss');">
+                            <img src="<?php echo base_url('assets/images/fss.jpg')?>" />
 
                             <div class="card-body">
-                                <h5 class="card-title">FSS</h5>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
 
 
-                                <button type="button" class="btn btn-primary float-end" onclick="goToPage('fss');">
-                                    Go
-                                </button>
+                                <h5 class="card-title">Transactions</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Manage Purchase/Royalty Invoices, Payments,
+                                    Account Statement</h6>
+
+                                <p class="card-text">Get full control of your financial transactions with tumbledry –
+                                    Access Purchase & Royalty invoices, Payments & Your Account statements</p>
+
+
 
 
                             </div>
@@ -236,10 +278,12 @@
     <footer class="text-muted py-5">
         <div class="container">
             <p class="float-end mb-1">
-                <a href="#">Back to top</a>
+                <a href="#" class="text-primary">Back to top</a>
             </p>
 
-            <p class="mb-0 text-center">©2019 <a href="https://www.tumbledry.in/" target="_blank">Tumbledry Solutions
+            <p class="mb-0 text-center text-secondary">©2019 <a href="https://www.tumbledry.in/" target="_blank"
+                    class="text-primary">Tumbledry
+                    Solutions
                     Pvt. Ltd.</a> All rights reserved.</p>
         </div>
     </footer>
