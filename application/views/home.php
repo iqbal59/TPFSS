@@ -234,7 +234,7 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card shadow-sm" onclick="goToPage('order');">
-                            <img src="<?php echo base_url('assets/images/scm.jpg')?>" />
+                            <img src="<?php echo base_url('assets/images/scm.jpg')?>" class="card-img-top" />
 
                             <div class="card-body">
                                 <h5 class="card-title">Procurement</h5>
@@ -249,7 +249,7 @@
 
                     <div class="col-md-4">
                         <div class="card shadow-sm" onclick="goToPage('fss');">
-                            <img src="<?php echo base_url('assets/images/fss.jpg')?>" />
+                            <img src="<?php echo base_url('assets/images/fss.jpg')?>" class="card-img-top" />
 
                             <div class="card-body">
 
