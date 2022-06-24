@@ -111,8 +111,8 @@
                     <div class="col-sm-8 col-md-7 py-4">
                         <h4 class="text-white">About SimplifyTumbledry</h4>
                         <p class="text-white">Your business will be a ZERO-hassle affair with Tumbledry’s tech-oriented
-                            360 degree support ecosystem. We aim to empower you to technologically run and grow your
-                            business with just few clicks. Be it developeing creatives for whatsapp marketing or
+                            360-degree support ecosystem. We aim to empower you technologically to run and grow your
+                            business with just a few clicks. Be it developing creatives for WhatsApp marketing or
                             managing your inventory procurement or managing your store financials, SimplifyTumbledry
                             provides solutions to all needs in one central system which is completely transparent and
                             easy to use.</p>
