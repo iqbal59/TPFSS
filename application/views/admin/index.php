@@ -15,6 +15,10 @@
     </title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap.min.css">
+
     <!-- chartist CSS -->
     <link href="<?php echo base_url() ?>assets/plugins/chartist-js/dist/chartist.min.css" rel="stylesheet">
     <link href="<?php echo base_url() ?>assets/plugins/chartist-js/dist/chartist-init.css" rel="stylesheet">
@@ -1019,11 +1023,49 @@
     <script src="<?php echo base_url() ?>assets/js/buttons.flash.min.js">
     </script>
     <!-- <script src="http://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script> -->
-    <script src="<?php echo base_url() ?>assets/js/pdfmake.min.js"></script>
-    <script src="<?php echo base_url() ?>assets/js/vfs_fonts.js"></script>
-    <script src="<?php echo base_url() ?>assets/js/buttons.html5.min.js">
+    <!-- <script src="<?php echo base_url() ?>assets/js/pdfmake.min.js">
     </script>
-    <script src="<?php echo base_url() ?>assets/js/buttons.print.min.js">
+    <script src="<?php echo base_url() ?>assets/js/vfs_fonts.js">
+    </script>
+    <script
+        src="<?php echo base_url() ?>assets/js/buttons.html5.min.js">
+    </script>
+    <script
+        src="<?php echo base_url() ?>assets/js/buttons.print.min.js">
+    </script> -->
+
+
+    <!-- Editable datatable-->
+    <script src="<?php echo base_url() ?>assets/plugins/jquery-datatables-editable/jquery.dataTables.js">
+    </script>
+    <script src="<?php echo base_url() ?>assets/plugins/datatables/dataTables.bootstrap.js">
+    </script>
+
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js">
+    </script>
+
+
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.bootstrap.min.js">
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js">
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
+    </script>
+
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js">
+    </script>
+
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js">
+    </script>
+
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js">
     </script>
 
     <script>
@@ -1036,10 +1078,13 @@
             dropUp: true
         });
 
+
         var table_voucher = $('#table-voucher').DataTable({
-            dom: 'Blfrtip',
+            dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
+                'csv', 'pdf', 'print', 'colvis'
             ],
 
             "processing": true,
@@ -1066,21 +1111,6 @@
 
 
 
-        // $("#table-news tbody").on('click', 'button', function() {
-        //     var id = $(this).attr('data-id');
-        //     if (this.name == "deleteButton") {
-        //         var is_delete = confirm("Are your sure?");
-        //         if (is_delete) {
-        //             $.post('news/delete', {
-        //                 id: id
-        //             }, function(result) {
-        //                 $(".result").html(result);
-        //                 table_voucher.ajax.reload();
-        //             });
-        //         }
-        //     }
-        // });
-
 
         $('#show_btn').click(function() {
             fromDt = $('input[name="from_date"]').val();
@@ -1095,10 +1125,6 @@
             } else
                 alert("Please enter both date");
         });
-
-
-
-
 
 
 
@@ -1145,18 +1171,15 @@
         });
     });
     $('#example23').DataTable({
-        dom: 'Blfrtip',
+        dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
         buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
+            'csv', 'pdf', 'print', 'colvis'
         ]
     });
     </script>
 
-    <!-- Editable datatable-->
-    <script src="<?php echo base_url() ?>assets/plugins/jquery-datatables-editable/jquery.dataTables.js">
-    </script>
-    <script src="<?php echo base_url() ?>assets/plugins/datatables/dataTables.bootstrap.js">
-    </script>
     <script src="<?php echo base_url() ?>assets/plugins/tiny-editable/mindmup-editabletable.js">
     </script>
     <script src="<?php echo base_url() ?>assets/plugins/tiny-editable/numeric-input-example.js">
@@ -1170,13 +1193,6 @@
     </script>
 
     <!-- End Table js -->
-
-
-
-
-
-
-
     <!-- Start Forms js -->
 
     <script src="<?php echo base_url() ?>assets/js/validation.js"></script>
@@ -1185,10 +1201,11 @@
     <script>
     ! function(window, document, $) {
         "use strict";
-        $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(), $(".skin-square input").iCheck({
-            checkboxClass: "icheckbox_square-green",
-            radioClass: "iradio_square-green"
-        }), $(".touchspin").TouchSpin(), $(".switchBootstrap").bootstrapSwitch();
+        $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(), $(".skin-square input")
+            .iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green"
+            }), $(".touchspin").TouchSpin(), $(".switchBootstrap").bootstrapSwitch();
     }(window, document, jQuery);
     </script>
 
