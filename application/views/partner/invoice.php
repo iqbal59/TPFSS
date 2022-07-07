@@ -108,8 +108,8 @@
                                         <div class="controls">
                                             <button type="button" id="show_invoice"
                                                 class="btn btn-success btn-sm">Show</button>
-                                            <button type="button" id="download_all_invoice"
-                                                class="btn btn-success btn-sm">Download All Invoice</button>
+                                            <!-- <button type="button" id="download_all_invoice"
+                                                class="btn btn-success btn-sm">Download All Invoice</button> -->
                                         </div>
                                     </div>
                                 </div>
