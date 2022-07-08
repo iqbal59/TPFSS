@@ -680,7 +680,7 @@ class Accounts extends CI_Controller
         foreach ($invoices as $invoice) {
             //echo $invoice['id'];
             $this->savePDFInvoiceByPartner($invoice['id']);
-            $this->zip->addFile($path.$invoice['id'].'.pdf');
+            $this->zip->read_file($path.$invoice['id'].'.pdf');
         }
 
        
