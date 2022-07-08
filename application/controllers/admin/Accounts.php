@@ -580,6 +580,33 @@ class Accounts extends CI_Controller
         $pdf->Output(FCPATH.'uploads/tempinvoice/'.$invoiceData->firm_name.'.pdf', 'F');
     }
 
+
+
+
+    public function savePDFInvoiceByPartner($id)
+    {
+        //check_login_user();
+        $invoiceData=$this->Accounts_model->get_invoice_by_id($id);
+        // print_r($invoiceData);
+        $this->load->library('Pdf');
+        $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+        $pdf->SetTitle('Inovice');
+        $pdf->SetHeaderMargin(30);
+        $pdf->SetTopMargin(10);
+        $pdf->setFooterMargin(20);
+        $pdf->SetAutoPageBreak(true);
+        $pdf->SetAuthor('tumbledry');
+        // $pdf->SetDisplayMode('real', 'default');
+        //$pdf->Write(5, 'CodeIgniter TCPDF Integration');
+        $pdf->SetFont('dejavusans', '', 8);
+        $pdf->AddPage();
+
+        $html=file_get_contents(base_url('admin/accounts/invoicepdf/'.$id));
+        //$html="<p>AAA</p>";
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        $pdf->Output(FCPATH.'uploads/temppartnerinvoice/'.$id.'.pdf', 'F');
+    }
     public function downloadledgerall()
     {
         if ($this->input->post('from_date')) {
@@ -634,6 +661,9 @@ class Accounts extends CI_Controller
 
     public function downloadallinvoicebyStore($store_id)
     {
+        $filename = "allinvoice_".date('d_m_Y_H_i_s', strtotime('+ 330 minutes')).".zip";
+        $path = 'uploads/temppartnerinvoice/';
+
         if ($this->input->post('from_date')) {
             $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
@@ -649,12 +679,12 @@ class Accounts extends CI_Controller
         
         foreach ($invoices as $invoice) {
             //echo $invoice['id'];
-            $this->savePDFInvoice($invoice['id']);
+            $this->savePDFInvoiceByPartner($invoice['id']);
+            $this->zip->addFile($path.$invoice['id'].'.pdf');
         }
 
-        $filename = "allinvoice_".date('d_m_Y_H_i_s', strtotime('+ 330 minutes')).".zip";
-        $path = 'uploads/tempinvoice';
-        $this->zip->read_dir($path);
+       
+       
         $this->zip->download($filename);
     }
 
