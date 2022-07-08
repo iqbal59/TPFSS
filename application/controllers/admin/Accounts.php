@@ -605,7 +605,7 @@ class Accounts extends CI_Controller
         //$html="<p>AAA</p>";
 
         $pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->Output(FCPATH.'uploads/temppartnerinvoice/'.$id.'.pdf', 'F');
+        $pdf->Output(FCPATH.'uploads/temppartnerinvoice/'.$invoiceData->invoiceno.'.pdf', 'F');
     }
     public function downloadledgerall()
     {
@@ -680,7 +680,7 @@ class Accounts extends CI_Controller
         foreach ($invoices as $invoice) {
             //echo $invoice['id'];
             $this->savePDFInvoiceByPartner($invoice['id']);
-            $this->zip->read_file($path.$invoice['id'].'.pdf');
+            $this->zip->read_file($path.$invoice['invoice_no'].'.pdf');
         }
 
        
