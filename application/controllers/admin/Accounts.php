@@ -222,8 +222,8 @@ class Accounts extends CI_Controller
 
         // Add cc or bcc
         //$mail->addCC('Gaurav.Teotia@tumbledry.in');
-        $mail->addCC('shashank.sharma@tumbledry.in');
-        $mail->addCC('Gaurav.Nigam@tumbledry.in');
+        $mail->addCC('Tarun.arora@tumbledry.in');
+        $mail->addBCC('Gaurav.Nigam@tumbledry.in');
         $mail->addCC('manmohan.rawat@tumbledry.in');
         // $mail->addCC('deepak.verma@tumbledry.in');
 
@@ -448,8 +448,8 @@ class Accounts extends CI_Controller
         if ($this->form_validation->run()) {
 
             
-           
-//REFUND SALES
+            
+            //REFUND SALES
             $data['refundSales']=$this->Accounts_model->get_all_refund_sales();
             if ($data['refundSales']) {
                 foreach ($data['refundSales'] as $r) {
