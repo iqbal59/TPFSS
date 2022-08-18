@@ -9,8 +9,8 @@ class Import extends CI_Controller
         //$this->load->model("store_model");
     }
 
-   
-    
+
+
     public function storesales()
     {
         // $data['users'] = $this->common_model->get_all_user();
@@ -31,12 +31,12 @@ class Import extends CI_Controller
         $this->load->view('admin/index', $data);
     }
 
-   
+
 
     public function addstoresale()
     {
         $dataType=$this->input->post('data_type');
-      
+
         if ($_FILES) {
             $file=$_FILES['excel_file']['tmp_name'];
             if ($file == null) {
@@ -46,10 +46,10 @@ class Import extends CI_Controller
             } else {
                 $handle = fopen($file, "r") or die("err");
                 switch ($dataType) {
-                case '1':
+                    case '1':
                         $s_from_date=$this->input->post('s_from_date');
                         $s_to_date=$this->input->post('s_to_date');
-                
+
                         $this->common_model->saleRefund($s_from_date, $s_to_date);
                         $row=0;
                         while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
@@ -79,24 +79,24 @@ class Import extends CI_Controller
                             // echo "<br>";
 
                             $this->common_model->add_import_sale($data);
-                            
+
                             //print_r($data);
                         }
                         $this->common_model->refundAdjust($s_from_date, $s_to_date);
                         $this->session->set_flashdata('msg', "data upload success");
-                       redirect('admin/import/saleimportdata');
-                break;
-             
-                case '3':
-                    $row=0;
-                  //  echo "AA";
+                        redirect('admin/import/saleimportdata');
+                        break;
+
+                    case '3':
+                        $row=0;
+                        //  echo "AA";
                         while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
                             // if($row++ < 1 || $filesop[6] != 'SUCCESS\'' || !isset($filesop[19]) || !isset($filesop[20])  )
                             //echo trim($filesop[6], "'");
                             if ($row++ < 1 || trim($filesop[6], "'") != 'SUCCESS' || !$filesop[19] || !$filesop[20]) {
                                 continue;
                             }
-                           
+
                             $data['transaction_no'] = trim($filesop[0], "'");
                             $data['mid_no'] = trim($filesop[7], "'");
                             $data['amount'] = trim($filesop[13], "'");
@@ -113,7 +113,7 @@ class Import extends CI_Controller
                             $data['store_name'] = trim($filesop[8], "'");
                             $data['gst'] = trim($filesop[15], "'");
                             $this->common_model->insert_ignore($data, 'paytm');
-                            
+
                             //print_r($data);
                         }
                         $paytmbankdata=$this->common_model->matchPaytmWithBank();
@@ -122,12 +122,12 @@ class Import extends CI_Controller
                                 $this->common_model->paytmReconcile($p['utr_no']);
                             }
                         }
-                         $this->session->set_flashdata('msg', "data upload success");
+                        $this->session->set_flashdata('msg', "data upload success");
                         redirect('admin/import/storesales');
-                break;
+                        break;
 
-                case '4':
-                    $row=0;
+                    case '4':
+                        $row=0;
                         while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
                             if ($row++ < 1 || strtoupper(trim($filesop[4], "'")) != 'SUCCESS') {
                                 continue;
@@ -141,28 +141,28 @@ class Import extends CI_Controller
                             $data['utr_no'] = $utr_no;
                             //  $data['utr_no']=number_format($utr_no, 0, '', '');
                             $data['amount'] = trim($filesop[5], "'");
-                           
+
                             $data['store_name'] = trim($filesop[0], "'");
                             $data['settled_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
                             $data['transaction_date'] = date('Y-m-d H:i:s', strtotime($data['settled_date']. " - 1 days"));
-                            
-                         
+
+
                             $this->common_model->insert_ignore($data, 'bharatpe');
-                            
+
                             // print_r($data);
                         }
 
                         $bharatpebankdata=$this->common_model->matchBharatpeithBank();
-                            foreach ($bharatpebankdata as $b) {
-                                //if($p['ba']==$p['bta'])
-                                $this->common_model->bharatpeReconcile($b['utr_no']);
-                            }
-                         $this->session->set_flashdata('msg', "data upload success");
-                         redirect('admin/import/storesales');
-                break;
+                        foreach ($bharatpebankdata as $b) {
+                            //if($p['ba']==$p['bta'])
+                            $this->common_model->bharatpeReconcile($b['utr_no']);
+                        }
+                        $this->session->set_flashdata('msg', "data upload success");
+                        redirect('admin/import/storesales');
+                        break;
 
-                case '5':
-                    $row=0;
+                    case '5':
+                        $row=0;
                         while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
                             if ($row++ < 22 ||  $filesop[0] == '') {
                                 continue;
@@ -175,8 +175,9 @@ class Import extends CI_Controller
                                 }
                                 $data['amount'] = trim($filesop[5], "'");
                                 $data['narration'] = trim($filesop[1], "'");
-                                //$data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
-                                $data['date'] = DateTime::createFromFormat('d/m/y', $filesop[0])->format('Y-m-d');
+                                $data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
+                                //$date = new DateTime(trim($filesop[0]));
+                                //$data['date'] = $date->format('Y-m-d');
                                 $this->common_model->insert_ignore($data, 'bank_bharatpe');
                             }
                             $data=array();
@@ -190,7 +191,7 @@ class Import extends CI_Controller
                                 $data['date'] = date('Y-m-d H:i:s', strtotime($filesop[0]));
                                 $this->common_model->insert_ignore($data, 'bank_paytm');
                             }
-                        
+
                             $paytmbankdata=$this->common_model->matchPaytmWithBank();
                             foreach ($paytmbankdata as $p) {
                                 if ($p['ba']==$p['bta']) {
@@ -206,17 +207,17 @@ class Import extends CI_Controller
                             }
 
                             //  $this->common_model->insert($data,'bank_bharatpe');
-                          //$this->common_model->insert($datap,'bank_paytm');
-                            
+                            //$this->common_model->insert($datap,'bank_paytm');
+
                             //print_r($data);
                         }
-                         $this->session->set_flashdata('msg', "data upload success");
-                         redirect('admin/import/storesales');
-                break;
+                        $this->session->set_flashdata('msg', "data upload success");
+                        redirect('admin/import/storesales');
+                        break;
 
 
 
-                case '2':
+                    case '2':
                         $row=0;
                         while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
                             if ($row++ < 1) {
@@ -228,41 +229,41 @@ class Import extends CI_Controller
                             $data['invoice_date'] = date('Y-m-d', strtotime($filesop[0]));
                             $data['store_crm_code'] = trim($filesop[6], "'");
                             $data['material_description'] = trim($filesop[7], "'");
-                          
-                         
+
+
                             $this->common_model->insert_ignore($data, 'material_invoices');
-                            
+
                             // print_r($data);
                         }
-                         $this->session->set_flashdata('msg', "data upload success");
-                         redirect('admin/import/storesales');
-                break;
+                        $this->session->set_flashdata('msg', "data upload success");
+                        redirect('admin/import/storesales');
+                        break;
 
-                case '6':
-                    $row=0;
-                  //  echo "AA";
+                    case '6':
+                        $row=0;
+                        //  echo "AA";
                         while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
                             // if($row++ < 1 || $filesop[6] != 'SUCCESS\'' || !isset($filesop[19]) || !isset($filesop[20])  )
                             //echo trim($filesop[6], "'");
                             if ($row++ < 1 || trim($filesop[6], "'") != 'SUCCESS' || !$filesop[19] || !$filesop[20]) {
                                 continue;
                             }
-                           
+
                             $data['transaction_no'] = trim($filesop[0], "'");
-                         
+
                             $order_no = trim($filesop[1], "'");
                             $order_no=substr($order_no, strpos($order_no, 'T'));
                             if (strpos($order_no, '_')!==false) {
                                 $order_no=substr($order_no, 0, (strpos($order_no, '_')));
                             }
-                           
+
                             if (strpos($order_no, '@') !== false) {
                                 $order_no=substr($order_no, 0, (strpos($order_no, '@')));
                             }
                             if (strpos($order_no, '.') !== false) {
                                 $order_no=substr($order_no, 0, (strpos($order_no, '.')));
                             }
-                         
+
                             //  echo $order_no;
                             $customer_mobile_no = trim($filesop[11], "'");
                             $customer_id = trim($filesop[9], "'");
@@ -282,7 +283,7 @@ class Import extends CI_Controller
                             $data['store_name'] = trim($filesop[8], "'");
                             $data['gst'] = trim($filesop[15], "'");
                             $this->common_model->insert_ignore($data, 'paytm');
-                            
+
                             //  print_r($data);
                         }
                         $paytmbankdata=$this->common_model->matchPaytmWithBank();
@@ -292,70 +293,67 @@ class Import extends CI_Controller
                                 $this->common_model->paytmReconcile($p['utr_no']);
                             }
                         }
-                         $this->session->set_flashdata('msg', "data upload success");
+                        $this->session->set_flashdata('msg', "data upload success");
                         redirect('admin/import/storesales');
-                break;
+                        break;
 
-                case '7':
-                    $row=0;
-                    while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
-                        if ($row++ < 1) {
-                            continue;
-                        }
-                        //print_r($filesop);
-                     
-                        $data['store_id'] = $this->common_model->getStoreId(trim($filesop[0], "'"));
-                        if (!$data['store_id']) {
-                            continue;
-                        }
-                        $data['amount'] = trim($filesop[2], "'");
-                        $data['create_date'] = date('Y-m-d', strtotime($filesop[1]));
-                        $data['descriptions'] = trim($filesop[4], "'");
-                        $data['voucher_type'] = trim($filesop[3], "'");
-                      
-                     
-                        $this->common_model->insert($data, 'vouchers');
-                        
-                        // print_r($data);
-                    }
-                    $this->session->set_flashdata('msg', "data upload success");
-                    redirect('admin/voucher');
-            break;
+                    case '7':
+                        $row=0;
+                        while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
+                            if ($row++ < 1) {
+                                continue;
+                            }
+                            //print_r($filesop);
 
-            case '8':
-                $row=0;
-                while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
-                    if ($row++ < 1) {
-                        continue;
-                    }
-                    //print_r($filesop);
-                 
-                  
-                    $store_id = trim($filesop[0], "'");
-                    $open_bal = trim($filesop[1], "'");
-                  
-                  
-                 
-                    $this->common_model->updateStoreOpenBalance($store_id, $open_bal);
-                    
-                    // print_r($data);
+                            $data['store_id'] = $this->common_model->getStoreId(trim($filesop[0], "'"));
+                            if (!$data['store_id']) {
+                                continue;
+                            }
+                            $data['amount'] = trim($filesop[2], "'");
+                            $data['create_date'] = date('Y-m-d', strtotime($filesop[1]));
+                            $data['descriptions'] = trim($filesop[4], "'");
+                            $data['voucher_type'] = trim($filesop[3], "'");
+
+
+                            $this->common_model->insert($data, 'vouchers');
+
+                            // print_r($data);
+                        }
+                        $this->session->set_flashdata('msg', "data upload success");
+                        redirect('admin/voucher');
+                        break;
+
+                    case '8':
+                        $row=0;
+                        while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
+                            if ($row++ < 1) {
+                                continue;
+                            }
+                            //print_r($filesop);
+
+
+                            $store_id = trim($filesop[0], "'");
+                            $open_bal = trim($filesop[1], "'");
+
+
+
+                            $this->common_model->updateStoreOpenBalance($store_id, $open_bal);
+
+                            // print_r($data);
+                        }
+                        $this->session->set_flashdata('msg', "data upload success");
+                        redirect('admin/store');
+                        break;
                 }
-                $this->session->set_flashdata('msg', "data upload success");
-                redirect('admin/store');
-        break;
-
-
-            }
             }
         }
     }
 
     public function saledata()
     {
-
-    // $params['limit'] = 100;
+        // $params['limit'] = 100;
         // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
-    
+
         // $config = $this->config->item('pagination');
         // $config['base_url'] = site_url('admin/import/saledata/page');
         // $config['total_rows'] = $this->common_model->get_all_count_by_table('storesales');
@@ -363,13 +361,13 @@ class Import extends CI_Controller
 
         $data=array();
         $condition_array=array('from_dt'=>$this->input->get('from_date'), 'to_dt'=>$this->input->get('to_date'));
-   
+
         if (!empty($condition_array['from_dt']) && !empty($condition_array['to_dt'])) {
             $data['salesdata'] = $this->common_model->getSaleOrderData($condition_array);
             $data['search_query']=$condition_array;
         }
 
-   
+
         $data['main_content'] = $this->load->view('admin/import/saledata', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -380,7 +378,7 @@ class Import extends CI_Controller
     {
         $data=array();
         $condition_array=array('from_dt'=>$this->input->get('from_date'), 'to_dt'=>$this->input->get('to_date'));
-   
+
         if (!empty($condition_array['from_dt']) && !empty($condition_array['to_dt'])) {
             $ordersData= $this->common_model->getSaleBillOrderData($condition_array);
             $data['search_query']=$condition_array;
@@ -391,8 +389,8 @@ class Import extends CI_Controller
             }
         }
 
-        
-   
+
+
         $data['main_content'] = $this->load->view('admin/import/saledatabill', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -402,13 +400,13 @@ class Import extends CI_Controller
     {
         $data=array();
         $condition_array=array('from_dt'=>$this->input->get('from_date'), 'to_dt'=>$this->input->get('to_date'));
-   
+
         if (!empty($condition_array['from_dt']) && !empty($condition_array['to_dt'])) {
             $data['salesdata'] = $this->common_model->getCreditOrderData($condition_array);
             $data['search_query']=$condition_array;
         }
 
-   
+
         $data['main_content'] = $this->load->view('admin/import/creditdata', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -416,10 +414,9 @@ class Import extends CI_Controller
 
     public function paytmdata()
     {
-
-    // $params['limit'] = 100;
+        // $params['limit'] = 100;
         // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
-    
+
         // $config = $this->config->item('pagination');
         // $config['base_url'] = site_url('admin/import/paytmdata/page');
         // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
@@ -446,10 +443,9 @@ class Import extends CI_Controller
 
     public function bharatpedata()
     {
-
-    // $params['limit'] = 100;
+        // $params['limit'] = 100;
         // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
-    
+
         // $config = $this->config->item('pagination');
         // $config['base_url'] = site_url('admin/import/paytmdata/page');
         // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
@@ -468,24 +464,23 @@ class Import extends CI_Controller
         }
 
         $data['bharatpedata'] = $this->common_model->getBharatPeData($data['from_date'], $data['to_date']);
-    
+
         $data['main_content'] = $this->load->view('admin/import/bharatpe', $data, true);
         $this->load->view('admin/index', $data);
     }
 
     public function mbdata()
     {
-
-    // $params['limit'] = 100;
+        // $params['limit'] = 100;
         // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
-    
+
         // $config = $this->config->item('pagination');
         // $config['base_url'] = site_url('admin/import/paytmdata/page');
         // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
         // $this->pagination->initialize($config);
 
         $data['mbdata'] = $this->common_model->getMbData();
-    
+
         $data['main_content'] = $this->load->view('admin/import/mbdata', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -495,8 +490,8 @@ class Import extends CI_Controller
     {
         // check if the store exists before trying to edit it
         $data['store'] = $this->common_model->get_material_by_id($id);
-      
-        
+
+
         if (isset($data['store']['id'])) {
             $this->load->library('form_validation');
 
@@ -504,8 +499,8 @@ class Import extends CI_Controller
             $this->form_validation->set_rules('store_crm_code', 'Store CRM Code', 'required');
             $this->form_validation->set_rules('invoice_date', 'Invoice Date (YYYY-MM-DD)', 'required');
             $this->form_validation->set_rules('amount', 'Amount', 'required');
-       
-    
+
+
             if ($this->form_validation->run()) {
                 $params = array(
                     'invoice_no' => $this->input->post('invoice_no'),
