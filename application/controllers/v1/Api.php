@@ -91,8 +91,7 @@ public function invoices_get()
         array_push($invoices, $invoiceItem);
     }
 
-
-
+//    echo $this->db->last_query();
 
     $response['result']=$invoices;
     $this->set_response($response, REST_Controller::HTTP_OK);
@@ -101,19 +100,26 @@ public function invoices_get()
 
 public function sync_with_tally_post()
 {
-    $invoiceId=$this->input->post('invoice_id');
-    // $syncStatus=$this->input->post('sync_status');
-    if ($invoiceId) {
-        $invoices = $this->api_model->sync_with_tally($invoiceId);
-        $this->set_response([
-            $this->config->item('rest_status_field_name') => true,
-            $this->config->item('rest_message_field_name') => "Success"
-        ], self::HTTP_FORBIDDEN);
-    } else {
-        $this->set_response([
-            $this->config->item('rest_status_field_name') => false,
-            $this->config->item('rest_message_field_name') => "Invlid Invoice ID or Sync Status"
-        ], self::HTTP_FORBIDDEN);
+    $tallyResposne= json_decode(file_get_contents('php://input'));
+
+    //print_r($tallyResposne['result']);
+    $synInvoices=array();
+    foreach ($tallyResposne->result as $item) {
+        if ($item->Status=='Success') {
+            if ($this->api_model->sync_with_tally($item->id)) {
+                $inv['syncstatus']=true;
+            } else {
+                $inv['syncstatus']=false;
+            }
+            $inv['id']=$item->id;
+            array_push($synInvoices, $inv);
+        }
     }
+
+    $response['result']=$synInvoices;
+    $this->set_response([
+        $this->config->item('rest_status_field_name') => true,
+        'message' =>$response
+    ], REST_Controller::HTTP_OK);
 }
 }

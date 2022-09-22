@@ -8,6 +8,7 @@ class Api_model extends CI_Model
         $this->db->join("stores", "stores.id=invoices.store_id", "left");
         $this->db->where('is_sync', 0);
         //$this->db->where('date(invoices.invoice_date) <=', $to_dt);
+        $this->db->limit(300, 0);
         return $this->db->get()->result();
     }
 
@@ -15,7 +16,6 @@ class Api_model extends CI_Model
     public function sync_with_tally($invoiceId)
     {
         $this->db->where('id', $invoiceId);
-        $this->db->update('invoices', array('is_sync'=>1));
-        return;
+        return $this->db->update('invoices', array('is_sync'=>1));
     }
 }
