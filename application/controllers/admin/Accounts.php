@@ -213,8 +213,8 @@ class Accounts extends CI_Controller
         // $mail->SMTPSecure = 'ssl';
         // $mail->Port     = 587;
 
-        $mail->setFrom('mis@tumbledry.in', 'MIS');
-        $mail->addReplyTo('mis@tumbledry.in', 'MIS');
+        $mail->setFrom('admin@centuryfasteners.in', 'MIS');
+        $mail->addReplyTo('mis@tumbeldry.in', 'MIS');
 
         // Add a recipient
         $mail->addAddress($to_address);
@@ -261,14 +261,22 @@ class Accounts extends CI_Controller
         // PHPMailer object
         $mail = $this->phpmailer_lib->load();
 
+
         // SMTP configuration
         $mail->isSMTP();
-        $mail->Host     = 'smtp.office365.com';
+        // $mail->Host     = 'smtp.office365.com';
+        // $mail->SMTPAuth = true;
+        // $mail->Username = 'mis@tumbledry.in';
+        // $mail->Password = '3@Million';
+        // $mail->SMTPSecure = 'tls';
+        // $mail->Port     = 587;
+        $mail->SMTPDebug = 2;
+        $mail->Host     = 'mail.centuryfasteners.in';
         $mail->SMTPAuth = true;
-        $mail->Username = 'mis@tumbledry.in';
-        $mail->Password = '3@Million';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port     = 587;
+        $mail->Username = 'admin@centuryfasteners.in';
+        $mail->Password = 'B5]DIG&#OcNH';
+        $mail->SMTPSecure = 'ssl';
+        $mail->Port     = 465;
 
         // $mail->Host     = 'outlook.office365.com';
         // $mail->SMTPAuth = true;
@@ -277,8 +285,8 @@ class Accounts extends CI_Controller
         // $mail->SMTPSecure = 'ssl';
         // $mail->Port     = 587;
 
-        $mail->setFrom('deepak.verma@tumbledry.in', 'Deepak Verma');
-        $mail->addReplyTo('deepak.verma@tumbledry.in', 'Deepak Verma');
+        $mail->setFrom('admin@centuryfasteners.in', 'MIS');
+        $mail->addReplyTo('mis@tumbeldry.in', 'MIS');
 
         // Add a recipient
         $mail->addAddress("iqbal.alam59@gmail.com");
@@ -304,7 +312,7 @@ class Accounts extends CI_Controller
         $mailContent = "Hello";
 
         $mail->Body = "Demo Email";
-
+        //echo $mail->send();
         // Send email
         if (!$mail->send()) {
             echo 'Message could not be sent.';
