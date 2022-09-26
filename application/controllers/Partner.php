@@ -28,23 +28,23 @@ class Partner extends CI_Controller
         $data['page'] = 'Forget Password';
         $this->load->library('form_validation');
         $this->form_validation->set_rules('email_id', 'Email ID', 'trim|required|valid_email');
-            
-           
-    
+
+
+
         if ($this->form_validation->run()) {
             if ($storeData=$this->store_model->get_store_by_email_id($this->input->post('email_id'))) {
                 $password=$this->random_password(6);
                 $params = array(
-                  
+
                     'password' => md5($password),
                     'is_first_login' => 1
-                   
-                   
+
+
                 );
 
                 $this->store_model->forget_password($storeData['id'], $params);
 
-             
+
 
                 $message="Hi ".$storeData['firm_name'].",<br/><br/>";
                 $message.="Please find below the password for <a href='https://simplifytumbledry.in'>simplifytumbledry.in</a> portal <br/><br/>Login ID : <strong>".$storeData['store_crm_code']."</strong><br/><br/>New Password :
@@ -54,7 +54,7 @@ class Partner extends CI_Controller
                 Tumbledry";
 
 
-               
+
                 if ($this->sendEmail($storeData['email_id'], "Forget Password", $message)) {
                     $this->session->set_flashdata('msg', 'Password has been sent to your registerd email id '.$storeData['email_id']);
                     redirect('partner/recover');
@@ -66,7 +66,7 @@ class Partner extends CI_Controller
                 $this->session->set_flashdata('error_msg', 'Email Id does not exist.');
                 redirect('partner/recover');
             }
-            // echo $this->db->last_query();
+        // echo $this->db->last_query();
         } else {
             $this->load->view('partner/recover', $data);
         }
@@ -86,8 +86,8 @@ class Partner extends CI_Controller
         $mail->isSMTP();
         $mail->Host     = 'smtp.office365.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'mis@tumbledry.in';
-        $mail->Password = '3@Million';
+        $mail->Username = 'digitaloperations@tumbledry.in';
+        $mail->Password = 'Wuz17917';
         $mail->SMTPSecure = 'tls';
         $mail->Port     = 587;
 
@@ -98,7 +98,7 @@ class Partner extends CI_Controller
         // $mail->SMTPSecure = 'ssl';
         // $mail->Port     = 587;
 
-        $mail->setFrom('mis@tumbledry.in', 'MIS');
+        $mail->setFrom('digitaloperations@tumbledry.in', 'MIS');
         $mail->addReplyTo('mis@tumbledry.in', 'MIS');
 
 
@@ -115,7 +115,7 @@ class Partner extends CI_Controller
         //$mail->addBCC('iqbal.alam59@gmail.com');
         // $mail->AddAttachment($attachmentpdf);
         // $mail->AddAttachment($invoicepdf);
-         
+
         // Email subject
         $mail->Subject = $subject;
 
@@ -124,7 +124,7 @@ class Partner extends CI_Controller
 
         // Email body content
         $mailContent = $content;
-            
+
         $mail->Body =$mailContent;
 
         // Send email
@@ -164,23 +164,23 @@ class Partner extends CI_Controller
         $data = array();
         $data['page'] = 'Profile';
         $data['storeData']=$this->store_model->get_store($id);
-        
-        
+
+
         if (isset($data['storeData']['id'])) {
             $this->load->library('form_validation');
 
             $this->form_validation->set_rules('cur_password', 'Current Password', 'required');
-            
+
             $this->form_validation->set_rules('new_password', 'Password', 'required|min_length[6]');
             $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'required|matches[new_password]');
-    
+
             if ($this->form_validation->run()) {
                 $params = array(
-                  
+
                     'password' => md5($this->input->post('new_password')),
                     'is_first_login' => 0
-                   
-                   
+
+
                 );
 
                 if ($this->store_model->change_password($id, $params, $this->input->post('cur_password'))) {
@@ -190,7 +190,7 @@ class Partner extends CI_Controller
                     $this->session->set_flashdata('error_msg', 'Current Passoword is Wrong');
                     redirect('partner/profile');
                 }
-                //echo $this->db->last_query();
+            //echo $this->db->last_query();
             } else {
                 $data['main_content'] = $this->load->view('partner/profile', $data, true);
                 $this->load->view('partner/index', $data);
@@ -209,7 +209,7 @@ class Partner extends CI_Controller
         $data = array();
         if ($_POST) {
             $query = $this->login_model->validate_partner();
-            
+
             //-- if valid
             if ($query) {
                 foreach ($query as $row) {
@@ -240,13 +240,14 @@ class Partner extends CI_Controller
     }
 
 
-    
+
     public function logout()
     {
         $this->session->sess_destroy();
         $data = array();
         $data['page'] = 'logout';
-        $this->load->view('partner/login', $data);
+        //$this->load->view('home/login', $data);
+        redirect('home/login');
     }
 
 
@@ -288,7 +289,7 @@ class Partner extends CI_Controller
             $data['to_date']=date('Y-m-d');
         }
 
-        
+
         $data['invoices']=$this->accounts_model->get_all_invoice_by_partner($this->session->userdata('id'), $data['open_date'], $data['to_date']);
         $data['main_content'] = $this->load->view('partner/invoice', $data, true);
         $this->load->view('partner/index', $data);
@@ -321,7 +322,7 @@ class Partner extends CI_Controller
         //     $data['year']=date('Y');
         // }
 
-        
+
         $data['expense'] = $this->accounts_model->calculate_expense_by_partner_new($id, $data['month']);
         //  echo $this->db->last_query();
         $data['main_content'] = $this->load->view('partner/summary', $data, true);
@@ -396,8 +397,8 @@ class Partner extends CI_Controller
             $data['to_date']=date('Y-m-d');
         }
 
-        
-        
+
+
         // output the column headings
         fputcsv($output, array('Voucher No.','Voucher Type', 'Voucher Date', 'Debit', 'Credit', 'Description', 'Total'));
         $data['storebalance']=$this->accounts_model->calculate_balance_by_store($data['open_date'], $id);
@@ -405,7 +406,7 @@ class Partner extends CI_Controller
         $itemrow=array('', 'Opening Balance', date("d-m-Y", strtotime($data['open_date'])), $total_balalnce, '', '', $total_balalnce);
         fputcsv($output, $itemrow);
         $data['ledgerItems']=$this->accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
-       
+
         foreach ($data['ledgerItems'] as $row) {
             if ($row['voucher_type']=='C') {
                 $voucher_type= 'Credit';
@@ -416,29 +417,29 @@ class Partner extends CI_Controller
             } else {
                 $voucher_type = $row['voucher_type'];
             }
-                  
-           
 
-           
+
+
+
             if ($row['voucher_type']=='D' or $row['voucher_type']=='Sale') {
                 $debit= $row['np'];
                 $total_balalnce+=$row['np'];
             } else {
                 $debit= '';
             }
-           
+
             if ($row['voucher_type']=='C' or $row['voucher_type']=='R') {
                 $credit= $row['np'];
                 $total_balalnce-=$row['np'];
             } else {
                 $credit='';
             }
-         
+
 
 
             $itemrow=array($row['voucher_no'], $voucher_type, date("d-m-Y", strtotime($row['voucher_date'])), $debit ,$credit, $row['descriptions'], $total_balalnce);
-        
-        
+
+
             fputcsv($output, $itemrow);
         }
     }
@@ -452,7 +453,7 @@ class Partner extends CI_Controller
 
         // $params['limit'] = 100;
         // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
-    
+
         // $config = $this->config->item('pagination');
         // $config['base_url'] = site_url('admin/import/paytmdata/page');
         // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
@@ -484,7 +485,7 @@ class Partner extends CI_Controller
 
         // $params['limit'] = 100;
         // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
-    
+
         // $config = $this->config->item('pagination');
         // $config['base_url'] = site_url('admin/import/paytmdata/page');
         // $config['total_rows'] = $this->common_model->get_all_count_by_table('paytm');
