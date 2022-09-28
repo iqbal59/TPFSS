@@ -271,21 +271,22 @@ class Accounts extends CI_Controller
         // $mail->SMTPSecure = 'tls';
         // $mail->Port     = 587;
         $mail->SMTPDebug = 2;
-        $mail->Host     = 'mail.centuryfasteners.in';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'admin@centuryfasteners.in';
-        $mail->Password = 'B5]DIG&#OcNH';
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port     = 465;
-
-        // $mail->Host     = 'outlook.office365.com';
+        // $mail->Host     = 'mail.centuryfasteners.in';
         // $mail->SMTPAuth = true;
-        // $mail->Username = 'deepak.verma@tumbledry.in';
-        // $mail->Password = 'Hellboy@06';
+        // $mail->Username = 'admin@centuryfasteners.in';
+        // $mail->Password = 'B5]DIG&#OcNH';
         // $mail->SMTPSecure = 'ssl';
-        // $mail->Port     = 587;
+        // $mail->Port     = 465;
 
-        $mail->setFrom('admin@centuryfasteners.in', 'MIS');
+        $mail->Host     = 'smtp.mailgun.org';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'postmaster@sandbox522d695537534bc0a882aa833dd7567c.mailgun.org';
+        $mail->Password = '21defed7dcd0caca8e24b02aac89816f-78651cec-5082dd1d';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port     = 587;
+
+
+        $mail->setFrom('mis@tumbledry.in', 'MIS');
         $mail->addReplyTo('mis@tumbeldry.in', 'MIS');
 
         // Add a recipient
@@ -293,7 +294,7 @@ class Accounts extends CI_Controller
         // $mail->addAddress('iqbal.alam59@gmail.com');
 
         // Add cc or bcc
-        // $mail->addCC('Gaurav.Teotia@tumbledry.in');
+        $mail->addCC('rohillamanoj.1979@gmail.com');
         // $mail->addCC('Gaurav.Nigam@tumbledry.in');
         // $mail->addCC('Sachin.bhatia@tumbledry.in');
         // $mail->addCC('deepak.verma@tumbledry.in');
@@ -477,7 +478,7 @@ class Accounts extends CI_Controller
             //print_r($data['storesales']);
 
             foreach ($data['storesales'] as $s) {
-                if (!$s['id'] || !$s['store_royalty']) {
+                if (!$s['id'] || !$s['store_royalty'] || $s['amount'] == 0) {
                     continue;
                 }
 

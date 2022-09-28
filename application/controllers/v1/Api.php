@@ -37,7 +37,7 @@ public function invoices_get()
         $invoiceItem['reg_type']=$item->gstin_no != ''?"Regular":"Non Regsitered";
         $invoiceItem['contact_person']='';
         $invoiceItem['mobile_No']=$item->contact_number;
-        $invoiceItem['narration']='';
+        $invoiceItem['narration']=$item->descriptions;
         $ledgerDetails=array();
         $ld['ledger_name']=$item->firm_name;
         $ld['ledger_perc']="";
