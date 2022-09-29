@@ -193,12 +193,14 @@ class Accounts extends CI_Controller
 
         // SMTP configuration
         $mail->isSMTP();
+
         $mail->Host     = 'smtp.office365.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'mis1@tumbledry.in';
         $mail->Password = 'Bud36747';
         $mail->SMTPSecure = 'tls';
         $mail->Port     = 587;
+
         // $mail->Host     = 'mail.centuryfasteners.in';
         // $mail->SMTPAuth = true;
         // $mail->Username = 'admin@centuryfasteners.in';
@@ -213,7 +215,7 @@ class Accounts extends CI_Controller
         // $mail->SMTPSecure = 'ssl';
         // $mail->Port     = 587;
 
-        $mail->setFrom('mis1@tumbeldry.in', 'MIS');
+        $mail->setFrom('mis1@tumbledry.in', 'MIS');
         $mail->addReplyTo('mis1@tumbeldry.in', 'MIS');
 
         // Add a recipient
@@ -264,12 +266,12 @@ class Accounts extends CI_Controller
 
         // SMTP configuration
         $mail->isSMTP();
-        // $mail->Host     = 'smtp.office365.com';
-        // $mail->SMTPAuth = true;
-        // $mail->Username = 'mis@tumbledry.in';
-        // $mail->Password = '3@Million';
-        // $mail->SMTPSecure = 'tls';
-        // $mail->Port     = 587;
+        $mail->Host     = 'smtp.office365.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'mis1@tumbledry.in';
+        $mail->Password = 'Bud36747';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port     = 587;
         $mail->SMTPDebug = 2;
         // $mail->Host     = 'mail.centuryfasteners.in';
         // $mail->SMTPAuth = true;
@@ -278,16 +280,16 @@ class Accounts extends CI_Controller
         // $mail->SMTPSecure = 'ssl';
         // $mail->Port     = 465;
 
-        $mail->Host     = 'smtp.mailgun.org';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'postmaster@sandbox522d695537534bc0a882aa833dd7567c.mailgun.org';
-        $mail->Password = '21defed7dcd0caca8e24b02aac89816f-78651cec-5082dd1d';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port     = 587;
+        // $mail->Host     = 'smtp.mailgun.org';
+        // $mail->SMTPAuth = true;
+        // $mail->Username = 'postmaster@sandbox522d695537534bc0a882aa833dd7567c.mailgun.org';
+        // $mail->Password = '21defed7dcd0caca8e24b02aac89816f-78651cec-5082dd1d';
+        // $mail->SMTPSecure = 'tls';
+        // $mail->Port     = 587;
 
 
-        $mail->setFrom('mis@tumbledry.in', 'MIS');
-        $mail->addReplyTo('mis@tumbeldry.in', 'MIS');
+        $mail->setFrom('mis1@tumbledry.in', 'MIS');
+        $mail->addReplyTo('mis1@tumbeldry.in', 'MIS');
 
         // Add a recipient
         $mail->addAddress("iqbal.alam59@gmail.com");
