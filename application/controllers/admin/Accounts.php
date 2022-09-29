@@ -172,7 +172,7 @@ class Accounts extends CI_Controller
             $smsText="Tumbledry has requested payment of INR ".$openBalance['openbalance'].", for Weekly Financial Settlement. You can pay by clicking the link below:
                 https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id']);
             if ($openBalance['openbalance'] > 0) {
-                //  $this->sms($to, $smsText);
+                $this->sms($to, $smsText);
             }
         }
 
@@ -200,7 +200,7 @@ class Accounts extends CI_Controller
         $mail->Password = 'Bud36747';
         $mail->SMTPSecure = 'tls';
         $mail->Port     = 587;
-        $mail->SMTPDebug = 2;
+        //$mail->SMTPDebug = 2;
         // $mail->Host     = 'mail.centuryfasteners.in';
         // $mail->SMTPAuth = true;
         // $mail->Username = 'admin@centuryfasteners.in';
