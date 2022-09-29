@@ -193,18 +193,18 @@ class Accounts extends CI_Controller
 
         // SMTP configuration
         $mail->isSMTP();
-        // $mail->Host     = 'smtp.office365.com';
-        // $mail->SMTPAuth = true;
-        // $mail->Username = 'mis@tumbledry.in';
-        // $mail->Password = '3@Million';
-        // $mail->SMTPSecure = 'tls';
-        // $mail->Port     = 587;
-        $mail->Host     = 'mail.centuryfasteners.in';
+        $mail->Host     = 'smtp.office365.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'admin@centuryfasteners.in';
-        $mail->Password = 'B5]DIG&#OcNH';
-        $mail->SMTPSecure = 'ssl';
-        $mail->Port     = 465;
+        $mail->Username = 'mis1@tumbledry.in';
+        $mail->Password = 'Bud36747';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port     = 587;
+        // $mail->Host     = 'mail.centuryfasteners.in';
+        // $mail->SMTPAuth = true;
+        // $mail->Username = 'admin@centuryfasteners.in';
+        // $mail->Password = 'B5]DIG&#OcNH';
+        // $mail->SMTPSecure = 'ssl';
+        // $mail->Port     = 465;
 
         // $mail->Host     = 'outlook.office365.com';
         // $mail->SMTPAuth = true;
@@ -213,8 +213,8 @@ class Accounts extends CI_Controller
         // $mail->SMTPSecure = 'ssl';
         // $mail->Port     = 587;
 
-        $mail->setFrom('admin@centuryfasteners.in', 'MIS');
-        $mail->addReplyTo('mis@tumbeldry.in', 'MIS');
+        $mail->setFrom('mis1@tumbeldry.in', 'MIS');
+        $mail->addReplyTo('mis1@tumbeldry.in', 'MIS');
 
         // Add a recipient
         $mail->addAddress($to_address);
