@@ -144,7 +144,12 @@ class Import extends CI_Controller
 
                             $data['store_name'] = trim($filesop[0], "'");
                             $data['settled_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
-                            $data['transaction_date'] = date('Y-m-d H:i:s', strtotime($data['settled_date']. " - 1 days"));
+
+                            /*********Change logic as per Rohilla/Deepak instruction******/
+                            //OLD Logic
+                            //$data['transaction_date'] = date('Y-m-d H:i:s', strtotime($data['settled_date']. " - 1 days"));
+
+                            $data['transaction_date'] = date('Y-m-d H:i:s', strtotime($data['settled_date']. " - 0 days"));
 
 
                             $this->common_model->insert_ignore($data, 'bharatpe');
