@@ -180,23 +180,15 @@
                 
                
                 if ($this->session->userdata('is_partner_login')) {?>
-                <span class="navbar-text text-white">
+                <span class="navbar-text">
                     Welcome <?php echo $this->session->userdata('name');?>
                 </span>
 
                 <?php } ?>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
-
-                <a class="navbar-toggler" title="Logout" href="<?php echo base_url('partner/logout')?>">
-                    <i class="bi bi-power"></i>
-                </a>
-
-
             </div>
         </div>
     </header>
@@ -221,82 +213,89 @@
         <div class="album bg-light">
             <div class="container">
 
-                <div class="row row-cols-1 equal-cols row-cols-sm-2 row-cols-md-3 g-3 mb-4">
-
-
-                    <?php $msg = $this->session->flashdata('msg'); ?>
-                    <?php if (isset($msg)): ?>
-
-                    <div class="col-md-12">
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fa fa-check-circle"></i>
-                            <?php echo $msg; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-
-                    <?php endif ?>
-
-
-
-
-
+                <div class="row justify-content-center m-4">
                     <div class="col-md-4">
 
-                        <div class="card shadow-sm" onclick="window.open('https://designwithtumbledry.in/', '_blank');">
+                        <div class="card shadow-sm">
 
 
-                            <img src="<?php echo base_url('assets/images/design-with-tumbledry.jpg')?>"
-                                class="card-img-top" />
 
                             <div class="card-body">
-                                <h5 class="card-title">Marketing Creatives</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">DIY Design Tool<br /><br /></h6>
-                                <p class="card-text">Easily make unique social media designs in a flash using 100s of
-                                    templates, images, trending design assets, and more.</p>
 
+                                <?php $msg = $this->session->flashdata('msg'); ?>
+                                <?php if (isset($msg)): ?>
+
+
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="fa fa-check-circle"></i>
+                                    <?php echo $msg; ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+
+
+                                <?php endif ?>
+
+                                <?php $error_msg = $this->session->flashdata('error_msg'); ?>
+                                <?php if (isset($error_msg)): ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="fa fa-check-circle"></i>
+                                    <?php echo $error_msg; ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <?php endif ?>
+
+
+                                <form class="" action="<?php echo base_url('home/log'); ?>" method="post">
+
+                                    <h2 class="box-title m-b-10 text-center">
+                                        <img src="<?php echo base_url() ?>assets/images/logo-light-login.png"
+                                            alt="loginpage" />
+                                    </h2>
+
+                                    <div class="mb-3 ">
+                                        <div class="col-xs-12">
+                                            <input class="form-control" type="text" name="user_name" required=""
+                                                placeholder="Store Code">
+                                            <span class="text-danger"><?php echo form_error('user_name');?></span>
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="col-xs-12">
+                                            <input class="form-control" type="password" name="password" required=""
+                                                placeholder="Password">
+                                            <span class="text-danger"><?php echo form_error('password');?></span>
+                                        </div>
+                                    </div>
+
+                                    <!-- CSRF token -->
+                                    <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>"
+                                        value="<?=$this->security->get_csrf_hash();?>" />
+
+                                    <div class="mb-3 text-center m-t-50">
+                                        <div class="col-xs-12">
+                                            <button type="submit"
+                                                class="btn btn-info btn-block text-uppercase waves-effect waves-light"
+                                                type="button">Log In</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div class="col-md-12">
+                                            <a href="<?php echo base_url('partner/recover') ?>" id="to-recover"
+                                                class="text-dark float-end">
+                                                <i class="fa fa-lock m-r-5"></i> Forgot password?
+                                            </a>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-md-4">
-                        <div class="card shadow-sm"
-                            onclick="window.open('https://orderattumbledry.in/partner/log/'+'<?php echo $this->session->userdata('code')."/".$this->session->userdata('psw');?>', '_blank');">
-                            <img src="<?php echo base_url('assets/images/scm.jpg')?>" class="card-img-top" />
 
-                            <div class="card-body">
-                                <h5 class="card-title">Procurement</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Order - Pay - Track<br /><br /></h6>
-
-                                <p class="card-text">A convenient online portal to order supplies, make online payments
-                                    and track shipment at a click of a button.</p>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card shadow-sm" onclick="window.open('partner/dashboard', '_blank');">
-                            <img src="<?php echo base_url('assets/images/fss.jpg')?>" class="card-img-top" />
-
-                            <div class="card-body">
-
-
-                                <h5 class="card-title">Transactions</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Manage Purchase/Royalty Invoices, Payments,
-                                    Account Statement</h6>
-
-                                <p class="card-text">Get full control of your financial transactions with tumbledry –
-                                    Access Purchase & Royalty invoices, Payments & Your Account statements</p>
-
-
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -320,6 +319,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
     </script>
+
+
 </body>
+
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger d-none" id="error_msg" role="alert">
+                    Incorrect Storcode or Password
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal End-->
 
 </html>

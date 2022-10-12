@@ -4,7 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Tumbledry</title>
+    <title><?php echo $page;?>
+    </title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
@@ -185,17 +186,14 @@
                 </span>
 
                 <?php } ?>
-
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
                     aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
-
                 <a class="navbar-toggler" title="Logout" href="<?php echo base_url('partner/logout')?>">
                     <i class="bi bi-power"></i>
                 </a>
-
 
             </div>
         </div>
@@ -221,82 +219,109 @@
         <div class="album bg-light">
             <div class="container">
 
-                <div class="row row-cols-1 equal-cols row-cols-sm-2 row-cols-md-3 g-3 mb-4">
+                <div class="row justify-content-center m-4">
+                    <div class="col-md-6">
+
+                        <div class="card shadow-sm">
 
 
-                    <?php $msg = $this->session->flashdata('msg'); ?>
-                    <?php if (isset($msg)): ?>
-
-                    <div class="col-md-12">
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fa fa-check-circle"></i>
-                            <?php echo $msg; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                        </div>
-                    </div>
-
-                    <?php endif ?>
-
-
-
-
-
-                    <div class="col-md-4">
-
-                        <div class="card shadow-sm" onclick="window.open('https://designwithtumbledry.in/', '_blank');">
-
-
-                            <img src="<?php echo base_url('assets/images/design-with-tumbledry.jpg')?>"
-                                class="card-img-top" />
 
                             <div class="card-body">
-                                <h5 class="card-title">Marketing Creatives</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">DIY Design Tool<br /><br /></h6>
-                                <p class="card-text">Easily make unique social media designs in a flash using 100s of
-                                    templates, images, trending design assets, and more.</p>
+
+                                <?php $msg = $this->session->flashdata('msg'); ?>
+                                <?php if (isset($msg)): ?>
+
+
+                                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                    <i class="fa fa-check-circle"></i>
+                                    <?php echo $msg; ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+
+
+                                <?php endif ?>
+
+                                <?php $error_msg = $this->session->flashdata('error_msg'); ?>
+                                <?php if (isset($error_msg)): ?>
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    <i class="fa fa-check-circle"></i>
+                                    <?php echo $error_msg; ?>
+                                    <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+
+                                <?php endif ?>
+
+
+
+
+
+                                <form method="post" action="<?php echo base_url('home/profile')?>">
+
+                                    <h4 class="box-title m-b-10 text-center">
+                                        Change Password
+                                    </h4>
+
+                                    <input type="hidden" name="store_id" value="<?php echo $storeData['id'];?>" />
+
+
+
+                                    <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>"
+                                        value="<?=$this->security->get_csrf_hash();?>" />
+
+
+                                    <div class="mb-3">
+                                        <label class="from-label">Current Password</label>
+
+                                        <input type="password" name="cur_password"
+                                            value="<?php echo $this->input->post('cur_password');?>"
+                                            class="form-control" />
+                                        <div class="form-text text-danger"><?php echo form_error('cur_password');?>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="from-label">New Password</label>
+
+                                        <input type="password" name="new_password"
+                                            value="<?php echo $this->input->post('new_password');?>"
+                                            class="form-control " />
+                                        <div class="form-text text-danger"><?php echo form_error('new_password');?>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="mb-3">
+                                        <label class="from-label">Confirm Password</label>
+
+                                        <input type="password" name="confirm_password"
+                                            value="<?php echo $this->input->post('confirm_password');?>"
+                                            class="form-control " />
+                                        <div class="form-text text-danger"><?php echo form_error('confirm_password');?>
+                                        </div>
+
+                                    </div>
+
+
+
+
+                                    <div class="mb-3">
+
+                                        <button class="btn btn-primary">Change Password</button>
+
+                                    </div>
+                                </form>
+
+
 
                             </div>
                         </div>
 
                     </div>
-                    <div class="col-md-4">
-                        <div class="card shadow-sm"
-                            onclick="window.open('https://orderattumbledry.in/partner/log/'+'<?php echo $this->session->userdata('code')."/".$this->session->userdata('psw');?>', '_blank');">
-                            <img src="<?php echo base_url('assets/images/scm.jpg')?>" class="card-img-top" />
 
-                            <div class="card-body">
-                                <h5 class="card-title">Procurement</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Order - Pay - Track<br /><br /></h6>
-
-                                <p class="card-text">A convenient online portal to order supplies, make online payments
-                                    and track shipment at a click of a button.</p>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="card shadow-sm" onclick="window.open('partner/dashboard', '_blank');">
-                            <img src="<?php echo base_url('assets/images/fss.jpg')?>" class="card-img-top" />
-
-                            <div class="card-body">
-
-
-                                <h5 class="card-title">Transactions</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">Manage Purchase/Royalty Invoices, Payments,
-                                    Account Statement</h6>
-
-                                <p class="card-text">Get full control of your financial transactions with tumbledry –
-                                    Access Purchase & Royalty invoices, Payments & Your Account statements</p>
-
-
-
-
-                            </div>
-
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -320,6 +345,30 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
     </script>
+
+
 </body>
+
+
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-danger d-none" id="error_msg" role="alert">
+                    Incorrect Storcode or Password
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Modal End-->
 
 </html>

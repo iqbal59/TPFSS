@@ -38,7 +38,7 @@
             $ci = get_instance();
             if ($ci->session->userdata('is_partner_login') != true) {
                 $ci->session->sess_destroy();
-                redirect(base_url('partner'));
+                redirect(base_url('home/login'));
             }
         }
     }
