@@ -87,7 +87,7 @@ class Partner extends CI_Controller
         $mail->Host     = 'smtp.office365.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'digitaloperations@tumbledry.in';
-        $mail->Password = 'Wuz17917';
+        $mail->Password = '3@Million';
         $mail->SMTPSecure = 'tls';
         $mail->Port     = 587;
 
