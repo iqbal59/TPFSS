@@ -69,7 +69,7 @@
 
                     <?php //print_r($storeData);?>
 
-                    <form class="" id="pay-form" action="https://orderattumbledry.in/sales/fsspaynow" method="post">
+                    <form class="" id="pay-form" action="<?php echo $payUrl;?>" method="post">
 
                         <input type="hidden" name="customer_id" value="<?php echo $storeData['store_crm_code'];?>" />
                         <input type="hidden" name="customer_mobile" value="" />
@@ -81,10 +81,12 @@
                         <h2 class="box-title m-b-10 text-center">
                             <img src="<?php echo base_url() ?>assets/images/logo-light-login.png" alt="loginpage" />
                         </h2>
-                        <h4 class="text-center"><?php  echo $storeData['store_crm_code']." ".$storeData['firm_name'];?>
+                        <h4 class="text-center">
+                            <?php  echo $storeData['store_crm_code']." ".$storeData['firm_name'];?>
                         </h4>
 
-                        <h5 class="text-center"><?php  echo $storeData['store_name'];?>
+                        <h5 class="text-center">
+                            <?php  echo $storeData['store_name'];?>
                         </h5>
 
                         <div class="container">
