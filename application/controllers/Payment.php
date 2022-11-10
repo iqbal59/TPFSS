@@ -24,11 +24,12 @@ class Payment extends CI_Controller
             $data = array();
             $data['storeData']=$this->accounts_model->calculate_balance_by_store(date('Y-m-d', strtotime('+1 day')), $customer_id);
             $data['page'] = 'Pay Partner';
-            if ($customer_id != 29) {
-                $data['payUrl']='https://orderattumbledry.in/sales/fsspaynow';
-            } else {
-                $data['payUrl']='https://orderattumbledry.in/sales/fsspayhdfcnow';
-            }
+            // if ($customer_id != 29) {
+            //     $data['payUrl']='https://orderattumbledry.in/sales/fsspaynow';
+            // } else {
+            //     $data['payUrl']='https://orderattumbledry.in/sales/fsspayhdfcnow';
+            // }
+            $data['payUrl']='https://orderattumbledry.in/sales/fsspayhdfcnow';
             $this->load->view('partner/pay', $data);
         }
     }
