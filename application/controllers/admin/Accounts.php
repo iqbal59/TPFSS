@@ -1,4 +1,5 @@
 <?php
+
 ini_set('max_execution_time', 0);
 ini_set('memory_limit', '2048M');
 class Accounts extends CI_Controller
@@ -226,7 +227,7 @@ class Accounts extends CI_Controller
         //$mail->addCC('Gaurav.Teotia@tumbledry.in');
         $mail->addCC('Tarun.arora@tumbledry.in');
         $mail->addBCC('Gaurav.Nigam@tumbledry.in');
-        $mail->addCC('manmohan.rawat@tumbledry.in');
+        // $mail->addCC('manmohan.rawat@tumbledry.in');
         // $mail->addCC('deepak.verma@tumbledry.in');
 
         //$mail->addBCC('iqbal.alam59@gmail.com');
