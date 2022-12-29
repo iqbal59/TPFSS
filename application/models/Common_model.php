@@ -20,10 +20,10 @@ class Common_model extends CI_Model
     group by order_no, store_name, taxable_amount, net_amount, service_code HAVING count(*) > 1";
         $query=$this->db->query($sql)->result_array();
         foreach ($query as $row) {
-            echo $linequery="update storesales set is_bill='1' where order_no='".$row['order_no']."' and store_name='".$row['store_name']."'";
-            // $this->db->query($linequery);
-            echo $linequery="delete from refundsales where order_no='".$row['order_no']."' and store_name='".$row['store_name']."'";
-            //$this->db->query($linequery);
+            $linequery="update storesales set is_bill='1' where order_no='".$row['order_no']."' and store_name='".$row['store_name']."'";
+            $this->db->query($linequery);
+            $linequery="delete from refundsales where order_no='".$row['order_no']."' and store_name='".$row['store_name']."'";
+            $this->db->query($linequery);
         }
     }
 
