@@ -1,4 +1,5 @@
 <?php
+
 class Import extends CI_Controller
 {
     public function __construct()
@@ -82,7 +83,7 @@ class Import extends CI_Controller
 
                             //print_r($data);
                         }
-                        $this->common_model->refundAdjust($s_from_date, $s_to_date);
+                        // $this->common_model->refundAdjust($s_from_date, $s_to_date);
                         $this->session->set_flashdata('msg', "data upload success");
                         redirect('admin/import/saleimportdata');
                         break;

@@ -1,10 +1,8 @@
 <?php
+
 class Common_model extends CI_Model
 {
-
-  
-  
-  /********Sale Data logic*******/
+    /********Sale Data logic*******/
     public function saleRefund($from_dt, $to_dt)
     {
         $sql="insert into refundsales(order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill, customer_id) select order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill, customer_id from storesales where date(order_date) between '".$from_dt."' and '".$to_dt."' and is_bill=1";
@@ -31,7 +29,6 @@ class Common_model extends CI_Model
 
 
     /******sale data end logic*********/
-  
     /***********GET MID NO */
 
     public function getMidNo($order_no, $mobile_no, $customer_id)
@@ -50,14 +47,14 @@ class Common_model extends CI_Model
         return $query['id'];
     }
 
-  
+
     /**************REPORTS***************/
 
-  
-  
-  
-  
-  
+
+
+
+
+
     public function getPaytmData($f_dt, $t_dt, $store_id=null)
     {
         $sql_search='';
@@ -103,7 +100,7 @@ class Common_model extends CI_Model
     }
 
 
-    
+
     public function getMbData()
     {
         $query = $this->db->query('SELECT  mi.id, mi.amount, mi.invoice_date, mi.invoice_no, s.store_code, mi.material_description FROM material_invoices mi LEFT join stores s on(mi.store_crm_code=s.store_crm_code) order by invoice_date DESC')->result_array();
@@ -149,21 +146,21 @@ class Common_model extends CI_Model
     public function add_import_sale($param)
     {
         // foreach($params as $key => $value){
-              
+
         $query="insert into storesales (order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, mobile_no, customer_id)values('$param[order_date]', '$param[order_no]', '$param[store_name]', '$param[taxable_amount]', '$param[net_amount]', '$param[service_code]', '$param[status]', '$param[mobile_no]', '$param[customer_id]') on duplicate key update 
             taxable_amount='".$param['taxable_amount']."', net_amount='".$param['net_amount']."', service_code='".$param['service_code']."', status='".$param['status']."', customer_id='".$param['customer_id']."'";
         $this->db->query($query);
         // }
     }
-    
-    
+
+
     public function matchPaytmWithBank()
     {
         $query="select paytmdata.amount, utr_no, (commission + gst) as fc, (paytmdata.amount-commission-gst) as ba, bank_paytm.amount as bta  from (SELECT sum(paytm.amount) as amount, utr_no, sum(commission) as commission, sum(gst) as gst  FROM `paytm` WHERE 1 and paytm.is_reconcile=0 group by utr_no) as paytmdata left join bank_paytm on (bank_paytm.ref_no=paytmdata.utr_no)";
 
         return $this->db->query($query)->result_array();
     }
-    
+
     public function paytmReconcile($utr_no)
     {
         $query="update paytm set is_reconcile=1 where utr_no='$utr_no'";
@@ -175,7 +172,7 @@ class Common_model extends CI_Model
     {
         return $this->db->get('bharatpewithbank')->result_array();
     }
-    
+
     public function bharatpeReconcile($utr_no)
     {
         $query="update bharatpe set is_reconcile=1 where utr_no='$utr_no'";
@@ -187,7 +184,7 @@ class Common_model extends CI_Model
         $query="update bharatpe set is_bill=1 where id in($ids)";
         $this->db->query($query);
     }
-    
+
     public function paytmbill($ids)
     {
         $query="update paytm set is_bill=1 where id in($ids)";
@@ -195,13 +192,13 @@ class Common_model extends CI_Model
     }
 
 
-    
+
     public function get_all_count_by_table($table)
     {
         $this->db->from($table);
         return $this->db->count_all_results();
     }
-      
+
     public function get_all_by_table($table, $params = array())
     {
         $this->db->order_by('id', 'desc');
@@ -210,8 +207,8 @@ class Common_model extends CI_Model
         }
         return $this->db->get($table)->result_array();
     }
-     
-    
+
+
     public function get_material_by_id($id)
     {
         return $this->db->get_where('material_invoices', array('id'=>$id))->row_array();
@@ -441,8 +438,7 @@ class Common_model extends CI_Model
     //-- image upload function with resize option
     public function upload_image($max_size)
     {
-            
-            //-- set upload path
+        //-- set upload path
         $config['upload_path']  = "./assets/images/";
         $config['allowed_types']= 'gif|jpg|png|jpeg';
         $config['max_size']     = '92000';
@@ -483,8 +479,8 @@ class Common_model extends CI_Model
             }
 
             //// Making THUMBNAIL ///////
-            $img['width']  = $limit_use > $limit_thumb ?  $data['image_width'] * $percent_thumb : $data['image_width'] ;
-            $img['height'] = $limit_use > $limit_thumb ?  $data['image_height'] * $percent_thumb : $data['image_height'] ;
+            $img['width']  = $limit_use > $limit_thumb ? $data['image_width'] * $percent_thumb : $data['image_width'] ;
+            $img['height'] = $limit_use > $limit_thumb ? $data['image_height'] * $percent_thumb : $data['image_height'] ;
 
             // Configuration Of Image Manipulation :: Dynamic
             $img['thumb_marker'] = '_thumb-'.floor($img['width']).'x'.floor($img['height']) ;
@@ -499,8 +495,8 @@ class Common_model extends CI_Model
             $this->image_lib->clear() ;
 
             ////// Making MEDIUM /////////////
-            $img['width']   = $limit_use > $limit_medium ?  $data['image_width'] * $percent_medium : $data['image_width'] ;
-            $img['height']  = $limit_use > $limit_medium ?  $data['image_height'] * $percent_medium : $data['image_height'] ;
+            $img['width']   = $limit_use > $limit_medium ? $data['image_width'] * $percent_medium : $data['image_width'] ;
+            $img['height']  = $limit_use > $limit_medium ? $data['image_height'] * $percent_medium : $data['image_height'] ;
 
             // Configuration Of Image Manipulation :: Dynamic
             $img['thumb_marker'] = '_medium-'.floor($img['width']).'x'.floor($img['height']) ;
