@@ -102,6 +102,7 @@
                                     <th>Paytm Mid3</th>
                                     <th>Bharatpay Id</th>
                                     <th>Store Address</th>
+                                    <th>Pin Code</th>
                                     <th>Launch Date</th>
                                     <th>Pan No.</th>
                                     <th>Opening Balance</th>
@@ -129,6 +130,7 @@
                                     <td><?php echo $s['paytm_mid3']; ?></td>
                                     <td><?php echo $s['bharatpay_id']; ?></td>
                                     <td><?php echo $s['store_address']; ?></td>
+                                    <td><?php echo $s['pin_code']; ?></td>
                                     <td><?php echo $s['launch_date']; ?></td>
                                     <td><?php echo $s['pan_no']; ?></td>
                                     <td><?php echo $s['opening_balance']; ?></td>

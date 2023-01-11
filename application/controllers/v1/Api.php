@@ -30,8 +30,8 @@ public function invoices_get()
         $invoiceItem['address3']=$item->store_city;
         $invoiceItem['address4']="";
         $invoiceItem['state']=$item->store_state;
-        $invoiceItem['state_code']=$state->gst_st_code; //State Code
-        $invoiceItem['bill_to_pin_code']='';
+        $invoiceItem['state_code']=$item->gst_st_code; //State Code
+        $invoiceItem['bill_to_pin_code']=$item->pin_code;
         $invoiceItem['gst_no']=$item->gstin_no;
         $invoiceItem['ship_to_party_name']=$item->firm_name;
         $invoiceItem['ship_to_address1']=$item->store_address;
@@ -39,14 +39,14 @@ public function invoices_get()
         $invoiceItem['ship_to_address3']=$item->store_city;
         $invoiceItem['ship_to_address4']="";
         $invoiceItem['ship_to_state']=$item->store_state;
-        $invoiceItem['ship_to_state_code']=$state->gst_st_code; //State Code
-        $invoiceItem['ship_to_pin_code']='';
+        $invoiceItem['ship_to_state_code']=$item->gst_st_code; //State Code
+        $invoiceItem['ship_to_pin_code']=$item->pin_code;;
         $invoiceItem['ship_to_gst_no']=$item->gstin_no;
         $invoiceItem['transporter_name']=""; 
         $invoiceItem['vehicle_no']="";
         $invoiceItem['country']='India';
         $invoiceItem['pan_no']=$item->pan_no;
-        $invoiceItem['seller_pin_code']='';
+        $invoiceItem['seller_pin_code']='201306';
         $invoiceItem['email_id']=$item->email_id;
         $invoiceItem['reg_type']=$item->gstin_no != ''?"Regular":"Non Regsitered";
         $invoiceItem['contact_person']='';
