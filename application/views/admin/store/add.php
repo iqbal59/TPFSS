@@ -188,6 +188,14 @@
 
 
                         <div class="form-group col-md-4">
+                            <label>Pincode</label>
+                            <input type="text" name="pin_code" class="form-control form-control-sm"
+                                value="<?php echo $this->input->post('pin_code'); ?>" />
+                            <span class="text-danger"><?php echo form_error('pin_code');?></span>
+                        </div>
+
+
+                        <div class="form-group col-md-4">
                             <label>Status</label>
 
                             <select name="is_active" class="form-control form-control-sm">

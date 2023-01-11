@@ -49,6 +49,7 @@ class Store extends CI_Controller
         $this->form_validation->set_rules('paytm_mid1', 'Paytm MID1', 'is_unique[stores.paytm_mid1]');
         $this->form_validation->set_rules('paytm_mid2', 'Paytm MID2', 'is_unique[stores.paytm_mid2]');
         $this->form_validation->set_rules('paytm_mid3', 'Paytm MID3', 'is_unique[stores.paytm_mid3]');
+        $this->form_validation->set_rules('pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
         // $this->form_validation->set_rules('email_id','Email ID','required|valid_email|is_unique[stores.email_id]');
     
         if ($this->form_validation->run()) {
@@ -73,6 +74,7 @@ class Store extends CI_Controller
                 'is_active' => $this->input->post('is_active'),
                 'gst_st_code' => $this->input->post('gst_st_code'),
                 'discount' => $this->input->post('discount'),
+                'pin_code' => $this->input->post('pin_code'),
             );
             
             $store_id = $this->Store_model->add_store($params);
@@ -104,6 +106,7 @@ class Store extends CI_Controller
             $this->form_validation->set_rules('paytm_mid2', 'Paytm MID2', 'edit_unique[stores.paytm_mid2.'.$data['store']['id'].']');
             $this->form_validation->set_rules('paytm_mid3', 'Paytm MID3', 'edit_unique[stores.paytm_mid3.'.$data['store']['id'].']');
             //$this->form_validation->set_rules('email_id','Email ID','required|valid_email|edit_unique[stores.email_id.'.$data['store']['id'].']');
+            $this->form_validation->set_rules('pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
     
             if ($this->form_validation->run()) {
                 $params = array(
@@ -127,6 +130,7 @@ class Store extends CI_Controller
                     'is_active' => $this->input->post('is_active'),
                     'gst_st_code' => $this->input->post('gst_st_code'),
                     'discount' => $this->input->post('discount'),
+                    'pin_code' => $this->input->post('pin_code'),
                 );
 
                 $this->Store_model->update_store($id, $params);
