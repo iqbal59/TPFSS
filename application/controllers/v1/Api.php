@@ -31,7 +31,7 @@ public function invoices_get()
         $invoiceItem['address4']="";
         $invoiceItem['state']=$item->store_state;
         $invoiceItem['state_code']=$item->gst_st_code; //State Code
-        $invoiceItem['bill_to_pin_code']=$item->pin_code;
+        $invoiceItem['pin_code']=$item->pin_code;
         $invoiceItem['gst_no']=$item->gstin_no;
         $invoiceItem['ship_to_party_name']=$item->firm_name;
         $invoiceItem['ship_to_address1']=$item->store_address;
