@@ -302,6 +302,28 @@
 
                         </div>
                     </div>
+
+                    <div class="col-md-4">
+                        <div class="card shadow-sm" onclick="window.open('partner/poject_charter', '_blank');">
+                            <img src="<?php echo base_url('assets/images/project_small.jpg')?>" class="card-img-top" />
+
+                            <div class="card-body">
+
+
+                                <h5 class="card-title">Project Tracker</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">End-to-end project management tool</h6>
+
+                                <p class="card-text">There are 250 distinct activities that need to be completed to
+                                    launch your tumbledry store. Track the live status of all these activities here.</p>
+
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

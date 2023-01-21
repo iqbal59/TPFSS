@@ -199,8 +199,11 @@ class Common_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public function get_all_by_table($table, $params = array())
+    public function get_all_by_table($table, $params = array(), $order_by=array())
     {
+        if($order_by)
+        $this->db->order_by($order_by['field'], $order_by['order']);
+        else
         $this->db->order_by('id', 'desc');
         if (isset($params) && !empty($params)) {
             $this->db->limit($params['limit'], $params['offset']);
