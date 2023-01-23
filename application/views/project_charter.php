@@ -437,7 +437,7 @@
                                             <label>Activity Header</label>
                                             <select name="sp_table_filter" id="sp_table_filter"
                                                 class="form-control select2">
-                                                <option value=''>--Select Header--</option>
+                                                <option value=''>All</option>
                                                 <?php 
                                             foreach($activities_header2 as $ah){
                                             ?>
@@ -499,7 +499,7 @@
                                             <label>Activity Header</label>
                                             <select name="prc_table_filter" id="prc_table_filter"
                                                 class="form-control select2">
-                                                <option value=''>--Select Header--</option>
+                                                <option value=''>All</option>
                                                 <?php 
                                             foreach($activities_header2 as $ah){
                                             ?>
@@ -561,7 +561,7 @@
                                             <label>Activity Header</label>
                                             <select name="cc_table_filter" id="cc_table_filter"
                                                 class="form-control select2">
-                                                <option value=''>--Select Header--</option>
+                                                <option value=''>All</option>
                                                 <?php 
                                             foreach($activities_header1 as $ah){
                                             ?>
