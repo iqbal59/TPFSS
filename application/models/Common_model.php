@@ -212,6 +212,13 @@ class Common_model extends CI_Model
     }
 
 
+    public function get_activity_header()
+    {
+        
+        return $this->db->query("select * from activities group by header")->result();
+    }
+
+
     public function get_material_by_id($id)
     {
         return $this->db->get_where('material_invoices', array('id'=>$id))->row_array();

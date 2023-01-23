@@ -432,10 +432,18 @@
                             <div class="tab-content" id="nav-tabContent">
                                 <div class="tab-pane fade" id="sp" role="tabpanel">
                                     <br />
-                                    <!-- <div class="row">
+                                    <div class="row">
                                         <div class="col-lg-6">
-                                            <input type="text" id="sp_table_filter" class="form-control"
-                                                placeholder="Search header">
+                                            <select name="sp_table_filter" id="sp_table_filter"
+                                                class="form-control select2">
+                                                <option value=''>--Select Header--</option>
+                                                <?php 
+                                            foreach($activities_header as $ah){
+                                            ?>
+                                                <option value='<?php echo $ah->header;?>'><?php echo $ah->header;?>
+                                                </option>
+                                                <?php }?>
+                                            </select>
                                         </div>
 
                                         <div class="col-lg-6">
@@ -447,7 +455,7 @@
 
                                             </div>
                                         </div>
-                                    </div> -->
+                                    </div>
                                     <div class="table-responsive">
                                         <table class="table  table-light table-striped" id="sp_table">
                                             <thead>
@@ -484,6 +492,30 @@
                                 </div>
                                 <div class="tab-pane fade" id="prc" role="tabpanel">
                                     <br />
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <select name="prc_table_filter" id="prc_table_filter"
+                                                class="form-control select2">
+                                                <option value=''>--Select Header--</option>
+                                                <?php 
+                                            foreach($activities_header as $ah){
+                                            ?>
+                                                <option value='<?php echo $ah->header;?>'><?php echo $ah->header;?>
+                                                </option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+
+                                                <input type="date" name="prc_launch_dt" id="prc_launch_dt"
+                                                    class="form-control" style="width:60%"
+                                                    placeholder="Enter Project Launch Date">
+
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="table-responsive">
                                         <table class="table table-light table-striped" id="prc_table">
                                             <thead>
@@ -520,6 +552,30 @@
                                 </div>
                                 <div class="tab-pane fade" id="cc" role="tabpanel">
                                     <br />
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <select name="cc_table_filter" id="cc_table_filter"
+                                                class="form-control select2">
+                                                <option value=''>--Select Header--</option>
+                                                <?php 
+                                            foreach($activities_header as $ah){
+                                            ?>
+                                                <option value='<?php echo $ah->header;?>'><?php echo $ah->header;?>
+                                                </option>
+                                                <?php }?>
+                                            </select>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="input-group">
+
+                                                <input type="date" name="cc_launch_dt" id="cc_launch_dt"
+                                                    class="form-control" style="width:60%"
+                                                    placeholder="Enter Project Launch Date">
+
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="table-responsive">
                                         <table class="table table-light table-striped" id="cc_table">
                                             <thead>
@@ -587,19 +643,41 @@
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="//cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
     <script type="text/javascript">
+    function addDays(date, days) {
+
+        result = new Date(date);
+        result.setDate(result.getDate() + parseInt(days));
+        return result;
+    }
     $(document).ready(function() {
 
         var sp_table = $('#sp_table').DataTable({
             responsive: true,
             paging: false, // works with or without paging
             columnDefs: [{
+                render: function(data, type, row) {
+                    launch_dt = $('#sp_launch_dt').val();
+                    console.log(launch_dt);
+                    if (launch_dt && launch_dt != '') {
+                        final_dt = addDays(launch_dt, row[3]);
+                        return final_dt.getDate() + "-" + (final_dt
+                                .getMonth() + 1) +
+                            "-" +
+                            final_dt.getFullYear();
+                    }
+
+                    return "";
+                },
+                targets: 4,
+            }, {
                 "targets": [0, 2, 3, 4, 5],
                 "searchable": false
             }],
             order: [
                 [1, 'asc']
             ],
-            //dom: 'lrtip',
+            dom: 'lrtip',
+
 
         });
         new $.fn.dataTable.FixedHeader(sp_table);
@@ -614,22 +692,18 @@
         }).draw();
 
 
-        // $('#sp_table_filter').keyup(function() {
-        //     sp_table.search($(this).val())
-        //         .draw(); // this  is for customized searchbox with datatable search feature.
-        // });
-
-        $('#sp_launch_dt').change(function() {
-            //alert($(this).val());
-
-            // sp_table.column(4, {
-            //     search: 'applied',
-            //     order: 'applied'
-            // }).nodes().each(function(cell, i) {
-            //     cell.innerHTML = sp_launch_date;
-            // }).draw();
+        $('#sp_table_filter').change(function() {
+            sp_table.search($(this).val())
+                .draw(); // this  is for customized searchbox with datatable search feature.
         });
 
+        $('#sp_launch_dt').change(function() {
+            console.log($('#sp_launch_dt').val());
+            sp_table.rows().invalidate('Yes');
+        });
+
+
+        //End SP Table
 
 
 
@@ -637,14 +711,30 @@
             responsive: true,
             paging: false, // works with or without paging
             columnDefs: [{
+                render: function(data, type, row) {
+                    launch_dt = $('#prc_launch_dt').val();
+                    console.log(launch_dt);
+                    if (launch_dt && launch_dt != '') {
+                        final_dt = addDays(launch_dt, row[3]);
+                        return final_dt.getDate() + "-" + (final_dt
+                                .getMonth() + 1) +
+                            "-" +
+                            final_dt.getFullYear();
+                    }
+
+                    return "";
+                },
+                targets: 4,
+            }, {
                 "targets": [0, 2, 3, 4, 5],
                 "searchable": false
             }],
             order: [
                 [1, 'asc']
             ],
-
+            dom: 'lrtip',
         });
+
         new $.fn.dataTable.FixedHeader(prc_table);
 
         prc_table.on('order.dt search.dt', function() {
@@ -656,17 +746,47 @@
             });
         }).draw();
 
+
+        $('#prc_table_filter').change(function() {
+            prc_table.search($(this).val())
+                .draw(); // this  is for customized searchbox with datatable search feature.
+        });
+
+        $('#prc_launch_dt').change(function() {
+            console.log($('#prc_launch_dt').val());
+            prc_table.rows().invalidate('Yes');
+        });
+
+        //end prc table
+
+
+
         var cc_table = $('#cc_table').DataTable({
             responsive: true,
             paging: false, // works with or without paging
             columnDefs: [{
+                render: function(data, type, row) {
+                    launch_dt = $('#cc_launch_dt').val();
+                    console.log(launch_dt);
+                    if (launch_dt && launch_dt != '') {
+                        final_dt = addDays(launch_dt, row[3]);
+                        return final_dt.getDate() + "-" + (final_dt
+                                .getMonth() + 1) +
+                            "-" +
+                            final_dt.getFullYear();
+                    }
+
+                    return "";
+                },
+                targets: 4,
+            }, {
                 "targets": [0, 2, 3, 4, 5],
                 "searchable": false
             }],
             order: [
                 [1, 'asc']
             ],
-
+            dom: 'lrtip',
         });
         new $.fn.dataTable.FixedHeader(cc_table);
 
@@ -679,43 +799,16 @@
             });
         }).draw();
 
+        $('#cc_table_filter').change(function() {
+            cc_table.search($(this).val())
+                .draw(); // this  is for customized searchbox with datatable search feature.
+        });
 
-        // $('#sp_table').DataTable({
-        //     responsive: true,
-        //     fixedHeader: {
-        //         header: true
-        //     },
-        //     paging: false,
-        //     columnDefs: [{
-        //         "targets": [0, 2, 3, 4, 5],
-        //         "searchable": false
-        //     }],
-        //     order: [
-        //         [1, 'asc']
-        //     ]
-        // });
-        // $('#prc_table').DataTable({
-        //     fixedHeader: {
-        //         header: true
-        //     },
-        //     paging: false,
-        //     columnDefs: [{
-        //         "targets": [0, 2, 3, 4, 5],
-        //         "searchable": false
-        //     }]
-        // });
-        // $('#cc_table').DataTable({
-        //     fixedHeader: {
-        //         header: true
-        //     },
-        //     paging: false,
-        //     columnDefs: [{
-        //         "targets": [0, 2, 3, 4, 5],
-        //         "searchable": false
-        //     }]
-        // });
+        $('#cc_launch_dt').change(function() {
+            console.log($('#cc_launch_dt').val());
+            cc_table.rows().invalidate('Yes');
+        });
 
-        // alert('sfsf');
     });
     </script>
 </body>
