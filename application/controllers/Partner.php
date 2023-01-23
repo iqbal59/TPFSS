@@ -519,7 +519,8 @@ class Partner extends CI_Controller
         $data = array();
         $data['page_title'] = 'Project Charter';
         $data['activities'] = $this->common_model->get_all_by_table('activities', '', array('field'=>'header', 'order_by'=>'asc'));
-        $data['activities_header'] = $this->common_model->get_activity_header();
+        $data['activities_header1'] = $this->common_model->get_activity_header(1);
+        $data['activities_header2'] = $this->common_model->get_activity_header(2);
         //$data['main_content'] = $this->load->view('partner/home', $data, true);
         $this->load->view('project_charter', $data);
     }

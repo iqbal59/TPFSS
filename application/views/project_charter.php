@@ -434,11 +434,12 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-lg-6">
+                                            <label>Activity Header</label>
                                             <select name="sp_table_filter" id="sp_table_filter"
                                                 class="form-control select2">
                                                 <option value=''>--Select Header--</option>
                                                 <?php 
-                                            foreach($activities_header as $ah){
+                                            foreach($activities_header2 as $ah){
                                             ?>
                                                 <option value='<?php echo $ah->header;?>'><?php echo $ah->header;?>
                                                 </option>
@@ -447,6 +448,7 @@
                                         </div>
 
                                         <div class="col-lg-6">
+                                            <label>Project Start Date</label>
                                             <div class="input-group">
 
                                                 <input type="date" name="sp_launch_dt" id="sp_launch_dt"
@@ -494,11 +496,12 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-lg-6">
+                                            <label>Activity Header</label>
                                             <select name="prc_table_filter" id="prc_table_filter"
                                                 class="form-control select2">
                                                 <option value=''>--Select Header--</option>
                                                 <?php 
-                                            foreach($activities_header as $ah){
+                                            foreach($activities_header2 as $ah){
                                             ?>
                                                 <option value='<?php echo $ah->header;?>'><?php echo $ah->header;?>
                                                 </option>
@@ -507,6 +510,7 @@
                                         </div>
 
                                         <div class="col-lg-6">
+                                            <label>Project Start Date</label>
                                             <div class="input-group">
 
                                                 <input type="date" name="prc_launch_dt" id="prc_launch_dt"
@@ -554,11 +558,12 @@
                                     <br />
                                     <div class="row">
                                         <div class="col-lg-6">
+                                            <label>Activity Header</label>
                                             <select name="cc_table_filter" id="cc_table_filter"
                                                 class="form-control select2">
                                                 <option value=''>--Select Header--</option>
                                                 <?php 
-                                            foreach($activities_header as $ah){
+                                            foreach($activities_header1 as $ah){
                                             ?>
                                                 <option value='<?php echo $ah->header;?>'><?php echo $ah->header;?>
                                                 </option>
@@ -567,6 +572,7 @@
                                         </div>
 
                                         <div class="col-lg-6">
+                                            <label>Project Start Date</label>
                                             <div class="input-group">
 
                                                 <input type="date" name="cc_launch_dt" id="cc_launch_dt"
@@ -594,7 +600,7 @@
                                                 <?php 
                                             $i=1;
                                             foreach ($activities as $activitie){
-                                                if($activitie['project_type']!= 1)
+                                                if($activitie['project_type'] != 1)
                                                 continue;
                                                 ?>
                                                 <tr>

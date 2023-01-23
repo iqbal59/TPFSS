@@ -212,10 +212,10 @@ class Common_model extends CI_Model
     }
 
 
-    public function get_activity_header()
+    public function get_activity_header($project_type)
     {
         
-        return $this->db->query("select * from activities group by header")->result();
+        return $this->db->query("select * from activities where project_type='".$project_type."' group by header")->result();
     }
 
 
