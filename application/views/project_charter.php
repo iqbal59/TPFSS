@@ -680,7 +680,7 @@
                 "searchable": false
             }],
             order: [
-                [1, 'asc']
+                [3, 'asc']
             ],
             dom: 'lrtip',
 
@@ -736,7 +736,7 @@
                 "searchable": false
             }],
             order: [
-                [1, 'asc']
+                [3, 'asc']
             ],
             dom: 'lrtip',
         });
@@ -790,7 +790,7 @@
                 "searchable": false
             }],
             order: [
-                [1, 'asc']
+                [3, 'asc']
             ],
             dom: 'lrtip',
         });
