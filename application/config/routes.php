@@ -52,3 +52,38 @@ defined('BASEPATH') or exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = false;
+
+//Washing User
+$route['knowledge-base/washing-article']            = 'support/washing_article';
+$route['knowledge-base/washing-article/(:any)']     = 'support/washing_article/$1';
+
+//knowledge base
+$route['knowledge-base']                            = 'support';
+$route['knowledge-base/article/(:any)']             = 'support/article/$1';
+$route['knowledge-base/(:any)']                     = 'support/kb_category/$1';
+$route['knowledge-base/(:any)/(:num)']              = 'support/kb_category/$1';
+$route['knowledge-base/(:any)/(:any)']              = 'support/kb_category/$1/$2';
+$route['knowledge-base/(:any)/(:any)/(:num)']       = 'support/kb_category/$1/$2';
+$route['search']                                    = 'support/search';
+$route['search/(:num)']                             = 'support/search';
+$route['faqs']                                      = 'support/faqs';
+
+//knowledge base admin
+$route['admin/knowledge_base/login']                = 'admin/kbm/dashboard/login';
+$route['admin/knowledge_base/logout']                = 'admin/kbm/dashboard/logout';
+$route['admin/knowledge_base/dashboard']            = 'admin/kbm/dashboard/admin';
+$route['admin/knowledge_base/categories']           = 'admin/kbm/support/articles_categories';
+$route['admin/knowledge_base/subcategories']        = 'admin/kbm/support/articles_categories/sub';
+$route['admin/knowledge_base/articles']             = 'admin/kbm/support/articles';
+$route['admin/knowledge_base/articles/list/(:num)'] = 'admin/kbm/support/articles/list/$1';
+$route['admin/knowledge_base/articles/list']        = 'admin/kbm/support/articles/list/1';
+$route['admin/knowledge_base/new_article']          = 'admin/kbm/support/articles/new';
+$route['admin/knowledge_base/edit_article/(:num)']  = 'admin/kbm/support/articles/edit/$1';
+
+
+//washing
+$route['admin/knowledge_base/washing']             = 'admin/kbm/washing/articles_washing';
+$route['admin/knowledge_base/washing/list/(:num)'] = 'admin/kbm/washing/articles_washing/list/$1';
+$route['admin/knowledge_base/washing/list']        = 'admin/kbm/washing/articles_washing/list/1';
+$route['admin/knowledge_base/new_washing']          = 'admin/kbm/washing/articles_washing/new';
+$route['admin/knowledge_base/edit_washing/(:num)']  = 'admin/kbm/washing/articles_washing/edit/$1';

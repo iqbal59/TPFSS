@@ -84,3 +84,86 @@ defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 defined('RECORDS_PER_PAGE')     or   define('RECORDS_PER_PAGE', 10); 
+
+
+
+define( 'ADMIN_ACTIONS', 'actions/admin/' );
+define( 'USER_ACTIONS', 'actions/user/' );
+define( 'USER_PUBLIC_PAGES', ['login', 'register', 'forgot_password', 'change_password', 'logout'] );
+
+// @version 1.1
+define( 'ALLOWED_IMG_EXT_ARRAY', ['gif', 'jpg', 'jpeg', 'png', 'bmp'] );
+define( 'ALLOWED_IMG_EXT', 'gif|jpg|jpeg|png|bmp' );
+define( 'ALLOWED_IMG_EXT_HTML', 'image/gif,image/jpg,image/jpeg,image/png,image/bmp' );
+
+define( 'ALLOWED_ATTACHMENTS_EXT', 'csv|gif|jpg|jpeg|png|bmp|pdf|xls|xlsx' );
+define(
+  'ALLOWED_ATTACHMENTS_EXT_HTML',
+  '.csv,image/jpeg,image/jpg,image/png,image/bmp,image/gif,application/pdf,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+);
+
+// In Kilobytes e.g. 5 MB = 5 * 1024
+define( 'MAX_ALLOWED_IMG_SIZE', 5120 );
+define( 'MAX_ALLOWED_ATTACHMENT_SIZE', 10240 );
+
+define( 'DEFAULT_DB_COLUMN', 'id' );
+define( 'Z_DESK_VERSION', '1.0.0' );
+define( 'PER_PAGE_RESULTS_PANEL', 20 );
+define( 'PER_PAGE_RESULTS', 10 );
+
+define( 'DEFAULT_USER_ROLE_ID', 3 );
+define( 'STATIC_DATE_FORMAT', 'Y-m-d' );
+define( 'DB_BACKUP_TABLES', ['tickets', 'tickets_replies', 'tickets_history'] ); // Specific database tables to backup
+
+// Cookies:
+define( 'LANG_COOKIE', 'z_site_language' );
+define( 'USER_TOKEN', 'z_user_token' );
+define( 'SIDEBAR_COOKIE', 'z_sidebar_collapsed' );
+
+// @version 1.4
+define( 'CHAT_COOKIE', 'z_live_chat' );
+
+// @version 1.6
+define( 'MAX_EMAIL_RESEND_LIMIT', 3 );
+
+define( 'MODALS_SUPPORTED_PARENT_AREAS', ['admin', 'user'] );
+define( 'NO_PERMISSION_MSG', '403 - You do not have permission of this area.' );
+define( 'DEFAULT_USER_IMG', 'default.png' );
+
+/**
+ * Slugs to handle the parent and child menus of sidebar. Supports only parent and child.
+ * Used to open and activate the parent dropdown menus.
+ *
+ * Related functions are declared in "helpers/z_pages_helper.php".
+ */
+define( 'PANEL_SLUGS', [
+    'admin' => [
+        'tickets'        => ['opened', 'closed', 'assigned', 'all', 'ticket', 'create_ticket', 'history'],
+        'chats'          => ['all', 'chat', 'assigned', 'active', 'ended'],
+        'knowledge_base' => ['categories', 'subcategories', 'articles', 'new_article', 'edit_article', 'washing', 'new_washing', 'edit_washing'],
+        'users'          => ['new_user', 'invites', 'manage', 'edit_user', 'sessions', 'sent_emails', 'tickets', 'chats'],
+        'settings'       => ['general', 'support', 'users', 'roles', 'permissions', 'apis', 'email']
+    ]
+]);
+
+/**
+ * Use this if you want to add the new language(s). Once a language will be added, that will
+ * be shown in the available languages list ( e.g. language switcher ). You will be required
+ * to add the language related translations in the "language/*" directory.
+ *
+ * NOTE: Once you add a new language, don't forget to add the related email templates.
+ */
+define( 'AVAILABLE_LANGUAGES',
+[
+    'english' => ['display_label' => 'English']
+]);
+
+define( 'SITE_THEMES',
+[
+    'default' => ['display_label' => 'Default']
+]);
+
+define( 'BACKUPS_DIRECTORY', 'assets/backups/' );
+define( 'IMG_UPLOADS_DIR', 'uploads/images/' );
+define( 'ADMIN_LTE_ASSETS', 'assets/%s/panel/admin_lte/' );
+define( 'ASSETS_PATH', 'assets/%s/' );

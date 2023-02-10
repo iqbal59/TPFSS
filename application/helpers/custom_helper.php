@@ -15,6 +15,18 @@
     }
 
 
+    if (!function_exists('check_login_kuser')) {
+        function check_login_kuser()
+        {
+            $ci = get_instance();
+            if ($ci->session->userdata('is_klogin') != true) {
+                $ci->session->sess_destroy();
+                redirect(base_url('admin/knowledge_base/login'));
+            }
+        }
+    }
+
+
     if (!function_exists('months')) {
         function months($selctedMonth='')
         {
