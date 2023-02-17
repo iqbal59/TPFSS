@@ -214,6 +214,8 @@ class Washing extends MY_Controller {
                 'video_url' => do_secure( post( 'video_url' ) )
                 
             ];
+
+            print_r($data);
             
             //$result = array_search( $data['category_id'], array_column( get_articles_categories( 'all' ), 'id' ) );
                 
