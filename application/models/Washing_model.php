@@ -128,10 +128,8 @@ class Washing_model extends MY_Model {
 
     public function get_article_wahsing_chemical( $id )
     {
-        $data['where']['washing_id'] = $id;
-        $data['table'] = 'tbl_washing_chemicals';
-        
-        return $this->get( $data );
+         $sql="select * from tbl_chemicals where 1 and id in ($id)";
+        return $this->db->query($sql)->result();
     }
 
 
@@ -145,15 +143,21 @@ class Washing_model extends MY_Model {
        
     }
 
-    public function getPublicWashingArticle($garment,  $fabric, $embellishment='', $color=''){
-         $sql="SELECT * FROM `articles_washing` where 1 and FIND_IN_SET($garment, garment_id) and FIND_IN_SET($fabric, fabric_id) and FIND_IN_SET($color, color_id) and embellishment_id=".$embellishment;
+    public function getAllChemicals($condition=""){
+        $sql="select id, concat(dosing_type, '-', chemical_name,'-', dosage, '-', wash_load, '-', total_dose) as chemical_name from tbl_chemicals where 1 ".$condition;
+        return $this->db->query($sql)->result();
+       
+    }
+
+    public function getPublicWashingArticle($garment,  $fabric, $embellishment='', $color='', $machine_id=''){
+         $sql="SELECT aw.* FROM `articles_washing` aw join article_washing_machine awm on (aw.id=awm.washing_article_id) where 1 and FIND_IN_SET($garment, garment_id) and FIND_IN_SET($fabric, fabric_id) and FIND_IN_SET($color, color_id) and embellishment_id=".$embellishment ." and machine_id='".$machine_id."'";
         return $this->db->query($sql)->row();
        
     }
 
     public function getPublicWashingProgram($machine_id,  $washing_article_id){
         
-            $sql="SELECT wash_program_id, wp.wash_program_name, dp.dry_program_name, dp.dry_time, dry_program_id FROM `article_washing_machine` awm join tbl_wash_program wp on (awm.wash_program_id=wp.id) join tbl_drying_program dp on (awm.dry_program_id=dp.id)  where awm.machine_id= '".$machine_id."' and washing_article_id='".$washing_article_id."'";
+           $sql="SELECT wash_program_id, wp.wash_program_name, dp.dry_program_name, dp.dry_time, dry_program_id, wash_chemical_ids FROM `article_washing_machine` awm join tbl_wash_program wp on (awm.wash_program_id=wp.id) join tbl_drying_program dp on (awm.dry_program_id=dp.id)  where awm.machine_id= '".$machine_id."' and washing_article_id='".$washing_article_id."'";
          
           return $this->db->query($sql)->row();
          

@@ -13,10 +13,16 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-xl-9">
+                <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
                             <h3 class="card-title">New Washing and Drying</h3>
+
+                            <div class="card-tools ml-auto">
+                                <button type="submit" class="btn btn-primary btn-block text-sm">
+                                    <i class="fas fa-check-circle mr-2"></i> <?php echo lang( 'submit' ); ?>
+                                </button>
+                            </div>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
@@ -95,7 +101,7 @@
                                     <label for="color">Color</label>
                                     <select class="form-control select2 search-disabled" multiple="multiple" id="color"
                                         data-placeholder="Select color" name="color[]">
-                                        <option value="0">Any</option>
+                                        <option value="0" <?php echo "selected"; ?>>Any</option>
 
                                         <?php 
                                 
@@ -158,6 +164,7 @@
                                             <th><input class='check_all' type='checkbox' onclick="select_all()" /></th>
                                             <th>Machine</th>
                                             <th>Wash Program</th>
+                                            <th>Wash Chemical</th>
                                             <th>Dry Program</th>
                                         </tr>
                                         <tr>
@@ -191,6 +198,16 @@
                                                 </select>
 
                                             </td>
+
+                                            <td>
+                                                <select class="form-control select2 search-disabled"
+                                                    data-placeholder="Select Wash Chemical" id="wash_chemical_0"
+                                                    name="wash[0][wash_chemical_ids][]" multiple="multiple">
+                                                    <option value="">--Select--</option>
+
+                                                </select>
+                                            </td>
+
                                             <td>
                                                 <select class="form-control select2 search-disabled"
                                                     data-placeholder="Select Dry Program" id="dry_program_0"
@@ -222,6 +239,10 @@
                                     id="drying_description"></textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="meta-keywords">Video URL</label>
+                                <input type="text" class="form-control" id="video_url" name="video_url" value="">
+                            </div>
 
                             <!-- /.form-group -->
                             <div class="form-group">
@@ -238,40 +259,7 @@
                     <!-- /.card -->
                 </div>
                 <!-- /.col -->
-                <div class="col-xl-3">
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><?php echo lang( 'action' ); ?></h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <button type="submit" class="btn btn-primary btn-block text-sm">
-                                <i class="fas fa-check-circle mr-2"></i> <?php echo lang( 'submit' ); ?>
-                            </button>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
 
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title">Other Options <span class="required">*</span>
-                            </h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-
-
-
-
-
-
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                </div>
-                <!-- /.col -->
             </div>
             <!-- /.row -->
         </form>

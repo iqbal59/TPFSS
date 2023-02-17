@@ -103,6 +103,7 @@ class Washing extends MY_Controller {
             {
             $data['data']['wash']=$this->washing_model->getDataById("machine_id='".$this->input->post('id')."'", "tbl_wash_program");
             $data['data']['dry']=$this->washing_model->getDataById("machine_id='".$this->input->post('id')."'", "tbl_drying_program");
+            $data['data']['chemicals']=$this->washing_model->getAllChemicals();
             echo json_encode($data);
             }
 
@@ -130,8 +131,9 @@ class Washing extends MY_Controller {
                 'garment_id' => implode(",",$this->input->post('garment' )) ,
                 'fabric_id' => implode(",",$this->input->post('fabric' )) ,
                 'embellishment_id' => do_secure( post( 'embellishment' ) ),
-                'color_id' => implode(",",$this->input->post('color' )) ,
+                'color_id' => implode(",", $this->input->post('color' )) ,
                 'water_id' => do_secure( post( 'water' ) ),
+                'video_url' => do_secure( post( 'video_url' ) ),
                 'created_at' => time()
             ];
             
@@ -167,6 +169,7 @@ class Washing extends MY_Controller {
                     'machine_id'=>$c['machine_id'],
                     'wash_program_id'=>$c['wash_program_id'],
                     'dry_program_id'=>$c['dry_program_id'],
+                    'wash_chemical_ids'=>implode(",", $c['wash_chemical_ids']),
                     'washing_article_id'=>$id
                 );
 
@@ -199,7 +202,7 @@ class Washing extends MY_Controller {
             
             $data = [
                 'title' => do_secure( post( 'title' ) ),
-                'slug' => do_secure(post('slug')),
+                //'slug' => do_secure(post('slug')),
                 'special_instruction' => do_secure( post( 'special_instruction' ) ),
                 'content' => do_secure( post( 'content' ), true ),
                 'drying_description' => do_secure( post( 'drying_description' ), true ),
@@ -207,7 +210,8 @@ class Washing extends MY_Controller {
                 'fabric_id' => implode(",",$this->input->post('fabric' )) ,
                 'embellishment_id' => do_secure( post( 'embellishment' ) ),
                 'color_id' => implode(",",$this->input->post('color' )) ,
-                'water_id' => do_secure( post( 'water' ) )
+                'water_id' => do_secure( post( 'water' ) ),
+                'video_url' => do_secure( post( 'video_url' ) )
                 
             ];
             
@@ -234,6 +238,7 @@ class Washing extends MY_Controller {
                         'machine_id'=>$c['machine_id'],
                         'wash_program_id'=>$c['wash_program_id'],
                         'dry_program_id'=>$c['dry_program_id'],
+                        'wash_chemical_ids'=>implode(",", $c['wash_chemical_ids']),
                         'washing_article_id'=>$id
                     );
     

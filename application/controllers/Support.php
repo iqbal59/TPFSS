@@ -298,13 +298,15 @@ class Support extends MY_Controller {
 
         if( $machineId && $garment  &&  $fabric){
 
-            $data['data']['article']=$this->washing_model->getPublicWashingArticle($garment,  $fabric, $embellishment, $color);
+            $data['data']['article']=$this->washing_model->getPublicWashingArticle($garment,  $fabric, $embellishment, $color, $machineId);
+            
             
             $data['data']['washAndDryProgram']=$this->washing_model->getPublicWashingProgram($machineId,  $data['data']['article']->id);
-          
+            
             //print_r($data['data']['washAndDryProgram']);
-
-            $data['data']['articleChemical'] = $this->washing_model->get_article_wahsing_chemical($data['data']['washAndDryProgram']->wash_program_id);
+            
+            if($data['data']['washAndDryProgram']->wash_chemical_ids)
+            $data['data']['articleChemical'] = $this->washing_model->get_article_wahsing_chemical($data['data']['washAndDryProgram']->wash_chemical_ids);
            
 
             $data['data']['machineId']=$this->input->get('machine_id');

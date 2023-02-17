@@ -24,7 +24,7 @@
         <div class="col-md-4  mb-3">
             <a href="<?php echo base_url('knowledge-base/washing-article');?>">
                 <div class="card rounded-0">
-                    <img src="<?php echo base_url('assets/images/cloyhing.jpg')?>" class="card-img-top rounded-0"
+                    <img src="<?php echo base_url('assets/images/home_dry_clean.jpg')?>" class="card-img-top rounded-0"
                         alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
@@ -41,7 +41,8 @@
         <div class="col-md-4  mb-3">
 
             <div class="card rounded-0">
-                <img src="<?php echo base_url('assets/images/cloyhing.jpg')?>" class="card-img-top rounded-0" alt="...">
+                <img src="<?php echo base_url('assets/images/home_laundry.jpg')?>" class="card-img-top rounded-0"
+                    alt="...">
                 <div class="card-body">
                     <h5 class="card-title text-center">
                         <a

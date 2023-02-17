@@ -204,9 +204,11 @@ $.ajax({
 $(".addmore").on('click', function () {
   //var count = $('table tr').length;
   //alert(count);
-  var data = '<tr> <td><input type="checkbox" class="case" /></td>  <td><select class="form-control select2 search-disabled" data-placeholder="Select Machine"  onchange="getWashandDryProgram(this.value, \'' + baseURL + 'admin/kbm/washing/get_allprogram\', ' + i + ')" id="wash_machine_' + i + '" name="wash[' + i + '][machine_id]"> <option>--Select--</option>' + machineHtml + ' </select></td> <td><select class="form-control select2 search-disabled" data-placeholder="Select Wash Program" id="wash_program_' + i + '" name="wash[' + i + '][wash_program_id]"> <option>--Select--</option> </select></td> <td><select class="form-control select2 search-disabled" data-placeholder="Select Dry Program" id="dry_program_' + i + '" name="wash[' + i + '][dry_program_id]"> <option>--Select--</option> </select></td>  </tr>';
+  var data = '<tr> <td><input type="checkbox" class="case" /></td>  <td><select class="form-control select2 search-disabled" data-placeholder="Select Machine"  onchange="getWashandDryProgram(this.value, \'' + baseURL + 'admin/kbm/washing/get_allprogram\', ' + i + ')" id="wash_machine_' + i + '" name="wash[' + i + '][machine_id]"> <option>--Select--</option>' + machineHtml + ' </select></td> <td><select class="form-control select2 search-disabled" data-placeholder="Select Wash Program" id="wash_program_' + i + '" name="wash[' + i + '][wash_program_id]"> <option>--Select--</option> </select></td> <td><select class="form-control select2 search-disabled" data-placeholder="Select Wash Chemical" id="wash_chemical_' + i + '" name="wash[' + i + '][wash_chemical_ids][]" multiple="multiple"> <option>--Select--</option> </select></td> <td><select class="form-control select2 search-disabled" data-placeholder="Select Dry Program" id="dry_program_' + i + '" name="wash[' + i + '][dry_program_id]"> <option>--Select--</option> </select></td>  </tr>';
   $('table').append(data);
   i++;
+
+  readySelect2();
 });
 
 function select_all() {
@@ -234,6 +236,7 @@ function getWashandDryProgram(id, source, divId = 0) {
       //console.log(res.data);
       var washHtml = '';
       var dryHtml = '';
+      var washChemicalHtml = '';
 
       $.map(res.data.wash, function (v, i) {
 
@@ -245,8 +248,15 @@ function getWashandDryProgram(id, source, divId = 0) {
         dryHtml += '<option value="' + v.id + '">' + v.dry_program_name + " (" + v.dry_time + ")" + '</option>';
       });
 
+      $.map(res.data.chemicals, function (v, i) {
+
+        washChemicalHtml += '<option value="' + v.id + '">' + v.chemical_name + '</option>';
+      });
+
       $('#wash_program_' + divId).html(washHtml);
       $('#dry_program_' + divId).html(dryHtml);
+      $('#wash_chemical_' + divId).html(washChemicalHtml);
+
 
     }, error: function (error) { console.log(error); }
   });

@@ -13,13 +13,15 @@
             </div>
             <!-- /.row -->
             <div class="row">
-                <div class="col-xl-9">
+                <div class="col-xl-12">
                     <div class="card">
                         <div class="card-header d-flex align-items-center">
                             <h3 class="card-title">Edit Washing and Drying</h3>
 
                             <div class="card-tools ml-auto">
-
+                                <button type="submit" class="btn btn-primary btn-block text-sm">
+                                    <i class="fas fa-check-circle mr-2"></i> <?php echo lang( 'update' ); ?>
+                                </button>
                             </div>
                             <!-- /.card-tools -->
                         </div>
@@ -109,10 +111,13 @@
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
-                                    <label for="color">Color</label>
+                                    <label for="color">Color <span class="required">*</span></label>
                                     <select class="form-control select2 search-disabled" multiple="multiple" id="color"
                                         data-placeholder="Select color" name="color[]">
-                                        <option value="0">Any</option>
+
+                                        <?php  $colorIds=explode(",", $article->color_id); ?>
+                                        <option value="0" <?php if(in_array('0', $colorIds)){echo "selected";} ?>>Any
+                                        </option>
 
                                         <?php 
                                 
@@ -120,7 +125,7 @@
                                 if ( ! empty( $colors) ) {
                 foreach ( $colors as $color ) { 
                     
-                    $colorIds=explode(",", $article->color_id); ?>
+                   ?>
                                         <option value="<?php echo html_escape( $color->id ); ?>"
                                             <?php if(in_array($color->id, $colorIds)){echo "selected";} ?>>
                                             <?php echo html_escape( $color->name ); ?></option>
@@ -181,6 +186,7 @@
                                             <th><input class='check_all' type='checkbox' onclick="select_all()" /></th>
                                             <th>Machine</th>
                                             <th>Wash Program</th>
+                                            <th>Wash Chemical</th>
                                             <th>Dry Program</th>
                                         </tr>
                                         <?php 
@@ -229,6 +235,28 @@
                                                     <option value="<?php echo html_escape( $wp->id ); ?>"
                                                         <?php if($wp->id == $am->wash_program_id){echo "selected";} ?>>
                                                         <?php echo html_escape( $wp->wash_program_name ); ?></option>
+
+                                                    <?php }?>
+                                                </select>
+
+                                            </td>
+                                            <td>
+                                                <select class="form-control select2 search-disabled"
+                                                    data-placeholder="Select Wash Chemical"
+                                                    id="wash_chemical_<?php echo $i;?>"
+                                                    name="wash[<?php echo $i;?>][wash_chemical_ids][]"
+                                                    multiple="multiple">
+                                                    <option value="">--Select--</option>
+                                                    <?php
+                                                    $chemicals=$this->db->query("select id, concat(dosing_type, '-', chemical_name,'-', dosage, '-', wash_load, '-', total_dose) as chemical_name from tbl_chemicals where 1")->result();
+                                                   
+                                                   $washChemicalIds=explode(",", $am->wash_chemical_ids);
+                                                    foreach($chemicals as $c){
+                                                    ?>
+
+                                                    <option value="<?php echo html_escape( $c->id ); ?>"
+                                                        <?php if(in_array($c->id, $washChemicalIds)){echo "selected";} ?>>
+                                                        <?php echo html_escape( $c->chemical_name ); ?></option>
 
                                                     <?php }?>
                                                 </select>
@@ -285,6 +313,12 @@
                                     id="drying_description"><?php echo html_escape( do_secure( $article->drying_description, true ) ); ?></textarea>
                             </div>
 
+                            <div class="form-group">
+                                <label for="meta-keywords">Video URL</label>
+                                <input type="text" class="form-control" id="video_url" name="video_url"
+                                    value="<?php echo html_escape( $article->video_url ); ?>">
+                            </div>
+
                             <!-- /.form-group -->
                             <div class="form-group">
                                 <label for="meta-keywords"><?php echo lang( 'meta_keywords' ); ?></label>
@@ -299,58 +333,6 @@
                         <!-- /.card-body -->
                     </div>
                     <!-- /.card -->
-                </div>
-                <!-- /.col -->
-                <div class="col-xl-3">
-                    <div class="card collapsed-card">
-                        <div class="card-header">
-                            <h3 class="card-title"><?php echo lang( 'article_statistics' ); ?></h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-plus"></i>
-                                </button>
-                            </div>
-                            <!-- /.card-tools -->
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <ul class="list-group">
-                                <li class="list-group-item">
-                                    <span>
-                                        <strong><?php echo lang( 'helpful' ); ?>:</strong>
-                                        <?php echo html_escape( $article->helpful ); ?>
-                                    </span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span>
-                                        <strong><?php echo lang( 'not_helpful' ); ?>:</strong>
-                                        <?php echo html_escape( $article->not_helpful ); ?>
-                                    </span>
-                                </li>
-                                <li class="list-group-item">
-                                    <span>
-                                        <strong><?php echo lang( 'views' ); ?>:</strong>
-                                        <?php echo html_escape( $article->views ); ?>
-                                    </span>
-                                </li>
-                            </ul>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
-                    <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><?php echo lang( 'action' ); ?></h3>
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body">
-                            <button type="submit" class="btn btn-primary btn-block text-sm">
-                                <i class="fas fa-check-circle mr-2"></i> <?php echo lang( 'update' ); ?>
-                            </button>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-
                 </div>
                 <!-- /.col -->
             </div>
