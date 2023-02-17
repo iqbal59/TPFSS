@@ -231,6 +231,7 @@ class Washing extends MY_Controller {
             
             if ( $this->washing_model->update_washing( $data, $id ) )
             {
+                echo $this->db->last_query();
                 $this->washing_model->delete_article_wahsing_machine($id);
                 $washPrograms=$this->input->post('wash');
                 foreach($washPrograms as $c){
