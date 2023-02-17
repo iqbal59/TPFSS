@@ -125,9 +125,9 @@ class Washing extends MY_Controller {
             $data = [
                 'title' => do_secure( post( 'title' ) ),
                 'slug' => do_secure(post('slug')),
-                'special_instruction' => stripslashes( post( 'special_instruction' ) ),
-                'content' => stripslashes( post( 'content' )),
-                'drying_description' => stripslashes( post( 'drying_description' ) ),
+                'special_instruction' => do_secure( post( 'special_instruction' ) ),
+                'content' => do_secure( post( 'content' ), true ),
+                'drying_description' => do_secure( post( 'drying_description' ), true ),
                 'garment_id' => implode(",",$this->input->post('garment' )) ,
                 'fabric_id' => implode(",",$this->input->post('fabric' )) ,
                 'embellishment_id' => do_secure( post( 'embellishment' ) ),
@@ -203,9 +203,9 @@ class Washing extends MY_Controller {
             $data = [
                 'title' => do_secure( post( 'title' ) ),
                 //'slug' => do_secure(post('slug')),
-                'special_instruction' => stripslashes( post( 'special_instruction' ) ),
-                'content' => stripslashes( post( 'content' ) ),
-                'drying_description' => stripslashes( post( 'drying_description' ) ),
+                'special_instruction' => do_secure( post( 'special_instruction' ) ),
+                'content' => do_secure( post( 'content' ), true ),
+                'drying_description' => do_secure( post( 'drying_description' ), true ),
                 'garment_id' => implode(",",$this->input->post('garment' )) ,
                 'fabric_id' => implode(",",$this->input->post('fabric' )) ,
                 'embellishment_id' => do_secure( post( 'embellishment' ) ),
@@ -214,8 +214,6 @@ class Washing extends MY_Controller {
                 'video_url' => do_secure( post( 'video_url' ) )
                 
             ];
-
-            print_r($data);
             
             //$result = array_search( $data['category_id'], array_column( get_articles_categories( 'all' ), 'id' ) );
                 
@@ -233,7 +231,6 @@ class Washing extends MY_Controller {
             
             if ( $this->washing_model->update_washing( $data, $id ) )
             {
-                echo $this->db->last_query();
                 $this->washing_model->delete_article_wahsing_machine($id);
                 $washPrograms=$this->input->post('wash');
                 foreach($washPrograms as $c){
@@ -246,7 +243,7 @@ class Washing extends MY_Controller {
                     );
     
                     $this->washing_model->add($dataWash, 'article_washing_machine' );}
-              // r_s_jump( "admin/knowledge_base/edit_washing/{$id}", 'updated' );
+               r_s_jump( "admin/knowledge_base/edit_washing/{$id}", 'updated' );
             }
             
             r_error( 'not_updated' );
