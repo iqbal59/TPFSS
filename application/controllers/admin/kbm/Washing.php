@@ -243,7 +243,7 @@ class Washing extends MY_Controller {
                     );
     
                     $this->washing_model->add($dataWash, 'article_washing_machine' );}
-               r_s_jump( "admin/knowledge_base/edit_washing/{$id}", 'updated' );
+              // r_s_jump( "admin/knowledge_base/edit_washing/{$id}", 'updated' );
             }
             
             r_error( 'not_updated' );
