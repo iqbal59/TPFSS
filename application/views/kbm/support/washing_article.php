@@ -248,7 +248,8 @@
                     <p><?php echo strip_extra_html( do_secure( $article->drying_description, true ) ); ?></p>
                 </div>
                 <!-- /.content-holder -->
-                <h5 class="fw-bold mb-2">Drying Description</h5>
+                <?php if($article->video_url){?>
+                <h5 class="fw-bold mb-2">Video</h5>
                 <div class="content-holder">
                     <video width="100%" height="340" controls>
                         <source src="<?php echo $article->video_url;?>" type="video/mp4">
@@ -256,7 +257,7 @@
                         Your browser does not support the video tag.
                     </video>
                 </div>
-
+                <?php } ?>
 
 
             </div>
