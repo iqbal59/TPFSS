@@ -150,15 +150,15 @@ class Washing extends MY_Controller {
                 
             // if ( $result === false ) r_error( 'invalid_req' );
             
-            if ( empty( $data['slug'] ) )
-            {
-                $data['slug'] = $this->washing_model->washing_article_slug( $data['title'] );
-            }
+            // if ( empty( $data['slug'] ) )
+            // {
+            //     $data['slug'] = $this->washing_model->washing_article_slug( $data['title'] );
+            // }
             
-            if ( $this->washing_model->washing( $data['slug'], 'slug' ) )
-            {
-                r_error( 'slug_exists' );
-            }
+            // if ( $this->washing_model->washing( $data['slug'], 'slug' ) )
+            // {
+            //     r_error( 'slug_exists' );
+            // }
             
             $id = $this->washing_model->add_washing( $data );
             
