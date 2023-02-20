@@ -18,8 +18,8 @@
                         <div class="col">
 
                             <label class="form-label" for="machine_id">Machine<span class="required">*</span></label>
-                            <select class="form-control select2 search-disabled" id="machine_id"
-                                data-placeholder="--Select Machine--" name="machine_id" required>
+                            <select class="form-control select2 " id="machine_id" data-placeholder="--Select Machine--"
+                                name="machine_id" required>
                                 <option></option>
 
                                 <?php 
@@ -41,7 +41,7 @@
 
                         <div class="col">
                             <label class="form-label" for="garment">Garment<span class="required">*</span></label>
-                            <select class="form-control border-0 select2 search-disabled" id="garment"
+                            <select class="form-control border-0 select2 " id="garment"
                                 data-placeholder="Select Garment" name="garment" required>
                                 <option></option>
 
@@ -62,8 +62,8 @@
                         </div>
                         <div class="col">
                             <label class="form-label" for="fabric">Fabric <span class="required">*</span></label>
-                            <select class="form-control select2 search-disabled" id="fabric"
-                                data-placeholder="Select fabric" name="fabric" required>
+                            <select class="form-control select2 " id="fabric" data-placeholder="Select fabric"
+                                name="fabric" required>
                                 <option></option>
 
                                 <?php 
@@ -82,7 +82,7 @@
                             </select>
                         </div>
                         <div class="col"><label class="form-label" for="embellishment">Embellishment</label>
-                            <select class="form-control select2 search-disabled" id="embellishment"
+                            <select class="form-control select2 " id="embellishment"
                                 data-placeholder="Select embellishment" name="embellishment" required>
                                 <option value="0">No</option>
 
@@ -102,8 +102,8 @@
                             </select>
                         </div>
                         <div class="col"> <label class="form-label" for="color">Color</label>
-                            <select class="form-control select2 search-disabled" id="color"
-                                data-placeholder="Select color" name="color" required>
+                            <select class="form-control select2 " id="color" data-placeholder="Select color"
+                                name="color" required>
                                 <option value="0">Any</option>
 
                                 <?php 
@@ -248,6 +248,15 @@
                     <p><?php echo strip_extra_html( do_secure( $article->drying_description, true ) ); ?></p>
                 </div>
                 <!-- /.content-holder -->
+                <h5 class="fw-bold mb-2">Drying Description</h5>
+                <div class="content-holder">
+                    <video width="100%" height="340" controls>
+                        <source src="<?php echo $article->video_url;?>" type="video/mp4">
+
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+
 
 
             </div>
