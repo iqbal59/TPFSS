@@ -229,8 +229,9 @@ class Washing extends MY_Controller {
             //     r_error( 'slug_exists' );
             // }
             
-            if ( $this->washing_model->update_washing( $data, $id ) )
-            {
+            // if ( $this->washing_model->update_washing( $data, $id ) )
+            // {
+                $this->washing_model->update_washing( $data, $id ) ;
                 $this->washing_model->delete_article_wahsing_machine($id);
                 $washPrograms=$this->input->post('wash');
                 foreach($washPrograms as $c){
@@ -243,10 +244,11 @@ class Washing extends MY_Controller {
                     );
     
                     $this->washing_model->add($dataWash, 'article_washing_machine' );}
-               r_s_jump( "admin/knowledge_base/edit_washing/{$id}", 'updated' );
-            }
+              
+                    r_s_jump( "admin/knowledge_base/edit_washing/{$id}", 'updated' );
+            //}
             
-            r_error( 'not_updated' );
+           // r_error( 'not_updated' );
         }
         
         d_r_error( validation_errors() );

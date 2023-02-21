@@ -170,7 +170,7 @@ class Dashboard extends MY_Controller {
     public function logout(){
         $this->session->sess_destroy();
         $data = array();
-        echo "sfdsfdsf";
+        //echo "sfdsfdsf";
         env_redirect( 'admin/knowledge_base/login' );
         
     }
