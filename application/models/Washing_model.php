@@ -4,9 +4,11 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
 
 class Washing_model extends MY_Model {
     
-    public function getModel($table_name)
+    public function getModel($table_name , $order_column='', $order_by='')
     {
-       return $this->db->get($table_name)->result();
+        $this->db->from($table_name);
+        $this->db->order_by($order_column, $order_by);
+        return $this->db->get()->result();
         
        // return $this->get( $data );
     }

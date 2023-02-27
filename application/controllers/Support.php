@@ -321,12 +321,12 @@ class Support extends MY_Controller {
 
         
         // $related = $this->Support_model->related_articles( $article->id, $ids );
-        $data['data']['machines']=$this->washing_model->getModel('tbl_machine');
-        $data['data']['garments']=$this->washing_model->getModel('tbl_garments');
-        $data['data']['fabrics']=$this->washing_model->getModel('tbl_fabrics');
-        $data['data']['embellishments']=$this->washing_model->getModel('tbl_embellishments');
-        $data['data']['colors']=$this->washing_model->getModel('tbl_colors');
-        $data['data']['waters']=$this->washing_model->getModel('tbl_water_temp');
+        $data['data']['machines']=$this->washing_model->getModel('tbl_machine', 'name', 'asc');
+        $data['data']['garments']=$this->washing_model->getModel('tbl_garments', 'name', 'asc');
+        $data['data']['fabrics']=$this->washing_model->getModel('tbl_fabrics', 'name', 'asc');
+        $data['data']['embellishments']=$this->washing_model->getModel('tbl_embellishments', 'name', 'asc');
+        $data['data']['colors']=$this->washing_model->getModel('tbl_colors', 'name', 'asc');
+        $data['data']['waters']=$this->washing_model->getModel('tbl_water_temp', 'name', 'asc');
         $data['data']['voted'] = $vote_status;
         $data['data']['related'] = $related;
        // $data['data']['article'] = $article;
