@@ -183,7 +183,7 @@ $(function () {
 
           fabricHtml += '<option value="' + v.id + '">' + v.name + '</option>';
         });
-        $('#fabric_user').append(fabricHtml);
+        $('#fabric_user').html(fabricHtml);
       }, error: function (error) { console.log(error); }
     });
   });
