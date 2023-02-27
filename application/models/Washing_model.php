@@ -13,6 +13,11 @@ class Washing_model extends MY_Model {
        // return $this->get( $data );
     }
 
+    public function getFabricList($garment_id){
+        $sql="select * from tbl_fabrics where 1 and find_in_set($garment_id, garment_ids)";
+        return $this->db->query($sql)->result();
+
+    }
 
     public function washing_article_slug( $name, $id = 0 )
     {

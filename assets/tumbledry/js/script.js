@@ -167,12 +167,35 @@ $(function () {
   $(window).on('shown.bs.modal', function () {
     resetResponseMessages();
   });
+  var fabricHtml = '';
+
+  $('#garment_user').change(() => {
+    //console.log($('#garment_user').val());
+    $.ajax({
+      url: baseURL + 'support/get_allfabrics',
+      data: { tumbledry_csrf: csrfToken, garment: $('#garment_user').val() },
+      dataType: "json",
+      method: 'POST',
+      success: function (res) {
+
+        console.log(res);
+        $.map(res.data.fabrics, function (v, i) {
+
+          fabricHtml += '<option value="' + v.id + '">' + v.name + '</option>';
+        });
+        $('#fabric_user').append(fabricHtml);
+      }, error: function (error) { console.log(error); }
+    });
+  });
+
+
 });
 
 
 $(window).on('load', function () {
   // Make pay modal button activated on the page is fully loaded:
   $('.btn.pay-modal').removeAttr('disabled');
+
 });
 
 
@@ -201,6 +224,7 @@ $.ajax({
     });
   }, error: function (error) { console.log(error); }
 })
+
 $(".addmore").on('click', function () {
   //var count = $('table tr').length;
   //alert(count);

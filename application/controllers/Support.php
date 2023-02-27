@@ -314,16 +314,18 @@ class Support extends MY_Controller {
             $data['data']['fabric']=$this->input->get('fabric');
             $data['data']['embellishment']=$this->input->get('embellishment');
             $data['data']['color']=$this->input->get('color');
+            $data['data']['fabrics']=$this->washing_model->getFabricList($this->input->get('garment'));
         }
 
 
+        
         
 
         
         // $related = $this->Support_model->related_articles( $article->id, $ids );
         $data['data']['machines']=$this->washing_model->getModel('tbl_machine', 'name', 'asc');
         $data['data']['garments']=$this->washing_model->getModel('tbl_garments', 'name', 'asc');
-        $data['data']['fabrics']=$this->washing_model->getModel('tbl_fabrics', 'name', 'asc');
+        
         $data['data']['embellishments']=$this->washing_model->getModel('tbl_embellishments', 'name', 'asc');
         $data['data']['colors']=$this->washing_model->getModel('tbl_colors', 'name', 'asc');
         $data['data']['waters']=$this->washing_model->getModel('tbl_water_temp', 'name', 'asc');
@@ -339,6 +341,13 @@ class Support extends MY_Controller {
         $this->load_public_template( $data, false );
     }
     
+
+    public function get_allfabrics()
+            {
+            $data['data']['fabrics']=$this->washing_model->getFabricList($this->input->post('garment'));
+            
+            echo json_encode($data);
+            }
     /**
      * Article Voting Input Handling ( Action ).
      *

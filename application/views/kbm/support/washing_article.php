@@ -41,7 +41,7 @@
 
                         <div class="col">
                             <label class="form-label" for="garment">Garment<span class="required">*</span></label>
-                            <select class="form-control border-0 select2 " id="garment"
+                            <select class="form-control border-0 select2 " id="garment_user"
                                 data-placeholder="Select Garment" name="garment" required>
                                 <option></option>
 
@@ -62,7 +62,7 @@
                         </div>
                         <div class="col">
                             <label class="form-label" for="fabric">Fabric <span class="required">*</span></label>
-                            <select class="form-control select2 " id="fabric" data-placeholder="Select fabric"
+                            <select class="form-control select2 " id="fabric_user" data-placeholder="Select fabric"
                                 name="fabric" required>
                                 <option></option>
 
