@@ -48,7 +48,11 @@ class Washing extends MY_Controller {
             $config['base_url'] = env_url( 'admin/knowledge_base/washing/list' );
             $config['total_rows'] = $this->washing_model->articles( true, 0, 0, $options );
             $config['per_page'] = PER_PAGE_RESULTS_PANEL;
-            $offset = get_offset( $config['per_page'], 5 );
+            
+            if($this->uri->segment(5))
+            $offset = $this->uri->segment(5); //get_offset( $config['per_page'], 5 );
+            else
+            $offset=0;
             
             $this->pagination->initialize( $config );
             $data['data']['pagination'] = $this->pagination->create_links();
@@ -59,7 +63,7 @@ class Washing extends MY_Controller {
                 $offset,
                 $options
             );
-            echo $this->db->last_query();
+            //echo $this->db->last_query();
             
             $data['data']['main_controller'] = 'kbm/washing';
             $data['delete_method'] = 'delete_washing';
