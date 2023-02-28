@@ -255,8 +255,13 @@
                                 <h6 class="card-title">Drying Programme</h6>
 
                                 <p class="fw-bold">
-                                    <?php echo $washAndDryProgram->dry_program_name." (".$washAndDryProgram->dry_time; ?>
-                                    Minutes)</p>
+                                    <?php 
+                                    $dryTime=" ".$washAndDryProgram->dry_time?"(".$washAndDryProgram->dry_time." Minutes)":"";
+                                  
+                                    echo $washAndDryProgram->dry_program_name.$dryTime;
+                                    
+                                    ?>
+                                </p>
 
                                 <?php if($article->drying_description && $article->drying_description != '<p>NA</p>'){?>
                                 <h6 class="fw-bold mb-2">Drying Description</h6>
