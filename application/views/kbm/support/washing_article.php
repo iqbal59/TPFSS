@@ -205,7 +205,9 @@
                                     </div>
 
                                 </div>
-                                <h6 class="card-title mt-2">Chemical Composition</h6>
+                                <h6 class="card-title mt-2">Chemical Composition <small
+                                        class="text-end text-warning"><i>* -ml
+                                            per kg /(Per Litre Water Handwash )</i></small></h6>
                                 <table class="table">
                                     <thead>
                                         <tr class="table-light">
