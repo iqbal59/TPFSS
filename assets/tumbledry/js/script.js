@@ -177,7 +177,7 @@ $(function () {
       dataType: "json",
       method: 'POST',
       success: function (res) {
-
+        fabricHtml = '';
         console.log(res);
         $.map(res.data.fabrics, function (v, i) {
 
