@@ -263,7 +263,7 @@
                                     else
                                     $dryTime=" ".$washAndDryProgram->dry_time?"(".$washAndDryProgram->dry_time." Minutes)":"";
                                   
-                                    echo $washAndDryProgram->dry_program_name.$dryTime;
+                                    echo $washAndDryProgram->dry_program_name." ".$dryTime;
                                     
                                     ?>
                                 </p>
