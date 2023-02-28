@@ -538,7 +538,7 @@ $config = [
         ]
         ],'article_washing' => [
             [
-                'field' => 'content',
+                'field' => 'garment',
                 'label' => 'lang:content',
                 'rules' => 'required'
             ]
