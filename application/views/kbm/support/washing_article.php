@@ -188,7 +188,7 @@
                                             <?php echo $washAndDryProgram->wash_program_name; ?>
                                         </p>
                                     </div>
-                                    <div class="col">
+                                    <div class="col text-right">
                                         <h6 class="card-title">Water Temeprature</h6>
                                         <p class="card-text fw-bold">
                                             <?php
