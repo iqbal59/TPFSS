@@ -229,7 +229,7 @@
                                         <?php }?>
                                     </tbody>
                                 </table>
-                                <?php if($article->content && $article->content != 'NA'){?>
+                                <?php if($article->content && $article->content != '<p>NA</p>'){?>
                                 <h6 class="card-title">Washing Description</h6>
                                 <p><?php echo strip_extra_html( do_secure( $article->content, true ) ); ?></p>
                                 <?php }?>
@@ -258,7 +258,7 @@
                                     <?php echo $washAndDryProgram->dry_program_name." (".$washAndDryProgram->dry_time; ?>
                                     Minutes)</p>
 
-                                <?php if($article->drying_description && $article->drying_description != 'NA'){?>
+                                <?php if($article->drying_description && $article->drying_description != '<p>NA</p>'){?>
                                 <h6 class="fw-bold mb-2">Drying Description</h6>
                                 <div class="content-holder">
                                     <p><?php echo strip_extra_html( do_secure( $article->drying_description, true ) ); ?>
