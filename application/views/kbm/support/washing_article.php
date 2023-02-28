@@ -168,12 +168,13 @@
 
             <div class="content border-top margin-footer">
 
+                <?php if($article->special_instruction && $article->special_instruction != '<p>NA</p>'){?>
                 <h5 class="fw-bold mb-4">Special Instruction</h5>
 
                 <div class="alert alert-danger">
                     <?php echo strip_extra_html( do_secure( $article->special_instruction, true ) ); ?>
                 </div>
-
+                <?php }?>
 
                 <div class="row">
                     <div class="col-md-7">
