@@ -27,12 +27,13 @@ class Partner extends CI_Controller
         $data = array();
         $data['page'] = 'Forget Password';
         $this->load->library('form_validation');
+        $this->form_validation->set_rules('store_code', 'Store Code', 'trim|required');
         $this->form_validation->set_rules('email_id', 'Email ID', 'trim|required|valid_email');
 
 
 
         if ($this->form_validation->run()) {
-            if ($storeData=$this->store_model->get_store_by_email_id($this->input->post('email_id'))) {
+            if ($storeData=$this->store_model->get_store_by_email_id($this->input->post('store_code'), $this->input->post('email_id'))) {
                 $password=$this->random_password(6);
                 $params = array(
 

@@ -97,7 +97,16 @@
                             <div class="row">
                                 <div class="col-md-12">
 
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="mdi mdi-store"></i></span>
 
+                                            <input class="form-control form-control-lg" type="text" name="store_code"
+                                                required="" placeholder="Store Code" />
+
+                                        </div>
+                                        <span class="text-danger"><?php echo form_error('store_code');?></span>
+                                    </div>
 
                                     <div class="form-group">
                                         <div class="input-group">

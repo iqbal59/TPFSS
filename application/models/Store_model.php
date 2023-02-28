@@ -26,9 +26,9 @@ class Store_model extends CI_Model
     }
 
 
-    public function get_store_by_email_id($email_id)
+    public function get_store_by_email_id($store_code, $email_id)
     {
-        return $this->db->get_where('stores', array('email_id'=>$email_id))->row_array();
+        return $this->db->get_where('stores', array('store_crm_code'=> $store_code, 'email_id'=>$email_id))->row_array();
     }
     
 
