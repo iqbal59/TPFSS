@@ -211,7 +211,7 @@
 
                                 <h6 class="card-title mt-2">Chemical Composition <small
                                         class="text-end text-warning"><i>* Dosage -ml
-                                            per kg for machine and per litre for handwash</i></small></h6>
+                                            (per kg for machine and per litre for handwash)</i></small></h6>
                                 <table class="table">
                                     <thead>
                                         <tr class="table-light">
