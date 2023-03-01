@@ -206,6 +206,9 @@
                                     </div>
 
                                 </div>
+
+                                <?php if($fabric != '52'){?>
+
                                 <h6 class="card-title mt-2">Chemical Composition <small
                                         class="text-end text-warning"><i>* Dosage -ml
                                             per kg /(Per Litre Water Handwash )</i></small></h6>
@@ -232,6 +235,8 @@
                                         <?php }?>
                                     </tbody>
                                 </table>
+
+                                <?php }?>
                                 <?php if($article->content && $article->content != '<p>NA</p>'){?>
                                 <h6 class="card-title">Washing Description</h6>
                                 <p><?php echo strip_extra_html( do_secure( $article->content, true ) ); ?></p>
