@@ -262,7 +262,10 @@
                                     if($washAndDryProgram->dry_time === 'Auto')
                                     $dryTime='Auto';
                                     else
+                                    if($washAndDryProgram->dry_time)
                                     $dryTime=" ".$washAndDryProgram->dry_time?"(".$washAndDryProgram->dry_time." Minutes)":"";
+                                    else
+                                    $dryTime="";
                                   
                                     echo $washAndDryProgram->dry_program_name." ".$dryTime;
                                     
