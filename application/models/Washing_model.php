@@ -14,7 +14,7 @@ class Washing_model extends MY_Model {
     }
 
     public function getFabricList($garment_id){
-        $sql="select * from tbl_fabrics where 1 and find_in_set($garment_id, garment_ids)";
+        $sql="select * from tbl_fabrics where 1 and find_in_set($garment_id, garment_ids) order by name asc";
         return $this->db->query($sql)->result();
 
     }
