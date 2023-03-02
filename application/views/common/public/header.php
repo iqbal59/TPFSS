@@ -40,6 +40,8 @@ else
 {
     $page_title = manage_title( $page_title );
 }
+
+$page_title = 'Tumbledry Knowledge Base';
 ?>
 
     <title><?php echo html_escape( $page_title ); ?></title>
