@@ -38,7 +38,7 @@
         </div>
         <!-- /col -->
         <?php foreach ( $categories as $category ) { ?>
-        <div class="col-md-4  mb-3">
+        <!-- <div class="col-md-4  mb-3">
 
             <div class="card rounded-0">
                 <img src="<?php echo base_url('assets/images/home_laundry.jpg')?>" class="card-img-top rounded-0"
@@ -53,7 +53,7 @@
 
 
 
-        </div>
+        </div> -->
         <!-- /col -->
 
         <?php } ?>
