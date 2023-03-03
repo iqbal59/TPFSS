@@ -359,7 +359,7 @@ class Support extends MY_Controller {
             //print_r($colorIds);
             $filterColors=array();
             if($colorIds){
-                $colorIds=explode(",", $colorIds->color_id);
+                $colorIds=explode(",", $colorIds[0]->color_id);
             foreach($colorIds as $v){
                 array_push($filterColors, array('id'=> $v, 'name'=> $colors[$v]));
             } }
