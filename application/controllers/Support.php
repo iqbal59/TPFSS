@@ -359,8 +359,9 @@ class Support extends MY_Controller {
             //print_r($colorIds);
             $filterColors=array();
             if($colorIds){
+                $colorIds=explode(",", $colorIds->color_id);
             foreach($colorIds as $v){
-                array_push($filterColors, array('id'=> $v->color_id, 'name'=> $colors[$v->color_id]));
+                array_push($filterColors, array('id'=> $v, 'name'=> $colors[$v]));
             } }
             $data['data']['colors']=$filterColors;
             echo json_encode($data);
