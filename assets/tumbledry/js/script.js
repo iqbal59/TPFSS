@@ -168,6 +168,8 @@ $(function () {
     resetResponseMessages();
   });
   var fabricHtml = '';
+  var embellishmentHtml = '';
+  var colorHtml = '';
 
   $('#garment_user').change(() => {
     //console.log($('#garment_user').val());
@@ -178,12 +180,26 @@ $(function () {
       method: 'POST',
       success: function (res) {
         fabricHtml = '';
+        embellishmentHtml = '';
+        colorHtml = '';
         console.log(res);
         $.map(res.data.fabrics, function (v, i) {
 
           fabricHtml += '<option value="' + v.id + '">' + v.name + '</option>';
         });
+
+        $.map(res.data.embellishment, function (v, i) {
+
+          embellishmentHtml += '<option value="' + v.id + '">' + v.name + '</option>';
+        });
+
+        $.map(res.data.colors, function (v, i) {
+
+          colorHtml += '<option value="' + v.id + '">' + v.name + '</option>';
+        });
         $('#fabric_user').html(fabricHtml);
+        $('#embellishment_user').html(embellishmentHtml);
+        $('#color_user').html(colorHtml);
       }, error: function (error) { console.log(error); }
     });
   });

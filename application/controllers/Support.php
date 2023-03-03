@@ -344,8 +344,25 @@ class Support extends MY_Controller {
 
     public function get_allfabrics()
             {
+            $colors=array('0'=>'Any', '1'=>'Dark', '2'=>'White', '4'=>'Light');
+            $embellishment=array('0'=>'No', '1'=>'Glued', '2'=>'Hanging', '3'=>'Stitched');
             $data['data']['fabrics']=$this->washing_model->getFabricList($this->input->post('garment'));
             
+            $embellishmentIds=$this->washing_model->getListEmbellishmentByGarmentId($this->input->post('garment'));
+            $filterEmbellishment=array();
+            if($embellishmentIds){
+            foreach($embellishmentIds as $v){
+                array_push($filterEmbellishment,array('id'=> $v->embellishment_id, 'name'=> $embellishment[$v->embellishment_id]));
+            }     }       
+            $data['data']['embellishment']=$filterEmbellishment;
+            $colorIds=$this->washing_model->getColorsListByGarmentId($this->input->post('garment'));
+            //print_r($colorIds);
+            $filterColors=array();
+            if($colorIds){
+            foreach($colorIds as $v){
+                array_push($filterColors, array('id'=> $v->color_id, 'name'=> $colors[$v->color_id]));
+            } }
+            $data['data']['colors']=$filterColors;
             echo json_encode($data);
             }
     /**

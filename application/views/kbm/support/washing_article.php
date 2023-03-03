@@ -82,7 +82,7 @@
                             </select>
                         </div>
                         <div class="col"><label class="form-label" for="embellishment">Embellishment</label>
-                            <select class="form-control select2 " id="embellishment"
+                            <select class="form-control select2 " id="embellishment_user"
                                 data-placeholder="Select embellishment" name="embellishment" required>
                                 <option value="0">No</option>
 
@@ -102,7 +102,7 @@
                             </select>
                         </div>
                         <div class="col"> <label class="form-label" for="color">Color</label>
-                            <select class="form-control select2 " id="color" data-placeholder="Select color"
+                            <select class="form-control select2 " id="color_user" data-placeholder="Select color"
                                 name="color" required>
                                 <option value="0">Any</option>
 
