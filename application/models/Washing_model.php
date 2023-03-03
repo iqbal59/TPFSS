@@ -26,7 +26,7 @@ class Washing_model extends MY_Model {
     }
 
     public function getColorsListByGarmentId($garment_id){
-        $sql="select GROUP_CONCAT(DISTINCT(articles_washing.color_id)) as color_id from articles_washing where 1 and find_in_set($garment_id, garment_id)";
+        $sql="select DISTINCT(articles_washing.color_id) as color_id from articles_washing where 1 and find_in_set($garment_id, garment_id)";
         return $this->db->query($sql)->result();
 
     }
