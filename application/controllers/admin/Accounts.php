@@ -19,18 +19,18 @@ class Accounts extends CI_Controller
         check_login_user();
 
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
-        $data['invoices']=$this->Accounts_model->get_all_invoice($data['open_date'], $data['to_date']);
+        $data['invoices'] = $this->Accounts_model->get_all_invoice($data['open_date'], $data['to_date']);
         $data['main_content'] = $this->load->view('admin/accounts/index', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -41,7 +41,7 @@ class Accounts extends CI_Controller
     public function emailreports()
     {
         check_login_user();
-        $data['emaildata']=$this->Accounts_model->get_all_email_list();
+        $data['emaildata'] = $this->Accounts_model->get_all_email_list();
         $data['main_content'] = $this->load->view('admin/accounts/emailreports', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -52,17 +52,17 @@ class Accounts extends CI_Controller
         check_login_user();
 
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
-        $data['stores']=$this->Store_model->get_all_active_stores();
+        $data['stores'] = $this->Store_model->get_all_active_stores();
         $data['main_content'] = $this->load->view('admin/accounts/sendemail', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -78,16 +78,16 @@ class Accounts extends CI_Controller
         check_login_user();
 
 
-        $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
-        $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+        $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
+        $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
 
 
 
-        $data['storedIds']=$this->input->post('store_id');
+        $data['storedIds'] = $this->input->post('store_id');
         // print_r($data['storedIds']);
 
         foreach ($data['storedIds'] as $s) {
-            $emailData=array('from_date'=>$data['open_date'] ,'to_date'=> $data['to_date'], 'store_id'=>$s);
+            $emailData = array('from_date' => $data['open_date'], 'to_date' => $data['to_date'], 'store_id' => $s);
 
             // print_r($emailData);
             $this->Accounts_model->save_email_data($emailData);
@@ -101,7 +101,7 @@ class Accounts extends CI_Controller
 
     public function refundAdjust()
     {
-        $this->Common_model->refundAdjust('2023-02-13', '2023-02-19');
+        $this->Common_model->refundAdjust('2023-02-20', '2023-02-26');
         $data['main_content'] = $this->load->view('admin/accounts/refund', null, true);
         $this->load->view('admin/index', $data);
     }
@@ -120,27 +120,27 @@ class Accounts extends CI_Controller
         // $data['storedIds']=$this->input->post('store_id');
         //  print_r($data['storedIds']);
 
-        $data['storedIds']=$this->Accounts_model->get_send_to_email_list();
+        $data['storedIds'] = $this->Accounts_model->get_send_to_email_list();
         if (!is_array($data['storedIds'])) {
-            $data['storedIds']=array();
+            $data['storedIds'] = array();
         }
         foreach ($data['storedIds'] as $s) {
-            $store_id=$s['store_id'];
+            $store_id = $s['store_id'];
 
-            $data['open_date']=date("Y-m-d", strtotime($s['from_date']));
-            $data['to_date']=date("Y-m-d", strtotime($s['to_date']));
+            $data['open_date'] = date("Y-m-d", strtotime($s['from_date']));
+            $data['to_date'] = date("Y-m-d", strtotime($s['to_date']));
 
 
-            $storeData=$this->Store_model->get_store($store_id);
-            $invoiceData=$this->Accounts_model->get_invoice_by_store($store_id, $data['open_date'], $data['to_date']);
+            $storeData = $this->Store_model->get_store($store_id);
+            $invoiceData = $this->Accounts_model->get_invoice_by_store($store_id, $data['open_date'], $data['to_date']);
 
 
             $this->savePDF($store_id, $data['open_date'], $data['to_date']);
             $this->savePDFInvoice($invoiceData->id);
-            $openBalance=$this->Accounts_model->calculate_balance_by_store(date('Y-m-d', strtotime('+1 day')), $storeData['id']);
-            $message='<p>Dear '.$storeData['firm_name'].', <br><br>PFA the Financial Statement along with Royalty invoice for the period '.$invoiceData->descriptions.'. Please note that only transactions till '.end(explode(' ', $invoiceData->descriptions)).' are considered in the attached statement.</p>';
+            $openBalance = $this->Accounts_model->calculate_balance_by_store(date('Y-m-d', strtotime('+1 day')), $storeData['id']);
+            $message = '<p>Dear ' . $storeData['firm_name'] . ', <br><br>PFA the Financial Statement along with Royalty invoice for the period ' . $invoiceData->descriptions . '. Please note that only transactions till ' . end(explode(' ', $invoiceData->descriptions)) . ' are considered in the attached statement.</p>';
 
-            $message.='<p><strong>Note :-</strong></p>
+            $message .= '<p><strong>Note :-</strong></p>
 
 <em><ul><li>If Balance is in Green Color then Tumbledry will transfer the indicated amount to the Franchise Partner.</li>
 
@@ -156,28 +156,28 @@ class Accounts extends CI_Controller
 
             // $message.='<br><br><br><p>Regards<br><br><br>Deepak-|- 9368067789 -|-<a href="mailto:deepak.verma@tumbledry.in">deepak.verma@tumbledry.in</a></p>';
             if ($openBalance['openbalance'] > 0) {
-                $message.="<br>To pay your pending balance, click <a href='https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id'])."'>https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id'])."</a><br>";
+                $message .= "<br>To pay your pending balance, click <a href='https://simplifytumbledry.in/payment/pay/" . base64_encode($storeData['id']) . "'>https://simplifytumbledry.in/payment/pay/" . base64_encode($storeData['id']) . "</a><br>";
             }
 
             // $message.='<br>To make payments and check FSS statements, account statements, ledger, invoices, you can login our centralized portal "Simplify Tumbledry" using link:  <a href="https://simplifytumbledry.in/
             //     ">https://simplifytumbledry.in</a> <br><br><br><p>Regards<br><br>Thanks<br><a href="mailto:mis@tumbledry.in">mis@tumbledry.in</a></p>';
 
 
-            $subject=$storeData['firm_name']."-Financial Settlement Sheet for the period ".$invoiceData->descriptions;
+            $subject = $storeData['firm_name'] . "-Financial Settlement Sheet for the period " . $invoiceData->descriptions;
 
 
 
-            $isSent=$this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH.'uploads/temppdf/'.$storeData['firm_name'].'-fss.pdf', FCPATH.'uploads/tempinvoice/'.$storeData['firm_name'].'.pdf', $subject);
+            $isSent = $this->send(trim($storeData['email_id']), $data['open_date'], $data['to_date'], $message, FCPATH . 'uploads/temppdf/' . $storeData['firm_name'] . '-fss.pdf', FCPATH . 'uploads/tempinvoice/' . $storeData['firm_name'] . '.pdf', $subject);
             if ($isSent) {
-                $this->Accounts_model->updateEmailStatus($s['id'], array('email_status'=>1, 'email_sent_at'=>date('Y-m-d H:i:s')));
+                $this->Accounts_model->updateEmailStatus($s['id'], array('email_status' => 1, 'email_sent_at' => date('Y-m-d H:i:s')));
             }
 
 
             //Send SMS
 
-            $to=$storeData['contact_number'];
-            $smsText="Tumbledry has requested payment of INR ".$openBalance['openbalance'].", for Weekly Financial Settlement. You can pay by clicking the link below:
-                https://simplifytumbledry.in/payment/pay/".base64_encode($storeData['id']);
+            $to = $storeData['contact_number'];
+            $smsText = "Tumbledry has requested payment of INR " . $openBalance['openbalance'] . ", for Weekly Financial Settlement. You can pay by clicking the link below:
+                https://simplifytumbledry.in/payment/pay/" . base64_encode($storeData['id']);
             if ($openBalance['openbalance'] > 0) {
                 $this->sms($to, $smsText);
             }
@@ -336,7 +336,7 @@ class Accounts extends CI_Controller
     public function ledger()
     {
         check_login_user();
-        $data['ledgers']=$this->Accounts_model->calculate_balance_by_date(date('Y-m-d'));
+        $data['ledgers'] = $this->Accounts_model->calculate_balance_by_date(date('Y-m-d'));
         $data['main_content'] = $this->load->view('admin/accounts/ledger', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -346,19 +346,19 @@ class Accounts extends CI_Controller
     {
         check_login_user();
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
-        $data['storebalance']=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $data['ledgerItems']=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
+        $data['storebalance'] = $this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $data['ledgerItems'] = $this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
         $data['main_content'] = $this->load->view('admin/accounts/customerledger', $data, true);
         $this->load->view('admin/index', $data);
     }
@@ -367,19 +367,19 @@ class Accounts extends CI_Controller
     {
         check_login_user();
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
-        $data['storebalance']=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $data['ledgerItems']=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
+        $data['storebalance'] = $this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $data['ledgerItems'] = $this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
         $this->load->view('admin/accounts/printledger', $data);
     }
 
@@ -388,38 +388,38 @@ class Accounts extends CI_Controller
     {
         check_login_user();
         header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename=customer_ledger-'.date('d-m-Y').'.csv');
+        header('Content-Disposition: attachment; filename=customer_ledger-' . date('d-m-Y') . '.csv');
         // create a file pointer connected to the output stream
         $output = fopen('php://output', 'w');
 
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
 
 
         // output the column headings
-        fputcsv($output, array('Voucher No.','Voucher Type', 'Voucher Date', 'Debit', 'Credit', 'Description', 'Total'));
-        $data['storebalance']=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $total_balalnce=$data['storebalance']['openbalance'];
-        $itemrow=array('', 'Opening Balance', date("d-m-Y", strtotime($data['open_date'])), $total_balalnce, '', '', $total_balalnce);
+        fputcsv($output, array('Voucher No.', 'Voucher Type', 'Voucher Date', 'Debit', 'Credit', 'Description', 'Total'));
+        $data['storebalance'] = $this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $total_balalnce = $data['storebalance']['openbalance'];
+        $itemrow = array('', 'Opening Balance', date("d-m-Y", strtotime($data['open_date'])), $total_balalnce, '', '', $total_balalnce);
         fputcsv($output, $itemrow);
-        $data['ledgerItems']=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
+        $data['ledgerItems'] = $this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
 
         foreach ($data['ledgerItems'] as $row) {
-            if ($row['voucher_type']=='C') {
-                $voucher_type= 'Credit';
-            } elseif ($row['voucher_type']=='R') {
-                $voucher_type ='Receipt';
-            } elseif ($row['voucher_type']=='D') {
+            if ($row['voucher_type'] == 'C') {
+                $voucher_type = 'Credit';
+            } elseif ($row['voucher_type'] == 'R') {
+                $voucher_type = 'Receipt';
+            } elseif ($row['voucher_type'] == 'D') {
                 $voucher_type = 'Debit';
             } else {
                 $voucher_type = $row['voucher_type'];
@@ -428,23 +428,23 @@ class Accounts extends CI_Controller
 
 
 
-            if ($row['voucher_type']=='D' or $row['voucher_type']=='Sale') {
-                $debit= $row['np'];
-                $total_balalnce+=$row['np'];
+            if ($row['voucher_type'] == 'D' or $row['voucher_type'] == 'Sale') {
+                $debit = $row['np'];
+                $total_balalnce += $row['np'];
             } else {
-                $debit= '';
+                $debit = '';
             }
 
-            if ($row['voucher_type']=='C' or $row['voucher_type']=='R') {
-                $credit= $row['np'];
-                $total_balalnce-=$row['np'];
+            if ($row['voucher_type'] == 'C' or $row['voucher_type'] == 'R') {
+                $credit = $row['np'];
+                $total_balalnce -= $row['np'];
             } else {
-                $credit='';
+                $credit = '';
             }
 
 
 
-            $itemrow=array($row['voucher_no'], $voucher_type, date("d-m-Y", strtotime($row['voucher_date'])), $debit ,$credit, $row['descriptions'], $total_balalnce);
+            $itemrow = array($row['voucher_no'], $voucher_type, date("d-m-Y", strtotime($row['voucher_date'])), $debit, $credit, $row['descriptions'], $total_balalnce);
 
 
             fputcsv($output, $itemrow);
@@ -465,11 +465,11 @@ class Accounts extends CI_Controller
         $this->form_validation->set_rules('invoice_to_date', 'Invoice Date', 'required');
         if ($this->form_validation->run()) {
             //REFUND SALES
-            $data['refundSales']=$this->Accounts_model->get_all_refund_sales();
+            $data['refundSales'] = $this->Accounts_model->get_all_refund_sales();
             if ($data['refundSales']) {
                 foreach ($data['refundSales'] as $r) {
-                    $item=array('amount'=>$r['amount'], 'service_code'=>$r['service_code'], 'store_royalty'=>$r['store_royalty'], 'order_ids'=>$r['order_nos'], 'item_name'=>$r['service_code'].' Royalty @'.$r['store_royalty'], 'rate'=>($r['amount']*$r['store_royalty']/100));
-                    $data['rsales'][$r['id']][]=$item;
+                    $item = array('amount' => $r['amount'], 'service_code' => $r['service_code'], 'store_royalty' => $r['store_royalty'], 'order_ids' => $r['order_nos'], 'item_name' => $r['service_code'] . ' Royalty @' . $r['store_royalty'], 'rate' => ($r['amount'] * $r['store_royalty'] / 100));
+                    $data['rsales'][$r['id']][] = $item;
                 }
 
 
@@ -483,7 +483,7 @@ class Accounts extends CI_Controller
 
 
 
-            $data['storesales']=$this->Accounts_model->get_all_sale_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))), date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
+            $data['storesales'] = $this->Accounts_model->get_all_sale_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))), date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
             //print_r($data['storesales']);
 
             foreach ($data['storesales'] as $s) {
@@ -491,39 +491,39 @@ class Accounts extends CI_Controller
                     continue;
                 }
 
-                $item=array('amount'=>$s['amount'], 'service_code'=>$s['service_code'], 'store_royalty'=>$s['store_royalty'], 'order_ids'=>$s['order_nos'], 'item_name'=>$s['service_code'].' Royalty @'.$s['store_royalty'], 'rate'=>($s['amount']*$s['store_royalty']/100));
+                $item = array('amount' => $s['amount'], 'service_code' => $s['service_code'], 'store_royalty' => $s['store_royalty'], 'order_ids' => $s['order_nos'], 'item_name' => $s['service_code'] . ' Royalty @' . $s['store_royalty'], 'rate' => ($s['amount'] * $s['store_royalty'] / 100));
 
-                $data['invoice'][$s['id']][]=$item;
+                $data['invoice'][$s['id']][] = $item;
             }
 
             if (!is_array($data['invoice'])) {
-                $data['invoice']=array();
+                $data['invoice'] = array();
             }
-            $data['period']=date('d-m-Y', strtotime($this->input->post('invoice_date')))." to ".date('d-m-Y', strtotime($this->input->post('invoice_to_date')));
+            $data['period'] = date('d-m-Y', strtotime($this->input->post('invoice_date'))) . " to " . date('d-m-Y', strtotime($this->input->post('invoice_to_date')));
             $this->Accounts_model->saveInvoice($data['invoice'], $data['period']);
 
 
 
 
             //BHARATE PE
-            $bharatpe=$this->Accounts_model->get_bharatpe_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))), date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
+            $bharatpe = $this->Accounts_model->get_bharatpe_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))), date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
 
             foreach ($bharatpe as $bp) {
-                $this->Common_model->insert(array('store_id'=>$bp['store_id'], 'voucher_type'=>'R', 'amount'=>$bp['amount'], 'descriptions'=>'Bharate Pe '.$data['period']), "vouchers");
+                $this->Common_model->insert(array('store_id' => $bp['store_id'], 'voucher_type' => 'R', 'amount' => $bp['amount'], 'descriptions' => 'Bharate Pe ' . $data['period']), "vouchers");
 
                 $this->Common_model->bharatpebill($bp['ids']);
             }
 
 
             //PAYTM
-            $paytm=$this->Accounts_model->get_paytm_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))), date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
+            $paytm = $this->Accounts_model->get_paytm_by_store(date('Y-m-d', strtotime($this->input->post('invoice_date'))), date('Y-m-d', strtotime($this->input->post('invoice_to_date'))));
 
             foreach ($paytm as $p) {
-                if ($p['store_id']==null) {
+                if ($p['store_id'] == null) {
                     continue;
                 }
-                $this->Common_model->insert(array('store_id'=>$p['store_id'], 'voucher_type'=>'R', 'amount'=>$p['final_amount'], 'descriptions'=>'Paytm '.$data['period']), "vouchers");
-                $this->Common_model->insert(array('store_id'=>$p['store_id'], 'voucher_type'=>'C', 'amount'=>($p['paytmcommission']*7.5/100), 'descriptions'=>'Paytm '.$p['paytmcommission']." @7.5% ".$data['period'] ), "vouchers");
+                $this->Common_model->insert(array('store_id' => $p['store_id'], 'voucher_type' => 'R', 'amount' => $p['final_amount'], 'descriptions' => 'Paytm ' . $data['period']), "vouchers");
+                $this->Common_model->insert(array('store_id' => $p['store_id'], 'voucher_type' => 'C', 'amount' => ($p['paytmcommission'] * 7.5 / 100), 'descriptions' => 'Paytm ' . $p['paytmcommission'] . " @7.5% " . $data['period']), "vouchers");
 
                 $this->Common_model->paytmbill($p['ids']);
             }
@@ -538,8 +538,8 @@ class Accounts extends CI_Controller
 
     public function invoicepdf($id)
     {
-        $data['invoice']=$this->Accounts_model->get_invoice_by_id($id);
-        $data['invoiceitems']=$this->Accounts_model->get_invoice_item_by_id($id);
+        $data['invoice'] = $this->Accounts_model->get_invoice_by_id($id);
+        $data['invoiceitems'] = $this->Accounts_model->get_invoice_item_by_id($id);
         $this->load->view('admin/accounts/invoice', $data);
     }
 
@@ -547,7 +547,7 @@ class Accounts extends CI_Controller
     public function invoicepdfdownload($id)
     {
         // check_login_user();
-        $invoiceData=$this->Accounts_model->get_invoice_by_id($id);
+        $invoiceData = $this->Accounts_model->get_invoice_by_id($id);
         // print_r($invoiceData);
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -562,18 +562,18 @@ class Accounts extends CI_Controller
         $pdf->SetFont('dejavusans', '', 8);
         $pdf->AddPage();
 
-        $html=file_get_contents(base_url('admin/accounts/invoicepdf/'.$id));
+        $html = file_get_contents(base_url('admin/accounts/invoicepdf/' . $id));
         //$html="<p>AAA</p>";
 
         $pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->Output($invoiceData->firm_name.'_'.$invoiceData->id.'.pdf', 'D');
+        $pdf->Output($invoiceData->firm_name . '_' . $invoiceData->id . '.pdf', 'D');
     }
 
 
     public function savePDFInvoice($id)
     {
         //check_login_user();
-        $invoiceData=$this->Accounts_model->get_invoice_by_id($id);
+        $invoiceData = $this->Accounts_model->get_invoice_by_id($id);
         // print_r($invoiceData);
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -588,11 +588,11 @@ class Accounts extends CI_Controller
         $pdf->SetFont('dejavusans', '', 8);
         $pdf->AddPage();
 
-        $html=file_get_contents(base_url('admin/accounts/invoicepdf/'.$id));
+        $html = file_get_contents(base_url('admin/accounts/invoicepdf/' . $id));
         //$html="<p>AAA</p>";
 
         $pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->Output(FCPATH.'uploads/tempinvoice/'.$invoiceData->firm_name.'.pdf', 'F');
+        $pdf->Output(FCPATH . 'uploads/tempinvoice/' . $invoiceData->firm_name . '.pdf', 'F');
     }
 
 
@@ -601,7 +601,7 @@ class Accounts extends CI_Controller
     public function savePDFInvoiceByPartner($id)
     {
         //check_login_user();
-        $invoiceData=$this->Accounts_model->get_invoice_by_id($id);
+        $invoiceData = $this->Accounts_model->get_invoice_by_id($id);
         // print_r($invoiceData);
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -616,32 +616,32 @@ class Accounts extends CI_Controller
         $pdf->SetFont('dejavusans', '', 8);
         $pdf->AddPage();
 
-        $html=file_get_contents(base_url('admin/accounts/invoicepdf/'.$id));
+        $html = file_get_contents(base_url('admin/accounts/invoicepdf/' . $id));
         //$html="<p>AAA</p>";
 
         $pdf->writeHTML($html, true, false, true, false, '');
-        $pdf->Output(FCPATH.'uploads/temppartnerinvoice/'.$invoiceData->invoiceno.'.pdf', 'F');
+        $pdf->Output(FCPATH . 'uploads/temppartnerinvoice/' . $invoiceData->invoiceno . '.pdf', 'F');
     }
     public function downloadledgerall()
     {
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
-        $storeList=$this->Store_model->get_all_active_stores();
+        $storeList = $this->Store_model->get_all_active_stores();
 
         foreach ($storeList as $store) {
             $this->savePDF($store['id'], $data['open_date'], $data['to_date']);
         }
 
-        $filename = "allfss_".date('d_m_Y_H_i_s', strtotime('+ 330 minutes')).".zip";
+        $filename = "allfss_" . date('d_m_Y_H_i_s', strtotime('+ 330 minutes')) . ".zip";
         $path = 'uploads/temppdf';
         $this->zip->read_dir($path);
         $this->zip->download($filename);
@@ -651,24 +651,24 @@ class Accounts extends CI_Controller
     public function downloadallinvoice()
     {
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
-        $invoices=$this->Accounts_model->get_all_invoice($data['open_date'], $data['to_date']);
+        $invoices = $this->Accounts_model->get_all_invoice($data['open_date'], $data['to_date']);
 
         foreach ($invoices as $invoice) {
             //echo $invoice['id'];
             $this->savePDFInvoice($invoice['id']);
         }
 
-        $filename = "allinvoice_".date('d_m_Y_H_i_s', strtotime('+ 330 minutes')).".zip";
+        $filename = "allinvoice_" . date('d_m_Y_H_i_s', strtotime('+ 330 minutes')) . ".zip";
         $path = 'uploads/tempinvoice';
         $this->zip->read_dir($path);
         $this->zip->download($filename);
@@ -676,26 +676,26 @@ class Accounts extends CI_Controller
 
     public function downloadallinvoicebyStore($store_id)
     {
-        $filename = "allinvoice_".date('d_m_Y_H_i_s', strtotime('+ 330 minutes')).".zip";
+        $filename = "allinvoice_" . date('d_m_Y_H_i_s', strtotime('+ 330 minutes')) . ".zip";
         $path = 'uploads/temppartnerinvoice/';
 
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
-        $invoices=$this->Accounts_model->get_all_invoice_by_partner($store_id, $data['open_date'], $data['to_date']);
+        $invoices = $this->Accounts_model->get_all_invoice_by_partner($store_id, $data['open_date'], $data['to_date']);
 
         foreach ($invoices as $invoice) {
             //echo $invoice['id'];
             $this->savePDFInvoiceByPartner($invoice['id']);
-            $this->zip->read_file($path.$invoice['invoice_no'].'.pdf');
+            $this->zip->read_file($path . $invoice['invoice_no'] . '.pdf');
         }
 
 
@@ -707,12 +707,12 @@ class Accounts extends CI_Controller
     {
         // check_login_user();
 
-        $data['open_date']=$from_date;
-        $data['to_date']=$to_date;
+        $data['open_date'] = $from_date;
+        $data['to_date'] = $to_date;
 
 
-        $openBalance=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $ledgerItems=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
+        $openBalance = $this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $ledgerItems = $this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
 
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -728,7 +728,7 @@ class Accounts extends CI_Controller
         $pdf->AddPage();
 
 
-        $html='<p align="right"><img src="'.base_url('assets/images/logo-light-login.png').'"/></p>' ;
+        $html = '<p align="right"><img src="' . base_url('assets/images/logo-light-login.png') . '"/></p>';
 
         // $html .= '<p align="center"><strong>FSS Period : '.date("d-m-Y", strtotime($data['open_date'])).' to
         //         '.date("d-m-Y", strtotime( $data['to_date'])).'</strong></p>
@@ -745,9 +745,9 @@ class Accounts extends CI_Controller
             <hr />
 
 
-            <b class="title_name"> '.$openBalance['firm_name'].' </b>
+            <b class="title_name"> ' . $openBalance['firm_name'] . ' </b>
             <BR />
-           '.$openBalance['store_address'].'
+           ' . $openBalance['store_address'] . '
 
 
 
@@ -772,82 +772,82 @@ class Accounts extends CI_Controller
                 <tr>
                     <td width="10%">-</td>
                     <td width="15%">Opening Balance</td>
-                    <td width="15%">'.date("d-m-Y", strtotime($data['open_date'])).'</td>
-                    <td class="right" width="10%">'.$openBalance['openbalance'].'</td>
+                    <td width="15%">' . date("d-m-Y", strtotime($data['open_date'])) . '</td>
+                    <td class="right" width="10%">' . $openBalance['openbalance'] . '</td>
 
                     <td width="10%">-</td>
                     <td width="30%">-</td>
-                    <td class="right" width="10%">'.$openBalance['openbalance'].'</td>
+                    <td class="right" width="10%">' . $openBalance['openbalance'] . '</td>
 
                 </tr>';
 
-        $total_balalnce=$openBalance['openbalance'];
+        $total_balalnce = $openBalance['openbalance'];
 
-        $saleInvoice=array();
-        $paytmR=array();
-        $bharatpeR=array();
+        $saleInvoice = array();
+        $paytmR = array();
+        $bharatpeR = array();
 
         foreach ($ledgerItems as $li) {
             if (preg_match("~\bTD\b~", $li['voucher_no'])) {
-                $saleInvoice[]=$li['id'];
+                $saleInvoice[] = $li['id'];
             }
 
-            if (preg_match("~\bBharate Pe\b~", $li['descriptions']) && $li['voucher_type'] =='R') {
-                $bharatpeR[]=$li['descriptions'];
+            if (preg_match("~\bBharate Pe\b~", $li['descriptions']) && $li['voucher_type'] == 'R') {
+                $bharatpeR[] = $li['descriptions'];
             }
 
-            if (preg_match("~\bPaytm\b~", $li['descriptions'])  && $li['voucher_type'] =='R') {
-                $paytmR[]=$li['descriptions'];
+            if (preg_match("~\bPaytm\b~", $li['descriptions'])  && $li['voucher_type'] == 'R') {
+                $paytmR[] = $li['descriptions'];
             }
 
 
-            $html.='<tr>
-                        <td width="10%">'.$li['voucher_no'].'</td>
+            $html .= '<tr>
+                        <td width="10%">' . $li['voucher_no'] . '</td>
                         <td width="15%">';
-            if ($li['voucher_type']=='C') {
-                $voucher_type= 'Credit';
-            } elseif ($li['voucher_type']=='R') {
-                $voucher_type= 'Receipt';
-            } elseif ($li['voucher_type']=='D') {
-                $voucher_type= 'Debit';
+            if ($li['voucher_type'] == 'C') {
+                $voucher_type = 'Credit';
+            } elseif ($li['voucher_type'] == 'R') {
+                $voucher_type = 'Receipt';
+            } elseif ($li['voucher_type'] == 'D') {
+                $voucher_type = 'Debit';
             } else {
-                $voucher_type= $li['voucher_type'];
+                $voucher_type = $li['voucher_type'];
             }
-            $html.= $voucher_type.'</td>
-                        <td width="15%">'.date("d-m-Y", strtotime($li['voucher_date'])).'</td>
+            $html .= $voucher_type . '</td>
+                        <td width="15%">' . date("d-m-Y", strtotime($li['voucher_date'])) . '</td>
 
                         ';
 
 
-            if ($li['voucher_type']=='D' or $li['voucher_type']=='Sale') {
-                $total_balalnce+=$li['np'];
-                $html.='<td class="right" width="10%">'.$li['np'].'</td>';
+            if ($li['voucher_type'] == 'D' or $li['voucher_type'] == 'Sale') {
+                $total_balalnce += $li['np'];
+                $html .= '<td class="right" width="10%">' . $li['np'] . '</td>';
             } else {
-                $html.='<td>-</td>';
+                $html .= '<td>-</td>';
             }
 
-            if ($li['voucher_type']=='C' or $li['voucher_type']=='R') {
-                $total_balalnce-=$li['np'];
-                $html.='<td class="right" width="10%">'.$li['np'].'</td>';
+            if ($li['voucher_type'] == 'C' or $li['voucher_type'] == 'R') {
+                $total_balalnce -= $li['np'];
+                $html .= '<td class="right" width="10%">' . $li['np'] . '</td>';
             } else {
-                $html.='<td width="10%">-</td>';
+                $html .= '<td width="10%">-</td>';
             }
 
 
 
 
-            $html.='<td width="30%">'.$li['descriptions'].'</td>
-<td class="right" width="10%">'.number_format($total_balalnce, 2).'</td>
+            $html .= '<td width="30%">' . $li['descriptions'] . '</td>
+<td class="right" width="10%">' . number_format($total_balalnce, 2) . '</td>
 
 </tr>';
         }
 
-        $color='#FF0000';
+        $color = '#FF0000';
         if ($total_balalnce < 0) {
-            $color='#008000';
+            $color = '#008000';
         }
 
-        $html.='</tbody>
+        $html .= '</tbody>
 
 
 <tfoot>
@@ -859,7 +859,7 @@ class Accounts extends CI_Controller
         <th>-</th>
         <th>-</th>
         <th>-</th>
-        <th class="right" style="color:'.$color.';" ><strong>'.number_format($total_balalnce, 2).'</strong></th>
+        <th class="right" style="color:' . $color . ';" ><strong>' . number_format($total_balalnce, 2) . '</strong></th>
 
     </tr>
 </tfoot>
@@ -868,7 +868,7 @@ class Accounts extends CI_Controller
 </table>
 ';
 
-        $html.='<p><strong>Note :-</strong></p>
+        $html .= '<p><strong>Note :-</strong></p>
 
 <em><ul><li>If Balance is in Green Color then Tumbledry will transfer the indicated amount to the Franchise Partner.</li>
 
@@ -891,21 +891,21 @@ class Accounts extends CI_Controller
             foreach ($saleInvoice as $sv) {
                 $pdf->lastPage();
                 $pdf->AddPage();
-                $invoice=$this->Accounts_model->get_invoice_by_id($sv);
-                $invoiceItems=$this->Accounts_model->get_invoice_item_by_id($sv);
+                $invoice = $this->Accounts_model->get_invoice_by_id($sv);
+                $invoiceItems = $this->Accounts_model->get_invoice_item_by_id($sv);
 
-                $orderNos=array();
+                $orderNos = array();
                 foreach ($invoiceItems as $item) {
-                    $rawOrderNo=$item->order_nos;
-                    $rawOrderNo=explode(',', $rawOrderNo);
+                    $rawOrderNo = $item->order_nos;
+                    $rawOrderNo = explode(',', $rawOrderNo);
                     foreach ($rawOrderNo as $orderNo) {
                         //echo trim($orderNo, '\'');
-                        $orderNos[]=$orderNo;
+                        $orderNos[] = $orderNo;
                     }
                 }
-                $saleRoyaltyData=$this->Accounts_model->get_royalty_sale_data($orderNos, $invoice->store_name);
-                $html='<h4 align="center">Sale Data ('.$invoice->descriptions.')</h4>';
-                $html.='<table id="" class="list" cellspacing="0" width="100%">
+                $saleRoyaltyData = $this->Accounts_model->get_royalty_sale_data($orderNos, $invoice->store_name);
+                $html = '<h4 align="center">Sale Data (' . $invoice->descriptions . ')</h4>';
+                $html .= '<table id="" class="list" cellspacing="0" width="100%">
 <thead>
     <tr>
         <td class="center">Order Date</td>
@@ -919,30 +919,30 @@ class Accounts extends CI_Controller
     </tr>
 </thead>
 <tbody>';
-                $txt=0;
-                $ntt=0;
+                $txt = 0;
+                $ntt = 0;
                 foreach ($saleRoyaltyData as $data) {
-                    $txt+=$data['taxable_amount'];
-                    $ntt+=$data['net_amount'];
-                    $html.='<tr>
-        <td>'.date('d-m-Y', strtotime($data['order_date'])).'</td>
-        <td>'.$data['order_no'].'</td>
-        <td>'.$data['taxable_amount'].'</td>
-        <td>'.$data['net_amount'].'</td>
-        <td>'.$data['service_code'].'</td>
+                    $txt += $data['taxable_amount'];
+                    $ntt += $data['net_amount'];
+                    $html .= '<tr>
+        <td>' . date('d-m-Y', strtotime($data['order_date'])) . '</td>
+        <td>' . $data['order_no'] . '</td>
+        <td>' . $data['taxable_amount'] . '</td>
+        <td>' . $data['net_amount'] . '</td>
+        <td>' . $data['service_code'] . '</td>
 </tr>';
                 }
 
-                $html.='<tr>
+                $html .= '<tr>
         <td><strong>Total</strong></td>
         <td>-</td>
-        <td><strong>'.number_format($txt, 2).'</strong></td>
-        <td><strong>'.number_format($ntt, 2).'</strong></td>
+        <td><strong>' . number_format($txt, 2) . '</strong></td>
+        <td><strong>' . number_format($ntt, 2) . '</strong></td>
         <td>-</td>
 </tr>';
 
 
-                $html.='</tbody></table>';
+                $html .= '</tbody></table>';
                 $pdf->writeHTML($html, true, false, true, false, '');
             }
         }
@@ -954,12 +954,12 @@ class Accounts extends CI_Controller
                 $pdf->lastPage();
                 $pdf->AddPage();
 
-                $paytmRawData=explode(' ', $sv);
-                $fromDate=date('Y-m-d', strtotime($paytmRawData[1]));
-                $toDate=date('Y-m-d', strtotime($paytmRawData[3]));
-                $paytmRoyaltyData=$this->Accounts_model->get_royalty_paytm_data($openBalance['paytm_mid1'], $openBalance['paytm_mid2'], $openBalance['paytm_mid3'], $fromDate, $toDate);
-                $html='<h4 align="center">'.$sv.'</h4>';
-                $html.='<table id="" class="list" cellspacing="0" width="100%">
+                $paytmRawData = explode(' ', $sv);
+                $fromDate = date('Y-m-d', strtotime($paytmRawData[1]));
+                $toDate = date('Y-m-d', strtotime($paytmRawData[3]));
+                $paytmRoyaltyData = $this->Accounts_model->get_royalty_paytm_data($openBalance['paytm_mid1'], $openBalance['paytm_mid2'], $openBalance['paytm_mid3'], $fromDate, $toDate);
+                $html = '<h4 align="center">' . $sv . '</h4>';
+                $html .= '<table id="" class="list" cellspacing="0" width="100%">
     <thead>
         <tr>
             <td class="center">Transaction Date</td>
@@ -974,15 +974,15 @@ class Accounts extends CI_Controller
     </thead>
     <tbody>';
                 foreach ($paytmRoyaltyData as $data) {
-                    $html.='<tr>
-            <td>'.date('d-m-Y', strtotime($data['transaction_date'])).'</td>
-            <td>'.$data['utr_no'].'</td>
-            <td>'.$data['amount'].'</td>
-            <td>'.$data['commission'].'</td>
-            <td>'.$data['gst'].'</td>
+                    $html .= '<tr>
+            <td>' . date('d-m-Y', strtotime($data['transaction_date'])) . '</td>
+            <td>' . $data['utr_no'] . '</td>
+            <td>' . $data['amount'] . '</td>
+            <td>' . $data['commission'] . '</td>
+            <td>' . $data['gst'] . '</td>
     </tr>';
                 }
-                $html.='</tbody></table>';
+                $html .= '</tbody></table>';
                 $pdf->writeHTML($html, true, false, true, false, '');
             }
         }
@@ -995,12 +995,12 @@ class Accounts extends CI_Controller
                 $pdf->AddPage();
 
 
-                $bharatRawData=explode(' ', $sv);
-                $fromDate=date('Y-m-d', strtotime($bharatRawData[2]));
-                $toDate=date('Y-m-d', strtotime($bharatRawData[4]));
-                $bharatRoyaltyData=$this->Accounts_model->get_royalty_bharatPe_data($openBalance['bharatpay_id'], $fromDate, $toDate);
-                $html='<h4 align="center">'.$sv.'</h4>';
-                $html.='<table id="" class="list" cellspacing="0" width="100%">
+                $bharatRawData = explode(' ', $sv);
+                $fromDate = date('Y-m-d', strtotime($bharatRawData[2]));
+                $toDate = date('Y-m-d', strtotime($bharatRawData[4]));
+                $bharatRoyaltyData = $this->Accounts_model->get_royalty_bharatPe_data($openBalance['bharatpay_id'], $fromDate, $toDate);
+                $html = '<h4 align="center">' . $sv . '</h4>';
+                $html .= '<table id="" class="list" cellspacing="0" width="100%">
     <thead>
         <tr>
             <td class="center">Transaction Date</td>
@@ -1013,19 +1013,19 @@ class Accounts extends CI_Controller
     </thead>
     <tbody>';
                 foreach ($bharatRoyaltyData as $data) {
-                    $html.='<tr>
-            <td>'.date('d-m-Y', strtotime($data['transaction_date'])).'</td>
-            <td>'.$data['utr_no'].'</td>
-            <td>'.$data['amount'].'</td>
+                    $html .= '<tr>
+            <td>' . date('d-m-Y', strtotime($data['transaction_date'])) . '</td>
+            <td>' . $data['utr_no'] . '</td>
+            <td>' . $data['amount'] . '</td>
 
     </tr>';
                 }
-                $html.='</tbody></table>';
+                $html .= '</tbody></table>';
                 $pdf->writeHTML($html, true, false, true, false, '');
             }
         }
 
-        $pdf->Output(FCPATH.'uploads/temppdf/'.$openBalance['firm_name'].'-fss.pdf', 'F');
+        $pdf->Output(FCPATH . 'uploads/temppdf/' . $openBalance['firm_name'] . '-fss.pdf', 'F');
     }
 
 
@@ -1038,19 +1038,19 @@ class Accounts extends CI_Controller
     {
         //  check_login_user();
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
-        $openBalance=$this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $ledgerItems=$this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
+        $openBalance = $this->Accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $ledgerItems = $this->Accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
 
         $this->load->library('Pdf');
         $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
@@ -1066,7 +1066,7 @@ class Accounts extends CI_Controller
         $pdf->AddPage();
 
 
-        $html='<p align="right"><img src="'.base_url('assets/images/logo-light-login.png').'"/></p>' ;
+        $html = '<p align="right"><img src="' . base_url('assets/images/logo-light-login.png') . '"/></p>';
 
         // $html .= '<p align="center"><strong>FSS Period : '.date("d-m-Y", strtotime($data['open_date'])).' to
         //         '.date("d-m-Y", strtotime( $data['to_date'])).'</strong></p>
@@ -1084,9 +1084,9 @@ class Accounts extends CI_Controller
             <hr />
 
 
-            <b class="title_name"> '.$openBalance['firm_name'].' </b>
+            <b class="title_name"> ' . $openBalance['firm_name'] . ' </b>
             <BR />
-           '.$openBalance['store_address'].'
+           ' . $openBalance['store_address'] . '
 
 
 
@@ -1111,82 +1111,82 @@ class Accounts extends CI_Controller
                 <tr>
                     <td width="10%">-</td>
                     <td width="15%">Opening Balance</td>
-                    <td width="15%">'.date("d-m-Y", strtotime($data['open_date'])).'</td>
-                    <td class="right" width="10%">'.$openBalance['openbalance'].'</td>
+                    <td width="15%">' . date("d-m-Y", strtotime($data['open_date'])) . '</td>
+                    <td class="right" width="10%">' . $openBalance['openbalance'] . '</td>
 
                     <td width="10%">-</td>
                     <td width="30%">-</td>
-                    <td class="right" width="10%">'.$openBalance['openbalance'].'</td>
+                    <td class="right" width="10%">' . $openBalance['openbalance'] . '</td>
 
                 </tr>';
 
-        $total_balalnce=$openBalance['openbalance'];
+        $total_balalnce = $openBalance['openbalance'];
 
-        $saleInvoice=array();
-        $paytmR=array();
-        $bharatpeR=array();
+        $saleInvoice = array();
+        $paytmR = array();
+        $bharatpeR = array();
 
         foreach ($ledgerItems as $li) {
             if (preg_match("~\bTD\b~", $li['voucher_no'])) {
-                $saleInvoice[]=$li['id'];
+                $saleInvoice[] = $li['id'];
             }
 
-            if (preg_match("~\bBharate Pe\b~", $li['descriptions']) && $li['voucher_type'] =='R') {
-                $bharatpeR[]=$li['descriptions'];
+            if (preg_match("~\bBharate Pe\b~", $li['descriptions']) && $li['voucher_type'] == 'R') {
+                $bharatpeR[] = $li['descriptions'];
             }
 
-            if (preg_match("~\bPaytm\b~", $li['descriptions'])  && $li['voucher_type'] =='R') {
-                $paytmR[]=$li['descriptions'];
+            if (preg_match("~\bPaytm\b~", $li['descriptions'])  && $li['voucher_type'] == 'R') {
+                $paytmR[] = $li['descriptions'];
             }
 
 
-            $html.='<tr>
-                        <td width="10%">'.$li['voucher_no'].'</td>
+            $html .= '<tr>
+                        <td width="10%">' . $li['voucher_no'] . '</td>
                         <td width="15%">';
-            if ($li['voucher_type']=='C') {
-                $voucher_type= 'Credit';
-            } elseif ($li['voucher_type']=='R') {
-                $voucher_type= 'Receipt';
-            } elseif ($li['voucher_type']=='D') {
-                $voucher_type= 'Debit';
+            if ($li['voucher_type'] == 'C') {
+                $voucher_type = 'Credit';
+            } elseif ($li['voucher_type'] == 'R') {
+                $voucher_type = 'Receipt';
+            } elseif ($li['voucher_type'] == 'D') {
+                $voucher_type = 'Debit';
             } else {
-                $voucher_type= $li['voucher_type'];
+                $voucher_type = $li['voucher_type'];
             }
-            $html.= $voucher_type.'</td>
-                        <td width="15%">'.date("d-m-Y", strtotime($li['voucher_date'])).'</td>
+            $html .= $voucher_type . '</td>
+                        <td width="15%">' . date("d-m-Y", strtotime($li['voucher_date'])) . '</td>
 
                         ';
 
 
-            if ($li['voucher_type']=='D' or $li['voucher_type']=='Sale') {
-                $total_balalnce+=$li['np'];
-                $html.='<td class="right" width="10%">'.$li['np'].'</td>';
+            if ($li['voucher_type'] == 'D' or $li['voucher_type'] == 'Sale') {
+                $total_balalnce += $li['np'];
+                $html .= '<td class="right" width="10%">' . $li['np'] . '</td>';
             } else {
-                $html.='<td>-</td>';
+                $html .= '<td>-</td>';
             }
 
-            if ($li['voucher_type']=='C' or $li['voucher_type']=='R') {
-                $total_balalnce-=$li['np'];
-                $html.='<td class="right" width="10%">'.$li['np'].'</td>';
+            if ($li['voucher_type'] == 'C' or $li['voucher_type'] == 'R') {
+                $total_balalnce -= $li['np'];
+                $html .= '<td class="right" width="10%">' . $li['np'] . '</td>';
             } else {
-                $html.='<td width="10%">-</td>';
+                $html .= '<td width="10%">-</td>';
             }
 
 
 
 
-            $html.='<td width="30%">'.$li['descriptions'].'</td>
-<td class="right" width="10%">'.number_format($total_balalnce, 2).'</td>
+            $html .= '<td width="30%">' . $li['descriptions'] . '</td>
+<td class="right" width="10%">' . number_format($total_balalnce, 2) . '</td>
 
 </tr>';
         }
 
-        $color='#FF0000';
+        $color = '#FF0000';
         if ($total_balalnce < 0) {
-            $color='#008000';
+            $color = '#008000';
         }
 
-        $html.='</tbody>
+        $html .= '</tbody>
 
 
 <tfoot>
@@ -1198,7 +1198,7 @@ class Accounts extends CI_Controller
         <th>-</th>
         <th>-</th>
         <th>-</th>
-        <th class="right" style="color:'.$color.';" ><strong>'.number_format($total_balalnce, 2).'</strong></th>
+        <th class="right" style="color:' . $color . ';" ><strong>' . number_format($total_balalnce, 2) . '</strong></th>
 
     </tr>
 </tfoot>
@@ -1207,7 +1207,7 @@ class Accounts extends CI_Controller
 </table>
 ';
 
-        $html.='<p><strong>Note :-</strong></p>
+        $html .= '<p><strong>Note :-</strong></p>
 
 <em><ul><li>If Balance is in Green Color then Tumbledry will transfer the indicated amount to the Franchise Partner.</li>
 
@@ -1229,21 +1229,21 @@ class Accounts extends CI_Controller
             foreach ($saleInvoice as $sv) {
                 $pdf->lastPage();
                 $pdf->AddPage();
-                $invoice=$this->Accounts_model->get_invoice_by_id($sv);
-                $invoiceItems=$this->Accounts_model->get_invoice_item_by_id($sv);
+                $invoice = $this->Accounts_model->get_invoice_by_id($sv);
+                $invoiceItems = $this->Accounts_model->get_invoice_item_by_id($sv);
 
-                $orderNos=array();
+                $orderNos = array();
                 foreach ($invoiceItems as $item) {
-                    $rawOrderNo=$item->order_nos;
-                    $rawOrderNo=explode(',', $rawOrderNo);
+                    $rawOrderNo = $item->order_nos;
+                    $rawOrderNo = explode(',', $rawOrderNo);
                     foreach ($rawOrderNo as $orderNo) {
                         //echo trim($orderNo, '\'');
-                        $orderNos[]=$orderNo;
+                        $orderNos[] = $orderNo;
                     }
                 }
-                $saleRoyaltyData=$this->Accounts_model->get_royalty_sale_data($orderNos, $invoice->store_name);
-                $html='<h4 align="center">Sale Data ('.$invoice->descriptions.')</h4>';
-                $html.='<table id="" class="list" cellspacing="0" width="100%">
+                $saleRoyaltyData = $this->Accounts_model->get_royalty_sale_data($orderNos, $invoice->store_name);
+                $html = '<h4 align="center">Sale Data (' . $invoice->descriptions . ')</h4>';
+                $html .= '<table id="" class="list" cellspacing="0" width="100%">
 <thead>
     <tr>
         <td class="center">Order Date</td>
@@ -1257,30 +1257,30 @@ class Accounts extends CI_Controller
     </tr>
 </thead>
 <tbody>';
-                $txt=0;
-                $ntt=0;
+                $txt = 0;
+                $ntt = 0;
                 foreach ($saleRoyaltyData as $data) {
-                    $txt+=$data['taxable_amount'];
-                    $ntt+=$data['net_amount'];
-                    $html.='<tr>
-        <td>'.date('d-m-Y', strtotime($data['order_date'])).'</td>
-        <td>'.$data['order_no'].'</td>
-        <td>'.$data['taxable_amount'].'</td>
-        <td>'.$data['net_amount'].'</td>
-        <td>'.$data['service_code'].'</td>
+                    $txt += $data['taxable_amount'];
+                    $ntt += $data['net_amount'];
+                    $html .= '<tr>
+        <td>' . date('d-m-Y', strtotime($data['order_date'])) . '</td>
+        <td>' . $data['order_no'] . '</td>
+        <td>' . $data['taxable_amount'] . '</td>
+        <td>' . $data['net_amount'] . '</td>
+        <td>' . $data['service_code'] . '</td>
 </tr>';
                 }
 
-                $html.='<tr>
+                $html .= '<tr>
         <td><strong>Total</strong></td>
         <td>-</td>
-        <td><strong>'.number_format($txt, 2).'</strong></td>
-        <td><strong>'.number_format($ntt, 2).'</strong></td>
+        <td><strong>' . number_format($txt, 2) . '</strong></td>
+        <td><strong>' . number_format($ntt, 2) . '</strong></td>
         <td>-</td>
 </tr>';
 
 
-                $html.='</tbody></table>';
+                $html .= '</tbody></table>';
                 $pdf->writeHTML($html, true, false, true, false, '');
             }
         }
@@ -1292,12 +1292,12 @@ class Accounts extends CI_Controller
                 $pdf->lastPage();
                 $pdf->AddPage();
 
-                $paytmRawData=explode(' ', $sv);
-                $fromDate=date('Y-m-d', strtotime($paytmRawData[1]));
-                $toDate=date('Y-m-d', strtotime($paytmRawData[3]));
-                $paytmRoyaltyData=$this->Accounts_model->get_royalty_paytm_data($openBalance['paytm_mid1'], $openBalance['paytm_mid2'], $openBalance['paytm_mid3'], $fromDate, $toDate);
-                $html='<h4 align="center">'.$sv.'</h4>';
-                $html.='<table id="" class="list" cellspacing="0" width="100%">
+                $paytmRawData = explode(' ', $sv);
+                $fromDate = date('Y-m-d', strtotime($paytmRawData[1]));
+                $toDate = date('Y-m-d', strtotime($paytmRawData[3]));
+                $paytmRoyaltyData = $this->Accounts_model->get_royalty_paytm_data($openBalance['paytm_mid1'], $openBalance['paytm_mid2'], $openBalance['paytm_mid3'], $fromDate, $toDate);
+                $html = '<h4 align="center">' . $sv . '</h4>';
+                $html .= '<table id="" class="list" cellspacing="0" width="100%">
     <thead>
         <tr>
             <td class="center">Transaction Date</td>
@@ -1312,15 +1312,15 @@ class Accounts extends CI_Controller
     </thead>
     <tbody>';
                 foreach ($paytmRoyaltyData as $data) {
-                    $html.='<tr>
-            <td>'.date('d-m-Y', strtotime($data['transaction_date'])).'</td>
-            <td>'.$data['utr_no'].'</td>
-            <td>'.$data['amount'].'</td>
-            <td>'.$data['commission'].'</td>
-            <td>'.$data['gst'].'</td>
+                    $html .= '<tr>
+            <td>' . date('d-m-Y', strtotime($data['transaction_date'])) . '</td>
+            <td>' . $data['utr_no'] . '</td>
+            <td>' . $data['amount'] . '</td>
+            <td>' . $data['commission'] . '</td>
+            <td>' . $data['gst'] . '</td>
     </tr>';
                 }
-                $html.='</tbody></table>';
+                $html .= '</tbody></table>';
                 $pdf->writeHTML($html, true, false, true, false, '');
             }
         }
@@ -1333,12 +1333,12 @@ class Accounts extends CI_Controller
                 $pdf->AddPage();
 
 
-                $bharatRawData=explode(' ', $sv);
-                $fromDate=date('Y-m-d', strtotime($bharatRawData[2]));
-                $toDate=date('Y-m-d', strtotime($bharatRawData[4]));
-                $bharatRoyaltyData=$this->Accounts_model->get_royalty_bharatPe_data($openBalance['bharatpay_id'], $fromDate, $toDate);
-                $html='<h4 align="center">'.$sv.'</h4>';
-                $html.='<table id="" class="list" cellspacing="0" width="100%">
+                $bharatRawData = explode(' ', $sv);
+                $fromDate = date('Y-m-d', strtotime($bharatRawData[2]));
+                $toDate = date('Y-m-d', strtotime($bharatRawData[4]));
+                $bharatRoyaltyData = $this->Accounts_model->get_royalty_bharatPe_data($openBalance['bharatpay_id'], $fromDate, $toDate);
+                $html = '<h4 align="center">' . $sv . '</h4>';
+                $html .= '<table id="" class="list" cellspacing="0" width="100%">
     <thead>
         <tr>
             <td class="center">Transaction Date</td>
@@ -1351,19 +1351,19 @@ class Accounts extends CI_Controller
     </thead>
     <tbody>';
                 foreach ($bharatRoyaltyData as $data) {
-                    $html.='<tr>
-            <td>'.date('d-m-Y', strtotime($data['transaction_date'])).'</td>
-            <td>'.$data['utr_no'].'</td>
-            <td>'.$data['amount'].'</td>
+                    $html .= '<tr>
+            <td>' . date('d-m-Y', strtotime($data['transaction_date'])) . '</td>
+            <td>' . $data['utr_no'] . '</td>
+            <td>' . $data['amount'] . '</td>
 
     </tr>';
                 }
-                $html.='</tbody></table>';
+                $html .= '</tbody></table>';
                 $pdf->writeHTML($html, true, false, true, false, '');
             }
         }
 
-        $pdf->Output($openBalance['firm_name'].'-fss.pdf', 'D');
+        $pdf->Output($openBalance['firm_name'] . '-fss.pdf', 'D');
     }
 
 
@@ -1375,17 +1375,17 @@ class Accounts extends CI_Controller
 
 
         $fields = array(
-      'to'   => $to,
-      'message'   => urlencode($message),
-      'sender' => urlencode('TMBDRY'),
-      'service'      => 'T'
-     );
+            'to'   => $to,
+            'message'   => urlencode($message),
+            'sender' => urlencode('TMBDRY'),
+            'service'      => 'T'
+        );
 
         $fields_string = '';
 
         //url-ify the data for the POST
-        foreach ($fields as $key=>$value) {
-            $fields_string .= $key.'='.$value.'&';
+        foreach ($fields as $key => $value) {
+            $fields_string .= $key . '=' . $value . '&';
         }
 
         rtrim($fields_string, '&');
@@ -1397,8 +1397,8 @@ class Accounts extends CI_Controller
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/x-www-form-urlencoded',
             'Authorization: Bearer 75d0ff626c3f8df921030692c3630f6b'
-            ));
-        curl_setopt($ch, CURLOPT_URL, $url.'sms/send');
+        ));
+        curl_setopt($ch, CURLOPT_URL, $url . 'sms/send');
         curl_setopt($ch, CURLOPT_POST, count($fields));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
 
