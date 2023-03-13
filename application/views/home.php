@@ -303,6 +303,8 @@
                         </div>
                     </div>
 
+
+
                     <div class="col-md-4">
                         <div class="card shadow-sm" onclick="window.open('partner/poject_charter', '_blank');">
                             <img src="<?php echo base_url('assets/images/project_small.jpg')?>" class="card-img-top" />
@@ -315,6 +317,34 @@
 
                                 <p class="card-text">There are 250 distinct activities that need to be completed to
                                     launch your tumbledry store. Track the live status of all these activities here.</p>
+
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="col-md-4">
+                        <div class="card shadow-sm" onclick="window.open('knowledge-base', '_blank');">
+                            <img src="<?php echo base_url('assets/images/knowledge-base.jpg')?>" class="card-img-top" />
+
+                            <div class="card-body">
+
+
+                                <h5 class="card-title">Knowledge Management
+
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    E-learning tool for training & development</h6>
+
+                                <p class="card-text">A self-learning tool to get comprehensive knowledge of how to
+                                    process items to deliver top-notch quality.
+
+                                </p>
 
 
 
