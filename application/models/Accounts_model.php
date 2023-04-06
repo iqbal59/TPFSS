@@ -150,7 +150,7 @@ class Accounts_model extends CI_Model
     public function getInvoiceNo()
     {
         $invoice_no=1;
-        $invoiceData=$this->db->query("select max(invoice_no) as invoice_no from invoices where date(invoice_date) >= '2022-04-01'")->row();
+        $invoiceData=$this->db->query("select max(invoice_no) as invoice_no from invoices where date(invoice_date) >= '2023-04-01'")->row();
         if ($invoiceData->invoice_no) {
             $invoice_no+=$invoiceData->invoice_no;
         }
