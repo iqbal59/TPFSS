@@ -101,7 +101,7 @@ class Accounts extends CI_Controller
 
     public function refundAdjust()
     {
-        $this->Common_model->refundAdjust('2023-03-20', '2023-03-26');
+        $this->Common_model->refundAdjust('2023-03-27', '2023-04-02');
         $data['main_content'] = $this->load->view('admin/accounts/refund', null, true);
         $this->load->view('admin/index', $data);
     }
@@ -201,12 +201,12 @@ class Accounts extends CI_Controller
         // SMTP configuration
         $mail->isSMTP();
 
-        $mail->Host     = 'smtp.office365.com';
+        $mail->Host = 'smtp.office365.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'mis1@tumbledry.in';
         $mail->Password = 'Puy39922';
         $mail->SMTPSecure = 'tls';
-        $mail->Port     = 587;
+        $mail->Port = 587;
         //$mail->SMTPDebug = 2;
         // $mail->Host     = 'mail.centuryfasteners.in';
         // $mail->SMTPAuth = true;
@@ -273,12 +273,12 @@ class Accounts extends CI_Controller
 
         // SMTP configuration
         $mail->isSMTP();
-        $mail->Host     = 'smtp.office365.com';
+        $mail->Host = 'smtp.office365.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'mis1@tumbledry.in';
         $mail->Password = 'Bud36747';
         $mail->SMTPSecure = 'tls';
-        $mail->Port     = 587;
+        $mail->Port = 587;
         $mail->SMTPDebug = 2;
         // $mail->Host     = 'mail.centuryfasteners.in';
         // $mail->SMTPAuth = true;
@@ -796,7 +796,7 @@ class Accounts extends CI_Controller
                 $bharatpeR[] = $li['descriptions'];
             }
 
-            if (preg_match("~\bPaytm\b~", $li['descriptions'])  && $li['voucher_type'] == 'R') {
+            if (preg_match("~\bPaytm\b~", $li['descriptions']) && $li['voucher_type'] == 'R') {
                 $paytmR[] = $li['descriptions'];
             }
 
@@ -1135,7 +1135,7 @@ class Accounts extends CI_Controller
                 $bharatpeR[] = $li['descriptions'];
             }
 
-            if (preg_match("~\bPaytm\b~", $li['descriptions'])  && $li['voucher_type'] == 'R') {
+            if (preg_match("~\bPaytm\b~", $li['descriptions']) && $li['voucher_type'] == 'R') {
                 $paytmR[] = $li['descriptions'];
             }
 
@@ -1375,10 +1375,10 @@ class Accounts extends CI_Controller
 
 
         $fields = array(
-            'to'   => $to,
-            'message'   => urlencode($message),
+            'to' => $to,
+            'message' => urlencode($message),
             'sender' => urlencode('TMBDRY'),
-            'service'      => 'T'
+            'service' => 'T'
         );
 
         $fields_string = '';
@@ -1397,7 +1397,8 @@ class Accounts extends CI_Controller
         curl_setopt($ch, CURLOPT_HTTPHEADER, array(
             'Content-Type: application/x-www-form-urlencoded',
             'Authorization: Bearer 75d0ff626c3f8df921030692c3630f6b'
-        ));
+        )
+        );
         curl_setopt($ch, CURLOPT_URL, $url . 'sms/send');
         curl_setopt($ch, CURLOPT_POST, count($fields));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
