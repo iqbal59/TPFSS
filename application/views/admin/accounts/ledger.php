@@ -44,20 +44,20 @@
 
             <?php $msg = $this->session->flashdata('msg'); ?>
             <?php if (isset($msg)): ?>
-                <div class="alert alert-success delete_msg pull" style="width: 100%"> <i class="fa fa-check-circle"></i>
-                    <?php echo $msg; ?> &nbsp;
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                            aria-hidden="true">×</span> </button>
-                </div>
+            <div class="alert alert-success delete_msg pull" style="width: 100%"> <i class="fa fa-check-circle"></i>
+                <?php echo $msg; ?> &nbsp;
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                        aria-hidden="true">×</span> </button>
+            </div>
             <?php endif ?>
 
             <?php $error_msg = $this->session->flashdata('error_msg'); ?>
             <?php if (isset($error_msg)): ?>
-                <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
-                    <?php echo $error_msg; ?> &nbsp;
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                            aria-hidden="true">×</span> </button>
-                </div>
+            <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
+                <?php echo $error_msg; ?> &nbsp;
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                        aria-hidden="true">×</span> </button>
+            </div>
             <?php endif ?>
 
 
@@ -148,40 +148,40 @@
                                     <th>Action</th>
                                 </tr>
                             </thead>
-                            <tfoot>
+                            <!-- <tfoot>
                                 <tr>
                                     <th>Customer Name</th>
                                     <th>Firm Name</th>
                                     <th>Balance</th>
                                     <th>Action</th>
                                 </tr>
-                            </tfoot>
+                            </tfoot> -->
 
                             <tbody>
                                 <?php
                                 foreach ($ledgers as $l) {
                                     ?>
-                                    <tr>
-                                        <td>
-                                            <?php echo $l['store_crm_code'] ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $l['store_name'] ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $l['firm_name'] ?>
-                                        </td>
-                                        <td>
-                                            <?php echo $l['openbalance'] ?>
-                                        </td>
-                                        <td> <a href="javascript:void(0)"
-                                                onclick="viewledger(<?php echo $l['id']; ?>)">View</a>
-                                            <a href="javascript:void(0)"
-                                                onclick="downloadpdf(<?php echo $l['id']; ?>)">Download</a>
-                                        </td>
-                                    </tr>
+                                <tr>
+                                    <td>
+                                        <?php echo $l['store_crm_code'] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $l['store_name'] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $l['firm_name'] ?>
+                                    </td>
+                                    <td>
+                                        <?php echo $l['openbalance'] ?>
+                                    </td>
+                                    <td> <a href="javascript:void(0)"
+                                            onclick="viewledger(<?php echo $l['id']; ?>)">View</a>
+                                        <a href="javascript:void(0)"
+                                            onclick="downloadpdf(<?php echo $l['id']; ?>)">Download</a>
+                                    </td>
+                                </tr>
 
-                                    <?php
+                                <?php
                                 }
                                 ?>
 
@@ -204,18 +204,18 @@
 </div>
 
 <script type="text/javascript">
-    function downloadpdf(store_id) {
-        url = "<?php echo base_url('admin/accounts/downloadledger/') ?>";
-        $("#ledger_form").attr("action", url + store_id);
-        $("#ledger_form").attr("target", "_self");
-        $("#ledger_form").submit();
-    }
+function downloadpdf(store_id) {
+    url = "<?php echo base_url('admin/accounts/downloadledger/') ?>";
+    $("#ledger_form").attr("action", url + store_id);
+    $("#ledger_form").attr("target", "_self");
+    $("#ledger_form").submit();
+}
 
 
-    function viewledger(store_id) {
-        url = "<?php echo base_url('admin/accounts/customerledger/') ?>";
-        $("#ledger_form").attr("action", url + store_id);
-        $("#ledger_form").attr("target", "_self");
-        $("#ledger_form").submit();
-    }
+function viewledger(store_id) {
+    url = "<?php echo base_url('admin/accounts/customerledger/') ?>";
+    $("#ledger_form").attr("action", url + store_id);
+    $("#ledger_form").attr("target", "_self");
+    $("#ledger_form").submit();
+}
 </script>
