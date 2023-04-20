@@ -101,7 +101,7 @@ class Accounts extends CI_Controller
 
     public function refundAdjust()
     {
-        $this->Common_model->refundAdjust('2023-03-27', '2023-04-02');
+        $this->Common_model->refundAdjust('2023-04-03', '2023-04-09');
         $data['main_content'] = $this->load->view('admin/accounts/refund', null, true);
         $this->load->view('admin/index', $data);
     }
@@ -1394,10 +1394,13 @@ class Accounts extends CI_Controller
         $ch = curl_init();
 
         //set the url, number of POST vars, POST data
-        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-            'Content-Type: application/x-www-form-urlencoded',
-            'Authorization: Bearer 75d0ff626c3f8df921030692c3630f6b'
-        )
+        curl_setopt(
+            $ch,
+            CURLOPT_HTTPHEADER,
+            array(
+                'Content-Type: application/x-www-form-urlencoded',
+                'Authorization: Bearer 75d0ff626c3f8df921030692c3630f6b'
+            )
         );
         curl_setopt($ch, CURLOPT_URL, $url . 'sms/send');
         curl_setopt($ch, CURLOPT_POST, count($fields));
