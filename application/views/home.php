@@ -172,16 +172,17 @@
             <div class="container">
                 <a href="#" class="navbar-brand d-flex align-items-center">
 
-                    <img src="<?php echo base_url('assets/images/tumbledry-logo-white.png')?>" height="40" />
+                    <img src="<?php echo base_url('assets/images/tumbledry-logo-white.png') ?>" height="40" />
 
                 </a>
 
                 <?php
 
 
-                if ($this->session->userdata('is_partner_login')) {?>
+                if ($this->session->userdata('is_partner_login')) { ?>
                 <span class="navbar-text text-white">
-                    Welcome <?php echo $this->session->userdata('name');?>
+                    Welcome
+                    <?php echo $this->session->userdata('name'); ?>
                 </span>
 
                 <?php } ?>
@@ -192,7 +193,7 @@
                 </button>
 
 
-                <a class="navbar-toggler" title="Logout" href="<?php echo base_url('partner/logout')?>">
+                <a class="navbar-toggler" title="Logout" href="<?php echo base_url('partner/logout') ?>">
                     <i class="bi bi-power"></i>
                 </a>
 
@@ -208,14 +209,14 @@
                 <div class="col-md-2 col-sm-12 mx-auto">
                     <a class="d-md-block" href="javascript:void(0)" data-bs-toggle="modal"
                         data-bs-target="#exampleModal"><img class="text-center" width="50%"
-                            src="<?php echo base_url('assets/images/tutorial.png')?>" /></a>
+                            src="<?php echo base_url('assets/images/tutorial.png') ?>" /></a>
                 </div>
                 <div class="col-md-8 col-sm-12 mx-auto">
                     <img class="d-none d-md-block" width="100%"
-                        src="<?php echo base_url('assets/images/cover.jpg')?>" />
+                        src="<?php echo base_url('assets/images/cover.jpg') ?>" />
 
                     <img class="d-block d-md-none" width="100%"
-                        src="<?php echo base_url('assets/images/cover_mobile.jpg')?>" />
+                        src="<?php echo base_url('assets/images/cover_mobile.jpg') ?>" />
                     <!-- <h1 class="fw-light">Making Business Easy For You</h1> -->
                     <!--<p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>-->
 
@@ -251,7 +252,7 @@
                         <div class="card shadow-sm" onclick="window.open('https://designwithtumbledry.in/', '_blank');">
 
 
-                            <img src="<?php echo base_url('assets/images/design-with-tumbledry.jpg')?>"
+                            <img src="<?php echo base_url('assets/images/design-with-tumbledry.jpg') ?>"
                                 class="card-img-top" />
 
                             <div class="card-body">
@@ -266,8 +267,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="card shadow-sm"
-                            onclick="window.open('https://orderattumbledry.in/partner/log/'+'<?php echo $this->session->userdata('code')."/".$this->session->userdata('psw');?>', '_blank');">
-                            <img src="<?php echo base_url('assets/images/scm.jpg')?>" class="card-img-top" />
+                            onclick="window.open('https://orderattumbledry.in/partner/log/'+'<?php echo $this->session->userdata('code') . "/" . $this->session->userdata('psw'); ?>', '_blank');">
+                            <img src="<?php echo base_url('assets/images/scm.jpg') ?>" class="card-img-top" />
 
                             <div class="card-body">
                                 <h5 class="card-title">Procurement</h5>
@@ -282,7 +283,7 @@
 
                     <div class="col-md-4">
                         <div class="card shadow-sm" onclick="window.open('partner/dashboard', '_blank');">
-                            <img src="<?php echo base_url('assets/images/fss.jpg')?>" class="card-img-top" />
+                            <img src="<?php echo base_url('assets/images/fss.jpg') ?>" class="card-img-top" />
 
                             <div class="card-body">
 
@@ -307,7 +308,7 @@
 
                     <div class="col-md-4">
                         <div class="card shadow-sm" onclick="window.open('partner/poject_charter', '_blank');">
-                            <img src="<?php echo base_url('assets/images/project_small.jpg')?>" class="card-img-top" />
+                            <img src="<?php echo base_url('assets/images/project_small.jpg') ?>" class="card-img-top" />
 
                             <div class="card-body">
 
@@ -330,7 +331,8 @@
 
                     <div class="col-md-4">
                         <div class="card shadow-sm" onclick="window.open('knowledge-base', '_blank');">
-                            <img src="<?php echo base_url('assets/images/knowledge-base.jpg')?>" class="card-img-top" />
+                            <img src="<?php echo base_url('assets/images/knowledge-base.jpg') ?>"
+                                class="card-img-top" />
 
                             <div class="card-body">
 
@@ -343,6 +345,38 @@
 
                                 <p class="card-text">A self-learning tool to get comprehensive knowledge of how to
                                     process items to deliver top-notch quality.
+
+                                </p>
+
+
+
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-md-4">
+                        <div class="card shadow-sm"
+                            onclick="window.open('https://tms.simplifytumbledry.in/login/simplypro/'+'<?php echo $this->session->userdata('code') . "/" . $this->session->userdata('psw'); ?>', '_blank');">
+                            <img src="<?php echo base_url('assets/images/ticket.jpg') ?>" class="card-img-top" />
+
+                            <div class="card-body">
+
+
+                                <h5 class="card-title">Support Hub
+
+                                </h5>
+                                <h6 class="card-subtitle mb-2 text-muted">
+                                    Comprehensive ticket management system for seamless issue resolution</h6>
+
+                                <p class="card-text">An efficient and effective medium to raise your queries and
+                                    streamline the process of issue resolution. It aims to centralize, organize, and
+                                    track tickets, ensuring that each request is addressed, and resolved in a timely
+                                    manner.
 
                                 </p>
 
