@@ -31,7 +31,7 @@ class Api extends REST_Controller
             $invoiceItem['address4'] = $item->store_city;
             $invoiceItem['state'] = $item->store_state;
             $invoiceItem['state_code'] = $item->gst_st_code; //State Code
-            $invoiceItem['pin_code'] = $item->pin_code;
+            $invoiceItem['bill_to_pin_code'] = $item->pin_code;
             $invoiceItem['gst_no'] = $item->gstin_no;
             $invoiceItem['ship_to_party_name'] = $item->firm_name;
             $invoiceItem['ship_to_address1'] = $item->store_address;
