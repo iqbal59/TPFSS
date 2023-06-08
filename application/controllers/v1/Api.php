@@ -31,7 +31,7 @@ class Api extends REST_Controller
             $invoiceItem['address4'] = $item->store_city;
             $invoiceItem['state'] = $item->store_state;
             $invoiceItem['state_code'] = $item->gst_st_code; //State Code
-            $invoiceItem['bill_to_pin_code'] = $item->pin_code;
+            $invoiceItem['pin_code'] = $item->pin_code;
             $invoiceItem['gst_no'] = $item->gstin_no;
             $invoiceItem['ship_to_party_name'] = $item->firm_name;
             $invoiceItem['ship_to_address1'] = $item->store_address;
@@ -41,7 +41,6 @@ class Api extends REST_Controller
             $invoiceItem['ship_to_state'] = $item->store_state;
             $invoiceItem['ship_to_state_code'] = $item->gst_st_code; //State Code
             $invoiceItem['ship_to_pin_code'] = $item->pin_code;
-            ;
             $invoiceItem['ship_to_gst_no'] = $item->gstin_no;
             $invoiceItem['transporter_name'] = "";
             $invoiceItem['vehicle_no'] = "";
