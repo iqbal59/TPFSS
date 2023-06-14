@@ -18,10 +18,10 @@ class Support extends MY_Controller {
     {
         parent::__construct();
         
-        $this->area = 'kbm/support';
-        
+        $this->area = 'kbm/support'; 
         $this->load->model( 'Support_model' );
         $this->load->model( 'washing_model' );
+        $this->load->model( 'Stain_model' );
         $this->load->library( 'pagination' );
     }
     
@@ -413,4 +413,95 @@ class Support extends MY_Controller {
         
         $this->load_public_template( $data, false );
     }
+
+    public function ironing_article()
+    {
+
+
+        $this->load->model('Ironing_model');
+        $data['fabric']=$this->Ironing_model->getiron();
+
+        $this->input->get('fabric');
+
+        if ($this->input->get('fabric')) {
+            
+            $id=$this->input->get('fabric');
+            $this->load->model('Ironing_model');
+            $data['fabtb']=$this->Ironing_model->get_tb($id);   
+        }
+        
+        $this->load->view('kbm/support/ironing',$data);
+        
+    }
+
+    public function newironing_article()
+    {
+
+        $this->load->model('Ironing_model');
+        $data['fabric']=$this->Ironing_model->getiron();
+
+        // $this->input->get('fabric');
+
+        // if ($this->input->get('fabric')) {
+            
+        //     $id=$this->input->get('fabric');
+        //     $this->load->model('Ironing_model');
+        //     $data['fabtb']=$this->Ironing_model->get_tb($id);   
+        // }
+        
+        $this->load->view('kbm/support/newiron',$data);
+        
+    }    
+
+    public function starching_article()
+    {
+        $this->load->view('kbm/support/starching');
+    }
+
+    public function stain_article()
+    {
+        $this->load->model('Stain_model');
+        $data['stain']=$this->Stain_model->getstain();
+
+        $this->input->get('stain');
+        $this->input->get('sub_stain');
+
+        if ($this->input->get('stain') && $this->input->get('sub_stain')) {
+            
+            $stain = $this->input->get('stain');
+            $sub_stain = $this->input->get('sub_stain');
+
+            $data['stainlevel']=$this->Stain_model->getlevel($stain,$sub_stain);
+            // echo "<pre>";
+            // print_r($data);
+        }
+
+        $this->load->view('kbm/support/stain',$data);
+    }
+
+    public function substain()
+    {
+        $stain_type = $this->input->get('stain_type');
+        $this->load->model('Stain_model');        
+        $subs = $this->Stain_model->getsubstain($stain_type);
+
+        $html = "<option value=''></option>";
+        foreach($subs as $ss){
+            $html .= '<option value="'.$ss->sub_stain_type.'">'.$ss->sub_stain_type.'</option>';
+        }
+        echo $html;
+        
+    }
+
+    public function getlevel()
+    {
+        $this->input->get();
+    }
+
+
+    public function demoironing_article()
+    {
+        $this->load->view('kbm/support/demoaccod');
+    }
+
 }

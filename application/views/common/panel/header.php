@@ -303,6 +303,14 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
                                     </a>
                                 </li>
 
+                                <li class="nav-item">
+                                    <a href="<?php echo env_url( 'admin/knowledge_base/ironing' ); ?>"
+                                        class="nav-link <?php echo panel_activate_sub_child_page( ['ironing', 'new_ironing', 'edit_ironing'] ); ?>">
+                                        <i class="fas fa-list-ul nav-icon"></i>
+                                        <p>Ironing</p>
+                                    </a>
+                                </li>
+
                             </ul>
                         </li>
                         <?php //} ?>
