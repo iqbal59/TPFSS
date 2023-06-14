@@ -57,6 +57,21 @@ $route['translate_uri_dashes'] = false;
 $route['knowledge-base/washing-article']            = 'support/washing_article';
 $route['knowledge-base/washing-article/(:any)']     = 'support/washing_article/$1';
 
+//ironing User
+$route['knowledge-base/ironing-article']         	= 'support/ironing_article';
+//$route['knowledge-base/ironing-data']       		= 'support/gettb';
+$route['knowledge-base/newironing-article']         = 'support/newironing_article';
+
+$route['knowledge-base/demoironing-article']         = 'support/demoironing_article';
+
+//starching user
+$route['knowledge-base/starching-article']			= 'support/starching_article';
+
+//stain user
+$route['knowledge-base/stain-article']				= 'support/stain_article';
+// $route['knowledge-base/sub-stain-article']			= 'support/substain';
+$route['knowledge-base/sub-stain-article']			= 'support/substain';
+
 //knowledge base
 $route['knowledge-base']                            = 'support';
 $route['knowledge-base/article/(:any)']             = 'support/article/$1';
@@ -87,3 +102,8 @@ $route['admin/knowledge_base/washing/list/(:num)'] = 'admin/kbm/washing/articles
 $route['admin/knowledge_base/washing/list']        = 'admin/kbm/washing/articles_washing/list/1';
 $route['admin/knowledge_base/new_washing']          = 'admin/kbm/washing/articles_washing/new';
 $route['admin/knowledge_base/edit_washing/(:num)']  = 'admin/kbm/washing/articles_washing/edit/$1';
+
+//iorning
+$route['admin/knowledge_base/ironing']             = 'admin/kbm/ironing/articles_ironing';
+$route['admin/knowledge_base/new_ironing']         = 'admin/kbm/ironing/new_ironing';
+$route['admin/knowledge_base/add_ironing']         = 'admin/kbm/ironing/add_ironing';

@@ -36,6 +36,42 @@
             </a>
 
         </div>
+
+
+        <div class="col-md-4  mb-3">
+            <a href="<?php echo base_url('knowledge-base/stain-article');?>">
+                <div class="card rounded-0">
+                    <img src="<?php echo base_url('assets/images/stain.jpg')?>" class="card-img-top rounded-0"
+                        alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <a href="<?php echo base_url('knowledge-base/stain-article');?>">Stain</a>
+                        </h5>
+                    </div>
+                </div>
+
+            </a>
+
+        </div>
+
+
+        
+
+        <div class="col-md-4  mb-3">
+            <a href="<?php echo base_url('knowledge-base/starching-article');?>">
+                <div class="card rounded-0">
+                    <img src="<?php echo base_url('assets/images/starching.png')?>" class="card-img-top rounded-0"
+                        alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <a href="<?php echo base_url('knowledge-base/starching-article');?>">Starching</a>
+                        </h5>
+                    </div>
+                </div>
+
+            </a>
+
+        </div>
         <!-- /col -->
         <?php foreach ( $categories as $category ) { ?>
         <!-- <div class="col-md-4  mb-3">
@@ -59,6 +95,24 @@
         <?php } ?>
     </div>
     <!-- /.row -->
+
+    <div class="row mb-5">     
+        <div class="col-md-4  mb-3">
+            <a href="<?php echo base_url('knowledge-base/newironing-article');?>">
+                <div class="card rounded-0">
+                    <img src="<?php echo base_url('assets/images/home_laundry.jpg')?>" class="card-img-top rounded-0"
+                        alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">
+                            <a href="<?php echo base_url('knowledge-base/newironing-article');?>">Ironing</a>
+                        </h5>
+                    </div>
+                </div>
+
+            </a>
+
+        </div>
+    </div>
 
 </div>
 <!-- /.container -->

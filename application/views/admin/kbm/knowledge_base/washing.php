@@ -15,7 +15,7 @@
                                 class="d-inline-block form-inline mr-2">
                                 <input class="form-control text-sm search-field mr-1 mb-2 mb-sm-0" name="search"
                                     type="search" value="<?php echo do_secure( get( 'search' ) ); ?>"
-                                    placeholder="<?php echo lang( 'id_or_title' ); ?>" aria-label="Search">
+                                    placeholder="<?php echo lang( 'id_or_fabric' ); ?>" aria-label="Search">
                                 <!-- <select class="form-control text-sm search-field mr-1 mb-2 mb-sm-0" name="visibility">
                                     <option value=""><?php echo lang( 'any_visibility' ); ?></option>
                                     <option value="public" <?php echo select_get_visibility( 'public' ); ?>>

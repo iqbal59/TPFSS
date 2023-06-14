@@ -18,10 +18,10 @@ class Washing extends MY_Controller {
     {
         parent::__construct();
         
-        // if ( ! $this->zuser->is_logged_in )
-        // {
-        //     env_redirect( 'login' );
-        // }
+        if ( ! $this->zuser->is_logged_in )
+        {
+            env_redirect( 'login' );
+        }
         check_login_kuser();
         
         $this->sub_area = 'kbm';
