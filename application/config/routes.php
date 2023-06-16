@@ -69,8 +69,8 @@ $route['knowledge-base/starching-article']			= 'support/starching_article';
 
 //stain user
 $route['knowledge-base/stain-article']				= 'support/stain_article';
-// $route['knowledge-base/sub-stain-article']			= 'support/substain';
 $route['knowledge-base/sub-stain-article']			= 'support/substain';
+// $route['knowledge-base/get-stain-article']			= 'support/get_stain_article';
 
 //knowledge base
 $route['knowledge-base']                            = 'support';

@@ -87,8 +87,17 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
 
             <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 
+            <style>
+                .mm{
+                    width: 35px;
+                    height: 35px;
+/*                    margin: 8px auto;*/
+/*                    border: 1px solid black;*/
+                }
+            </style>
+
         </head>
-        <body class="">
+        <body  style="background-color:#c9c9c9;" class="">
 
             <?php 
                 // echo "<pre>";
@@ -145,7 +154,7 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
             <section class="bg-image position-fixed w-100" style="z-index:1030">
                 <div class="container ">
                     <div class="row">
-                        <div class="col-lg-12 m-4 ">
+                        <div class="col-lg-12 mt-3 mb-2">
                             <h3 class="text-center">Stain Tutorial</h3>
                         </div>
                         <div class="col-lg-12 mb-4">
@@ -154,7 +163,11 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
                                     
                                     
                                     <div class="col">
-                                        <?php //echo $fabtb->fabric; ?>
+                                        <?php //echo $stainlevel->stain_type; 
+                                            // print_r($stainlevel);
+                                            // echo $stain->stain_type;
+                                        foreach ($stainlevel as $e) {}
+                                        ?>
                                         <label class="form-label" for="stain">Stain type<span class="required">*</span></label>
                                         <select class="form-control select2 " id="stain" data-placeholder="Select Stain"
                                             name="stain" required>
@@ -165,7 +178,7 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
                                             if ( ! empty( $stain) ) {
                                             foreach ( $stain as $f ) { ?>
                                             <option value="<?php echo html_escape( $f->stain_type ); ?>"
-                                                <?php echo $stainlevel->stain_type==$f->stain_type?"selected":"";?>>
+                                                <?php //echo $e->stain_type==$f->stain_type?"selected":"";?>>
                                             <?php echo html_escape( $f->stain_type ); ?></option>
                                             <?php }
                                             } ?>
@@ -193,89 +206,122 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
                 </div>
             </section>
 
+            <?php if ($stainlevel): ?>
+                
             
-            <div class="z-posts container" style="margin-top:200px;">
+            
+            <div class="z-posts container mb-5" style="margin-top:175px;">
                 <div class="row row-main">
                     <div class="col-lg-12 mb-2">
-                        <div class="content border-top margin-footer">
+                        <h4 class="fw-bold mb-2"> Stain Type <span class="text-success"><?php echo $e->stain_type; ?></span> and Sub Stain Type <span class="text-success"><?php echo $e->sub_stain_type; ?></span></h4>
+                <?php foreach ($stainlevel as $lvl): ?>     
+                        <div class="content border-top mb-3">
                             <div class="row">
                                 <div class="col-md-12">
-                                    <div class=" d-flex flex-row">
-                                        <div class="col-md-3 ">
-                                            <h5>level-1</h5>
+                                    <div style="height: 50px;" class="d-flex flex-row">
+                                        <div  class="col-md-3">
+                                            <h3 style="margin-left: 10px;" class="mt-2"><?php 
+                                                switch ($lvl->level) {
+                                                    case 'L1':
+                                                        echo "Level-1";
+                                                        break;
+                                                    case 'L2':
+                                                        echo "Level-2";
+                                                        break;
+                                                    case 'L3':
+                                                        echo "Level-3";
+                                                        break;
+                                                    case 'L4':
+                                                        echo "Level-4";
+                                                        break;
+                                                    case 'L5':
+                                                        echo "Level-5";
+                                                        break;    
+                                                    default:
+                                                        echo "Level-6";
+                                                        break;
+                                                }
+                                             ?>
+                                            </h3>
                                         </div>
-                                        <div class="col-md-3 ">
-                                            <h5 class="text-center">MANDATORY PRE-CHECK</h5>
+                                        <div class="text-center col-md-3 ">
+                                            <img style="margin-top: 8px;" class="d-inline mm" src="<?php echo base_url('assets/images/pre-check-2.png')?>" alt="">
+                                            <h5 class="d-inline text-center">MANDATORY PRE-CHECK</h5>
                                         </div>
-                                        <div class="col-md-3 ">
-                                            <h5 class="text-center">HOW TO APPLY</h5>
+                                        <div class="text-center col-md-3 ">
+                                            <img style="margin-top: 8px;" class="d-inline mm" src="<?php echo base_url('assets/images/how-to.png')?>" alt="">
+                                            <h5 class="d-inline text-center">HOW TO APPLY</h5>
                                         </div>
-                                        <div class="col-md-3 ">
-                                            <h5 class="text-center">FOR LARGE STAIN AREA</h5>
+                                        <div class="text-center col-md-3 ">
+                                            <img style="margin-top: 8px;" class="d-inline mm" src="<?php echo base_url('assets/images/large-stain.png')?>" alt="">
+                                            <h5 class="d-inline text-center">FOR LARGE STAIN AREA</h5>
                                         </div>
                                     </div>
 
                                     <div class=" d-flex flex-row">
                                         
-                                            <table class="col table border m-2">
+                                            <table class="col table border m-1">
+                                                <tr style=" " class="">
+                                                    <th class="col-2 table-secondary text-center">CHEMICAL-1</th>
+                                                    <td class="col-2 text-center"><?php echo $lvl->chemical_1; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="col-2 table-secondary text-center">CHEMICAL-2</th>
+                                                    <td class="col-2 text-center"><?php echo $lvl->chemical_2; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="col-2 table-secondary text-center">CHEMICAL-3</th>
+                                                    <td class="col-2 text-center"><?php echo $lvl->chemical_3; ?></td>
+                                                </tr>
+                                                <tr>
+                                                    <th class="col-2 table-secondary text-center">Application Type</th>
+                                                    <td class="col-2 text-center"><?php echo $lvl->application_type; ?></td>
+                                                </tr>
                                                 <tr class="">
-                                                    <th class="col-2 table-secondary">CHEMICAL-1</th>
-                                                    <td class="col-2 text-center">food</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="col-2 table-secondary">CHEMICAL-2</th>
-                                                    <td class="col-2 text-center">food</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="col-2 table-secondary">CHEMICAL-3</th>
-                                                    <td class="col-2 text-center">food</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="col-2 table-secondary">Application Type</th>
-                                                    <td class="col-2 text-center">food</td>
-                                                </tr>
-                                                <tr>
-                                                    <th class="col-2 table-secondary">Mixture Proportion</th>
-                                                    <td class="col-2 text-center">food</td>
+                                                    <th class="col-2 table-secondary text-center">Mixture Proportion</th>
+                                                    <td class="col-2 text-center"><?php echo $lvl->mixture_proportion; ?></td>
                                                 </tr>
                                             </table>
                                         
-                                        <div class="col border m-2">
-                                            <p class="text-center m-4">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Porro veniam, rem est sunt ea repellat odit iure nulla tenetur ipsa!</p>
+                                        <div style="background-color:#f0e984;" class="col border m-1">
+                                            <p class="text-center m-4"><?php echo $lvl->mandatory_pre_check; ?></p>
                                         </div>
-                                        <div class="col border m-2">
-                                            <p class="text-center m-4">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consequatur doloremque quos sapiente. Nostrum, ipsam accusamus et placeat optio dolorum, dolor.</p>
+                                        <div style="background-color:#e3e3e3;" class="col border m-1">
+                                            <p class="text-center m-4"><?php echo $lvl->how_to_apply; ?></p>
                                         </div>
-                                        <div class="col border m-2">
-                                            <p class="text-center m-4">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum cumque a illo nesciunt repudiandae aperiam corrupti omnis necessitatibus sed odit!</p>
+                                        <div style="background-color:#e3e3e3;" class="col border m-1">
+                                            <p class="text-center m-4"><?php echo $lvl->for_large_stain_area; ?></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                    <?php endforeach ?>
                     </div>
                 </div>
             </div>
 
+
+            <?php endif ?>
 
 
 
 
 
             
-            <?php if ($stainlevel): ?>
+            <?//php if ($stainlevel): ?>
 
-                <div class="z-posts container" style="margin-top:200px;">                    
+                <!-- <div class="z-posts container" style="margin-top:200px;">                    
                 <div class="row row-main">
                     <div class="col-lg-12 mb-2">
-                        <!-- <h3 class="fw-bold mb-2"></h3> -->
-                        <?php foreach ($stainlevel as $lvl): ?>
+                        <h3 class="fw-bold mb-2">sdf</h3>
+                        <?//php foreach ($stainlevel as $lvl): ?>
                         <div class="content border-top margin-footer">
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="card">
-                                        <h4 class="card-header"><?php echo $lvl->level; ?></h4>
-                                        <div class="card-body mb-0">
+                                        <h4 class="card-header"><?php// echo $lvl->level; ?></h4>
+                                        <div class="card-body mb-0"> -->
                                             <!-- <div class="row">
                                                 <div class="col">
                                                     <h6 class="card-text fw-bold"><?//php echo $fabtb->fabric; ?></h6>
@@ -284,7 +330,7 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
                                                 
                                             </div> -->
                                             
-                                            <table class="table">
+                                            <!-- <table class="table">
                                                 <thead>
                                                     <tr class="table-secondary">
                                                         <th class="text-center">Chemical - 1</th>
@@ -296,11 +342,11 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
                                                 </thead>
                                                 <tbody>
                                                     <tr>
-                                                        <td class="text-center"><?php echo $lvl->chemical_1; ?></td>
-                                                        <td class="text-center"><?php echo $lvl->chemical_2; ?></td>
-                                                        <td class="text-center"><?php echo $lvl->chemical_3; ?></td>
-                                                        <td class="text-center"><?php echo $lvl->application_type; ?></td>
-                                                        <td class="text-center"><?php echo $lvl->mixture_proportion; ?></td>
+                                                        <td class="text-center"><?php// echo $lvl->chemical_1; ?></td>
+                                                        <td class="text-center"><?php// echo $lvl->chemical_2; ?></td>
+                                                        <td class="text-center"><?php// echo $lvl->chemical_3; ?></td>
+                                                        <td class="text-center"><?php// echo $lvl->application_type; ?></td>
+                                                        <td class="text-center"><?php// echo $lvl->mixture_proportion; ?></td>
                                                         
                                                     </tr>
                                                 </tbody>
@@ -309,14 +355,14 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
                                             <div class="row border alert alert-danger">
                                                 <h5 class="text-center"><u>MANDATORY PRE-CHECK</u></h5>
                                                 <div class="col text-center">
-                                                    <p><?php echo $lvl->mandatory_pre_check; ?></p>
+                                                    <p><?php// echo $lvl->mandatory_pre_check; ?></p>
                                                 </div>
                                             </div>
 
                                             <div style="" class="row border alert">
                                                 <h5 class="text-center"><u>HOW TO APPLY</u></h5>
                                                 <div class="col text-center">
-                                                    <p><?php echo $lvl->how_to_apply; ?>
+                                                    <p><?php// echo $lvl->how_to_apply; ?>
                                                     </p>
                                                 </div>
                                             </div>
@@ -324,36 +370,35 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
                                             <div style="" class="row border alert alert-secondary">
                                                 <h5 class="text-center"><u>FOR LARGE STAIN AREA</u></h5>
                                                 <div class="col text-center">
-                                                    <p><?php echo $lvl->for_large_stain_area; ?>
+                                                    <p><?php// echo $lvl->for_large_stain_area; ?>
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-
                                 
                             </div>
-                        </div>
+                        </div> -->
                         <!-- /.content -->
 
-                        <?php endforeach ?>
+                        <?php// endforeach ?>
                         
-                    </div>
+                    <!-- </div> -->
                     <!-- /col -->
 
 
 
 
-                </div>
+                <!-- </div> -->
                 <!-- /.row -->
             
             
 
-            </div>
+            <!-- </div> -->
             <!-- /.container -->
 
-            <?php endif ?>
+            <?php// endif ?>
 
 
             //new
@@ -380,7 +425,21 @@ defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' );
                                     // }
                                 }
                             });
-                    });
+                        });
+
+                    // $('#sub_stain').on('change', function(){
+                    //     var sub_stain_type = $('#sub_stain').val();
+                    //     //alert(sub_stain_type);
+                    //     $.ajax({
+                    //         url:"",
+                    //         type:"GET",
+                    //         data:{sub_stain_type:sub_stain_type},
+                    //         success:function(response)
+                    //         {
+                    //             console.log(response)
+                    //         }
+                    //     })
+                    // })
                 });
             </script>
             

@@ -493,6 +493,11 @@ class Support extends MY_Controller {
         
     }
 
+    // public function get_stain_article()
+    // {
+        
+    // }
+
     public function getlevel()
     {
         $this->input->get();
