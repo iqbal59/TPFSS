@@ -1,5 +1,7 @@
-<?php defined( 'BASEPATH' ) OR exit( 'No direct script access allowed' ); ?>
-<div class="response-message no-radius no-mb"><?php echo alert_message(); ?></div>
+<?php defined('BASEPATH') or exit('No direct script access allowed'); ?>
+<div class="response-message no-radius no-mb">
+    <?php echo alert_message(); ?>
+</div>
 
 <!-- Hero: -->
 
@@ -15,20 +17,20 @@
         </div>
     </div>
 </section>
-<?php if ( ! empty( $categories = get_articles_categories() ) ) {?>
+<?php if (!empty($categories = get_articles_categories())) { ?>
 
 <div class="z-posts container">
 
     <div class="row">
 
         <div class="col-md-4  mb-3">
-            <a href="<?php echo base_url('knowledge-base/washing-article');?>">
+            <a href="<?php echo base_url('knowledge-base/washing-article'); ?>">
                 <div class="card rounded-0">
-                    <img src="<?php echo base_url('assets/images/home_dry_clean.jpg')?>" class="card-img-top rounded-0"
+                    <img src="<?php echo base_url('assets/images/home_dry_clean.jpg') ?>" class="card-img-top rounded-0"
                         alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="<?php echo base_url('knowledge-base/washing-article');?>">Washing and Drying</a>
+                            <a href="<?php echo base_url('knowledge-base/washing-article'); ?>">Washing and Drying</a>
                         </h5>
                     </div>
                 </div>
@@ -39,13 +41,13 @@
 
 
         <div class="col-md-4  mb-3">
-            <a href="<?php echo base_url('knowledge-base/stain-article');?>">
+            <a href="<?php //echo base_url('knowledge-base/stain-article');?>">
                 <div class="card rounded-0">
-                    <img src="<?php echo base_url('assets/images/stain.jpg')?>" class="card-img-top rounded-0"
+                    <img src="<?php echo base_url('assets/images/stain.jpg') ?>" class="card-img-top rounded-0"
                         alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="<?php echo base_url('knowledge-base/stain-article');?>">Stain</a>
+                            <a href="<?php echo base_url('knowledge-base/stain-article'); ?>">Stain (coming soon..)</a>
                         </h5>
                     </div>
                 </div>
@@ -55,16 +57,16 @@
         </div>
 
 
-        
+
 
         <div class="col-md-4  mb-3">
-            <a href="<?php echo base_url('knowledge-base/starching-article');?>">
+            <a href="<?php echo base_url('knowledge-base/starching-article'); ?>">
                 <div class="card rounded-0">
-                    <img src="<?php echo base_url('assets/images/starching.png')?>" class="card-img-top rounded-0"
+                    <img src="<?php echo base_url('assets/images/starching.png') ?>" class="card-img-top rounded-0"
                         alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="<?php echo base_url('knowledge-base/starching-article');?>">Starching</a>
+                            <a href="<?php echo base_url('knowledge-base/starching-article'); ?>">Starching</a>
                         </h5>
                     </div>
                 </div>
@@ -73,16 +75,16 @@
 
         </div>
         <!-- /col -->
-        <?php foreach ( $categories as $category ) { ?>
+        <?php foreach ($categories as $category) { ?>
         <!-- <div class="col-md-4  mb-3">
 
             <div class="card rounded-0">
-                <img src="<?php echo base_url('assets/images/home_laundry.jpg')?>" class="card-img-top rounded-0"
+                <img src="<?php echo base_url('assets/images/home_laundry.jpg') ?>" class="card-img-top rounded-0"
                     alt="...">
                 <div class="card-body">
                     <h5 class="card-title text-center">
                         <a
-                            href="<?php echo env_url( get_kb_category_slug( html_escape( $category->slug ) ) ); ?>"><?php echo html_escape( $category->name ); ?></a>
+                            href="<?php echo env_url(get_kb_category_slug(html_escape($category->slug))); ?>"><?php echo html_escape($category->name); ?></a>
                     </h5>
                 </div>
             </div>
@@ -96,15 +98,15 @@
     </div>
     <!-- /.row -->
 
-    <div class="row mb-5">     
+    <div class="row mb-5">
         <div class="col-md-4  mb-3">
-            <a href="<?php echo base_url('knowledge-base/newironing-article');?>">
+            <a href="<?php echo base_url('knowledge-base/newironing-article'); ?>">
                 <div class="card rounded-0">
-                    <img src="<?php echo base_url('assets/images/home_laundry.jpg')?>" class="card-img-top rounded-0"
+                    <img src="<?php echo base_url('assets/images/home_laundry.jpg') ?>" class="card-img-top rounded-0"
                         alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="<?php echo base_url('knowledge-base/newironing-article');?>">Ironing</a>
+                            <a href="<?php echo base_url('knowledge-base/newironing-article'); ?>">Ironing</a>
                         </h5>
                     </div>
                 </div>
@@ -116,7 +118,7 @@
 
 </div>
 <!-- /.container -->
-<?php 
+<?php
 } else { ?>
 <div class="z-list container my-5">
     <div class="shadow-sm">
@@ -126,9 +128,11 @@
                     <div class="row">
                         <div class="col">
                             <div class="text-center">
-                                <img class="not-found mt-2 mb-4" src="<?php illustration_by_color( 'not_found' ); ?>"
+                                <img class="not-found mt-2 mb-4" src="<?php illustration_by_color('not_found'); ?>"
                                     alt="">
-                                <h2 class="h4 fw-bold"><?php echo lang( 'no_records_found' ); ?></h2>
+                                <h2 class="h4 fw-bold">
+                                    <?php echo lang('no_records_found'); ?>
+                                </h2>
                             </div>
                         </div>
                         <!-- /col -->
@@ -146,4 +150,4 @@
 <!-- /.z-list -->
 <?php } ?>
 
-<?php load_view( 'home/still_no_luck' ); ?>
+<?php load_view('home/still_no_luck'); ?>
