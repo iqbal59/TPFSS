@@ -41,13 +41,13 @@
 
 
         <div class="col-md-4  mb-3">
-            <a href="<?php //echo base_url('knowledge-base/stain-article');?>">
+            <a href="<?php echo base_url('knowledge-base/stain-article'); ?>">
                 <div class="card rounded-0">
                     <img src="<?php echo base_url('assets/images/stain.jpg') ?>" class="card-img-top rounded-0"
                         alt="...">
                     <div class="card-body">
                         <h5 class="card-title text-center">
-                            <a href="<?php echo base_url('knowledge-base/stain-article'); ?>">Stain (coming soon..)</a>
+                            <a href="<?php echo base_url('knowledge-base/stain-article'); ?>">Stain</a>
                         </h5>
                     </div>
                 </div>
