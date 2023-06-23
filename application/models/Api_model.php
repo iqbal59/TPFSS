@@ -15,7 +15,7 @@ class Api_model extends CI_Model
 
     public function get_all_customers()
     {
-        $this->db->select("store_crm_code, store_code, store_crm_name, firm_name,email_id,contact_number,gstin_no, store_address");
+        $this->db->select("store_crm_code, store_code, store_name, firm_name,email_id,contact_number,gstin_no, store_address");
         $this->db->from("stores");
         return $this->db->get()->result();
     }
