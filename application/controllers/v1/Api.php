@@ -136,4 +136,15 @@ class Api extends REST_Controller
             'message' => $response
         ], REST_Controller::HTTP_OK);
     }
+
+    public function stores_get()
+    {
+
+        $items = $this->api_model->get_all_customers();
+        $response['result'] = $items;
+        $this->set_response($response, REST_Controller::HTTP_OK);
+    }
+
+
+
 }
