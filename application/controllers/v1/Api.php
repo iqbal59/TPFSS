@@ -250,7 +250,7 @@ class Api extends REST_Controller
         $synInvoices = array();
         foreach ($tallyResposne->result as $item) {
             if ($item->Status == 'Success') {
-                if ($this->api_model->sync_with_tally($item->id)) {
+                if ($this->api_model->sync_with_tally_credit_note($item->id)) {
                     $inv['syncstatus'] = true;
                 } else {
                     $inv['syncstatus'] = false;
