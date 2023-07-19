@@ -468,8 +468,10 @@ class Accounts extends CI_Controller
             $data['refundSales'] = $this->Accounts_model->get_all_refund_sales();
             if ($data['refundSales']) {
                 foreach ($data['refundSales'] as $r) {
-                    $item = array('amount' => $r['amount'], 'service_code' => $r['service_code'], 'store_royalty' => $r['store_royalty'], 'order_ids' => $r['order_nos'], 'item_name' => $r['service_code'] . ' Royalty @' . $r['store_royalty'], 'rate' => ($r['amount'] * $r['store_royalty'] / 100));
-                    $data['rsales'][$r['id']][] = $item;
+                    if ($r['id'] != null) {
+                        $item = array('amount' => $r['amount'], 'service_code' => $r['service_code'], 'store_royalty' => $r['store_royalty'], 'order_ids' => $r['order_nos'], 'item_name' => $r['service_code'] . ' Royalty @' . $r['store_royalty'], 'rate' => ($r['amount'] * $r['store_royalty'] / 100));
+                        $data['rsales'][$r['id']][] = $item;
+                    }
                 }
 
 
@@ -523,7 +525,9 @@ class Accounts extends CI_Controller
                     continue;
                 }
                 $this->Common_model->insert(array('store_id' => $p['store_id'], 'voucher_type' => 'R', 'amount' => $p['final_amount'], 'descriptions' => 'Paytm ' . $data['period']), "vouchers");
-                $this->Common_model->insert(array('store_id' => $p['store_id'], 'voucher_type' => 'C', 'amount' => ($p['paytmcommission'] * 7.5 / 100), 'descriptions' => 'Paytm ' . $p['paytmcommission'] . " @7.5% " . $data['period']), "vouchers");
+
+                if ($p['paytmcommission'] != 0)
+                    $this->Common_model->insert(array('store_id' => $p['store_id'], 'voucher_type' => 'C', 'amount' => ($p['paytmcommission'] * 7.5 / 100), 'descriptions' => 'Paytm ' . $p['paytmcommission'] . " @7.5% " . $data['period']), "vouchers");
 
                 $this->Common_model->paytmbill($p['ids']);
             }
