@@ -26,6 +26,19 @@ class Api_model extends CI_Model
         return $this->db->get()->result();
     }
 
+    public function get_all_payment()
+    {
+        $this->db->select("vouchers.id, amount as net_amount, store_name, create_date as voucher_date, firm_name, store_state, concat('TD/','23-24','/', vouchers.id) as voucher_no, store_address, store_city, store_state, gstin_no, email_id, pan_no, contact_number, amount, 12 as tax_amount, 18 as tax_rate, gst_st_code, descriptions,pin_code");
+        $this->db->from("vouchers");
+        $this->db->join("stores", "stores.id=vouchers.store_id", "left");
+        $this->db->where('is_sync', 0);
+        $this->db->where('voucher_type', 'R');
+        $this->db->where('date(vouchers.create_date) >=', '2023-07-13');
+        $this->db->limit(300, 0);
+        return $this->db->get()->result();
+    }
+
+
 
     public function get_all_customers()
     {
@@ -39,9 +52,9 @@ class Api_model extends CI_Model
         $this->db->where('id', $invoiceId);
         return $this->db->update('invoices', array('is_sync' => 1));
     }
-    public function sync_with_tally_credit_note($creditnote_id)
+    public function sync_with_tally_credit_note_or_payment($id)
     {
-        $this->db->where('id', $creditnote_id);
+        $this->db->where('id', $id);
         return $this->db->update('vouchers', array('is_sync' => 1));
     }
 }

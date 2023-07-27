@@ -250,7 +250,7 @@ class Api extends REST_Controller
         $synInvoices = array();
         foreach ($tallyResposne->result as $item) {
             if ($item->Status == 'Success') {
-                if ($this->api_model->sync_with_tally_credit_note($item->id)) {
+                if ($this->api_model->sync_with_tally_credit_note_or_payment($item->id)) {
                     $inv['syncstatus'] = true;
                 } else {
                     $inv['syncstatus'] = false;
@@ -267,6 +267,73 @@ class Api extends REST_Controller
         ], REST_Controller::HTTP_OK);
     }
     //END CREDIT
+
+
+
+    //Payment
+
+    public function payments_get()
+    {
+        $payments = array();
+        $items = $this->api_model->get_all_payment();
+
+        foreach ($items as $item) {
+            $paymentItem['id'] = $item->id;
+            $paymentItem['voucher_type'] = 'Receipt';
+            $paymentItem['voucher_no'] = $item->voucher_no;
+            $paymentItem['voucher_date'] = date('d/m/Y', strtotime($item->voucher_date));
+            $paymentItem['narration'] = "Recieved Payment From Customer " . $item->firm_name . " and  " . $item->amount;
+
+            $ledgerDetails = array();
+            $ld['ledger_name'] = $item->firm_name;
+            $ld['ledger_amt'] = $item->amount;
+            $ld['dr_cr'] = "DR";
+            array_push($ledgerDetails, $ld);
+
+            $ld['ledger_name'] = "Paytm";
+            $ld['ledger_amt'] = $item->amount;
+            $ld['dr_cr'] = "CR";
+            array_push($ledgerDetails, $ld);
+
+
+
+            $paymentItem['ledger_details'] = $ledgerDetails;
+            array_push($payments, $paymentItem);
+        }
+
+        $response['result'] = $payments;
+        $this->set_response($response, REST_Controller::HTTP_OK);
+    }
+
+
+    public function sync_with_tally_payment_post()
+    {
+        $tallyResposne = json_decode(file_get_contents('php://input'));
+
+        //print_r($tallyResposne['result']);
+        $syncPayments = array();
+        foreach ($tallyResposne->result as $item) {
+            if ($item->Status == 'Success') {
+                if ($this->api_model->sync_with_tally_credit_note_or_payment($item->id)) {
+                    $payment['syncstatus'] = true;
+                } else {
+                    $payment['syncstatus'] = false;
+                }
+                $payment['id'] = $item->id;
+                array_push($syncPayments, $payment);
+            }
+        }
+
+        $response['result'] = $syncPayments;
+        $this->set_response([
+            $this->config->item('rest_status_field_name') => true,
+            'message' => $response
+        ], REST_Controller::HTTP_OK);
+    }
+    //END Payment
+
+
+
 
     public function stores_get()
     {
