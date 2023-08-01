@@ -16,7 +16,7 @@ class Api_model extends CI_Model
 
     public function get_all_creditnote()
     {
-        $this->db->select("vouchers.id, amount as net_amount, store_name, create_date as invoice_date, firm_name, store_state, concat('TD/','23-24','/', vouchers.id) as invoice_no, store_address, store_city, store_state, gstin_no, email_id, pan_no, contact_number, amount, 12 as tax_amount, 18 as tax_rate, gst_st_code, descriptions,pin_code");
+        $this->db->select("vouchers.id, amount as net_amount, store_name, create_date as invoice_date, firm_name, store_state, concat('TD/','23-24','/', vouchers.id) as invoice_no, store_address, store_city, store_state, gstin_no, email_id, pan_no, contact_number, amount, (amount*100)/118 as taxable_amount, ((amount*100)/118)*0.18 as tax_amount, 18 as tax_rate, gst_st_code, descriptions,pin_code");
         $this->db->from("vouchers");
         $this->db->join("stores", "stores.id=vouchers.store_id", "left");
         $this->db->where('is_sync', 0);

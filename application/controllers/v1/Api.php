@@ -183,15 +183,16 @@ class Api extends REST_Controller
             $invoiceItem['mobile_No'] = $item->contact_number;
             $invoiceItem['narration'] = $item->descriptions;
             $ledgerDetails = array();
+
             $ld['ledger_name'] = $item->firm_name;
             $ld['ledger_perc'] = "";
-            $ld['ledger_amt'] = $item->net_amount;
+            $ld['ledger_amt'] = $item->taxable_amount;
             $ld['dr_cr'] = "DR";
             array_push($ledgerDetails, $ld);
 
             $ld['ledger_name'] = "Royalty on Laundry";
             $ld['ledger_perc'] = "";
-            $ld['ledger_amt'] = $item->amount;
+            $ld['ledger_amt'] = $item->taxable_amount;
             $ld['dr_cr'] = "CR";
             array_push($ledgerDetails, $ld);
 

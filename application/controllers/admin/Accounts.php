@@ -1,5 +1,4 @@
 <?php
-
 ini_set('max_execution_time', 0);
 ini_set('memory_limit', '2048M');
 class Accounts extends CI_Controller
@@ -106,6 +105,50 @@ class Accounts extends CI_Controller
         $this->load->view('admin/index', $data);
     }
 
+
+    public function getPaytmOrder()
+    {
+        $this->load->library('PaytmChecksum');
+        $paytmParams = array();
+        $paytmParams["body"] = array(
+            "mid" => "TUMBLE14269829602154",
+            "fromDate" => "2023-07-12T23: 59: 35+08: 00",
+            "toDate" => "2023-02-28T23: 59: 35+08: 00",
+            "orderSearchType" => "TRANSACTION",
+            "orderSearchStatus" => "SUCCESS",
+            "pageNumber" => 1,
+            "pageSize" => 50
+
+        );
+        /*
+         * Generate checksum by parameters we have in body
+         * Find your Merchant Key in your Paytm Dashboard at https://dashboard.paytm.com/next/apikeys
+         */
+        echo $checksum = $this->paytmchecksum->generateSignature(json_encode($paytmParams["body"], JSON_UNESCAPED_SLASHES), "CZLNggLqAmcRtGn!");
+
+        $isVerifySignature = $this->paytmchecksum->verifySignature(json_encode($paytmParams["body"], JSON_UNESCAPED_SLASHES), "CZLNggLqAmcRtGn!", $checksum);
+
+        if ($isVerifySignature) {
+            echo "Checksum Matched";
+        } else {
+            echo "Checksum Mismatched";
+        }
+
+        $paytmParams["head"] = array(
+            "signature" => $checksum,
+            "tokenType" => "CHECKSUM",
+            //"requestTimestamp" => ""
+        );
+        $post_data = json_encode($paytmParams, JSON_UNESCAPED_SLASHES);
+        $url = "https://securegw.paytm.in/merchant-passbook/search/list/order/v2";
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array("Content-Type: application/json"));
+        $response = curl_exec($ch);
+        print_r($response);
+    }
 
     public function processemailnew()
     {
