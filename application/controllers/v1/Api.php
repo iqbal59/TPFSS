@@ -186,13 +186,13 @@ class Api extends REST_Controller
 
             $ld['ledger_name'] = $item->firm_name;
             $ld['ledger_perc'] = "";
-            $ld['ledger_amt'] = $item->taxable_amount;
+            $ld['ledger_amt'] = round($item->taxable_amount, 2);
             $ld['dr_cr'] = "DR";
             array_push($ledgerDetails, $ld);
 
             $ld['ledger_name'] = "Royalty on Laundry";
             $ld['ledger_perc'] = "";
-            $ld['ledger_amt'] = $item->taxable_amount;
+            $ld['ledger_amt'] = round($item->taxable_amount, 2);
             $ld['dr_cr'] = "CR";
             array_push($ledgerDetails, $ld);
 
@@ -200,8 +200,8 @@ class Api extends REST_Controller
                 $cgstRate = $item->tax_rate / 2;
                 $sgstRate = $item->tax_rate / 2;
                 $igstRate = '0.00';
-                $cgstAmount = $item->tax_amount / 2;
-                $sgstAmount = $item->tax_amount / 2;
+                $cgstAmount = round($item->tax_amount / 2, 2);
+                $sgstAmount = round($item->tax_amount / 2, 2);
                 $igstAmount = '0.00';
             } else {
                 $cgstRate = '0.00';
@@ -209,7 +209,7 @@ class Api extends REST_Controller
                 $igstRate = $item->tax_rate;
                 $cgstAmount = '0.00';
                 $sgstAmount = '0.00';
-                $igstAmount = $item->tax_amount;
+                $igstAmount = round($item->tax_amount, 2);
             }
 
 
