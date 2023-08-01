@@ -200,8 +200,8 @@ class Api extends REST_Controller
                 $cgstRate = $item->tax_rate / 2;
                 $sgstRate = $item->tax_rate / 2;
                 $igstRate = '0.00';
-                $cgstAmount = round($item->tax_amount / 2, 2);
-                $sgstAmount = round($item->tax_amount / 2, 2);
+                $cgstAmount = round(($item->tax_amount / 2), 2);
+                $sgstAmount = round(($item->tax_amount / 2), 2);
                 $igstAmount = '0.00';
             } else {
                 $cgstRate = '0.00';
