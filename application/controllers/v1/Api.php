@@ -9,6 +9,8 @@ class Api extends REST_Controller
     {
         parent::__construct();
         $this->load->model('api_model');
+        $this->load->model('Voucher_model');
+        $this->load->model('store_model');
         header('Content-Type: application/json');
     }
 
@@ -350,6 +352,54 @@ class Api extends REST_Controller
         ], REST_Controller::HTTP_OK);
     }
     //END Payment
+
+
+    public function addHdFCPayment_post()
+    {
+        try {
+            $_POST = json_decode(file_get_contents('php://input'), true);
+            $this->form_validation->set_rules('order_id', 'Order ID', 'trim|required');
+            $this->form_validation->set_rules('amount', 'Amount', 'trim|required');
+
+
+            if (!$this->form_validation->run()) {
+                throw new Exception(validation_errors());
+            }
+
+
+            $storeCode = current(explode("_", $this->input->post('order_id')));
+
+            $storeInfo = $this->store_model->get_store_by_code($storeCode);
+
+
+            $data = array(
+                'voucher_type' => 'R',
+                'store_id' => $storeInfo['id'],
+                'amount' => $this->input->post('amount'),
+                'create_date' => date('Y-m-dH:i:s'),
+                'descriptions' => $this->input->post('descriptions')
+            );
+
+
+
+            if ($this->Voucher_model->add_voucher($data) > 0) {
+                $this->set_response([
+                    'status' => true,
+                    'message' => $data,
+                ], REST_Controller::HTTP_OK);
+            } else {
+                // echo $this->db->last_query();
+                throw new Exception('Insert fail');
+            }
+        } catch (Throwable $e) {
+            $this->set_response([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+    //END Payment
+
 
 
 
