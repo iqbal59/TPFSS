@@ -9,98 +9,113 @@
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
     <style type="text/css">
-    section #services {
-        /*text-align: center;*/
-        transform: translatez(0);
-        margin: 0;
-        padding: 0;
-    }
+        section #services {
+            /*text-align: center;*/
+            transform: translatez(0);
+            margin: 0;
+            padding: 0;
+        }
 
-    section #services li {
-        width: 40px;
-        height: 50px;
-        display: inline-block;
-        margin-right: 10px;
-        list-style: none;
-    }
+        section #services li {
+            width: 40px;
+            height: 50px;
+            display: inline-block;
+            margin-right: 10px;
+            list-style: none;
+        }
 
-    section #services li div {
-        width: 40px;
-        height: 40px;
-        color: #FFBE0E;
-        font-size: 1.5em;
-        text-align: center;
-        line-height: 40px;
-        background-color: #fff;
-        transition: all 0.5s ease;
-    }
+        section #services li div {
+            width: 40px;
+            height: 40px;
+            color: #FFBE0E;
+            font-size: 1.5em;
+            text-align: center;
+            line-height: 40px;
+            background-color: #fff;
+            transition: all 0.5s ease;
+        }
 
-    section #services li a {
-        color: #FFBE0E;
-    }
+        section #services li a {
+            color: #FFBE0E;
+        }
 
-    section #services li div:hover {
-        transform: rotate(360deg);
-        border-radius: 100px;
-    }
+        section #services li div:hover {
+            transform: rotate(360deg);
+            border-radius: 100px;
+        }
 
-    .credits a {
-        display: block;
-        text-align: center;
-        color: #74d4b3;
-        text-decoration: none;
-        font-size: 24px;
-        margin-top: 50px;
-        background: white;
-        padding: 20px;
-        max-width: 300px;
-    }
+        .credits a {
+            display: block;
+            text-align: center;
+            color: #74d4b3;
+            text-decoration: none;
+            font-size: 24px;
+            margin-top: 50px;
+            background: white;
+            padding: 20px;
+            max-width: 300px;
+        }
 
-    footer {
-        background: #404040;
-    }
+        footer {
+            background: #404040;
+        }
 
-    .shadow-sm {
-        cursor: pointer;
-    }
+        .shadow-sm {
+            cursor: pointer;
+        }
 
-    .row.equal-cols {
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    }
+        .row.equal-cols {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
 
-    .row.equal-cols:before,
-    .row.equal-cols:after {
-        display: block;
-    }
+        .row.equal-cols:before,
+        .row.equal-cols:after {
+            display: block;
+        }
 
-    .row.equal-cols>[class*='col-'] {
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-    }
+        .row.equal-cols>[class*='col-'] {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
 
-    .row.equal-cols>[class*='col-']>* {
-        -webkit-flex: 1 1 auto;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-    }
+        .row.equal-cols>[class*='col-']>* {
+            -webkit-flex: 1 1 auto;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+        }
 
-    .card-text {
-        font-size: 14px;
-    }
+        .card-text {
+            font-size: 14px;
+        }
 
-    .bg-top {
-        background-color: #212121;
-    }
+        .bg-top {
+            background-color: #212121;
+        }
     </style>
+    <!-- Calendly badge widget begin -->
+    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet">
+    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
+    <script type="text/javascript">
+        window.onload = function () {
+            Calendly.initBadgeWidget({
+                url: 'https://calendly.com/tumbledry/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=a0c839',
+                text: 'Schedule time with Us',
+                color: '#a0c839',
+                textColor: '#ffffff',
+                branding: true
+            });
+        }
+    </script>
+    <!-- Calendly badge widget end -->
 </head>
 
 <body>
@@ -180,10 +195,10 @@
 
 
                 if ($this->session->userdata('is_partner_login')) { ?>
-                <span class="navbar-text text-white">
-                    Welcome
-                    <?php echo $this->session->userdata('name'); ?>
-                </span>
+                    <span class="navbar-text text-white">
+                        Welcome
+                        <?php echo $this->session->userdata('name'); ?>
+                    </span>
 
                 <?php } ?>
 
@@ -233,13 +248,13 @@
                     <?php $msg = $this->session->flashdata('msg'); ?>
                     <?php if (isset($msg)): ?>
 
-                    <div class="col-md-12">
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            <i class="fa fa-check-circle"></i>
-                            <?php echo $msg; ?>
-                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        <div class="col-md-12">
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <i class="fa fa-check-circle"></i>
+                                <?php echo $msg; ?>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         </div>
-                    </div>
 
                     <?php endif ?>
 
@@ -450,7 +465,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
-    </script>
+        </script>
 
 
 

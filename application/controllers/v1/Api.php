@@ -289,11 +289,29 @@ class Api extends REST_Controller
             $ld['ledger_name'] = $item->firm_name;
             $ld['ledger_amt'] = $item->amount;
             $ld['dr_cr'] = "DR";
+            $bill_details = array();
+            $bill_detail['type'] = '';
+            $bill_detail['ref'] = '';
+            $bill_detail['amount'] = '';
+            $bill_detail['dr_cr'] = '';
+            array_push($bill_details, $bill_detail);
+            $ld['bill_details'] = $bill_detail;
             array_push($ledgerDetails, $ld);
 
-            $ld['ledger_name'] = "Paytm";
+
+
+
+            $ld['ledger_name'] = current(explode(' ', $item->descriptions));
             $ld['ledger_amt'] = $item->amount;
             $ld['dr_cr'] = "CR";
+            $bill_details = array();
+            $bill_detail['type'] = 'Agst Ref';
+            $bill_detail['ref'] = $item->descriptions;
+            $bill_detail['amount'] = $item->amount;
+            $bill_detail['dr_cr'] = 'CR';
+            array_push($bill_details, $bill_detail);
+
+            $ld['bill_details'] = $bill_detail;
             array_push($ledgerDetails, $ld);
 
 
