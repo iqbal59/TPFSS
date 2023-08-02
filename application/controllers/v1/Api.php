@@ -11,6 +11,7 @@ class Api extends REST_Controller
         $this->load->model('api_model');
         $this->load->model('Voucher_model');
         $this->load->model('store_model');
+        $this->load->library('form_validation');
         header('Content-Type: application/json');
     }
 
@@ -354,7 +355,7 @@ class Api extends REST_Controller
     //END Payment
 
 
-    public function addHdFCPayment_post()
+    public function add_hdfc_payment_post()
     {
         try {
             $_POST = json_decode(file_get_contents('php://input'), true);
@@ -376,7 +377,7 @@ class Api extends REST_Controller
                 'voucher_type' => 'R',
                 'store_id' => $storeInfo['id'],
                 'amount' => $this->input->post('amount'),
-                'create_date' => date('Y-m-dH:i:s'),
+                'create_date' => date('Y-m-d H:i:s'),
                 'descriptions' => $this->input->post('descriptions')
             );
 
