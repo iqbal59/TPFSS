@@ -20,6 +20,7 @@ class Api_model extends CI_Model
         $this->db->from("vouchers");
         $this->db->join("stores", "stores.id=vouchers.store_id", "left");
         $this->db->where('is_sync', 0);
+        $this->db->where('descriptions not like', 'Paytm%');
         $this->db->where('voucher_type', 'C');
         $this->db->where('date(vouchers.create_date) >=', '2023-07-13');
         $this->db->limit(300, 0);
