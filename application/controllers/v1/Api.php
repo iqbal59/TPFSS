@@ -291,14 +291,27 @@ class Api extends REST_Controller
             $ledgerDetails = array();
             $ld['ledger_name'] = $item->firm_name;
             $ld['ledger_amt'] = $item->amount;
-            $ld['dr_cr'] = "DR";
+            $ld['dr_cr'] = "CR";
             $bill_details = array();
             $bill_detail['type'] = '';
             $bill_detail['ref'] = '';
             $bill_detail['amount'] = '';
             $bill_detail['dr_cr'] = '';
             array_push($bill_details, $bill_detail);
-            $ld['bill_details'] = $bill_detail;
+            $ld['bill_details'] = $bill_details;
+
+
+            //BAnk Details
+            $bank_details = array();
+            $bank_detail['payment_type'] = '';
+            $bank_detail['bank_amount'] = '';
+            $bank_detail['instrument_no'] = '';
+            $bank_detail['instrument_date'] = '';
+            $bank_detail['bank_name'] = '';
+            array_push($bank_details, $bank_detail);
+
+            $ld['bank_details'] = $bank_details;
+
             array_push($ledgerDetails, $ld);
 
 
@@ -306,7 +319,7 @@ class Api extends REST_Controller
 
             $ld['ledger_name'] = current(explode(' ', $item->descriptions));
             $ld['ledger_amt'] = $item->amount;
-            $ld['dr_cr'] = "CR";
+            $ld['dr_cr'] = "DR";
             $bill_details = array();
             $bill_detail['type'] = 'Agst Ref';
             $bill_detail['ref'] = $item->descriptions;
@@ -314,12 +327,24 @@ class Api extends REST_Controller
             $bill_detail['dr_cr'] = 'CR';
             array_push($bill_details, $bill_detail);
 
-            $ld['bill_details'] = $bill_detail;
+            $ld['bill_details'] = $bill_details;
+
+            //BAnk Details
+            $bank_details = array();
+            $bank_detail['payment_type'] = '';
+            $bank_detail['bank_amount'] = '';
+            $bank_detail['instrument_no'] = '';
+            $bank_detail['instrument_date'] = '';
+            $bank_detail['bank_name'] = '';
+            array_push($bank_details, $bank_detail);
+
+            $ld['bank_details'] = $bank_details;
+
             array_push($ledgerDetails, $ld);
 
 
 
-            $paymentItem['ledger_details'] = $ledgerDetails;
+            $paymentItem['ledger_entries'] = $ledgerDetails;
             array_push($payments, $paymentItem);
         }
 
