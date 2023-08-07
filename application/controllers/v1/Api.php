@@ -286,7 +286,7 @@ class Api extends REST_Controller
             $paymentItem['voucher_type'] = 'Receipt';
             $paymentItem['voucher_no'] = $item->voucher_no;
             $paymentItem['voucher_date'] = date('d/m/Y', strtotime($item->voucher_date));
-            $paymentItem['narration'] = "Recieved Payment From Customer " . $item->firm_name . " and  " . $item->amount;
+            $paymentItem['narration'] = $item->descriptions;
 
             $ledgerDetails = array();
             $ld['ledger_name'] = $item->firm_name;
@@ -294,7 +294,11 @@ class Api extends REST_Controller
             $ld['dr_cr'] = "CR";
             $bill_details = array();
             $bill_detail['type'] = 'Agst Ref';
-            $bill_detail['ref'] = $item->descriptions;
+
+            if (current(explode(' ', $item->descriptions) == 'HDFC'))
+                $bill_detail['ref'] = end(explode(' ', $item->descriptions));
+            else
+                $bill_detail['ref'] = '';
             $bill_detail['amount'] = $item->amount;
             $bill_detail['dr_cr'] = 'CR';
             array_push($bill_details, $bill_detail);
@@ -333,7 +337,10 @@ class Api extends REST_Controller
             $bank_details = array();
             $bank_detail['payment_type'] = '';
             $bank_detail['bank_amount'] = $item->amount;
-            $bank_detail['instrument_no'] = $item->descriptions;
+            if (current(explode(' ', $item->descriptions) == 'HDFC'))
+                $bank_detail['instrument_no'] = end(explode(' ', $item->descriptions));
+            else
+                $bank_detail['instrument_no'] = '';
             $bank_detail['instrument_date'] = '';
             $bank_detail['bank_name'] = '';
             array_push($bank_details, $bank_detail);
