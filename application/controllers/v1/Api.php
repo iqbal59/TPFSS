@@ -295,7 +295,7 @@ class Api extends REST_Controller
             $bill_details = array();
             $bill_detail['type'] = 'Agst Ref';
 
-            if (current(explode(' ', $item->descriptions) == 'HDFC'))
+            if (current(explode(' ', $item->descriptions)) == 'HDFC')
                 $bill_detail['ref'] = end(explode(' ', $item->descriptions));
             else
                 $bill_detail['ref'] = '';
@@ -337,7 +337,7 @@ class Api extends REST_Controller
             $bank_details = array();
             $bank_detail['payment_type'] = '';
             $bank_detail['bank_amount'] = $item->amount;
-            if (current(explode(' ', $item->descriptions) == 'HDFC'))
+            if (current(explode(' ', $item->descriptions)) == 'HDFC')
                 $bank_detail['instrument_no'] = end(explode(' ', $item->descriptions));
             else
                 $bank_detail['instrument_no'] = '';
