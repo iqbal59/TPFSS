@@ -293,10 +293,10 @@ class Api extends REST_Controller
             $ld['ledger_amt'] = $item->amount;
             $ld['dr_cr'] = "CR";
             $bill_details = array();
-            $bill_detail['type'] = '';
-            $bill_detail['ref'] = '';
-            $bill_detail['amount'] = '';
-            $bill_detail['dr_cr'] = '';
+            $bill_detail['type'] = 'Agst Ref';
+            $bill_detail['ref'] = $item->descriptions;
+            $bill_detail['amount'] = $item->amount;
+            $bill_detail['dr_cr'] = 'CR';
             array_push($bill_details, $bill_detail);
             $ld['bill_details'] = $bill_details;
 
@@ -321,10 +321,10 @@ class Api extends REST_Controller
             $ld['ledger_amt'] = $item->amount;
             $ld['dr_cr'] = "DR";
             $bill_details = array();
-            $bill_detail['type'] = 'Agst Ref';
-            $bill_detail['ref'] = $item->descriptions;
-            $bill_detail['amount'] = $item->amount;
-            $bill_detail['dr_cr'] = 'CR';
+            $bill_detail['type'] = '';
+            $bill_detail['ref'] = '';
+            $bill_detail['amount'] = '';
+            $bill_detail['dr_cr'] = '';
             array_push($bill_details, $bill_detail);
 
             $ld['bill_details'] = $bill_details;
@@ -332,8 +332,8 @@ class Api extends REST_Controller
             //BAnk Details
             $bank_details = array();
             $bank_detail['payment_type'] = '';
-            $bank_detail['bank_amount'] = '';
-            $bank_detail['instrument_no'] = '';
+            $bank_detail['bank_amount'] = $item->amount;
+            $bank_detail['instrument_no'] = $item->descriptions;
             $bank_detail['instrument_date'] = '';
             $bank_detail['bank_name'] = '';
             array_push($bank_details, $bank_detail);
