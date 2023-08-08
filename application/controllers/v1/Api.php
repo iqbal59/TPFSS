@@ -325,10 +325,14 @@ class Api extends REST_Controller
             $ld['ledger_amt'] = $item->amount;
             $ld['dr_cr'] = "DR";
             $bill_details = array();
-            $bill_detail['type'] = '';
-            $bill_detail['ref'] = '';
-            $bill_detail['amount'] = '';
-            $bill_detail['dr_cr'] = '';
+            $bill_detail['type'] = 'New Ref';
+            if (current(explode(' ', $item->descriptions)) == 'HDFC')
+                $bill_detail['ref'] = end(explode(' ', $item->descriptions));
+            else
+                $bill_detail['ref'] = '';
+
+            $bill_detail['amount'] = $item->amount;
+            $bill_detail['dr_cr'] = 'DR';
             array_push($bill_details, $bill_detail);
 
             $ld['bill_details'] = $bill_details;
