@@ -100,7 +100,7 @@ class Accounts extends CI_Controller
 
     public function refundAdjust()
     {
-        $this->Common_model->refundAdjust('2023-07-31', '2023-08-06');
+        $this->Common_model->refundAdjust('2023-08-07', '2023-08-13');
         $data['main_content'] = $this->load->view('admin/accounts/refund', null, true);
         $this->load->view('admin/index', $data);
     }
