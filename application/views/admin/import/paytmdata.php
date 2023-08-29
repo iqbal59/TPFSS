@@ -45,20 +45,20 @@
 
             <?php $msg = $this->session->flashdata('msg'); ?>
             <?php if (isset($msg)): ?>
-            <div class="alert alert-success delete_msg pull" style="width: 100%"> <i class="fa fa-check-circle"></i>
-                <?php echo $msg; ?> &nbsp;
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                        aria-hidden="true">×</span> </button>
-            </div>
+                <div class="alert alert-success delete_msg pull" style="width: 100%"> <i class="fa fa-check-circle"></i>
+                    <?php echo $msg; ?> &nbsp;
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                            aria-hidden="true">×</span> </button>
+                </div>
             <?php endif ?>
 
             <?php $error_msg = $this->session->flashdata('error_msg'); ?>
             <?php if (isset($error_msg)): ?>
-            <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
-                <?php echo $error_msg; ?> &nbsp;
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                        aria-hidden="true">×</span> </button>
-            </div>
+                <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
+                    <?php echo $error_msg; ?> &nbsp;
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                            aria-hidden="true">×</span> </button>
+                </div>
             <?php endif ?>
 
 
@@ -82,7 +82,7 @@
                                         <div class="controls">
                                             <input type="date" name="from_date" class="form-control"
                                                 placeholder="MM/DD/YYYY" required
-                                                value="<?php echo isset($from_date)?$from_date:date("Y-m-01");?>">
+                                                value="<?php echo isset($from_date) ? $from_date : date("Y-m-01"); ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -92,7 +92,7 @@
                                         <div class="controls">
                                             <input type="date" name="to_date" class="form-control"
                                                 placeholder="MM/DD/YYYY" required
-                                                value="<?php echo isset($to_date)?$to_date:date("Y-m-d");?>">
+                                                value="<?php echo isset($to_date) ? $to_date : date("Y-m-d"); ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -111,8 +111,8 @@
 
 
                             <!-- CSRF token -->
-                            <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>"
-                                value="<?=$this->security->get_csrf_hash();?>" />
+                            <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+                                value="<?= $this->security->get_csrf_hash(); ?>" />
 
 
 
@@ -151,30 +151,38 @@
                             </thead>
                             <tbody>
                                 <?php foreach ($paytmdata as $s) { ?>
-                                <tr>
+                                    <tr>
 
-                                    <td><?php echo $s['transaction_no']; ?>
-                                    </td>
-                                    <td><?php echo date("d-m-Y", strtotime($s['transaction_date'])); ?>
-                                    </td>
-                                    <td><?php if ($s['is_reconcile']=='1') {
-    echo 'Yes';
-} else {
-    echo 'No';
-} ?>
-                                    </td>
-                                    <td><?php echo $s['mid_no']; ?>
-                                    </td>
-                                    <td><?php echo $s['amount']; ?>
-                                    </td>
-                                    <td><?php echo $s['commission']; ?>
-                                    </td>
-                                    <td><?php echo $s['utr_no']; ?>
-                                    </td>
-                                    <td><?php echo $s['store_code']; ?>
-                                    </td>
+                                        <td>
+                                            <?php echo "'" . $s['transaction_no'] . "'"; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo date("d-m-Y", strtotime($s['transaction_date'])); ?>
+                                        </td>
+                                        <td>
+                                            <?php if ($s['is_reconcile'] == '1') {
+                                                echo 'Yes';
+                                            } else {
+                                                echo 'No';
+                                            } ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $s['mid_no']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $s['amount']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $s['commission']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $s['utr_no']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $s['store_code']; ?>
+                                        </td>
 
-                                </tr>
+                                    </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
