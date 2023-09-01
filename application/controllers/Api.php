@@ -21,7 +21,7 @@ class Api extends REST_Controller
     public function paytm_payment_post()
     {
         try {
-            $_POST = json_decode(file_get_contents('php://input'), true);
+            //$_POST = json_decode(file_get_contents('php://input'), true);
             //$data = file_get_contents('php://input');
             // $this->form_validation->set_rules('order_id', 'Order ID', 'trim|required');
             // $this->form_validation->set_rules('amount', 'Amount', 'trim|required');
