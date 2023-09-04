@@ -39,7 +39,12 @@ class Api extends REST_Controller
 
             $data = array(
 
-                'descriptions' => $_POST['ORDERID']
+                'order_id' => $_POST['ORDERID'],
+                'transaction_no' => $_POST['TXNID'],
+                'mid_no' => $_POST['MID'],
+                'amount' => $_POST['TXNAMOUNT'],
+                'transaction_date' => $_POST['TXNDATETIME'],
+                'status' => $_POST['STATUS']
             );
 
 
