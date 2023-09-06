@@ -3,8 +3,8 @@ class Accounts_model extends CI_Model
 {
     public function get_all_sale_by_store($date, $date_to)
     {
-        $query=$this->db->query('CALL get_sale_by_store(?, ?)', array('dt'=>$date, 'dt_to'=>$date_to));
-        $res=$query->result_array();
+        $query = $this->db->query('CALL get_sale_by_store(?, ?)', array('dt' => $date, 'dt_to' => $date_to));
+        $res = $query->result_array();
         mysqli_next_result($this->db->conn_id);
 
         $query->free_result();
@@ -33,8 +33,8 @@ class Accounts_model extends CI_Model
 
     public function calculate_expense_by_partner_new($id, $no_of_month)
     {
-        $query=$this->db->query('CALL account_summary(?, ?)', array('storeid'=>$id, 'no_of_months'=>$no_of_month));
-        $res=$query->result_array();
+        $query = $this->db->query('CALL account_summary(?, ?)', array('storeid' => $id, 'no_of_months' => $no_of_month));
+        $res = $query->result_array();
         //print_r($res);
         mysqli_next_result($this->db->conn_id);
 
@@ -99,7 +99,7 @@ class Accounts_model extends CI_Model
 
     public function get_invoice_by_store($store_id, $from_dt, $to_dt)
     {
-        $sql="select * from invoices where store_id='".$store_id."' and date(invoice_date) >= '".$from_dt."' and date(invoice_date) <= '".$to_dt."'";
+        $sql = "select * from invoices where store_id='" . $store_id . "' and date(invoice_date) >= '" . $from_dt . "' and date(invoice_date) <= '" . $to_dt . "'";
         return $this->db->query($sql)->row();
     }
 
@@ -107,7 +107,7 @@ class Accounts_model extends CI_Model
     {
         $this->db->select("*, invoices.id as invoice_no, invoices.invoice_no as invoiceno");
         $this->db->from("invoices");
-        
+
         $this->db->join("stores", "stores.id=invoices.store_id", "left");
         $this->db->where('invoices.id', $id);
         return $this->db->get()->row();
@@ -118,77 +118,81 @@ class Accounts_model extends CI_Model
         $this->db->select("item_name, qty, rate,order_nos, amount, service_code, name , royalty, sac_code");
         $this->db->from("invoice_item");
         $this->db->join("services", "services.code=invoice_item.service_code", "inner");
-        
-        
+
+
         $this->db->where('invoice_id', $id);
         return $this->db->get()->result();
     }
 
     public function saveInvoice($data, $period)
     {
-        foreach ($data as $store_id=>$items) {
-            $total_amount=0;
-            $tax_amount=0;
-            $net_amount=0;
-            $invoice_no=$this->getInvoiceNo();
-            $this->db->insert('invoices', array('store_id'=>$store_id, 'invoice_no'=>$invoice_no));
-            $invoice_id=$this->db->insert_id();
-            $storeData=$this->db->get_where('stores', array('id'=>$store_id))->row_array();
+        foreach ($data as $store_id => $items) {
+            $total_amount = 0;
+            $tax_amount = 0;
+            $net_amount = 0;
+            $invoice_no = $this->getInvoiceNo();
+            $this->db->insert('invoices', array('store_id' => $store_id, 'invoice_no' => $invoice_no));
+            $invoice_id = $this->db->insert_id();
+            $storeData = $this->db->get_where('stores', array('id' => $store_id))->row_array();
             foreach ($items as $item) {
 
-                    //print_r($item);
-                $this->db->insert('invoice_item', array('invoice_id'=>$invoice_id, 'item_name'=>$item['item_name'], 'rate'=>$item['rate'], 'order_nos'=>$item['order_ids'], 'amount'=>$item['amount'], 'service_code'=>$item['service_code'], 'royalty'=>$item['store_royalty']));
+                //print_r($item);
+                $this->db->insert('invoice_item', array('invoice_id' => $invoice_id, 'item_name' => $item['item_name'], 'rate' => $item['rate'], 'order_nos' => $item['order_ids'], 'amount' => $item['amount'], 'service_code' => $item['service_code'], 'royalty' => $item['store_royalty']));
 
-                $total_amount+=$item['rate'];
+                $total_amount += $item['rate'];
                 $this->db->query("update storesales set is_bill=1 where store_name='$storeData[store_name]' and order_no in($item[order_ids])");
             }
-            $tax_amount=$total_amount*18/100;
-            $net_amount=$total_amount+$tax_amount;
+            $tax_amount = $total_amount * 18 / 100;
+            $net_amount = $total_amount + $tax_amount;
             $this->db->query("update invoices set amount='$total_amount', tax_rate='18', tax_amount='$tax_amount', net_amount='$net_amount', descriptions='$period' where id='$invoice_id'");
         }
     }
     public function getInvoiceNo()
     {
-        $invoice_no=1;
-        $invoiceData=$this->db->query("select max(invoice_no) as invoice_no from invoices where date(invoice_date) >= '2023-04-01'")->row();
+        $invoice_no = 1;
+        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where date(invoice_date) >= '2023-04-01'")->row();
         if ($invoiceData->invoice_no) {
-            $invoice_no+=$invoiceData->invoice_no;
+            $invoice_no += $invoiceData->invoice_no;
         }
 
         return $invoice_no;
     }
-
+    public function select_max_serial_no()
+    {
+        $this->db->select_max('serial_no');
+        return $this->db->get('vouchers')->row()->serial_no;
+    }
 
     public function refundInvoice($data)
     {
-        foreach ($data as $store_id=>$items) {
-            $total_amount=0;
-            $tax_amount=0;
-            $net_amount=0;
-            $order_string='';
+        foreach ($data as $store_id => $items) {
+            $total_amount = 0;
+            $tax_amount = 0;
+            $net_amount = 0;
+            $order_string = '';
             // $this->db->insert('invoices', array('store_id'=>$store_id));
             // $invoice_id=$this->db->insert_id();
-            $storeData=$this->db->get_where('stores', array('id'=>$store_id))->row_array();
+            $storeData = $this->db->get_where('stores', array('id' => $store_id))->row_array();
             foreach ($items as $item) {
 
-                    //print_r($item);
+                //print_r($item);
                 // $this->db->insert('invoice_item', array('invoice_id'=>$invoice_id, 'item_name'=>$item['item_name'], 'rate'=>$item['rate'], 'order_nos'=>$item['order_ids'], 'amount'=>$item['amount'], 'service_code'=>$item['service_code'], 'royalty'=>$item['store_royalty']));
 
-                $total_amount+=$item['rate'];
-                $sql="update refundsales set is_refund=1 where store_name='$storeData[store_name]' and order_no in($item[order_ids])";
-                   
+                $total_amount += $item['rate'];
+                $sql = "update refundsales set is_refund=1 where store_name='$storeData[store_name]' and order_no in($item[order_ids])";
+
                 $this->db->query($sql);
-                $order_string.=$item['order_ids'];
+                $order_string .= $item['order_ids'];
             }
-            $tax_amount=$total_amount*18/100;
-            $net_amount=$total_amount+$tax_amount;
-            $this->db->insert("vouchers", array("amount"=>$net_amount, "voucher_type"=>'C', "descriptions"=>$order_string, "store_id"=>$store_id ));
+            $tax_amount = $total_amount * 18 / 100;
+            $net_amount = $total_amount + $tax_amount;
+            $this->db->insert("vouchers", array("amount" => $net_amount, "voucher_type" => 'C', "descriptions" => $order_string, "store_id" => $store_id, "serial_no" => $this->select_max_serial_no() + 1));
         }
     }
 
     public function get_all_refund_sales()
     {
-        $sql="select store_service_sale.store_name, amount, service_code,  s.royality,  ifnull(royalties.store_royalty, s.royality) as store_royalty, order_nos, stores.id from 
+        $sql = "select store_service_sale.store_name, amount, service_code,  s.royality,  ifnull(royalties.store_royalty, s.royality) as store_royalty, order_nos, stores.id from 
 
             (SELECT store_name, sum(taxable_amount) as amount, service_code, GROUP_CONCAT(QUOTE(order_no)) as order_nos FROM `refundsales` where is_refund=0  group by store_name, service_code ORDER BY `store_name` asc) 
             
@@ -200,30 +204,30 @@ class Accounts_model extends CI_Model
             left join services as s on (s.code=store_service_sale.service_code) 
             left join royalties on (royalties.service_id = s.id and royalties.store_id=stores.id)";
 
-        return $query=$this->db->query($sql)->result_array();
+        return $query = $this->db->query($sql)->result_array();
     }
 
 
     public function get_royalty_sale_data($order_nos, $store_name)
     {
-        $sql="select * from storesales where order_no in(".implode(",", $order_nos).") and store_name='".$store_name."'";
+        $sql = "select * from storesales where order_no in(" . implode(",", $order_nos) . ") and store_name='" . $store_name . "'";
 
-        return $query=$this->db->query($sql)->result_array();
+        return $query = $this->db->query($sql)->result_array();
     }
-        
+
 
     public function get_royalty_paytm_data($mid1, $mid2, $mid3, $from_dt, $to_dt)
     {
-        $sql="select * from paytm where (mid_no='$mid1' or mid_no='$mid2' or mid_no='$mid3') and date(transaction_date) >= '$from_dt' and date(transaction_date) <= '$to_dt' and is_bill=1";
+        $sql = "select * from paytm where (mid_no='$mid1' or mid_no='$mid2' or mid_no='$mid3') and date(transaction_date) >= '$from_dt' and date(transaction_date) <= '$to_dt' and is_bill=1";
 
-        return $query=$this->db->query($sql)->result_array();
+        return $query = $this->db->query($sql)->result_array();
     }
 
     public function get_royalty_bharatPe_data($store_name, $from_dt, $to_dt)
     {
-        $sql="select * from bharatpe where store_name='$store_name' and date(transaction_date) >= '$from_dt' and date(transaction_date) <= '$to_dt' and is_bill=1";
+        $sql = "select * from bharatpe where store_name='$store_name' and date(transaction_date) >= '$from_dt' and date(transaction_date) <= '$to_dt' and is_bill=1";
 
-        return $query=$this->db->query($sql)->result_array();
+        return $query = $this->db->query($sql)->result_array();
     }
 
 
@@ -236,16 +240,16 @@ class Accounts_model extends CI_Model
 
     public function get_all_email_list()
     {
-        $sql="select emailreport.*, firm_name from emailreport left join stores on (emailreport.store_id=stores.id)";
+        $sql = "select emailreport.*, firm_name from emailreport left join stores on (emailreport.store_id=stores.id)";
 
-        return $query=$this->db->query($sql)->result_array();
+        return $query = $this->db->query($sql)->result_array();
     }
 
     public function get_send_to_email_list()
     {
-        $sql="select * from emailreport where email_status=0 limit 0, 10";
+        $sql = "select * from emailreport where email_status=0 limit 0, 10";
 
-        return $query=$this->db->query($sql)->result_array();
+        return $query = $this->db->query($sql)->result_array();
     }
 
 

@@ -36,10 +36,10 @@ class Import extends CI_Controller
 
     public function addstoresale()
     {
-        $dataType=$this->input->post('data_type');
+        $dataType = $this->input->post('data_type');
 
         if ($_FILES) {
-            $file=$_FILES['excel_file']['tmp_name'];
+            $file = $_FILES['excel_file']['tmp_name'];
             if ($file == null) {
                 show_error('Please select a file to import');
                 $this->session->set_flashdata('error_msg', "Please select file");
@@ -48,28 +48,28 @@ class Import extends CI_Controller
                 $handle = fopen($file, "r") or die("err");
                 switch ($dataType) {
                     case '1':
-                        $s_from_date=$this->input->post('s_from_date');
-                        $s_to_date=$this->input->post('s_to_date');
+                        $s_from_date = $this->input->post('s_from_date');
+                        $s_to_date = $this->input->post('s_to_date');
 
                         $this->common_model->saleRefund($s_from_date, $s_to_date);
-                        $row=0;
+                        $row = 0;
                         while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
-                            $odate=date('Y-m-d', strtotime($filesop[2]));
-                            if ($row++ < 3 || $filesop[3]=='' || !(strtotime($odate)>=strtotime($s_from_date) && strtotime($odate)<=strtotime($s_to_date))) {
+                            $odate = date('Y-m-d', strtotime($filesop[2]));
+                            if ($row++ < 3 || $filesop[3] == '' || !(strtotime($odate) >= strtotime($s_from_date) && strtotime($odate) <= strtotime($s_to_date))) {
                                 continue;
                             }
                             $data['store_name'] = $filesop[1];
                             $data['order_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
                             $data['order_no'] = $filesop[3];
                             $data['mobile_no'] = $filesop[6];
-                            $data['taxable_amount'] = (($filesop[12]-$filesop[13]-$filesop[18])/1.18);
+                            $data['taxable_amount'] = (($filesop[12] - $filesop[13] - $filesop[18]) / 1.18);
                             $data['net_amount'] = $filesop[15];
                             //list($service_code)=explode(",", $filesop[34]);
-                            $service_list=array_map("trim", explode(",", $filesop[34]));
+                            $service_list = array_map("trim", explode(",", $filesop[34]));
                             if (in_array('DC', $service_list)) {
-                                $service_code='DC';
+                                $service_code = 'DC';
                             } else {
-                                list($service_code)=$service_list;
+                                list($service_code) = $service_list;
                             }
 
                             //print_r($service_list);
@@ -89,7 +89,7 @@ class Import extends CI_Controller
                         break;
 
                     case '3':
-                        $row=0;
+                        $row = 0;
                         //  echo "AA";
                         while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
                             // if($row++ < 1 || $filesop[6] != 'SUCCESS\'' || !isset($filesop[19]) || !isset($filesop[20])  )
@@ -102,7 +102,7 @@ class Import extends CI_Controller
                             $data['mid_no'] = trim($filesop[7], "'");
                             $data['amount'] = trim($filesop[13], "'");
                             $data['commission'] = trim($filesop[14], "'");
-                            $utr_no=trim($filesop[19], "'");
+                            $utr_no = trim($filesop[19], "'");
                             if (is_numeric($utr_no)) {
                                 $utr_no = ltrim($utr_no, "0");
                             }
@@ -117,9 +117,9 @@ class Import extends CI_Controller
 
                             //print_r($data);
                         }
-                        $paytmbankdata=$this->common_model->matchPaytmWithBank();
+                        $paytmbankdata = $this->common_model->matchPaytmWithBank();
                         foreach ($paytmbankdata as $p) {
-                            if ($p['ba']==$p['bta'] or  ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta'])) {
+                            if ($p['ba'] == $p['bta'] or ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta'])) {
                                 $this->common_model->paytmReconcile($p['utr_no']);
                             }
                         }
@@ -128,14 +128,14 @@ class Import extends CI_Controller
                         break;
 
                     case '4':
-                        $row=0;
+                        $row = 0;
                         while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
                             if ($row++ < 1 || strtoupper(trim($filesop[4], "'")) != 'SUCCESS') {
                                 continue;
                             }
                             $data['transaction_no'] = 'NA';
                             // $data['utr_no'] = trim($filesop[8], "'");
-                            $utr_no=trim($filesop[3], "'");
+                            $utr_no = trim($filesop[3], "'");
                             if (is_numeric($utr_no)) {
                                 $utr_no = ltrim($utr_no, "0");
                             }
@@ -150,7 +150,7 @@ class Import extends CI_Controller
                             //OLD Logic
                             //$data['transaction_date'] = date('Y-m-d H:i:s', strtotime($data['settled_date']. " - 1 days"));
 
-                            $data['transaction_date'] = date('Y-m-d H:i:s', strtotime($data['settled_date']. " - 0 days"));
+                            $data['transaction_date'] = date('Y-m-d H:i:s', strtotime($data['settled_date'] . " - 0 days"));
 
 
                             $this->common_model->insert_ignore($data, 'bharatpe');
@@ -158,7 +158,7 @@ class Import extends CI_Controller
                             // print_r($data);
                         }
 
-                        $bharatpebankdata=$this->common_model->matchBharatpeithBank();
+                        $bharatpebankdata = $this->common_model->matchBharatpeithBank();
                         foreach ($bharatpebankdata as $b) {
                             //if($p['ba']==$p['bta'])
                             $this->common_model->bharatpeReconcile($b['utr_no']);
@@ -168,13 +168,13 @@ class Import extends CI_Controller
                         break;
 
                     case '5':
-                        $row=0;
+                        $row = 0;
                         while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
-                            if ($row++ < 22 ||  $filesop[0] == '') {
+                            if ($row++ < 22 || $filesop[0] == '') {
                                 continue;
                             }
 
-                            if (strpos($filesop[1], 'BHARATPE') !== false || strpos($filesop[1], 'RESILIENT INNOVATION') !== false  || strpos($filesop[1], 'UPI RB') !== false) {
+                            if (strpos($filesop[1], 'BHARATPE') !== false || strpos($filesop[1], 'RESILIENT INNOVATION') !== false || strpos($filesop[1], 'UPI RB') !== false) {
                                 $data['ref_no'] = trim($filesop[2], "'");
                                 if (is_numeric($data['ref_no'])) {
                                     $data['ref_no'] = ltrim($filesop[2], "0");
@@ -186,8 +186,8 @@ class Import extends CI_Controller
                                 //$data['date'] = $date->format('Y-m-d');
                                 $this->common_model->insert_ignore($data, 'bank_bharatpe');
                             }
-                            $data=array();
-                            if (strpos($filesop[1], 'ONE97') !== false  ||  strpos($filesop[1], 'ONE 97') !== false ||  strpos($filesop[1], 'PAYTM') !== false) {
+                            $data = array();
+                            if (strpos($filesop[1], 'ONE97') !== false || strpos($filesop[1], 'ONE 97') !== false || strpos($filesop[1], 'PAYTM') !== false) {
                                 $data['ref_no'] = trim($filesop[2], "'");
                                 if (is_numeric($data['ref_no'])) {
                                     $data['ref_no'] = ltrim($filesop[2], "0");
@@ -198,15 +198,15 @@ class Import extends CI_Controller
                                 $this->common_model->insert_ignore($data, 'bank_paytm');
                             }
 
-                            $paytmbankdata=$this->common_model->matchPaytmWithBank();
+                            $paytmbankdata = $this->common_model->matchPaytmWithBank();
                             foreach ($paytmbankdata as $p) {
-                                if ($p['ba']==$p['bta']) {
+                                if ($p['ba'] == $p['bta']) {
                                     $this->common_model->paytmReconcile($p['utr_no']);
                                 }
                             }
 
 
-                            $bharatpebankdata=$this->common_model->matchBharatpeithBank();
+                            $bharatpebankdata = $this->common_model->matchBharatpeithBank();
                             foreach ($bharatpebankdata as $b) {
                                 //if($p['ba']==$p['bta'])
                                 $this->common_model->bharatpeReconcile($b['utr_no']);
@@ -224,7 +224,7 @@ class Import extends CI_Controller
 
 
                     case '2':
-                        $row=0;
+                        $row = 0;
                         while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
                             if ($row++ < 1) {
                                 continue;
@@ -246,7 +246,7 @@ class Import extends CI_Controller
                         break;
 
                     case '6':
-                        $row=0;
+                        $row = 0;
                         //  echo "AA";
                         while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
                             // if($row++ < 1 || $filesop[6] != 'SUCCESS\'' || !isset($filesop[19]) || !isset($filesop[20])  )
@@ -258,16 +258,16 @@ class Import extends CI_Controller
                             $data['transaction_no'] = trim($filesop[0], "'");
 
                             $order_no = trim($filesop[1], "'");
-                            $order_no=substr($order_no, strpos($order_no, 'T'));
-                            if (strpos($order_no, '_')!==false) {
-                                $order_no=substr($order_no, 0, (strpos($order_no, '_')));
+                            $order_no = substr($order_no, strpos($order_no, 'T'));
+                            if (strpos($order_no, '_') !== false) {
+                                $order_no = substr($order_no, 0, (strpos($order_no, '_')));
                             }
 
                             if (strpos($order_no, '@') !== false) {
-                                $order_no=substr($order_no, 0, (strpos($order_no, '@')));
+                                $order_no = substr($order_no, 0, (strpos($order_no, '@')));
                             }
                             if (strpos($order_no, '.') !== false) {
-                                $order_no=substr($order_no, 0, (strpos($order_no, '.')));
+                                $order_no = substr($order_no, 0, (strpos($order_no, '.')));
                             }
 
                             //  echo $order_no;
@@ -278,7 +278,7 @@ class Import extends CI_Controller
                             //$data['mid_no'] = $this->common_model->getMidNo('T1515', '111');
                             $data['amount'] = trim($filesop[13], "'");
                             $data['commission'] = trim($filesop[14], "'");
-                            $utr_no=trim($filesop[19], "'");
+                            $utr_no = trim($filesop[19], "'");
                             if (is_numeric($utr_no)) {
                                 $utr_no = ltrim($utr_no, "0");
                             }
@@ -292,10 +292,10 @@ class Import extends CI_Controller
 
                             //  print_r($data);
                         }
-                        $paytmbankdata=$this->common_model->matchPaytmWithBank();
+                        $paytmbankdata = $this->common_model->matchPaytmWithBank();
                         foreach ($paytmbankdata as $p) {
                             //if($p['ba']==$p['bta'])
-                            if ($p['ba']==$p['bta'] or  ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta'])) {
+                            if ($p['ba'] == $p['bta'] or ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta'])) {
                                 $this->common_model->paytmReconcile($p['utr_no']);
                             }
                         }
@@ -304,7 +304,7 @@ class Import extends CI_Controller
                         break;
 
                     case '7':
-                        $row=0;
+                        $row = 0;
                         while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
                             if ($row++ < 1) {
                                 continue;
@@ -318,6 +318,7 @@ class Import extends CI_Controller
                             $data['amount'] = trim($filesop[2], "'");
                             $data['create_date'] = date('Y-m-d', strtotime($filesop[1]));
                             $data['descriptions'] = trim($filesop[4], "'");
+                            $data['is_sync'] = 1;
                             $data['voucher_type'] = trim($filesop[3], "'");
 
 
@@ -330,7 +331,7 @@ class Import extends CI_Controller
                         break;
 
                     case '8':
-                        $row=0;
+                        $row = 0;
                         while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
                             if ($row++ < 1) {
                                 continue;
@@ -365,12 +366,12 @@ class Import extends CI_Controller
         // $config['total_rows'] = $this->common_model->get_all_count_by_table('storesales');
         // $this->pagination->initialize($config);
 
-        $data=array();
-        $condition_array=array('from_dt'=>$this->input->get('from_date'), 'to_dt'=>$this->input->get('to_date'));
+        $data = array();
+        $condition_array = array('from_dt' => $this->input->get('from_date'), 'to_dt' => $this->input->get('to_date'));
 
         if (!empty($condition_array['from_dt']) && !empty($condition_array['to_dt'])) {
             $data['salesdata'] = $this->common_model->getSaleOrderData($condition_array);
-            $data['search_query']=$condition_array;
+            $data['search_query'] = $condition_array;
         }
 
 
@@ -382,15 +383,15 @@ class Import extends CI_Controller
 
     public function saledatabill()
     {
-        $data=array();
-        $condition_array=array('from_dt'=>$this->input->get('from_date'), 'to_dt'=>$this->input->get('to_date'));
+        $data = array();
+        $condition_array = array('from_dt' => $this->input->get('from_date'), 'to_dt' => $this->input->get('to_date'));
 
         if (!empty($condition_array['from_dt']) && !empty($condition_array['to_dt'])) {
-            $ordersData= $this->common_model->getSaleBillOrderData($condition_array);
-            $data['search_query']=$condition_array;
+            $ordersData = $this->common_model->getSaleBillOrderData($condition_array);
+            $data['search_query'] = $condition_array;
             if (!empty($ordersData)) {
                 foreach ($ordersData as $sale) {
-                    $data['salesdata'][]=$this->common_model->getBillOrderData($sale['order_nos'], $sale['store_name']);
+                    $data['salesdata'][] = $this->common_model->getBillOrderData($sale['order_nos'], $sale['store_name']);
                 }
             }
         }
@@ -404,12 +405,12 @@ class Import extends CI_Controller
 
     public function creditdata()
     {
-        $data=array();
-        $condition_array=array('from_dt'=>$this->input->get('from_date'), 'to_dt'=>$this->input->get('to_date'));
+        $data = array();
+        $condition_array = array('from_dt' => $this->input->get('from_date'), 'to_dt' => $this->input->get('to_date'));
 
         if (!empty($condition_array['from_dt']) && !empty($condition_array['to_dt'])) {
             $data['salesdata'] = $this->common_model->getCreditOrderData($condition_array);
-            $data['search_query']=$condition_array;
+            $data['search_query'] = $condition_array;
         }
 
 
@@ -430,15 +431,15 @@ class Import extends CI_Controller
 
 
         if ($this->input->post('from_date')) {
-            $data['from_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['from_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['from_date']=date('Y-m-01');
+            $data['from_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
         $data['paytmdata'] = $this->common_model->getPaytmData($data['from_date'], $data['to_date']);
@@ -458,15 +459,15 @@ class Import extends CI_Controller
         // $this->pagination->initialize($config);
 
         if ($this->input->post('from_date')) {
-            $data['from_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['from_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['from_date']=date('Y-m-01');
+            $data['from_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
         $data['bharatpedata'] = $this->common_model->getBharatPeData($data['from_date'], $data['to_date']);
@@ -501,7 +502,7 @@ class Import extends CI_Controller
         if (isset($data['store']['id'])) {
             $this->load->library('form_validation');
 
-            $this->form_validation->set_rules('invoice_no', 'Invoice No.', 'required|edit_unique[material_invoices.invoice_no.'.$data['store']['id'].']');
+            $this->form_validation->set_rules('invoice_no', 'Invoice No.', 'required|edit_unique[material_invoices.invoice_no.' . $data['store']['id'] . ']');
             $this->form_validation->set_rules('store_crm_code', 'Store CRM Code', 'required');
             $this->form_validation->set_rules('invoice_date', 'Invoice Date (YYYY-MM-DD)', 'required');
             $this->form_validation->set_rules('amount', 'Amount', 'required');
