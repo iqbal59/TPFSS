@@ -35,7 +35,7 @@ class Api_model extends CI_Model
         $this->db->where('is_sync', 0);
         $this->db->where('voucher_type', 'R');
         $this->db->where('date(vouchers.create_date) >=', '2023-07-13');
-        $where = '(voucher_type = \'C\' and description like \'Paytm %\' )';
+        $where = '(is_sync=0 and voucher_type = \'C\' and description like \'Paytm %\' )';
         $this->db->or_where($where);
         $this->db->limit(300, 0);
         return $this->db->get()->result();
