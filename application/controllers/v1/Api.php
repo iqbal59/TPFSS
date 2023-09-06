@@ -320,8 +320,12 @@ class Api extends REST_Controller
 
 
 
+            if (current(explode(' ', $item->descriptions)) == 'Paytm' && $item->voucher_type == 'C')
+                $ld['ledger_name'] = 'Paytm Gateway Charges';
+            else
+                $ld['ledger_name'] = current(explode(' ', $item->descriptions));
 
-            $ld['ledger_name'] = current(explode(' ', $item->descriptions));
+
             $ld['ledger_amt'] = $item->amount;
             $ld['dr_cr'] = "DR";
             $bill_details = array();
