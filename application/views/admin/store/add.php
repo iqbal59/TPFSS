@@ -58,11 +58,28 @@
                             <span class="text-danger"><?php echo form_error('store_name');?></span>
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-2">
                             <label>Store Crm Code</label>
                             <input type="text" class="form-control form-control-sm" name="store_crm_code"
                                 value="<?php echo $this->input->post('store_crm_code'); ?>" />
                             <span class="text-danger"><?php echo form_error('store_crm_code');?></span>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label>Store Type</label>
+
+                            <select name="store_type" class="form-control form-control-sm">
+                                <option value="1"
+                                    <?php echo($this->input->post('store_type')=='1' ? "selected" : ""); ?>>
+                                    Live
+                                </option>
+
+                                <option value="2"
+                                    <?php echo($this->input->post('store_type')=='2' ? "selected" : ""); ?>>
+                                    CC
+                                </option>
+
+                            </select>
+
                         </div>
 
                         <div class="form-group col-md-4">
