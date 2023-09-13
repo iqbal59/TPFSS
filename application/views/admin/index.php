@@ -11,12 +11,13 @@
     <meta name="author" content="">
     <!-- Favicon icon -->
     <link rel="icon" type="image/png" sizes="16x16" href="<?php echo base_url() ?>assets/images/favicon.png">
-    <title> <?php echo isset($page_title)?$page_title:"tumbledry"; ?>
+    <title>
+        <?php echo isset($page_title) ? $page_title : "tumbledry"; ?>
     </title>
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url() ?>assets/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-    <link rel="stylesheet" href="<?php echo base_url();?>assets/plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/datatables/dataTables.bootstrap.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap.min.css">
 
     <!-- chartist CSS -->
@@ -445,9 +446,11 @@
                                                     src="<?php echo base_url() ?>assets/images/users/1.jpg" alt="user">
                                             </div>
                                             <div class="u-text">
-                                                <h4><?php echo $this->session->userdata('name'); ?>
+                                                <h4>
+                                                    <?php echo $this->session->userdata('name'); ?>
                                                 </h4>
-                                                <p class="text-muted"><?php echo $this->session->userdata('email'); ?>
+                                                <p class="text-muted">
+                                                    <?php echo $this->session->userdata('email'); ?>
                                                 </p><a href="profile.html"
                                                     class="btn btn-rounded btn-danger btn-sm">View Profile</a>
                                             </div>
@@ -520,7 +523,7 @@
                                 <li><a href="<?php echo base_url('admin/user/power') ?>"><i
                                             class="fa fa-angle-right"></i> Add User Power</a></li>
                                 <?php else: ?>
-                                <?php if (check_power(1)):?>
+                                <?php if (check_power(1)): ?>
                                 <li><a href="<?php echo base_url('admin/user') ?>"><i class="fa fa-angle-right"></i> Add
                                         User </a></li>
                                 <?php endif; ?>
@@ -540,6 +543,10 @@
 
                                 <li><a href="<?php echo base_url('admin/store') ?>"><i class="fa fa-angle-right"></i>
                                         Stores</a></li>
+
+                                <li><a href="<?php echo base_url('admin/store/amcstore') ?>"><i
+                                            class="fa fa-angle-right"></i>
+                                        AMC Stores</a></li>
 
                                 <li><a href="<?php echo base_url('admin/service') ?>"><i class="fa fa-angle-right"></i>
                                         Services</a></li>
@@ -1177,6 +1184,20 @@
         buttons: [
             'csv', 'pdf', 'print', 'colvis'
         ]
+    });
+
+
+    //New 
+
+    $('#list_100').DataTable({
+        dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [
+            'csv', 'pdf', 'print', 'colvis'
+        ],
+        "displayLength": 100,
+
     });
     </script>
 

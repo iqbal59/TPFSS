@@ -583,6 +583,37 @@ class Accounts extends CI_Controller
         }
     }
 
+
+    //Create AMC Invoice
+
+
+    public function createAmcInvoices($from_date, $to_date)
+    {
+        // check_login_user();
+
+        $data['stores'] = $this->Store_model->get_all_amc_store();
+        // print_r($data['stores']);
+
+        foreach ($data['stores'] as $s) {
+            if (!$s['id']) {
+                continue;
+            }
+
+            $item = array('amount' => 580, 'service_code' => '', 'store_royalty' => 0, 'order_ids' => "", 'item_name' => 'AMC Charges', 'rate' => 580);
+
+            $data['invoice'][$s['id']][] = $item;
+        }
+
+        if (!is_array($data['invoice'])) {
+            $data['invoice'] = array();
+        }
+        $data['period'] = date('d-m-Y', strtotime($from_date)) . " to " . date('d-m-Y', strtotime($to_date));
+        $this->Accounts_model->saveAMCInvoice($data['invoice'], $data['period']);
+
+    }
+
+    //Create AMC Invoice END
+
     public function invoicepdf($id)
     {
         $data['invoice'] = $this->Accounts_model->get_invoice_by_id($id);
@@ -835,7 +866,7 @@ class Accounts extends CI_Controller
         $bharatpeR = array();
 
         foreach ($ledgerItems as $li) {
-            if (preg_match("~\bTD\b~", $li['voucher_no'])) {
+            if (preg_match("~\bTD\b~", $li['voucher_no']) && $li['invoice_type'] != '1') {
                 $saleInvoice[] = $li['id'];
             }
 
@@ -1174,7 +1205,7 @@ class Accounts extends CI_Controller
         $bharatpeR = array();
 
         foreach ($ledgerItems as $li) {
-            if (preg_match("~\bTD\b~", $li['voucher_no'])) {
+            if (preg_match("~\bTD\b~", $li['voucher_no']) && $li['invoice_type'] != 1) {
                 $saleInvoice[] = $li['id'];
             }
 

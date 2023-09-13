@@ -1,36 +1,39 @@
 <?php
 
- 
+
 class Store_model extends CI_Model
 {
     public function __construct()
     {
         parent::__construct();
     }
-    
+
     /*
      * Get store by id
      */
     public function get_store($id)
     {
-        return $this->db->get_where('stores', array('id'=>$id))->row_array();
+        return $this->db->get_where('stores', array('id' => $id))->row_array();
     }
-    
+
 
     /*
-         * Get store by code
-         */
+     * Get store by code
+     */
     public function get_store_by_code($id)
     {
-        return $this->db->get_where('stores', array('store_crm_code'=>$id))->row_array();
+        return $this->db->get_where('stores', array('store_crm_code' => $id))->row_array();
     }
+
+
+
 
 
     public function get_store_by_email_id($store_code, $email_id)
     {
-        return $this->db->get_where('stores', array('store_crm_code'=> $store_code, 'email_id'=>$email_id))->row_array();
+        return $this->db->get_where('stores', array('store_crm_code' => $store_code, 'email_id' => $email_id))->row_array();
     }
-    
+
 
     /*
      * Get all stores count
@@ -40,17 +43,17 @@ class Store_model extends CI_Model
         $this->db->from('stores');
         return $this->db->count_all_results();
     }
-      
-    
+
+
     /*
-         * Get all royalties
-         */
+     * Get all royalties
+     */
     public function get_store_all_royalties($id)
     {
-        $query="SELECT name, code, royality, ifnull(store_royalty, royality) as store_royalty, services.id FROM services left join (SELECT * from royalties WHERE royalties.store_id='$id') as temp on (services.id=temp.service_id)";
+        $query = "SELECT name, code, royality, ifnull(store_royalty, royality) as store_royalty, services.id FROM services left join (SELECT * from royalties WHERE royalties.store_id='$id') as temp on (services.id=temp.service_id)";
         return $this->db->query($query)->result_array();
     }
-     
+
 
 
     /*
@@ -65,7 +68,22 @@ class Store_model extends CI_Model
         // }
         return $this->db->get('stores')->result_array();
     }
-        
+
+
+
+    public function get_all_amc_store()
+    {
+        $sql = "SELECT * FROM `stores` where 1 and is_active=1   and store_type = 1 and ((launch_date >='2022-07-01' and curdate() > (launch_date + INTERVAL 365 day) and (is_amc= 0 or is_amc=1)) or is_amc=1)";
+        return $this->db->query($sql)->result_array();
+    }
+
+
+    public function get_all_amc_store_count()
+    {
+        $sql = "SELECT * FROM `stores` where 1 and is_active=1   and store_type = 1 and launch_date >='2022-07-01' and curdate() > launch_date + INTERVAL 365 day";
+        return $this->db->query($sql)->count_all_results();
+    }
+
     public function get_all_active_stores()
     {
         $this->db->order_by('id', 'desc');
@@ -85,7 +103,7 @@ class Store_model extends CI_Model
         $this->db->insert('stores', $params);
         return $this->db->insert_id();
     }
-    
+
     /*
      * function to update store
      */
@@ -94,7 +112,7 @@ class Store_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update('stores', $params);
     }
-    
+
 
     public function change_password($id, $params, $old_password)
     {
@@ -108,33 +126,33 @@ class Store_model extends CI_Model
     public function forget_password($id, $params)
     {
         $this->db->where('id', $id);
-        return  $this->db->update('stores', $params);
+        return $this->db->update('stores', $params);
     }
-    
+
 
     /*
-    * function to update store
-    */
+     * function to update store
+     */
     public function update_store_royality($id, $params)
     {
         foreach ($params['store_royalty'] as $store_royality) {
             foreach ($store_royality as $key => $royalty) {
-                if ($params['royality'][$id][$key]==$royalty) {
+                if ($params['royality'][$id][$key] == $royalty) {
                     continue;
                 }
-                echo $query="insert into royalties (service_id, store_id, store_royalty)values('$key', '$id', '$royalty') on duplicate key update store_royalty='$royalty'";
+                echo $query = "insert into royalties (service_id, store_id, store_royalty)values('$key', '$id', '$royalty') on duplicate key update store_royalty='$royalty'";
                 $this->db->query($query);
             }
         }
     }
-    
-    
-    
+
+
+
     /*
      * function to delete store
      */
     public function delete_store($id)
     {
-        return $this->db->delete('stores', array('id'=>$id));
+        return $this->db->delete('stores', array('id' => $id));
     }
 }

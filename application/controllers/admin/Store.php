@@ -20,7 +20,7 @@ class Store extends CI_Controller
     public function index()
     {
         $params['limit'] = 10;
-        echo $this->input->get('page');
+        //echo $this->input->get('page');
         $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
 
         $config = $this->config->item('pagination');
@@ -31,6 +31,24 @@ class Store extends CI_Controller
         $data['stores'] = $this->Store_model->get_all_stores($params);
 
         $data['main_content'] = $this->load->view('admin/store/index', $data, true);
+        $this->load->view('admin/index', $data);
+    }
+
+
+    public function amcstore()
+    {
+        $params['limit'] = 10;
+        // echo $this->input->get('page');
+        // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
+
+        // $config = $this->config->item('pagination');
+        // $config['base_url'] = site_url('/admin/store/index');
+        // $config['total_rows'] = $this->Store_model->get_all_stores_count();
+        // $this->pagination->initialize($config);
+
+        $data['stores'] = $this->Store_model->get_all_active_stores();
+
+        $data['main_content'] = $this->load->view('admin/store/amcstore', $data, true);
         $this->load->view('admin/index', $data);
     }
 
@@ -199,4 +217,27 @@ class Store extends CI_Controller
             show_error('The store you are trying to delete does not exist.');
         }
     }
+
+    public function amcupdate($id)
+    {
+        $store = $this->Store_model->get_store($id);
+
+        // check if the store exists before trying to delete it
+        if (isset($store['id'])) {
+            if ($this->input->get('act') == 'remove') {
+                $this->Store_model->update_store($id, array('is_amc' => '2'));
+                $this->session->set_flashdata('msg', 'AMC Service removed Successfully');
+            } else if ($this->input->get('act') == 'add') {
+                $this->Store_model->update_store($id, array('is_amc' => '1'));
+                $this->session->set_flashdata('msg', 'AMC Service added Successfully');
+            }
+
+            redirect('admin/store/amcstore');
+        } else {
+            show_error('The store you are trying to delete does not exist.');
+        }
+    }
+
+
+
 }

@@ -59,16 +59,16 @@ class Accounts_model extends CI_Model
 
     public function ledgerItem($date, $date_to, $sotreid)
     {
-        return $this->db->query("select * from (SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat('Royalty', ' ', descriptions) as descriptions, concat('TD', '-', invoice_no) as voucher_no FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
+        return $this->db->query("select * from (SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat(case when invoice_type =0 then 'Royalty' else 'AMC' end, ' ', descriptions) as descriptions, concat('TD', '-', invoice_no) as voucher_no, invoice_type FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
 
             UNION
             
-            SELECT material_invoices.id, material_invoices.amount as np ,'Sale' as voucher_type, material_invoices.invoice_date as voucher_date, case when material_description is not null then material_description else 'Material' end as descriptions, invoice_no as voucher_no from material_invoices LEFT join stores on (stores.store_crm_code=material_invoices.store_crm_code)  WHERE 1 and material_invoices.invoice_date >= '$date' and material_invoices.invoice_date <= '$date_to' and stores.id=$sotreid
+            SELECT material_invoices.id, material_invoices.amount as np ,'Sale' as voucher_type, material_invoices.invoice_date as voucher_date, case when material_description is not null then material_description else 'Material' end as descriptions, invoice_no as voucher_no, 0 as invoice_type from material_invoices LEFT join stores on (stores.store_crm_code=material_invoices.store_crm_code)  WHERE 1 and material_invoices.invoice_date >= '$date' and material_invoices.invoice_date <= '$date_to' and stores.id=$sotreid
             
             
             UNION
             
-            SELECT vouchers.id, vouchers.amount as np, vouchers.voucher_type  , date(vouchers.create_date) as voucher_date, descriptions, concat('TMBLV', '-', id) as voucher_no from vouchers WHERE 1 and date(vouchers.create_date) >= '$date' and date(vouchers.create_date) <='$date_to' and vouchers.store_id=$sotreid) as temp order by voucher_date asc")->result_array();
+            SELECT vouchers.id, vouchers.amount as np, vouchers.voucher_type  , date(vouchers.create_date) as voucher_date, descriptions, concat('TMBLV', '-', id) as voucher_no,0 as invoice_type from vouchers WHERE 1 and date(vouchers.create_date) >= '$date' and date(vouchers.create_date) <='$date_to' and vouchers.store_id=$sotreid) as temp order by voucher_date asc")->result_array();
     }
 
     public function get_all_invoice($from_dt, $to_dt)
@@ -115,9 +115,9 @@ class Accounts_model extends CI_Model
 
     public function get_invoice_item_by_id($id)
     {
-        $this->db->select("item_name, qty, rate,order_nos, amount, service_code, name , royalty, sac_code");
+        $this->db->select("item_name, qty, rate,order_nos, amount, service_code, case when name != '' then name else item_name end as name , royalty, sac_code");
         $this->db->from("invoice_item");
-        $this->db->join("services", "services.code=invoice_item.service_code", "inner");
+        $this->db->join("services", "services.code=invoice_item.service_code", "left");
 
 
         $this->db->where('invoice_id', $id);
@@ -145,6 +145,31 @@ class Accounts_model extends CI_Model
             $tax_amount = $total_amount * 18 / 100;
             $net_amount = $total_amount + $tax_amount;
             $this->db->query("update invoices set amount='$total_amount', tax_rate='18', tax_amount='$tax_amount', net_amount='$net_amount', descriptions='$period' where id='$invoice_id'");
+        }
+    }
+
+
+    public function saveAMCInvoice($data, $period)
+    {
+        foreach ($data as $store_id => $items) {
+            $total_amount = 0;
+            $tax_amount = 0;
+            $net_amount = 0;
+            $invoice_no = $this->getInvoiceNo();
+            $this->db->insert('invoices', array('store_id' => $store_id, 'invoice_no' => $invoice_no));
+            $invoice_id = $this->db->insert_id();
+            $storeData = $this->db->get_where('stores', array('id' => $store_id))->row_array();
+            foreach ($items as $item) {
+
+                //print_r($item);
+                $this->db->insert('invoice_item', array('invoice_id' => $invoice_id, 'item_name' => $item['item_name'], 'rate' => $item['rate'], 'order_nos' => $item['order_ids'], 'amount' => $item['amount'], 'service_code' => $item['service_code'], 'royalty' => $item['store_royalty']));
+
+                $total_amount += $item['rate'];
+                //$this->db->query("update storesales set is_bill=1 where store_name='$storeData[store_name]' and order_no in($item[order_ids])");
+            }
+            $tax_amount = $total_amount * 18 / 100;
+            $net_amount = $total_amount + $tax_amount;
+            $this->db->query("update invoices set amount='$total_amount', tax_rate='18', tax_amount='$tax_amount', net_amount='$net_amount', descriptions='$period', invoice_type=1 where id='$invoice_id'");
         }
     }
     public function getInvoiceNo()
