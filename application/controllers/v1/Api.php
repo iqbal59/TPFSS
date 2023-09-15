@@ -499,5 +499,16 @@ class Api extends REST_Controller
     }
 
 
+    public function fss_status_post()
+    {
+        $_POST = json_decode(file_get_contents('php://input'), true);
+        $storeInfo = $this->store_model->get_store_by_code($_POST['store_code']);
+        $items = $this->api_model->get_fss_status($storeInfo['id']);
+        $response['result'] = $items;
+        $this->set_response($response, REST_Controller::HTTP_OK);
+    }
+
+
+
 
 }

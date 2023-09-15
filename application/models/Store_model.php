@@ -103,7 +103,9 @@ class Store_model extends CI_Model
         $day = date('w', $yourTime);
         $time = $yourTime - ($day > 4 ? ($day + 7 - 4) : ($day + 14 - 4)) * 3600 * 24;
         $myDate = date('Y-m-d', $time);
-        $sql = "select *,  get_open_balance('" . $myDate . "', stores.id) as open_bal , get_payment('" . $myDate . "', stores.id) as payment from stores where is_active=1";
+        // $sql = "select *,  get_open_balance('" . $myDate . "', stores.id) as open_bal , get_payment('" . $myDate . "', stores.id) as payment from stores where is_active=1";
+
+        $sql = "select * from stores where is_active=1";
         return $this->db->query($sql)->result_array();
     }
 
