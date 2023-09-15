@@ -1242,6 +1242,28 @@
         type="text/javascript"></script>
     <script type="text/javascript" src="../assets/plugins/multiselect/js/jquery.multi-select.js"></script>
     <script>
+    function get_fss_status(id) {
+
+        $.ajax({
+            url: "https://simplifytumbledry.in/v1/api/fss_status",
+            type: 'POST',
+            dataType: 'json',
+            headers: {
+                'api_key': '123456789',
+
+            },
+            contentType: 'application/json; charset=utf-8',
+            success: function(resp) {
+                alert(resp);
+            },
+            error: function(er) {
+                console.log(er);
+            }
+        });
+        alert(id);
+    }
+
+
     jQuery(document).ready(function() {
 
 
@@ -1386,6 +1408,9 @@
         $('.delete_msg').delay(3000).slideUp();
     });
     </script>
+
+
+
 
 
 
