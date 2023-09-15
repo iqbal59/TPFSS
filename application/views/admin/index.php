@@ -1249,7 +1249,7 @@
                 type: 'POST',
                 dataType: 'json',
                 data: {
-                    store_code = 'TS10'
+                    store_code: 'TS10'
                 },
                 headers: {
                     'api_key': '123456789',
