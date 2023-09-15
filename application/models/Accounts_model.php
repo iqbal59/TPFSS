@@ -113,7 +113,7 @@ class Accounts_model extends CI_Model
 
     public function get_invoice_item_by_id($id)
     {
-        $this->db->select("item_name, qty, rate,order_nos, amount, service_code, case when name != '' then name else item_name end as name , royalty, sac_code");
+        $this->db->select("item_name, qty, rate,order_nos, amount, service_code, case when name != '' then name else item_name end as name , royalty, case when sac_code != '' then sac_code else '998719' end as sac_code");
         $this->db->from("invoice_item");
         $this->db->join("services", "services.code=invoice_item.service_code", "left");
 
