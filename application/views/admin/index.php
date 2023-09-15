@@ -1249,7 +1249,7 @@
             type: 'POST',
             dataType: 'json',
             data: JSON.stringify({
-                "store_code": id
+                store_code: id
             }),
             headers: {
                 'api_key': '123456789',
