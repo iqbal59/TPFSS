@@ -1258,11 +1258,11 @@
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(dataStore),
                 success: function (resp) {
-                    alert(resp);
+                    // alert(resp);
                     if (resp.open_bal < 0 || resp.payment >= resp.open_bal)
                         alert("Paid");
                     else
-                        alert("Inpaid");
+                        alert("Unpaid");
 
                 },
                 error: function (er) {
