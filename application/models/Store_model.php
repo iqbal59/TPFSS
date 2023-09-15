@@ -73,15 +73,17 @@ class Store_model extends CI_Model
 
     public function get_all_amc_store()
     {
-        $sql = "SELECT * FROM `stores` where 1 and is_active=1   and store_type = 1 and ((launch_date >='2022-07-01' and curdate() > (launch_date + INTERVAL 365 day) and (is_amc= 0 or is_amc=1)) or is_amc=1)";
+
+
+        $sql = "SELECT * FROM `stores` where 1 and is_active=1   and store_type = 1 and ((launch_date >='2022-07-01' and curdate() >= (launch_date + INTERVAL 365 day) and (is_amc= 0 or is_amc=1)) or is_amc=1)";
         return $this->db->query($sql)->result_array();
     }
 
 
     public function get_all_amc_store_count()
     {
-        $sql = "SELECT * FROM `stores` where 1 and is_active=1   and store_type = 1 and launch_date >='2022-07-01' and curdate() > launch_date + INTERVAL 365 day";
-        return $this->db->query($sql)->count_all_results();
+        // $sql = "SELECT * FROM `stores` where 1 and is_active=1   and store_type = 1 and launch_date >='2022-07-01' and curdate() > launch_date + INTERVAL 365 day";
+        //return $this->db->query($sql)->count_all_results();
     }
 
     public function get_all_active_stores()
@@ -94,6 +96,18 @@ class Store_model extends CI_Model
         $this->db->where('is_active', 1);
         return $this->db->get('stores')->result_array();
     }
+
+    public function get_all_active_stores_with_balance()
+    {
+        $yourTime = time();
+        $day = date('w', $yourTime);
+        $time = $yourTime - ($day > 4 ? ($day + 7 - 4) : ($day + 14 - 4)) * 3600 * 24;
+        $myDate = date('Y-m-d', $time);
+        $sql = "select *,  get_open_balance('" . $myDate . "', stores.id) as open_bal , get_payment('" . $myDate . "', stores.id) as payment from stores where is_active=1";
+        return $this->db->query($sql)->result_array();
+    }
+
+
 
     /*
      * function to add new store

@@ -86,12 +86,13 @@
 
                                     <th>Launch Date</th>
                                     <th>AMC Status</th>
+                                    <th>FSS Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                $i=1;
+                                <?php
+                                $i = 1;
                                 foreach ($stores as $s) {
                                     if ($s['store_type'] != 1)
                                         continue;
@@ -128,7 +129,7 @@
                                     <td>
                                         <?php
 
-                                            if ((date('Y-m-d') >= date('Y-m-d', strtotime($s['launch_date'] . ' +365 days')) && $s['launch_date'] > '2022-07-01' && ($s['is_amc'] == 0 || $s['is_amc'] == 1)) || $s['is_amc'] == 1) {
+                                            if ((date('Y-m-d') >= date('Y-m-d', strtotime($s['launch_date'] . ' +365 days')) && $s['launch_date'] >= '2022-07-01' && ($s['is_amc'] == 0 || $s['is_amc'] == 1)) || $s['is_amc'] == 1) {
                                                 $flg = 1;
                                                 echo "YES";
                                             } else {
@@ -141,6 +142,15 @@
                                             ?>
 
 
+                                    </td>
+                                    <td>
+
+                                        <?php
+                                            if ($s['open_bal'] < 0 || ($s['open_bal'] - $s['payment']) <= 0)
+                                                echo "PAID";
+                                            else
+                                                echo "<span style='color:red;'>UNPAID</span>";
+                                            ?>
                                     </td>
 
                                     <td>

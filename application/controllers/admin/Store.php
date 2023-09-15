@@ -46,7 +46,7 @@ class Store extends CI_Controller
         // $config['total_rows'] = $this->Store_model->get_all_stores_count();
         // $this->pagination->initialize($config);
 
-        $data['stores'] = $this->Store_model->get_all_active_stores();
+        $data['stores'] = $this->Store_model->get_all_active_stores_with_balance();
 
         $data['main_content'] = $this->load->view('admin/store/amcstore', $data, true);
         $this->load->view('admin/index', $data);
