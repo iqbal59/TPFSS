@@ -518,15 +518,15 @@
                             <ul aria-expanded="false" class="collapse">
 
                                 <?php if ($this->session->userdata('role') == 'admin'): ?>
-                                    <li><a href="<?php echo base_url('admin/user') ?>"><i class="fa fa-angle-right"></i> Add
-                                            User </a></li>
-                                    <li><a href="<?php echo base_url('admin/user/power') ?>"><i
-                                                class="fa fa-angle-right"></i> Add User Power</a></li>
+                                <li><a href="<?php echo base_url('admin/user') ?>"><i class="fa fa-angle-right"></i> Add
+                                        User </a></li>
+                                <li><a href="<?php echo base_url('admin/user/power') ?>"><i
+                                            class="fa fa-angle-right"></i> Add User Power</a></li>
                                 <?php else: ?>
-                                    <?php if (check_power(1)): ?>
-                                        <li><a href="<?php echo base_url('admin/user') ?>"><i class="fa fa-angle-right"></i> Add
-                                                User </a></li>
-                                    <?php endif; ?>
+                                <?php if (check_power(1)): ?>
+                                <li><a href="<?php echo base_url('admin/user') ?>"><i class="fa fa-angle-right"></i> Add
+                                        User </a></li>
+                                <?php endif; ?>
                                 <?php endif ?>
 
                                 <li><a href="<?php echo base_url('admin/user/all_user_list') ?>"><i
@@ -1006,17 +1006,17 @@
     <!-- Invoice print JS -->
     <script src="<?php echo base_url() ?>assets/js/jquery.PrintArea.js" type="text/JavaScript"></script>
     <script>
-        $(document).ready(function () {
-            $("#print").click(function () {
-                var mode = 'iframe'; //popup
-                var close = mode == "popup";
-                var options = {
-                    mode: mode,
-                    popClose: close
-                };
-                $("div.printableArea").printArea(options);
-            });
+    $(document).ready(function() {
+        $("#print").click(function() {
+            var mode = 'iframe'; //popup
+            var close = mode == "popup";
+            var options = {
+                mode: mode,
+                popClose: close
+            };
+            $("div.printableArea").printArea(options);
         });
+    });
     </script>
 
 
@@ -1076,129 +1076,129 @@
     </script>
 
     <script>
-        $(document).ready(function () {
+    $(document).ready(function() {
 
-            $('#store_email').multiselect({
-                enableFiltering: true,
-                includeSelectAllOption: true,
-                maxHeight: 400,
-                dropUp: true
-            });
-
-
-            var table_voucher = $('#table-voucher').DataTable({
-                dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                    "<'row'<'col-sm-12'tr>>" +
-                    "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-                buttons: [
-                    'csv', 'pdf', 'print', 'colvis'
-                ],
-
-                "processing": true,
-                "serverSide": true,
-                "ajax": {
-                    url: '<?php echo base_url("admin/voucher/voucher_datatable"); ?>?from_date=' +
-                        $('input[name="from_date"]').val() +
-                        '&to_date=' +
-                        $('input[name="to_date"]').val(),
-                    type: "GET",
-                },
-                "lengthMenu": [
-                    [25, 50, -1],
-                    [25, 50, 'All'],
-                ],
-                "order": [
-                    [1, 'desc']
-                ],
-                "columnDefs": [{
-                    "targets": [0],
-                    "orderable": false,
-                },],
-            });
-
-
-
-
-            $('#show_btn').click(function () {
-                fromDt = $('input[name="from_date"]').val();
-                toDt = $('input[name="to_date"]').val();
-                if (fromDt && toDt) {
-                    table_voucher.ajax.url(
-                        '<?php echo base_url("admin/voucher/voucher_datatable"); ?>?from_date=' +
-                        $('input[name="from_date"]').val() +
-                        '&to_date=' +
-                        $('input[name="to_date"]').val());
-                    table_voucher.ajax.reload();
-                } else
-                    alert("Please enter both date");
-            });
-
-
-
-            $('#myTable').DataTable();
-            $(document).ready(function () {
-                var table = $('#example').DataTable({
-                    "columnDefs": [{
-                        "visible": false,
-                        "targets": 2
-                    }],
-                    "order": [
-                        [2, 'asc']
-                    ],
-                    "displayLength": 25,
-                    "drawCallback": function (settings) {
-                        var api = this.api();
-                        var rows = api.rows({
-                            page: 'current'
-                        }).nodes();
-                        var last = null;
-                        api.column(2, {
-                            page: 'current'
-                        }).data().each(function (group, i) {
-                            if (last !== group) {
-                                $(rows).eq(i).before(
-                                    '<tr class="group"><td colspan="5">' +
-                                    group + '</td></tr>');
-                                last = group;
-                            }
-                        });
-                    }
-                });
-                // Order by the grouping
-                $('#example tbody').on('click', 'tr.group', function () {
-                    var currentOrder = table.order()[0];
-                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                        table.order([2, 'desc']).draw();
-                    } else {
-                        table.order([2, 'asc']).draw();
-                    }
-                });
-
-
-            });
-        });
-        $('#example23').DataTable({
-            dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
-                "<'row'<'col-sm-12'tr>>" +
-                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
-            buttons: [
-                'csv', 'pdf', 'print', 'colvis'
-            ]
+        $('#store_email').multiselect({
+            enableFiltering: true,
+            includeSelectAllOption: true,
+            maxHeight: 400,
+            dropUp: true
         });
 
 
-        //New 
-
-        $('#list_100').DataTable({
+        var table_voucher = $('#table-voucher').DataTable({
             dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-5'i><'col-sm-7'p>>",
             buttons: [
                 'csv', 'pdf', 'print', 'colvis'
             ],
-            "displayLength": 100,
+
+            "processing": true,
+            "serverSide": true,
+            "ajax": {
+                url: '<?php echo base_url("admin/voucher/voucher_datatable"); ?>?from_date=' +
+                    $('input[name="from_date"]').val() +
+                    '&to_date=' +
+                    $('input[name="to_date"]').val(),
+                type: "GET",
+            },
+            "lengthMenu": [
+                [25, 50, -1],
+                [25, 50, 'All'],
+            ],
+            "order": [
+                [1, 'desc']
+            ],
+            "columnDefs": [{
+                "targets": [0],
+                "orderable": false,
+            }, ],
+        });
+
+
+
+
+        $('#show_btn').click(function() {
+            fromDt = $('input[name="from_date"]').val();
+            toDt = $('input[name="to_date"]').val();
+            if (fromDt && toDt) {
+                table_voucher.ajax.url(
+                    '<?php echo base_url("admin/voucher/voucher_datatable"); ?>?from_date=' +
+                    $('input[name="from_date"]').val() +
+                    '&to_date=' +
+                    $('input[name="to_date"]').val());
+                table_voucher.ajax.reload();
+            } else
+                alert("Please enter both date");
+        });
+
+
+
+        $('#myTable').DataTable();
+        $(document).ready(function() {
+            var table = $('#example').DataTable({
+                "columnDefs": [{
+                    "visible": false,
+                    "targets": 2
+                }],
+                "order": [
+                    [2, 'asc']
+                ],
+                "displayLength": 25,
+                "drawCallback": function(settings) {
+                    var api = this.api();
+                    var rows = api.rows({
+                        page: 'current'
+                    }).nodes();
+                    var last = null;
+                    api.column(2, {
+                        page: 'current'
+                    }).data().each(function(group, i) {
+                        if (last !== group) {
+                            $(rows).eq(i).before(
+                                '<tr class="group"><td colspan="5">' +
+                                group + '</td></tr>');
+                            last = group;
+                        }
+                    });
+                }
+            });
+            // Order by the grouping
+            $('#example tbody').on('click', 'tr.group', function() {
+                var currentOrder = table.order()[0];
+                if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
+                    table.order([2, 'desc']).draw();
+                } else {
+                    table.order([2, 'asc']).draw();
+                }
+            });
+
 
         });
+    });
+    $('#example23').DataTable({
+        dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [
+            'csv', 'pdf', 'print', 'colvis'
+        ]
+    });
+
+
+    //New 
+
+    $('#list_100').DataTable({
+        dom: "<'row'<'col-sm-3'l><'col-sm-6 text-center'B><'col-sm-3'f>>" +
+            "<'row'<'col-sm-12'tr>>" +
+            "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+        buttons: [
+            'csv', 'pdf', 'print', 'colvis'
+        ],
+        "displayLength": 100,
+
+    });
     </script>
 
     <script src="<?php echo base_url() ?>assets/plugins/tiny-editable/mindmup-editabletable.js">
@@ -1206,11 +1206,11 @@
     <script src="<?php echo base_url() ?>assets/plugins/tiny-editable/numeric-input-example.js">
     </script>
     <script>
-        $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
-        $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
-        $(document).ready(function () {
-            $('#editable-datatable').DataTable();
-        });
+    $('#mainTable').editableTableWidget().numericInputExample().find('td:first').focus();
+    $('#editable-datatable').editableTableWidget().numericInputExample().find('td:first').focus();
+    $(document).ready(function() {
+        $('#editable-datatable').DataTable();
+    });
     </script>
 
     <!-- End Table js -->
@@ -1220,14 +1220,14 @@
     <script src="<?php echo base_url() ?>assets/plugins/summernote/dist/summernote.min.js">
     </script>
     <script>
-        ! function (window, document, $) {
-            "use strict";
-            $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(), $(".skin-square input")
-                .iCheck({
-                    checkboxClass: "icheckbox_square-green",
-                    radioClass: "iradio_square-green"
-                }), $(".touchspin").TouchSpin(), $(".switchBootstrap").bootstrapSwitch();
-        }(window, document, jQuery);
+    ! function(window, document, $) {
+        "use strict";
+        $("input,select,textarea").not("[type=submit]").jqBootstrapValidation(), $(".skin-square input")
+            .iCheck({
+                checkboxClass: "icheckbox_square-green",
+                radioClass: "iradio_square-green"
+            }), $(".touchspin").TouchSpin(), $(".switchBootstrap").bootstrapSwitch();
+    }(window, document, jQuery);
     </script>
 
     <script src="<?php echo base_url() ?>assets/plugins/switchery/dist/switchery.min.js">
@@ -1242,166 +1242,166 @@
         type="text/javascript"></script>
     <script type="text/javascript" src="../assets/plugins/multiselect/js/jquery.multi-select.js"></script>
     <script>
-        function get_fss_status(id) {
+    function get_fss_status(id) {
 
-            var dataStore = {
-                store_code: id,
-            };
-            $.ajax({
-                url: "https://simplifytumbledry.in/v1/api/fss_status",
-                type: 'POST',
-                dataType: 'json',
-                headers: {
-                    'api_key': '123456789',
+        var dataStore = {
+            store_code: id,
+        };
+        $.ajax({
+            url: "https://simplifytumbledry.in/v1/api/fss_status",
+            type: 'POST',
+            dataType: 'json',
+            headers: {
+                'api_key': '123456789',
 
-                },
-                contentType: 'application/json; charset=utf-8',
-                data: JSON.stringify(dataStore),
-                success: function (resp) {
-                    // alert(resp);
-                    if (resp.open_bal < 0 || resp.payment >= resp.open_bal)
-                        alert("Paid");
-                    else
-                        alert("Unpaid");
+            },
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(dataStore),
+            success: function(resp) {
+                // alert(resp);
+                if (resp.result[0].open_bal < 0 || resp.result[0]..payment >= resp.result[0]..open_bal)
+                    alert("Paid");
+                else
+                    alert("Unpaid");
 
-                },
-                error: function (er) {
-                    console.log(er);
-                }
-            });
-            // alert(id);
-        }
-
-
-        jQuery(document).ready(function () {
-
-
-
-
-            //summernone text editor
-            jQuery(document).ready(function () {
-
-                $('#store_id_voucher').select2({
-                    placeholder: 'Select Store ID'
-                });
-
-                $('.summernote').summernote({
-                    height: 350, // set editor height
-                    minHeight: null, // set minimum height of editor
-                    maxHeight: null, // set maximum height of editor
-                    focus: false // set focus to editable area after initializing summernote
-                });
-
-                $('.inline-editor').summernote({
-                    airMode: true
-                });
-
-            });
-
-            // Switchery
-            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
-            $('.js-switch').each(function () {
-                new Switchery($(this)[0], $(this).data());
-            });
-            // For select 2
-            $(".select2").select2();
-            $('.selectpicker').selectpicker();
-            //Bootstrap-TouchSpin
-            $(".vertical-spin").TouchSpin({
-                verticalbuttons: true,
-                verticalupclass: 'ti-plus',
-                verticaldownclass: 'ti-minus'
-            });
-            var vspinTrue = $(".vertical-spin").TouchSpin({
-                verticalbuttons: true
-            });
-            if (vspinTrue) {
-                $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+            },
+            error: function(er) {
+                console.log(er);
             }
-            $("input[name='tch1']").TouchSpin({
-                min: 0,
-                max: 100,
-                step: 0.1,
-                decimals: 2,
-                boostat: 5,
-                maxboostedstep: 10,
-                postfix: '%'
-            });
-            $("input[name='tch2']").TouchSpin({
-                min: -1000000000,
-                max: 1000000000,
-                stepinterval: 50,
-                maxboostedstep: 10000000,
-                prefix: '$'
-            });
-            $("input[name='tch3']").TouchSpin();
-            $("input[name='tch3_22']").TouchSpin({
-                initval: 40
-            });
-            $("input[name='tch5']").TouchSpin({
-                prefix: "pre",
-                postfix: "post"
-            });
-            // For multiselect
-            $('#pre-selected-options').multiSelect();
-            $('#optgroup').multiSelect({
-                selectableOptgroup: true
-            });
-            $('#public-methods').multiSelect();
-            $('#select-all').click(function () {
-                $('#public-methods').multiSelect('select_all');
-                return false;
-            });
-            $('#deselect-all').click(function () {
-                $('#public-methods').multiSelect('deselect_all');
-                return false;
-            });
-            $('#refresh').on('click', function () {
-                $('#public-methods').multiSelect('refresh');
-                return false;
-            });
-            $('#add-option').on('click', function () {
-                $('#public-methods').multiSelect('addOption', {
-                    value: 42,
-                    text: 'test 42',
-                    index: 0
-                });
-                return false;
-            });
-            $(".ajax").select2({
-                ajax: {
-                    url: "https://api.github.com/search/repositories",
-                    dataType: 'json',
-                    delay: 250,
-                    data: function (params) {
-                        return {
-                            q: params.term, // search term
-                            page: params.page
-                        };
-                    },
-                    processResults: function (data, params) {
-                        // parse the results into the format expected by Select2
-                        // since we are using custom formatting functions we do not need to
-                        // alter the remote JSON data, except to indicate that infinite
-                        // scrolling can be used
-                        params.page = params.page || 1;
-                        return {
-                            results: data.items,
-                            pagination: {
-                                more: (params.page * 30) < data.total_count
-                            }
-                        };
-                    },
-                    cache: true
-                },
-                escapeMarkup: function (markup) {
-                    return markup;
-                }, // let our custom formatter work
-                minimumInputLength: 1,
-                templateResult: formatRepo, // omitted for brevity, see the source of this page
-                templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
-            });
         });
+        // alert(id);
+    }
+
+
+    jQuery(document).ready(function() {
+
+
+
+
+        //summernone text editor
+        jQuery(document).ready(function() {
+
+            $('#store_id_voucher').select2({
+                placeholder: 'Select Store ID'
+            });
+
+            $('.summernote').summernote({
+                height: 350, // set editor height
+                minHeight: null, // set minimum height of editor
+                maxHeight: null, // set maximum height of editor
+                focus: false // set focus to editable area after initializing summernote
+            });
+
+            $('.inline-editor').summernote({
+                airMode: true
+            });
+
+        });
+
+        // Switchery
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+        $('.js-switch').each(function() {
+            new Switchery($(this)[0], $(this).data());
+        });
+        // For select 2
+        $(".select2").select2();
+        $('.selectpicker').selectpicker();
+        //Bootstrap-TouchSpin
+        $(".vertical-spin").TouchSpin({
+            verticalbuttons: true,
+            verticalupclass: 'ti-plus',
+            verticaldownclass: 'ti-minus'
+        });
+        var vspinTrue = $(".vertical-spin").TouchSpin({
+            verticalbuttons: true
+        });
+        if (vspinTrue) {
+            $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+        }
+        $("input[name='tch1']").TouchSpin({
+            min: 0,
+            max: 100,
+            step: 0.1,
+            decimals: 2,
+            boostat: 5,
+            maxboostedstep: 10,
+            postfix: '%'
+        });
+        $("input[name='tch2']").TouchSpin({
+            min: -1000000000,
+            max: 1000000000,
+            stepinterval: 50,
+            maxboostedstep: 10000000,
+            prefix: '$'
+        });
+        $("input[name='tch3']").TouchSpin();
+        $("input[name='tch3_22']").TouchSpin({
+            initval: 40
+        });
+        $("input[name='tch5']").TouchSpin({
+            prefix: "pre",
+            postfix: "post"
+        });
+        // For multiselect
+        $('#pre-selected-options').multiSelect();
+        $('#optgroup').multiSelect({
+            selectableOptgroup: true
+        });
+        $('#public-methods').multiSelect();
+        $('#select-all').click(function() {
+            $('#public-methods').multiSelect('select_all');
+            return false;
+        });
+        $('#deselect-all').click(function() {
+            $('#public-methods').multiSelect('deselect_all');
+            return false;
+        });
+        $('#refresh').on('click', function() {
+            $('#public-methods').multiSelect('refresh');
+            return false;
+        });
+        $('#add-option').on('click', function() {
+            $('#public-methods').multiSelect('addOption', {
+                value: 42,
+                text: 'test 42',
+                index: 0
+            });
+            return false;
+        });
+        $(".ajax").select2({
+            ajax: {
+                url: "https://api.github.com/search/repositories",
+                dataType: 'json',
+                delay: 250,
+                data: function(params) {
+                    return {
+                        q: params.term, // search term
+                        page: params.page
+                    };
+                },
+                processResults: function(data, params) {
+                    // parse the results into the format expected by Select2
+                    // since we are using custom formatting functions we do not need to
+                    // alter the remote JSON data, except to indicate that infinite
+                    // scrolling can be used
+                    params.page = params.page || 1;
+                    return {
+                        results: data.items,
+                        pagination: {
+                            more: (params.page * 30) < data.total_count
+                        }
+                    };
+                },
+                cache: true
+            },
+            escapeMarkup: function(markup) {
+                return markup;
+            }, // let our custom formatter work
+            minimumInputLength: 1,
+            templateResult: formatRepo, // omitted for brevity, see the source of this page
+            templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+        });
+    });
     </script>
     <!-- End form js -->
 
@@ -1413,9 +1413,9 @@
 
     <!-- auto hide message div-->
     <script type="text/javascript">
-        $(document).ready(function () {
-            $('.delete_msg').delay(3000).slideUp();
-        });
+    $(document).ready(function() {
+        $('.delete_msg').delay(3000).slideUp();
+    });
     </script>
 
 
