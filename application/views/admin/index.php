@@ -1244,16 +1244,19 @@
     <script>
     function get_fss_status(id) {
 
+        var dataStore = {
+            store_code: id,
+        };
         $.ajax({
             url: "https://simplifytumbledry.in/v1/api/fss_status",
             type: 'POST',
             dataType: 'json',
-            data: '{"store_code": "' + id + '"}',
             headers: {
                 'api_key': '123456789',
 
             },
-            contentType: 'application/json',
+            contentType: 'application/json; charset=utf-8',
+            data: JSON.stringify(dataStore),
             success: function(resp) {
                 alert(resp);
                 if (resp.open_bal < 0 || resp.payment >= resp.open_bal)
