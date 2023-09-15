@@ -1248,6 +1248,9 @@
             url: "https://simplifytumbledry.in/v1/api/fss_status",
             type: 'POST',
             dataType: 'json',
+            data: {
+                "store_code": id
+            },
             headers: {
                 'api_key': '123456789',
 
@@ -1255,12 +1258,17 @@
             contentType: 'application/json; charset=utf-8',
             success: function(resp) {
                 alert(resp);
+                if (resp.open_bal < 0 || resp.payment >= resp.open_bal)
+                    alert("Paid");
+                else
+                    alert("Inpaid");
+
             },
             error: function(er) {
                 console.log(er);
             }
         });
-        alert(id);
+        // alert(id);
     }
 
 
