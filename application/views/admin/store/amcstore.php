@@ -44,20 +44,20 @@
 
             <?php $msg = $this->session->flashdata('msg'); ?>
             <?php if (isset($msg)): ?>
-            <div class="alert alert-success delete_msg pull" style="width: 100%"> <i class="fa fa-check-circle"></i>
-                <?php echo $msg; ?> &nbsp;
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                        aria-hidden="true">×</span> </button>
-            </div>
+                <div class="alert alert-success delete_msg pull" style="width: 100%"> <i class="fa fa-check-circle"></i>
+                    <?php echo $msg; ?> &nbsp;
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                            aria-hidden="true">×</span> </button>
+                </div>
             <?php endif ?>
 
             <?php $error_msg = $this->session->flashdata('error_msg'); ?>
             <?php if (isset($error_msg)): ?>
-            <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
-                <?php echo $error_msg; ?> &nbsp;
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                        aria-hidden="true">×</span> </button>
-            </div>
+                <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
+                    <?php echo $error_msg; ?> &nbsp;
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                            aria-hidden="true">×</span> </button>
+                </div>
             <?php endif ?>
 
             <div class="card">
@@ -97,37 +97,37 @@
                                     if ($s['store_type'] != 1)
                                         continue;
                                     ?>
-                                <tr>
-                                    <td>
-                                        <?php echo $i++; ?>
-                                    </td>
+                                    <tr>
+                                        <td>
+                                            <?php echo $i++; ?>
+                                        </td>
 
-                                    <td>
-                                        <?php echo $s['store_crm_code']; ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $s['store_name']; ?>
-                                    </td>
+                                        <td>
+                                            <?php echo $s['store_crm_code']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $s['store_name']; ?>
+                                        </td>
 
-                                    <td>
-                                        <?php echo $s['firm_name']; ?>
-                                    </td>
-                                    <td>
-                                        <?php echo $s['store_city']; ?>
-                                    </td>
+                                        <td>
+                                            <?php echo $s['firm_name']; ?>
+                                        </td>
+                                        <td>
+                                            <?php echo $s['store_city']; ?>
+                                        </td>
 
-                                    <td>
-                                        <?php echo $s['contact_number']; ?>
-                                    </td>
+                                        <td>
+                                            <?php echo $s['contact_number']; ?>
+                                        </td>
 
 
 
-                                    <td>
-                                        <?php echo $s['launch_date']; ?>
-                                    </td>
+                                        <td>
+                                            <?php echo $s['launch_date']; ?>
+                                        </td>
 
-                                    <td>
-                                        <?php
+                                        <td>
+                                            <?php
 
                                             if ((date('Y-m-d') >= date('Y-m-d', strtotime($s['launch_date'] . ' +365 days')) && $s['launch_date'] >= '2022-07-01' && ($s['is_amc'] == 0 || $s['is_amc'] == 1)) || $s['is_amc'] == 1) {
                                                 $flg = 1;
@@ -142,26 +142,27 @@
                                             ?>
 
 
-                                    </td>
-                                    <td>
+                                        </td>
+                                        <td>
 
-                                        <a href="javascript:void(0);"
-                                            onclick="get_fss_status('<?php echo $s['id'] ?>')">Click to Get</a>
-                                        <span id="status_<?php echo $s['id']; ?>"></span>
-                                    </td>
+                                            <a href="javascript:void(0);"
+                                                onclick="get_fss_status('<?php echo $s['store_crm_code'] ?>')">Click to
+                                                Get</a>
+                                            <span id="status_<?php echo $s['id']; ?>"></span>
+                                        </td>
 
-                                    <td>
-                                        <?php if ($flg == 1) { ?>
-                                        <a
-                                            href="<?php echo site_url('admin/store/amcupdate/' . $s['id']); ?>?act=remove">Remove</a>
+                                        <td>
+                                            <?php if ($flg == 1) { ?>
+                                                <a
+                                                    href="<?php echo site_url('admin/store/amcupdate/' . $s['id']); ?>?act=remove">Remove</a>
 
-                                        <?php } else { ?>
-                                        <a
-                                            href="<?php echo site_url('admin/store/amcupdate/' . $s['id']); ?>?act=add">Add</a>
+                                            <?php } else { ?>
+                                                <a
+                                                    href="<?php echo site_url('admin/store/amcupdate/' . $s['id']); ?>?act=add">Add</a>
 
-                                        <?php } ?>
-                                    </td>
-                                </tr>
+                                            <?php } ?>
+                                        </td>
+                                    </tr>
                                 <?php } ?>
                             </tbody>
                         </table>
