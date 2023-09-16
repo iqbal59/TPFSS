@@ -22,6 +22,16 @@ class Api extends REST_Controller
         }
     }
 
+    public function index_post()
+    {
+        echo json_encode(array("hey" => "hey!"));
+    }
+
+    public function index_options()
+    {
+        return $this->response(NULL, REST_Controller::HTTP_OK);
+    }
+
     public function invoices_get()
     {
         $invoices = array();
