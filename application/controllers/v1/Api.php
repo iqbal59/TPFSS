@@ -13,31 +13,6 @@ class Api extends REST_Controller
         $this->load->model('store_model');
         $this->load->library('form_validation');
         header('Content-Type: application/json');
-        header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        $method = $_SERVER['REQUEST_METHOD'];
-        if ($method == "OPTIONS") {
-            die();
-        }
-
-    }
-
-    public function index_post()
-    {
-        header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        $method = $_SERVER['REQUEST_METHOD'];
-        if ($method == "OPTIONS") {
-            die();
-        }
-        echo json_encode(array("hey" => "hey!"));
-    }
-
-    public function index_options()
-    {
-        return $this->response(NULL, REST_Controller::HTTP_OK);
     }
 
     public function invoices_get()
