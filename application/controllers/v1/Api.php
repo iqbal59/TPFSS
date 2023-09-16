@@ -5,31 +5,14 @@ require APPPATH . 'libraries/REST_Controller.php';
 
 class Api extends REST_Controller
 {
-    public function __construct($config = 'rest')
+    public function __construct()
     {
-        parent::__construct($config);
+        parent::__construct();
         $this->load->model('api_model');
         $this->load->model('Voucher_model');
         $this->load->model('store_model');
         $this->load->library('form_validation');
         header('Content-Type: application/json');
-        header('Access-Control-Allow-Origin: *');
-        header("Access-Control-Allow-Headers: X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Request-Method, Authorization");
-        header("Access-Control-Allow-Methods: GET, POST, OPTIONS, PUT, DELETE");
-        $method = $_SERVER['REQUEST_METHOD'];
-        if ($method == "OPTIONS") {
-            die();
-        }
-    }
-
-    public function index_post()
-    {
-        echo json_encode(array("hey" => "hey!"));
-    }
-
-    public function index_options()
-    {
-        return $this->response(NULL, REST_Controller::HTTP_OK);
     }
 
     public function invoices_get()
