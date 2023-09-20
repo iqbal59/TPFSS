@@ -1,4 +1,4 @@
-<?php if (! defined('BASEPATH')) {
+<?php if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
@@ -33,8 +33,8 @@ class Partner extends CI_Controller
 
 
         if ($this->form_validation->run()) {
-            if ($storeData=$this->store_model->get_store_by_email_id($this->input->post('store_code'), $this->input->post('email_id'))) {
-                $password=$this->random_password(6);
+            if ($storeData = $this->store_model->get_store_by_email_id($this->input->post('store_code'), $this->input->post('email_id'))) {
+                $password = $this->random_password(6);
                 $params = array(
 
                     'password' => md5($password),
@@ -47,9 +47,9 @@ class Partner extends CI_Controller
 
 
 
-                $message="Hi ".$storeData['firm_name'].",<br/><br/>";
-                $message.="Please find below the password for <a href='https://simplifytumbledry.in'>simplifytumbledry.in</a> portal <br/><br/>Login ID : <strong>".$storeData['store_crm_code']."</strong><br/><br/>New Password :
-                 <strong>".$password."</strong>
+                $message = "Hi " . $storeData['firm_name'] . ",<br/><br/>";
+                $message .= "Please find below the password for <a href='https://simplifytumbledry.in'>simplifytumbledry.in</a> portal <br/><br/>Login ID : <strong>" . $storeData['store_crm_code'] . "</strong><br/><br/>New Password :
+                 <strong>" . $password . "</strong>
                 <br/><br/>
                 Thanks<br/>
                 Tumbledry";
@@ -57,7 +57,7 @@ class Partner extends CI_Controller
 
 
                 if ($this->sendEmail($storeData['email_id'], "Forget Password", $message)) {
-                    $this->session->set_flashdata('msg', 'Password has been sent to your registerd email id '.$storeData['email_id']);
+                    $this->session->set_flashdata('msg', 'Password has been sent to your registerd email id ' . $storeData['email_id']);
                     redirect('partner/recover');
                 } else {
                     $this->session->set_flashdata('error_msg', 'Something went wrong. Please try again');
@@ -67,7 +67,7 @@ class Partner extends CI_Controller
                 $this->session->set_flashdata('error_msg', 'Email Id does not exist.');
                 redirect('partner/recover');
             }
-        // echo $this->db->last_query();
+            // echo $this->db->last_query();
         } else {
             $this->load->view('partner/recover', $data);
         }
@@ -85,12 +85,12 @@ class Partner extends CI_Controller
 
         // SMTP configuration
         $mail->isSMTP();
-        $mail->Host     = 'smtp.office365.com';
+        $mail->Host = 'smtp.office365.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'digitaloperations@tumbledry.in';
-        $mail->Password = 'Mud39050';
+        $mail->Password = 'Ruv48725';
         $mail->SMTPSecure = 'tls';
-        $mail->Port     = 587;
+        $mail->Port = 587;
 
         // $mail->Host     = 'outlook.office365.com';
         // $mail->SMTPAuth = true;
@@ -126,7 +126,7 @@ class Partner extends CI_Controller
         // Email body content
         $mailContent = $content;
 
-        $mail->Body =$mailContent;
+        $mail->Body = $mailContent;
 
         // Send email
         if (!$mail->send()) {
@@ -161,10 +161,10 @@ class Partner extends CI_Controller
     public function profile()
     {
         check_login_partner();
-        $id=$this->session->userdata('id');
+        $id = $this->session->userdata('id');
         $data = array();
         $data['page'] = 'Profile';
-        $data['storeData']=$this->store_model->get_store($id);
+        $data['storeData'] = $this->store_model->get_store($id);
 
 
         if (isset($data['storeData']['id'])) {
@@ -191,7 +191,7 @@ class Partner extends CI_Controller
                     $this->session->set_flashdata('error_msg', 'Current Passoword is Wrong');
                     redirect('partner/profile');
                 }
-            //echo $this->db->last_query();
+                //echo $this->db->last_query();
             } else {
                 $data['main_content'] = $this->load->view('partner/profile', $data, true);
                 $this->load->view('partner/index', $data);
@@ -217,8 +217,8 @@ class Partner extends CI_Controller
                     $data = array(
                         'id' => $row->id,
                         'name' => $row->firm_name,
-                        'email' =>$row->email_id,
-                        'role' =>'user',
+                        'email' => $row->email_id,
+                        'role' => 'user',
                         'is_partner_login' => true
                     );
 
@@ -231,9 +231,9 @@ class Partner extends CI_Controller
                         $url = base_url('partner/dashboard');
                     }
                 }
-                echo json_encode(array('st'=>1,'url'=> $url)); //--success
+                echo json_encode(array('st' => 1, 'url' => $url)); //--success
             } else {
-                echo json_encode(array('st'=>0)); //-- error
+                echo json_encode(array('st' => 0)); //-- error
             }
         } else {
             $this->load->view('auth', $data);
@@ -256,18 +256,18 @@ class Partner extends CI_Controller
     public function dashboard()
     {
         check_login_partner();
-        $id=$this->session->userdata('id');
+        $id = $this->session->userdata('id');
         $data = array();
         $data['page_title'] = 'Dashboard';
         $data['expense'] = $this->accounts_model->calculate_expense_by_partner_new($id, 4);
         $data['paytm'] = $this->common_model->getPaytmDataMonthly(date('Y-m-01', strtotime('-6 months')), date('Y-m-d'), $id);
         $data['bharatpe'] = $this->common_model->getBharatPeDataMonthly(date('Y-m-01', strtotime('-6 months')), date('Y-m-d'), $id);
         //$this->db->last_query();
-        $data['storeData']=$this->accounts_model->calculate_balance_by_store(date('Y-m-d'), $id);
-        $data['invoices']=$this->accounts_model->get_all_invoice_by_partner($this->session->userdata('id'), date('Y-m-d', strtotime("-30 days")), date('y-m-d'));
-        $data['open_date']=date('Y-m-d', strtotime('-30 days'));
-        $data['storebalance']=$this->accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $data['ledgerItems']=$this->accounts_model->ledgerItem(date('Y-m-d', strtotime("-30 days")), date('y-m-d'), $id);
+        $data['storeData'] = $this->accounts_model->calculate_balance_by_store(date('Y-m-d'), $id);
+        $data['invoices'] = $this->accounts_model->get_all_invoice_by_partner($this->session->userdata('id'), date('Y-m-d', strtotime("-30 days")), date('y-m-d'));
+        $data['open_date'] = date('Y-m-d', strtotime('-30 days'));
+        $data['storebalance'] = $this->accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $data['ledgerItems'] = $this->accounts_model->ledgerItem(date('Y-m-d', strtotime("-30 days")), date('y-m-d'), $id);
         $data['main_content'] = $this->load->view('partner/home', $data, true);
         $this->load->view('partner/index', $data);
     }
@@ -279,19 +279,19 @@ class Partner extends CI_Controller
         check_login_partner();
 
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-d', strtotime('-30 days'));
+            $data['open_date'] = date('Y-m-d', strtotime('-30 days'));
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
 
-        $data['invoices']=$this->accounts_model->get_all_invoice_by_partner($this->session->userdata('id'), $data['open_date'], $data['to_date']);
+        $data['invoices'] = $this->accounts_model->get_all_invoice_by_partner($this->session->userdata('id'), $data['open_date'], $data['to_date']);
         $data['main_content'] = $this->load->view('partner/invoice', $data, true);
         $this->load->view('partner/index', $data);
     }
@@ -301,20 +301,20 @@ class Partner extends CI_Controller
     {
         check_login_partner();
         $curMonth = date("m", time());
-        $curQuarter = ceil($curMonth/3);
-        $id=$this->session->userdata('id');
+        $curQuarter = ceil($curMonth / 3);
+        $id = $this->session->userdata('id');
         if ($this->input->post('month')) {
-            if ($this->input->post('month')=='MONTH') {
-                $data['month']=1;
-            } elseif ($this->input->post('month')=='QUARTER') {
-                $data['month']=3;
-            } elseif ($this->input->post('month')=='YEAR') {
-                $data['month']=$curMonth;
-            } elseif ($this->input->post('month')=='PYEAR') {
-                $data['month']=24;
+            if ($this->input->post('month') == 'MONTH') {
+                $data['month'] = 1;
+            } elseif ($this->input->post('month') == 'QUARTER') {
+                $data['month'] = 3;
+            } elseif ($this->input->post('month') == 'YEAR') {
+                $data['month'] = $curMonth;
+            } elseif ($this->input->post('month') == 'PYEAR') {
+                $data['month'] = 24;
             }
         } else {
-            $data['month']=date('n');
+            $data['month'] = date('n');
         }
 
         // if ($this->input->post('year')) {
@@ -334,21 +334,21 @@ class Partner extends CI_Controller
     public function ledger()
     {
         check_login_partner();
-        $id=$this->session->userdata('id');
+        $id = $this->session->userdata('id');
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-d', strtotime('-30 days'));
+            $data['open_date'] = date('Y-m-d', strtotime('-30 days'));
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
-        $data['storebalance']=$this->accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $data['ledgerItems']=$this->accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
+        $data['storebalance'] = $this->accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $data['ledgerItems'] = $this->accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
         $data['main_content'] = $this->load->view('partner/ledger', $data, true);
         $this->load->view('partner/index', $data);
     }
@@ -358,21 +358,21 @@ class Partner extends CI_Controller
     public function printledger()
     {
         check_login_partner();
-        $id=$this->session->userdata('id');
+        $id = $this->session->userdata('id');
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
-        $data['storebalance']=$this->accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $data['ledgerItems']=$this->accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
+        $data['storebalance'] = $this->accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $data['ledgerItems'] = $this->accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
         $this->load->view('admin/accounts/printledger', $data);
     }
 
@@ -380,40 +380,40 @@ class Partner extends CI_Controller
     public function exportledger()
     {
         check_login_partner();
-        $id=$this->session->userdata('id');
+        $id = $this->session->userdata('id');
         header('Content-Type: text/csv; charset=utf-8');
-        header('Content-Disposition: attachment; filename=customer_ledger-'.date('d-m-Y').'.csv');
+        header('Content-Disposition: attachment; filename=customer_ledger-' . date('d-m-Y') . '.csv');
         // create a file pointer connected to the output stream
         $output = fopen('php://output', 'w');
 
         if ($this->input->post('from_date')) {
-            $data['open_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date']=date('Y-m-01');
+            $data['open_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
 
 
         // output the column headings
-        fputcsv($output, array('Voucher No.','Voucher Type', 'Voucher Date', 'Debit', 'Credit', 'Description', 'Total'));
-        $data['storebalance']=$this->accounts_model->calculate_balance_by_store($data['open_date'], $id);
-        $total_balalnce=$data['storebalance']['openbalance'];
-        $itemrow=array('', 'Opening Balance', date("d-m-Y", strtotime($data['open_date'])), $total_balalnce, '', '', $total_balalnce);
+        fputcsv($output, array('Voucher No.', 'Voucher Type', 'Voucher Date', 'Debit', 'Credit', 'Description', 'Total'));
+        $data['storebalance'] = $this->accounts_model->calculate_balance_by_store($data['open_date'], $id);
+        $total_balalnce = $data['storebalance']['openbalance'];
+        $itemrow = array('', 'Opening Balance', date("d-m-Y", strtotime($data['open_date'])), $total_balalnce, '', '', $total_balalnce);
         fputcsv($output, $itemrow);
-        $data['ledgerItems']=$this->accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
+        $data['ledgerItems'] = $this->accounts_model->ledgerItem($data['open_date'], $data['to_date'], $id);
 
         foreach ($data['ledgerItems'] as $row) {
-            if ($row['voucher_type']=='C') {
-                $voucher_type= 'Credit';
-            } elseif ($row['voucher_type']=='R') {
-                $voucher_type ='Receipt';
-            } elseif ($row['voucher_type']=='D') {
+            if ($row['voucher_type'] == 'C') {
+                $voucher_type = 'Credit';
+            } elseif ($row['voucher_type'] == 'R') {
+                $voucher_type = 'Receipt';
+            } elseif ($row['voucher_type'] == 'D') {
                 $voucher_type = 'Debit';
             } else {
                 $voucher_type = $row['voucher_type'];
@@ -422,23 +422,23 @@ class Partner extends CI_Controller
 
 
 
-            if ($row['voucher_type']=='D' or $row['voucher_type']=='Sale') {
-                $debit= $row['np'];
-                $total_balalnce+=$row['np'];
+            if ($row['voucher_type'] == 'D' or $row['voucher_type'] == 'Sale') {
+                $debit = $row['np'];
+                $total_balalnce += $row['np'];
             } else {
-                $debit= '';
+                $debit = '';
             }
 
-            if ($row['voucher_type']=='C' or $row['voucher_type']=='R') {
-                $credit= $row['np'];
-                $total_balalnce-=$row['np'];
+            if ($row['voucher_type'] == 'C' or $row['voucher_type'] == 'R') {
+                $credit = $row['np'];
+                $total_balalnce -= $row['np'];
             } else {
-                $credit='';
+                $credit = '';
             }
 
 
 
-            $itemrow=array($row['voucher_no'], $voucher_type, date("d-m-Y", strtotime($row['voucher_date'])), $debit ,$credit, $row['descriptions'], $total_balalnce);
+            $itemrow = array($row['voucher_no'], $voucher_type, date("d-m-Y", strtotime($row['voucher_date'])), $debit, $credit, $row['descriptions'], $total_balalnce);
 
 
             fputcsv($output, $itemrow);
@@ -450,7 +450,7 @@ class Partner extends CI_Controller
 
     public function paytm()
     {
-        $id=$this->session->userdata('id');
+        $id = $this->session->userdata('id');
 
         // $params['limit'] = 100;
         // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
@@ -462,15 +462,15 @@ class Partner extends CI_Controller
 
 
         if ($this->input->post('from_date')) {
-            $data['from_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['from_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['from_date']=date('Y-m-01');
+            $data['from_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
         $data['paytmdata'] = $this->common_model->getPaytmData($data['from_date'], $data['to_date'], $id);
@@ -482,7 +482,7 @@ class Partner extends CI_Controller
 
     public function bharatpay()
     {
-        $id=$this->session->userdata('id');
+        $id = $this->session->userdata('id');
 
         // $params['limit'] = 100;
         // $params['offset'] = ($this->input->get('page')) ? $this->input->get('page') : 0;
@@ -493,15 +493,15 @@ class Partner extends CI_Controller
         // $this->pagination->initialize($config);
 
         if ($this->input->post('from_date')) {
-            $data['from_date']=date("Y-m-d", strtotime($this->input->post('from_date')));
+            $data['from_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['from_date']=date('Y-m-01');
+            $data['from_date'] = date('Y-m-01');
         }
 
         if ($this->input->post('to_date')) {
-            $data['to_date']=date("Y-m-d", strtotime($this->input->post('to_date')));
+            $data['to_date'] = date("Y-m-d", strtotime($this->input->post('to_date')));
         } else {
-            $data['to_date']=date('Y-m-d');
+            $data['to_date'] = date('Y-m-d');
         }
 
         $data['bharatpedata'] = $this->common_model->getBharatPeData($data['from_date'], $data['to_date'], $id);
@@ -516,10 +516,10 @@ class Partner extends CI_Controller
     public function poject_charter()
     {
         check_login_partner();
-        $id=$this->session->userdata('id');
+        $id = $this->session->userdata('id');
         $data = array();
         $data['page_title'] = 'Project Charter';
-        $data['activities'] = $this->common_model->get_all_by_table('activities', '', array('field'=>'completion_day', 'order_by'=>'asc'));
+        $data['activities'] = $this->common_model->get_all_by_table('activities', '', array('field' => 'completion_day', 'order_by' => 'asc'));
         $data['activities_header1'] = $this->common_model->get_activity_header(1);
         $data['activities_header2'] = $this->common_model->get_activity_header(2);
         //$data['main_content'] = $this->load->view('partner/home', $data, true);
