@@ -22,7 +22,7 @@ class Api extends REST_Controller
 
         foreach ($items as $item) {
             $invoiceItem['id'] = $item->id;
-            $invoiceItem['voucher_type'] = 'Sales';
+            $invoiceItem['voucher_type'] = $item->invoice_type == 1 ? 'AMC' : 'Sales';
             $invoiceItem['voucher_no'] = $item->invoice_no;
             $invoiceItem['voucher_date'] = date('d/m/Y', strtotime($item->invoice_date));
             $invoiceItem['party_name'] = $item->firm_name;
@@ -60,11 +60,21 @@ class Api extends REST_Controller
             $ld['dr_cr'] = "DR";
             array_push($ledgerDetails, $ld);
 
-            $ld['ledger_name'] = "Royalty on Laundry";
-            $ld['ledger_perc'] = "";
-            $ld['ledger_amt'] = $item->amount;
-            $ld['dr_cr'] = "CR";
-            array_push($ledgerDetails, $ld);
+            if ($item->invoice_type == '0') {
+                $ld['ledger_name'] = "Royalty on Laundry";
+                $ld['ledger_perc'] = "";
+                $ld['ledger_amt'] = $item->amount;
+                $ld['dr_cr'] = "CR";
+                array_push($ledgerDetails, $ld);
+            }
+
+            if ($item->invoice_type == '1') {
+                $ld['ledger_name'] = "AMC Charges";
+                $ld['ledger_perc'] = "";
+                $ld['ledger_amt'] = $item->amount;
+                $ld['dr_cr'] = "CR";
+                array_push($ledgerDetails, $ld);
+            }
 
             if ($item->gst_st_code == '09' || $item->gst_st_code == '9') {
                 $cgstRate = $item->tax_rate / 2;
