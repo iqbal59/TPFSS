@@ -122,8 +122,12 @@ body {
                 </td>
                 <td colspan="2" style="vertical-align:top">
                     <p><span style="font-size:9pt;font-family:Calibri,Arial;">:
-                            TD/23-24/
-                            <?php echo $invoice->invoiceno; ?><br />
+                            <?php if ($invoice->invoice_type == '1') {
+                                echo 'AMC/23-24/'.$invoice->invoiceno;
+                            } else {
+                                echo 'TD/23-24/'.$invoice->invoiceno;
+                            } ?>
+
                         </span></p>
                     <span style="font-size:9pt;font-family:Calibri,Arial;">:
                         <?php echo date('d/m/Y', strtotime($invoice->invoice_date)); ?>
@@ -147,8 +151,9 @@ body {
                 <td colspan="5"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Billing
                         Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s
                         <?php echo $invoice->firm_name; ?><br>
-                    </span><span
-                        style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address; ?></span><br />
+                    </span><span style="font-size:9pt;font-family:Calibri,Arial;">
+                        <?php echo $invoice->store_address; ?>
+                    </span><br />
                     <span style="font-size:9pt;font-family:Calibri,Arial;">GSTIN NO.
                         <?php echo $invoice->gstin_no; ?>
                     </span>
@@ -156,11 +161,12 @@ body {
                 <td colspan="4"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Shipping
                         Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s
                         <?php echo $invoice->firm_name; ?><br>
-                    </span><span
-                        style="font-size:9pt;font-family:Calibri,Arial;"><?php echo $invoice->store_address; ?></span><br><span
-                        style="font-size:9pt;font-family:Calibri,Arial;">GSTIN NO.
+                    </span><span style="font-size:9pt;font-family:Calibri,Arial;">
+                        <?php echo $invoice->store_address; ?>
+                    </span><br><span style="font-size:9pt;font-family:Calibri,Arial;">GSTIN NO.
                         <?php echo $invoice->gstin_no;
-                        $stcode = trim($invoice->gst_st_code); ?></span></td>
+                        $stcode = trim($invoice->gst_st_code); ?>
+                    </span></td>
             </tr>
 
 
@@ -207,7 +213,9 @@ body {
                 <td class="s7 center">
                     <?php echo $i++; ?>
                 </td>
-                <td class="s7" <?php echo $stcode == '09' ? '' : 'colspan="2"'; ?>><?php echo $inv->name; ?></td>
+                <td class="s7" <?php echo $stcode == '09' ? '' : 'colspan="2"'; ?>>
+                    <?php echo $inv->name; ?>
+                </td>
                 <td class="s7 center">
                     <?php echo $inv->sac_code; ?>
                 </td>
@@ -319,12 +327,13 @@ body {
 
                 <td class="s14 left" colspan="9">
                     <p><strong>Remarks:</strong></p>
-                    <p><strong><?php echo $invoice->invoice_type == '1'?"AMC Charges":"Royalty"?> for the period of
+                    <p><strong>
+                            <?php echo $invoice->invoice_type == '1' ? "AMC Charges" : "Royalty" ?> for the period of
                             <?php echo $invoice->descriptions; ?>.
                         </strong><br>
-                        <?php 
-                        if($invoice->invoice_type=='1')
-                        echo "<strong>** Terms and conditions applied.</strong>";
+                        <?php
+                        if ($invoice->invoice_type == '1')
+                            echo "<strong>** Terms and conditions applied.</strong>";
                         ?>
                     </p>
 

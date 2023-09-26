@@ -153,7 +153,7 @@ class Accounts_model extends CI_Model
             $total_amount = 0;
             $tax_amount = 0;
             $net_amount = 0;
-            $invoice_no = $this->getInvoiceNo();
+            $invoice_no = $this->getAMCInvoiceNo();
             $this->db->insert('invoices', array('store_id' => $store_id, 'invoice_no' => $invoice_no));
             $invoice_id = $this->db->insert_id();
             $storeData = $this->db->get_where('stores', array('id' => $store_id))->row_array();
@@ -173,13 +173,26 @@ class Accounts_model extends CI_Model
     public function getInvoiceNo()
     {
         $invoice_no = 1;
-        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where date(invoice_date) >= '2023-04-01'")->row();
+        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where invoice_type=0 and date(invoice_date) >= '2023-04-01'")->row();
         if ($invoiceData->invoice_no) {
             $invoice_no += $invoiceData->invoice_no;
         }
 
         return $invoice_no;
     }
+
+    public function getAMCInvoiceNo()
+    {
+        $invoice_no = 1;
+        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where invoice_type=1 and date(invoice_date) >= '2023-04-01'")->row();
+        if ($invoiceData->invoice_no) {
+            $invoice_no += $invoiceData->invoice_no;
+        }
+
+        return $invoice_no;
+    }
+
+
     public function select_max_serial_no()
     {
         $this->db->select_max('serial_no');
