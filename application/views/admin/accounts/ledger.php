@@ -86,7 +86,7 @@
                                         <div class="controls">
                                             <input type="date" name="from_date" class="form-control"
                                                 placeholder="MM/DD/YYYY" required
-                                                value="<?php echo isset($open_date) ? $open_date : date("Y-m-01"); ?>">
+                                                value="<?php echo isset($open_date) ? $open_date : date('Y-m-d', strtotime(date('Y-m-d') . ' -31 days')); ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -176,7 +176,7 @@
                                     </td>
                                     <td> <a href="javascript:void(0)"
                                             onclick="viewledger(<?php echo $l['id']; ?>)">View</a>
-                                        <a href="javascript:void(0)"
+                                        <a href=" javascript:void(0)"
                                             onclick="downloadpdf(<?php echo $l['id']; ?>)">Download</a>
                                     </td>
                                 </tr>
