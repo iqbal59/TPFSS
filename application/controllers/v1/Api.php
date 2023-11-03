@@ -418,7 +418,14 @@ class Api extends REST_Controller
 
             $storeCode = current(explode("_", $this->input->post('order_id')));
 
+            if ($storeCode == 'TS48')
+                $storeCode = 'TS48_New';
+
+            if ($storeCode == 'TS31')
+                $storeCode = 'TS31_New';
+
             $storeInfo = $this->store_model->get_store_by_code($storeCode);
+
 
 
             $data = array(
