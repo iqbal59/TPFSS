@@ -425,7 +425,7 @@ class Api extends REST_Controller
                 'voucher_type' => 'R',
                 'store_id' => $storeInfo['id'],
                 'amount' => $this->input->post('amount'),
-                'create_date' => date('Y-m-d H:i:s'),
+                //'create_date' => date('Y-m-d H:i:s'),
                 'descriptions' => $this->input->post('descriptions')
             );
 
