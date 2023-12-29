@@ -525,7 +525,7 @@ class Api extends REST_Controller
 
 
 
-    public function addStore_post()
+    public function add_store_post()
     {
         try {
             $_POST = json_decode(file_get_contents('php://input'), true);
