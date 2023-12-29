@@ -68,7 +68,7 @@ class Store extends CI_Controller
         $this->form_validation->set_rules('paytm_mid2', 'Paytm MID2', 'is_unique[stores.paytm_mid2]');
         $this->form_validation->set_rules('paytm_mid3', 'Paytm MID3', 'is_unique[stores.paytm_mid3]');
         $this->form_validation->set_rules('pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
-        // $this->form_validation->set_rules('email_id','Email ID','required|valid_email|is_unique[stores.email_id]');
+        $this->form_validation->set_rules('email_id', 'Email ID', 'required|valid_email');
 
         if ($this->form_validation->run()) {
             $params = array(

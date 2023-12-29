@@ -525,5 +525,72 @@ class Api extends REST_Controller
 
 
 
+    public function addStore()
+    {
+        try {
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            $this->form_validation->set_rules('store_code', 'Store Code', 'required|is_unique[stores.store_code]');
+            $this->form_validation->set_rules('store_crm_code', 'Store CRM Code', 'required|is_unique[stores.store_crm_code]');
+            $this->form_validation->set_rules('store_name', 'Store Name', 'required|is_unique[stores.store_name]');
+            $this->form_validation->set_rules('firm_name', 'Firm Name', 'required|is_unique[stores.firm_name]');
+            //$this->form_validation->set_rules('bharatpay_id', 'Bharat Pay Id', 'is_unique[stores.bharatpay_id]');
+            $this->form_validation->set_rules('paytm_mid1', 'Paytm MID1', 'is_unique[stores.paytm_mid1]');
+            $this->form_validation->set_rules('paytm_mid2', 'Paytm MID2', 'is_unique[stores.paytm_mid2]');
+            $this->form_validation->set_rules('paytm_mid3', 'Paytm MID3', 'is_unique[stores.paytm_mid3]');
+            $this->form_validation->set_rules('pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
+
+            if (!$this->form_validation->run()) {
+                throw new Exception(validation_errors());
+            }
+
+
+            $params = array(
+                'store_code' => $this->input->post('store_code'),
+                'store_name' => $this->input->post('store_name'),
+                'store_crm_code' => $this->input->post('store_crm_code'),
+                'firm_name' => $this->input->post('firm_name'),
+                'store_city' => $this->input->post('store_city'),
+                'store_state' => $this->input->post('store_state'),
+                'email_id' => $this->input->post('email_id'),
+                'gstin_no' => $this->input->post('gstin_no'),
+                'contact_number' => $this->input->post('contact_number'),
+                'paytm_mid1' => $this->input->post('paytm_mid1'),
+                'paytm_mid2' => $this->input->post('paytm_mid2'),
+                'paytm_mid3' => $this->input->post('paytm_mid3'),
+                'bharatpay_id' => $this->input->post('bharatpay_id'),
+                'store_address' => $this->input->post('store_address'),
+                'launch_date' => $this->input->post('launch_date'),
+                'pan_no' => $this->input->post('pan_no'),
+                'opening_balance' => $this->input->post('opening_balance'),
+                'is_active' => $this->input->post('is_active'),
+                'gst_st_code' => $this->input->post('gst_st_code'),
+                'discount' => $this->input->post('discount'),
+                'pin_code' => $this->input->post('pin_code'),
+                'store_type' => $this->input->post('store_type'),
+            );
+
+
+
+
+            if ($this->store_model->add_store($params) > 0) {
+                $this->set_response([
+                    'status' => true,
+                    'message' => $params,
+                ], REST_Controller::HTTP_OK);
+            } else {
+                // echo $this->db->last_query();
+                throw new Exception('Insert fail');
+            }
+        } catch (Throwable $e) {
+            $this->set_response([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+
+    }
+
+
 
 }
