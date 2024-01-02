@@ -71,7 +71,59 @@ class Api extends REST_Controller
 
     public function sale_order_by_qdc_get()
     {
-        echo "succcess";
+        $headers = ['Content-Type: application/json', 'token:  EXDHXUXobI5WmIwVSoIPb4JnmLSVTT92OjbLIymOQSzCfs2HIzkjMaaaOPVLBB5R9DID6kMUBuzS5GItjLMT8pQdJAxsdbMOnh2ckZaXn0iSbRFHH11qoLijm4u6nUhZhk5nd5JUbo6IHyCrvpkLJWZbyjpP4Ea3jSbqmR3bRHPzeabo1Cax95PUVtpugup7ODYpXMFdWJuCHZxXHA', 'ClientID: 2469'];
+        $url = "https://api.quickdrycleaning.com/QDCV1/OrderReportData";
+        $post_fields = json_encode(array('ClientID' => '2469', "ReportDate" => date('d M Y', strtotime('-1 days', time()))));
+
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        if (!empty($post_fields)) {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
+        }
+
+        if (!empty($headers)) {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        }
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $data = curl_exec($ch);
+
+        $orderInfo = json_decode($data);
+        $orderCreatedInfos = $orderInfo->OrderCreated;
+        $orderCreatedInfos = $orderInfo->OrderCreated;
+        $orderCreatedInfos = $orderInfo->OrderCreated;
+
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+
+        curl_close($ch);
+
+
+        foreach ($orderCreatedInfos as $orderInfo) {
+
+            $data = array(
+                "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
+                "order_no" => $orderInfo->OrderNumber,
+                "store_name=" => $orderInfo->StoreName,
+                "taxable_amount" => $orderInfo->NetAmount,
+                "net_amount" => $orderInfo->NetAmount,
+                "service_code" => $orderInfo->PrimaryServices,
+                "mobile_n=" => $orderInfo->CustomerMobile,
+                "status=" => $orderInfo->OrderStatus,
+                "customer_id'" => $orderInfo->CustomerCode
+            );
+
+            $this->Voucher_model->add_model($data);
+
+        }
+
     }
 
 
