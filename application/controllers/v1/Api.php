@@ -503,6 +503,43 @@ class Api extends REST_Controller
     }
     //END Paytm Payment
 
+    //Once payment success on QDC app
+
+    public function paytm_payment_by_app_post()
+    {
+        try {
+            $_POST = json_decode(file_get_contents('php://input'), true);
+
+            $data = array(
+
+                'order_id' => $_POST['ORDERID'],
+                'transaction_no' => $_POST['TXNID'],
+                'mid_no' => $_POST['MID'],
+                'amount' => $_POST['TXNAMOUNT'],
+                'transaction_date' => $_POST['TXNDATETIME'],
+                'status' => $_POST['STATUS'],
+                'store_code' => $_POST['STORECODE'],
+
+            );
+
+            if ($this->Voucher_model->add_model('paytm_qdc', $data) > 0) {
+                $this->set_response([
+                    'status' => true,
+                    'message' => $data,
+                ], REST_Controller::HTTP_OK);
+            } else {
+                // echo $this->db->last_query();
+                throw new Exception('Insert fail');
+            }
+        } catch (Throwable $e) {
+            $this->set_response([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
+
 
 
     public function stores_get()

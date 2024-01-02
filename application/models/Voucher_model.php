@@ -68,7 +68,11 @@ class Voucher_model extends CI_Model
     }
 
 
-
+    public function add_model($table_name, $params)
+    {
+        $this->db->insert($table_name, $params);
+        return $this->db->insert_id();
+    }
     /*
      * function to update voucher
      */

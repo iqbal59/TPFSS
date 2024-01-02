@@ -69,6 +69,10 @@ class Api extends REST_Controller
 
 
 
+    public function sale_order_by_qdc_get()
+    {
+        echo "succcess";
+    }
 
 
 
