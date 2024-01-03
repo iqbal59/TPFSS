@@ -112,7 +112,7 @@ class Api extends REST_Controller
                 "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
                 "order_no" => $orderInfo->OrderNumber,
                 "store_name" => $orderInfo->StoreName,
-                "taxable_amount" => ($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment),
+                "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
                 "net_amount" => $orderInfo->NetAmount,
                 "service_code" => $orderInfo->PrimaryServices,
                 "mobile_no" => $orderInfo->CustomerMobile,
