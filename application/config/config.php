@@ -456,7 +456,7 @@ $config['csrf_token_name'] = 'tumbledry_csrf';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = false;
-$config['csrf_exclude_uris'] = array('v1/api/sync_with_tally', 'v1/api/sync_with_tally_creditnote', 'v1/api/sync_with_tally_payment', 'v1/api/add_hdfc_payment', 'v1/api/paytm_payment', 'v1/api/fss_status', 'v1/api/add_store', 'api/paytm_payment', 'v1/api/paytm_payment_by_app', 'api/sale_order_by_qdc');
+$config['csrf_exclude_uris'] = array('v1/api/sync_with_tally', 'v1/api/sync_with_tally_creditnote', 'v1/api/sync_with_tally_payment', 'v1/api/add_hdfc_payment', 'v1/api/paytm_payment', 'v1/api/fss_status', 'v1/api/add_store', 'api/paytm_payment', 'v1/api/paytm_payment_by_app', 'v1/api/creditnote_by_tally', 'api/sale_order_by_qdc');
 
 /*
 |--------------------------------------------------------------------------

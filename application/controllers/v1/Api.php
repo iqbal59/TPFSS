@@ -254,6 +254,43 @@ class Api extends REST_Controller
     }
 
 
+    public function creditnote_by_tally_post()
+    {
+        $tallyData = json_decode(file_get_contents('php://input'));
+
+        $creditNotes = array();
+        foreach ($tallyData->result as $item) {
+            $storeCode = $this->store_model->get_store_by_code(trim($item->party_name));
+            $data = array(
+                'voucher_type' => 'C',
+                'store_id' => $storeCode['id'],
+                'amount' => $item->amount,
+                'create_date' => date('Y-m-d H:i:s', strtotime($item->date)),
+                'descriptions' => $this->input->post('descriptions')
+            );
+
+
+            if (this->Voucher_model->add_model('vouchers_new', $data) > 0) {
+                $creditNote['syncstatus'] = true;
+            } else {
+                $creditNote['syncstatus'] = false;
+            }
+            $creditNote['voucher_no'] = $item->vouhcer_no;
+            array_push($creditNotes, $creditNote);
+
+        }
+
+        $response['result'] = $creditNotes;
+        $this->set_response([
+            $this->config->item('rest_status_field_name') => true,
+            'message' => $response
+        ], REST_Controller::HTTP_OK);
+    }
+    //END CREDIT
+
+    //CREDIT NOTE push by Tally
+
+
     public function sync_with_tally_creditnote_post()
     {
         $tallyResposne = json_decode(file_get_contents('php://input'));
@@ -278,9 +315,8 @@ class Api extends REST_Controller
             'message' => $response
         ], REST_Controller::HTTP_OK);
     }
-    //END CREDIT
 
-
+    //END Credit Note
 
     //Payment
 
