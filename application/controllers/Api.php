@@ -92,7 +92,7 @@ class Api extends REST_Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        echo $data = curl_exec($ch);
+        $data = curl_exec($ch);
 
         $orderInfo = json_decode($data);
         $orderCreatedInfos = $orderInfo->OrderCreated;
@@ -112,11 +112,11 @@ class Api extends REST_Controller
                 "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
                 "order_no" => $orderInfo->OrderNumber,
                 "store_name=" => $orderInfo->StoreName,
-                "taxable_amount" => $orderInfo->NetAmount,
+                "taxable_amount" => ($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment),
                 "net_amount" => $orderInfo->NetAmount,
                 "service_code" => $orderInfo->PrimaryServices,
-                "mobile_n=" => $orderInfo->CustomerMobile,
-                "status=" => $orderInfo->OrderStatus,
+                "mobile_no" => $orderInfo->CustomerMobile,
+                "status" => $orderInfo->OrderStatus,
                 "customer_id'" => $orderInfo->CustomerCode
             );
 
