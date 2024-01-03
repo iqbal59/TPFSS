@@ -120,6 +120,7 @@ class Api extends REST_Controller
                 "customer_id'" => $orderInfo->CustomerCode
             );
 
+            print_r($data);
             $this->Voucher_model->add_model("storesales_qdc", $data);
 
         }
