@@ -264,9 +264,9 @@ class Api extends REST_Controller
             $data = array(
                 'voucher_type' => 'C',
                 'store_id' => $storeCode['id'],
-                'amount' => $item->amount,
-                'create_date' => date('Y-m-d H:i:s', strtotime($item->date)),
-                'descriptions' => $this->input->post('descriptions')
+                'amount' => $item->voucher_amount,
+                'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
+                'descriptions' => $item->voucher_narration
             );
 
 
