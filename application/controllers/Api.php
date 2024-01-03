@@ -126,6 +126,38 @@ class Api extends REST_Controller
 
         }
 
+        //Update
+        foreach ($orderEditedInfos as $orderInfo) {
+
+            $data = array(
+                "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
+                //"order_no" => $orderInfo->OrderNumber,
+                //"store_name" => $orderInfo->StoreName,
+                "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
+                "net_amount" => $orderInfo->NetAmount,
+                "service_code" => $orderInfo->PrimaryServices,
+                "mobile_no" => $orderInfo->CustomerMobile,
+                "status" => $orderInfo->OrderStatus,
+                "customer_id" => $orderInfo->CustomerCode
+            );
+
+
+            $this->Voucher_model->update_sale_order($orderInfo->OrderNumber, $orderInfo->StoreName, $data);
+
+        }
+
+        //Delete
+
+        foreach ($orderCancelledInfos as $orderInfo) {
+
+
+
+
+            $this->Voucher_model->add_model("storesales_qdc", $data);
+
+
+        }
+
     }
 
 

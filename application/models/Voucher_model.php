@@ -82,6 +82,20 @@ class Voucher_model extends CI_Model
         return $this->db->update('vouchers', $params);
     }
 
+
+    public function update_sale_order($order_no, $store_name, $params)
+    {
+        $this->db->where('order_no', $order_no);
+        $this->db->where('store_name', $store_name);
+        return $this->db->update('storesales_qdc', $params);
+    }
+
+
+    public function delete_sale_order($order_no, $store_name)
+    {
+        return $this->db->delete('storesales_qdc', array('order_no' => $order_no, 'store_name' => $store_name));
+    }
+
     /*
      * function to delete voucher
      */
