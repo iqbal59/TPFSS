@@ -92,12 +92,12 @@ class Api extends REST_Controller
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
-        $data = curl_exec($ch);
+        echo $data = curl_exec($ch);
 
         $orderInfo = json_decode($data);
         $orderCreatedInfos = $orderInfo->OrderCreated;
-        $orderCreatedInfos = $orderInfo->OrderCreated;
-        $orderCreatedInfos = $orderInfo->OrderCreated;
+        $orderEditedInfos = $orderInfo->OrderEdited;
+        $orderCancelledInfos = $orderInfo->OrderCancelled;
 
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
