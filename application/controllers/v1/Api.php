@@ -270,7 +270,7 @@ class Api extends REST_Controller
             );
 
 
-            if (this->Voucher_model->add_model('vouchers_new', $data) > 0) {
+            if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
                 $creditNote['syncstatus'] = true;
             } else {
                 $creditNote['syncstatus'] = false;
