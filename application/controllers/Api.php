@@ -111,7 +111,7 @@ class Api extends REST_Controller
             $data = array(
                 "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
                 "order_no" => $orderInfo->OrderNumber,
-                "store_name=" => $orderInfo->StoreName,
+                "store_name" => $orderInfo->StoreName,
                 "taxable_amount" => ($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment),
                 "net_amount" => $orderInfo->NetAmount,
                 "service_code" => $orderInfo->PrimaryServices,
