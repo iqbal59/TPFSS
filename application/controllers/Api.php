@@ -154,7 +154,7 @@ class Api extends REST_Controller
 
 
 
-            $this->Voucher_model->add_model("storesales_qdc", $data);
+            $this->Voucher_model->delete_sale_order($orderInfo->OrderNumber, $orderInfo->StoreName);
 
 
         }
