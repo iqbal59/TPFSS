@@ -974,7 +974,8 @@ class Accounts extends CI_Controller
                 echo $this->db->last_query();
                 $orderNos = array();
                 foreach ($invoiceItems as $item) {
-                    $rawOrderNo = $item->order_nos;
+                    if ($item->order_nos)
+                        $rawOrderNo = $item->order_nos;
                     $rawOrderNo = explode(',', $rawOrderNo);
                     foreach ($rawOrderNo as $orderNo) {
                         //echo trim($orderNo, '\'');
