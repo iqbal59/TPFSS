@@ -984,7 +984,7 @@ class Accounts extends CI_Controller
                     }
                 }
 
-                print_r($orderNos);
+                //print_r($orderNos);
                 $saleRoyaltyData = $this->Accounts_model->get_royalty_sale_data($orderNos, $invoice->store_name);
                 $html = '<h4 align="center">Sale Data (' . $invoice->descriptions . ')</h4>';
                 $html .= '<table id="" class="list" cellspacing="0" width="100%">
