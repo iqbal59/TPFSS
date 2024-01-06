@@ -971,7 +971,7 @@ class Accounts extends CI_Controller
                 $pdf->AddPage();
                 $invoice = $this->Accounts_model->get_invoice_by_id($sv);
                 $invoiceItems = $this->Accounts_model->get_invoice_item_by_id($sv);
-
+                echo $this->db->last_query();
                 $orderNos = array();
                 foreach ($invoiceItems as $item) {
                     $rawOrderNo = $item->order_nos;
