@@ -246,8 +246,8 @@ class Accounts extends CI_Controller
 
         $mail->Host = 'smtp.office365.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'mis1@tumbledry.in';
-        $mail->Password = 'Puy39922';
+        $mail->Username = 'mis2@tumbledry.in';
+        $mail->Password = 'Zab33506';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
         //$mail->SMTPDebug = 2;
@@ -265,8 +265,8 @@ class Accounts extends CI_Controller
         // $mail->SMTPSecure = 'ssl';
         // $mail->Port     = 587;
 
-        $mail->setFrom('mis1@tumbledry.in', 'MIS');
-        $mail->addReplyTo('mis1@tumbeldry.in', 'MIS');
+        $mail->setFrom('mis2@tumbledry.in', 'MIS');
+        $mail->addReplyTo('mis2@tumbeldry.in', 'MIS');
 
         // Add a recipient
         $mail->addAddress($to_address);
@@ -318,7 +318,7 @@ class Accounts extends CI_Controller
         $mail->isSMTP();
         $mail->Host = 'smtp.office365.com';
         $mail->SMTPAuth = true;
-        $mail->Username = 'mis1@tumbledry.in';
+        $mail->Username = 'mis2@tumbledry.in';
         $mail->Password = 'Bud36747';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
@@ -338,8 +338,8 @@ class Accounts extends CI_Controller
         // $mail->Port     = 587;
 
 
-        $mail->setFrom('mis1@tumbledry.in', 'MIS');
-        $mail->addReplyTo('mis1@tumbeldry.in', 'MIS');
+        $mail->setFrom('mis2@tumbledry.in', 'MIS');
+        $mail->addReplyTo('mis2@tumbeldry.in', 'MIS');
 
         // Add a recipient
         $mail->addAddress("iqbal.alam59@gmail.com");
