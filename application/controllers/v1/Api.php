@@ -260,7 +260,7 @@ class Api extends REST_Controller
 
         $creditNotes = array();
         foreach ($tallyData->result as $item) {
-            $storeCode = $this->store_model->get_store_by_code(trim($item->party_name));
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->party_name));
             $data = array(
                 'voucher_type' => 'C',
                 'store_id' => $storeCode['id'],

@@ -25,7 +25,10 @@ class Store_model extends CI_Model
         return $this->db->get_where('stores', array('store_crm_code' => $id))->row_array();
     }
 
-
+    public function get_store_by_firm_name($id)
+    {
+        return $this->db->get_where('stores', array('firm_name' => $id))->row_array();
+    }
 
 
 
