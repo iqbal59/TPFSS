@@ -552,9 +552,10 @@ class Api extends REST_Controller
                 'transaction_no' => $_POST['TXNID'],
                 'mid_no' => $_POST['MID'],
                 'amount' => $_POST['TXNAMOUNT'],
-                'transaction_date' => $_POST['TXNDATETIME'],
+                'transaction_date' => $_POST['TXNDATE'],
                 'status' => $_POST['STATUS'],
                 'store_code' => $_POST['STORECODE'],
+                'payment_mode' => $_POST['PAYMENTMODE'],
 
             );
 
