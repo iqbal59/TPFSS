@@ -266,16 +266,18 @@ class Api extends REST_Controller
                 'store_id' => $storeCode['id'],
                 'amount' => $item->ledger_details[0]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
-                'descriptions' => $item->voucher_narration
+                'descriptions' => $item->voucher_narration,
+                'serial_no' => $item->voucher_no
             );
 
+            $creditNote['voucher_no'] = $item->voucher_no;
 
             if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
                 $creditNote['syncstatus'] = true;
             } else {
                 $creditNote['syncstatus'] = false;
             }
-            $creditNote['voucher_no'] = $item->vouhcer_no;
+
             array_push($creditNotes, $creditNote);
 
         }
