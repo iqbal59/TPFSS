@@ -42,6 +42,58 @@
             </div>
             <?php endif ?>
 
+
+            <div class="card">
+
+                <div class="card-body">
+                    <form id="ledger_form" method="post" action="" class="form-horizontal" enctype="multipart/form-data"
+                        novalidate>
+
+                        <input type="hidden" id="download_ledger_url_all"
+                            value="<?php echo base_url('admin/accounts/downloadledgerall') ?>" />
+
+                        <div class="form-body">
+                            <br>
+
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h5>Enter From Date <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="date" name="from_date" class="form-control"
+                                                placeholder="MM/DD/YYYY" required
+                                                value="<?php echo isset($open_date) ? $open_date : date('Y-m-d', strtotime(date('Y-m-d') . ' -31 days')); ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <h5>Enter To Date <span class="text-danger">*</span></h5>
+                                        <div class="controls">
+                                            <input type="date" name="to_date" class="form-control"
+                                                placeholder="MM/DD/YYYY" required
+                                                value="<?php echo isset($to_date) ? $to_date : date("Y-m-d"); ?>">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--/span-->
+
+
+                            </div>
+
+
+                            <!-- CSRF token -->
+                            <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+                                value="<?= $this->security->get_csrf_hash(); ?>" />
+
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
             <div class="card">
 
                 <div class="card-body">
