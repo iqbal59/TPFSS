@@ -132,7 +132,7 @@
                                         <?php echo $l['firm_name'] ?>
                                     </td>
                                     <td>
-                                        <?php echo $l['openbalance'] ?>
+                                        <?php echo $l['open_bal'] ?>
                                     </td>
                                     <td> <a href="javascript:void(0)"
                                             onclick="viewledger(<?php echo $l['id']; ?>)">View</a>
