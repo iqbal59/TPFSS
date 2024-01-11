@@ -393,6 +393,7 @@ class Accounts extends CI_Controller
         $myDate = date('Y-m-d', $time);
 
         $data['ledgers'] = $this->Accounts_model->calculate_balance_by_date($myDate);
+        $data['calculate_on_date'] = $myDate;
         $data['main_content'] = $this->load->view('admin/accounts/ledgerblock', $data, true);
         $this->load->view('admin/index', $data);
     }
