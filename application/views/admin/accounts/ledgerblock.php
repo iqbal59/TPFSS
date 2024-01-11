@@ -80,7 +80,7 @@
                                     <td>
                                         <?php echo $l['openbalance'] ?>
                                     </td>
-                                    <td> <a href="javascript:void(0)"
+                                    <td> <a href="javascript:void(0)" target="_blank"
                                             onclick="viewledger(<?php echo $l['id']; ?>)">View</a>
                                         <a href=" javascript:void(0)"
                                             onclick="downloadpdf(<?php echo $l['id']; ?>)">Download</a>
