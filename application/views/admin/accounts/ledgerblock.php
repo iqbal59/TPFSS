@@ -134,7 +134,7 @@
                                     <td>
                                         <?php echo $l['openbalance'] ?>
                                     </td>
-                                    <td> <a href="javascript:void(0)" target="_blank"
+                                    <td> <a href="javascript:void(0)"
                                             onclick="viewledger(<?php echo $l['id']; ?>)">View</a>
                                         <a href=" javascript:void(0)"
                                             onclick="downloadpdf(<?php echo $l['id']; ?>)">Download</a>
@@ -166,7 +166,7 @@
 function downloadpdf(store_id) {
     url = "<?php echo base_url('admin/accounts/downloadledger/') ?>";
     $("#ledger_form").attr("action", url + store_id);
-    $("#ledger_form").attr("target", "_self");
+    $("#ledger_form").attr("target", "_blank");
     $("#ledger_form").submit();
 }
 
@@ -174,7 +174,7 @@ function downloadpdf(store_id) {
 function viewledger(store_id) {
     url = "<?php echo base_url('admin/accounts/customerledger/') ?>";
     $("#ledger_form").attr("action", url + store_id);
-    $("#ledger_form").attr("target", "_self");
+    $("#ledger_form").attr("target", "_blank");
     $("#ledger_form").submit();
 }
 </script>
