@@ -389,7 +389,7 @@ class Accounts extends CI_Controller
         check_login_user();
         $yourTime = time();
         $day = date('w', $yourTime);
-        $time = $yourTime - ($day > 4 ? ($day + 7 - 4) : ($day + 14 - 4)) * 3600 * 24;
+        $time = $yourTime - ($day >= 4 ? ($day + 7 - 4) : ($day + 14 - 4)) * 3600 * 24;
         $myDate = date('Y-m-d', $time);
 
         $data['ledgers'] = $this->Accounts_model->get_fss_status_all();

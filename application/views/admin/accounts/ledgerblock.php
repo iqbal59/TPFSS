@@ -118,7 +118,7 @@
                             <tbody>
                                 <?php
                                 foreach ($ledgers as $l) {
-                                    if ($l['open_bal'] <= 0 || ($l['payment'] >= $l['open_bal']))
+                                    if ($l['open_bal'] <= 1000 || ($l['payment'] >= $l['open_bal']))
                                         continue;
                                     ?>
                                 <tr>
