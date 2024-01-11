@@ -16,6 +16,18 @@ class Accounts_model extends CI_Model
         return $this->db->query("select *, (opening_balance+msales+rsales+debit-receipt-credit) as openbalance from (select stores.id, stores.store_crm_code, stores.store_name, stores.firm_name, opening_balance, ifnull(msales, 0) as msales, ifnull(rsales, 0) as rsales, ifnull(receipt, 0) as receipt, ifnull(debit, 0) as debit, ifnull(credit, 0) as credit from stores left join (SELECT store_crm_code, sum(amount) as msales FROM `material_invoices` where invoice_date <= '$date'  group by store_crm_code) as mtable on (stores.store_crm_code=mtable.store_crm_code) left join (select sum(net_amount) as rsales, store_id from invoices where date(invoice_date) <= '$date' group by store_id) rtable on (rtable.store_id=stores.id) left join (SELECT store_id, sum(case when voucher_type = 'R' then amount else 0 end) as receipt, sum(case when voucher_type = 'D' then amount else 0 end) as debit, sum(case when voucher_type = 'C' then amount else 0 end) as credit FROM `vouchers` WHERE 1 and date(create_date) <= '$date'  group by store_id) as v on (v.store_id=stores.id)) as openbalancetable")->result_array();
     }
 
+
+    public function get_fss_status_all()
+    {
+        $yourTime = time();
+        $day = date('w', $yourTime);
+        $time = $yourTime - ($day > 4 ? ($day + 7 - 4) : ($day + 14 - 4)) * 3600 * 24;
+        $myDate = date('Y-m-d', $time);
+        $sql = "select *,  get_open_balance('" . $myDate . "', stores.id) as open_bal , get_payment('" . $myDate . "', stores.id) as payment from stores where is_active=1";
+
+
+        return $this->db->query($sql)->result_array();
+    }
     public function calculate_balance_by_store($date, $id)
     {
         return $this->db->query("select *, (opening_balance+msales+rsales+debit-receipt-credit) as openbalance from (select stores.id, stores.store_crm_code, opening_balance, stores.store_name, firm_name, store_address, ifnull(msales, 0) as msales, ifnull(rsales, 0) as rsales, ifnull(receipt, 0) as receipt, ifnull(debit, 0) as debit, ifnull(credit, 0) as credit , stores.bharatpay_id, paytm_mid1, paytm_mid2, paytm_mid3 from stores left join (SELECT store_crm_code, sum(amount) as msales FROM `material_invoices` where invoice_date < '$date'  group by store_crm_code) as mtable on (stores.store_crm_code=mtable.store_crm_code) left join (select sum(net_amount) as rsales, store_id from invoices where date(invoice_date) < '$date' group by store_id) rtable on (rtable.store_id=stores.id) left join (SELECT store_id, sum(case when voucher_type = 'R' then amount else 0 end) as receipt, sum(case when voucher_type = 'D' then amount else 0 end) as debit, sum(case when voucher_type = 'C' then amount else 0 end) as credit FROM `vouchers` WHERE 1 and date(create_date) < '$date'  group by store_id) as v on (v.store_id=stores.id)) as openbalancetable where id=$id")->row_array();

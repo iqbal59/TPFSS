@@ -118,7 +118,7 @@
                             <tbody>
                                 <?php
                                 foreach ($ledgers as $l) {
-                                    if ($l['openbalance'] <= 0)
+                                    if ($l['open_bal'] <= 0 || ($l['payment'] >= $l['open_bal']))
                                         continue;
                                     ?>
                                 <tr>
@@ -162,9 +162,10 @@
     <!-- End Page Content -->
 
 </div>
-<script type="text/javascript">
+<script type=" text/javascript">
 function downloadpdf(store_id) {
-    url = "<?php echo base_url('admin/accounts/downloadledger/') ?>";
+    url = "
+    <?php echo base_url('admin/accounts/downloadledger/') ?> ";
     $("#ledger_form").attr("action", url + store_id);
     $("#ledger_form").attr("target", "_blank");
     $("#ledger_form").submit();
