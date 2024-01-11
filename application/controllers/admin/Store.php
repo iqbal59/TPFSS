@@ -105,6 +105,202 @@ class Store extends CI_Controller
         }
     }
 
+    //Block/Unblock Store in QDC
+
+    public function blocktoggle()
+    {
+        $this->load->library('form_validation');
+        $data['main_content'] = $this->load->view('admin/store/blocktoggle', null, true);
+        $this->load->view('admin/index', $data);
+    }
+
+
+    public function block()
+    {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('store_code', 'Store Code', 'required');
+
+        if ($this->form_validation->run()) {
+
+            $this->load->library('tumbledryqdc');
+            $params = array(
+
+                "ClientID" => "2469",
+                "RoleName" => array(
+                    "Store Incharge",
+                    "Store Incharge Limited Access",
+                    "Mobile POS"
+                ),
+                "StoreCode" => trim($this->input->post('store_code')),
+                "IsEnable" => "false"
+
+            );
+
+
+            $response = $this->tumbledryqdc->QDCLiveApi('EnableDisableUserByRoleName', $params);
+            $response = json_decode($response);
+            if ($response->Status == 'True')
+                $this->session->set_flashdata('msg', 'Store blocked Successfully');
+            else
+                $this->session->set_flashdata('error_msg', 'Somthing went wrong');
+            redirect('admin/store/blocktoggle');
+        } else {
+            $data['main_content'] = $this->load->view('admin/store/blocktoggle', null, true);
+            $this->load->view('admin/index', $data);
+        }
+    }
+
+
+    public function blockbyfile()
+    {
+        if ($_FILES) {
+            $file = $_FILES['csv_file_upload']['tmp_name'];
+            if ($file == null) {
+                show_error('Please select a file to import');
+                $this->session->set_flashdata('error_msg', "Please select file");
+                redirect('admin/import/blocktoggle');
+            } else {
+                $handle = fopen($file, "r") or die("err");
+                $row = 0;
+                $stores = array();
+                $this->load->library('tumbledryqdc');
+                while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
+
+                    if ($row++ < 1 || $filesop[0] == '')
+                        continue;
+
+                    $params = array(
+
+                        "ClientID" => "2469",
+                        "RoleName" => array(
+                            "Store Incharge",
+                            "Store Incharge Limited Access",
+                            "Mobile POS"
+                        ),
+                        "StoreCode" => trim($filesop[0]),
+                        "IsEnable" => "false"
+
+                    );
+
+                    // print_r($params);
+                    $response = $this->tumbledryqdc->QDCLiveApi('EnableDisableUserByRoleName', $params);
+                    $response = json_decode($response);
+                    if ($response->Status == 'True')
+                        $stores[] = $filesop[0];
+
+                }
+
+
+            }
+
+
+            $this->session->set_flashdata('msg', implode(",", $stores) . ' store blocked Successfully');
+
+            redirect('admin/store/blocktoggle');
+        } else {
+            //show_error('Please select a file to import');
+            $this->session->set_flashdata('error_msg', "Please select file");
+            redirect('admin/store/blocktoggle');
+        }
+    }
+
+
+
+    public function unblock()
+    {
+        $this->load->library('form_validation');
+
+        $this->form_validation->set_rules('store_code', 'Store Code', 'required');
+
+        if ($this->form_validation->run()) {
+
+            $this->load->library('tumbledryqdc');
+            $params = array(
+
+                "ClientID" => "2469",
+                "RoleName" => array(
+                    "Store Incharge",
+                    "Store Incharge Limited Access",
+                    "Mobile POS"
+                ),
+                "StoreCode" => trim($this->input->post('store_code')),
+                "IsEnable" => "true"
+
+            );
+
+
+            $response = $this->tumbledryqdc->QDCLiveApi('EnableDisableUserByRoleName', $params);
+            $response = json_decode($response);
+            if ($response->Status == 'True')
+                $this->session->set_flashdata('msg', 'Store unblock Successfully');
+            else
+                $this->session->set_flashdata('error_msg', 'Somthing went wrong');
+            redirect('admin/store/blocktoggle');
+        } else {
+            $data['main_content'] = $this->load->view('admin/store/blocktoggle', null, true);
+            $this->load->view('admin/index', $data);
+        }
+    }
+
+
+    public function unblockbyfile()
+    {
+        if ($_FILES) {
+            $file = $_FILES['csv_file_upload']['tmp_name'];
+            if ($file == null) {
+                show_error('Please select a file to import');
+                $this->session->set_flashdata('error_msg', "Please select file");
+                redirect('admin/import/blocktoggle');
+            } else {
+                $handle = fopen($file, "r") or die("err");
+                $row = 0;
+                $stores = array();
+                $this->load->library('tumbledryqdc');
+                while (($filesop = fgetcsv($handle, 10000, ",")) !== false) {
+
+                    if ($row++ < 1 || $filesop[0] == '')
+                        continue;
+
+                    $params = array(
+
+                        "ClientID" => "2469",
+                        "RoleName" => array(
+                            "Store Incharge",
+                            "Store Incharge Limited Access",
+                            "Mobile POS"
+                        ),
+                        "StoreCode" => trim($filesop[0]),
+                        "IsEnable" => "true"
+
+                    );
+
+                    // print_r($params);
+                    $response = $this->tumbledryqdc->QDCLiveApi('EnableDisableUserByRoleName', $params);
+                    $response = json_decode($response);
+                    if ($response->Status == 'True')
+                        $stores[] = $filesop[0];
+
+                }
+
+
+            }
+
+
+            $this->session->set_flashdata('msg', implode(",", $stores) . ' store unblock Successfully');
+
+            redirect('admin/store/blocktoggle');
+        } else {
+            //show_error('Please select a file to import');
+            $this->session->set_flashdata('error_msg', "Please select file");
+            redirect('admin/store/blocktoggle');
+        }
+    }
+
+    //Block/Unblock Store in QDC End
+
+
+
     /*
      * Editing a store
      */

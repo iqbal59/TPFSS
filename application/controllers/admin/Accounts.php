@@ -384,6 +384,19 @@ class Accounts extends CI_Controller
         $this->load->view('admin/index', $data);
     }
 
+    public function ledgerblock()
+    {
+        check_login_user();
+        $yourTime = time();
+        $day = date('w', $yourTime);
+        $time = $yourTime - ($day > 4 ? ($day + 7 - 4) : ($day + 14 - 4)) * 3600 * 24;
+        $myDate = date('Y-m-d', $time);
+
+        $data['ledgers'] = $this->Accounts_model->calculate_balance_by_date($myDate);
+        $data['main_content'] = $this->load->view('admin/accounts/ledgerblock', $data, true);
+        $this->load->view('admin/index', $data);
+    }
+
 
     public function customerledger($id)
     {
