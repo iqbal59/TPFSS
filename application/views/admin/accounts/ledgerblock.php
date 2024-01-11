@@ -107,7 +107,7 @@
                                     <th>Customer Name</th>
                                     <th>Firm Name</th>
                                     <th>Need to pay for unblock(
-                                        <?php date('d-m-Y', strtotime($calculate_on_date)); ?>)
+                                        <?php echo date('d-m-Y', strtotime($calculate_on_date)); ?>)
                                     </th>
 
                                     <th>Action</th>

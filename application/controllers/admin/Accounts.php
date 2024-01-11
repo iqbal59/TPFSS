@@ -390,7 +390,7 @@ class Accounts extends CI_Controller
         $yourTime = time();
         $day = date('w', $yourTime);
         $time = $yourTime - ($day > 4 ? ($day + 7 - 4) : ($day + 14 - 4)) * 3600 * 24;
-        echo $myDate = date('Y-m-d', $time);
+        $myDate = date('Y-m-d', $time);
 
         $data['ledgers'] = $this->Accounts_model->calculate_balance_by_date($myDate);
         $data['calculate_on_date'] = $myDate;
