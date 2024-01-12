@@ -74,7 +74,7 @@ class Api extends REST_Controller
         $headers = ['Content-Type: application/json', 'token:  EXDHXUXobI5WmIwVSoIPb4JnmLSVTT92OjbLIymOQSzCfs2HIzkjMaaaOPVLBB5R9DID6kMUBuzS5GItjLMT8pQdJAxsdbMOnh2ckZaXn0iSbRFHH11qoLijm4u6nUhZhk5nd5JUbo6IHyCrvpkLJWZbyjpP4Ea3jSbqmR3bRHPzeabo1Cax95PUVtpugup7ODYpXMFdWJuCHZxXHA', 'ClientID: 2469'];
         $url = "https://api.quickdrycleaning.com/QDCV1/OrderReportData";
         //$post_fields = json_encode(array('ClientID' => '2469', "ReportDate" => date('d M Y', strtotime('-1 days', time()))));
-        $post_fields = json_encode(array('ClientID' => '2469', "ReportDate" => '25 Jan 2023'));
+        $post_fields = json_encode(array('ClientID' => '2469', "ReportDate" => '25 Dec 2023'));
 
         $ch = curl_init();
         $timeout = 5;
