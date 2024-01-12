@@ -107,25 +107,25 @@ class Api extends REST_Controller
         curl_close($ch);
 
 
-        foreach ($orderCreatedInfos as $orderInfo) {
+        // foreach ($orderCreatedInfos as $orderInfo) {
 
-            $data = array(
-                "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
-                "order_no" => $orderInfo->OrderNumber,
-                "store_name" => $orderInfo->StoreName,
-                "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
-                "net_amount" => $orderInfo->NetAmount,
-                "service_code" => $orderInfo->PrimaryServices,
-                "mobile_no" => $orderInfo->CustomerMobile,
-                "status" => $orderInfo->OrderStatus,
-                "customer_id" => $orderInfo->CustomerCode
-            );
-
-
-            //$this->Voucher_model->add_model("storesales_qdc", $data);
+        //     $data = array(
+        //         "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
+        //         "order_no" => $orderInfo->OrderNumber,
+        //         "store_name" => $orderInfo->StoreName,
+        //         "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
+        //         "net_amount" => $orderInfo->NetAmount,
+        //         "service_code" => $orderInfo->PrimaryServices,
+        //         "mobile_no" => $orderInfo->CustomerMobile,
+        //         "status" => $orderInfo->OrderStatus,
+        //         "customer_id" => $orderInfo->CustomerCode
+        //     );
 
 
-        }
+        //     $this->Voucher_model->add_model("storesales_qdc", $data);
+
+
+        // }
 
         //Update
         foreach ($orderEditedInfos as $orderInfo) {
