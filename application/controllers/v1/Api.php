@@ -266,7 +266,7 @@ class Api extends REST_Controller
                 'store_id' => $storeCode['id'],
                 'amount' => $item->ledger_details[0]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
-                'descriptions' => $item->voucher_narration,
+                'descriptions' => $item->narration,
                 'serial_no' => $item->voucher_no
             );
 
@@ -291,6 +291,86 @@ class Api extends REST_Controller
     //END CREDIT
 
     //CREDIT NOTE push by Tally
+
+
+    //Payment push by Tally
+    public function payment_by_tally_post()
+    {
+        $tallyData = json_decode(file_get_contents('php://input'));
+
+        $payments = array();
+        foreach ($tallyData->result as $item) {
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[0]->ledger_name));
+            $data = array(
+                'voucher_type' => 'P',
+                'store_id' => $storeCode['id'],
+                'amount' => $item->ledger_details[0]->ledger_amt,
+                'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
+                'descriptions' => $item->narration,
+                'serial_no' => $item->voucher_no
+            );
+
+            $payment['voucher_no'] = $item->voucher_no;
+
+            if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
+                $payment['syncstatus'] = true;
+            } else {
+                $payment['syncstatus'] = false;
+            }
+
+            array_push($payments, $payment);
+
+        }
+
+        $response['result'] = $payments;
+        $this->set_response([
+            $this->config->item('rest_status_field_name') => true,
+            'message' => $response
+        ], REST_Controller::HTTP_OK);
+    }
+
+    //END payment push by Tally
+
+
+
+    //Reciept push by Tally
+    public function reciept_by_tally_post()
+    {
+        $tallyData = json_decode(file_get_contents('php://input'));
+
+        $reciepts = array();
+        foreach ($tallyData->result as $item) {
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[1]->ledger_name));
+            $data = array(
+                'voucher_type' => 'R',
+                'store_id' => $storeCode['id'],
+                'amount' => $item->ledger_details[1]->ledger_amt,
+                'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
+                'descriptions' => $item->narration,
+                'serial_no' => $item->voucher_no
+            );
+
+            $reciept['voucher_no'] = $item->voucher_no;
+
+            if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
+                $reciept['syncstatus'] = true;
+            } else {
+                $reciept['syncstatus'] = false;
+            }
+
+            array_push($reciepts, $reciept);
+
+        }
+
+        $response['result'] = $reciepts;
+        $this->set_response([
+            $this->config->item('rest_status_field_name') => true,
+            'message' => $response
+        ], REST_Controller::HTTP_OK);
+    }
+
+    //END Reciept push by Tally
+
 
 
     public function sync_with_tally_creditnote_post()
