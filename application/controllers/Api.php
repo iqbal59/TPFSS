@@ -106,29 +106,43 @@ class Api extends REST_Controller
 
         curl_close($ch);
 
+        //Insert
+        foreach ($orderCreatedInfos as $orderInfo) {
 
-        // foreach ($orderCreatedInfos as $orderInfo) {
+            $service_list = array_map("trim", explode(",", $orderInfo->PrimaryServices));
+            if (in_array('DC', $service_list)) {
+                $service_code = 'DC';
+            } else {
+                list($service_code) = $service_list;
+            }
 
-        //     $data = array(
-        //         "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
-        //         "order_no" => $orderInfo->OrderNumber,
-        //         "store_name" => $orderInfo->StoreName,
-        //         "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
-        //         "net_amount" => $orderInfo->NetAmount,
-        //         "service_code" => $orderInfo->PrimaryServices,
-        //         "mobile_no" => $orderInfo->CustomerMobile,
-        //         "status" => $orderInfo->OrderStatus,
-        //         "customer_id" => $orderInfo->CustomerCode
-        //     );
+            $data = array(
+                "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
+                "order_no" => $orderInfo->OrderNumber,
+                "store_name" => $orderInfo->StoreName,
+                "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
+                "net_amount" => $orderInfo->NetAmount,
+                "service_code" => $service_code,
+                "mobile_no" => $orderInfo->CustomerMobile,
+                "status" => $orderInfo->OrderStatus,
+                "customer_id" => $orderInfo->CustomerCode
+            );
 
 
-        //     $this->Voucher_model->add_model("storesales_qdc", $data);
+            $this->Voucher_model->add_model("storesales_qdc", $data);
 
 
-        // }
+        }
 
         //Update
         foreach ($orderEditedInfos as $orderInfo) {
+
+            $service_list = array_map("trim", explode(",", $orderInfo->PrimaryServices));
+            if (in_array('DC', $service_list)) {
+                $service_code = 'DC';
+            } else {
+                list($service_code) = $service_list;
+            }
 
             $data = array(
                 "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
@@ -136,7 +150,7 @@ class Api extends REST_Controller
                 //"store_name" => $orderInfo->StoreName,
                 "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
                 "net_amount" => $orderInfo->NetAmount,
-                "service_code" => $orderInfo->PrimaryServices,
+                "service_code" => $service_code,
                 "mobile_no" => $orderInfo->CustomerMobile,
                 "status" => $orderInfo->OrderStatus,
                 "customer_id" => $orderInfo->CustomerCode
