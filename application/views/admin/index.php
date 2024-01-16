@@ -1087,6 +1087,9 @@
 
         $('#store_email').multiselect({
             enableFiltering: true,
+            enableCaseInsensitiveFiltering: true,
+            filterPlaceholder: 'Search ...',
+            nonSelectedText: '--Select Store--',
             includeSelectAllOption: true,
             maxHeight: 400,
             dropUp: true

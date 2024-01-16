@@ -53,7 +53,7 @@ class Accounts extends CI_Controller
         if ($this->input->post('from_date')) {
             $data['open_date'] = date("Y-m-d", strtotime($this->input->post('from_date')));
         } else {
-            $data['open_date'] = date('Y-m-01');
+            $data['open_date'] = date('Y-m-d', strtotime('-6 days'));
         }
 
         if ($this->input->post('to_date')) {
