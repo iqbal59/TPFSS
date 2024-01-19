@@ -44,7 +44,8 @@ class Api extends REST_Controller
                 'mid_no' => $_POST['MID'],
                 'amount' => $_POST['TXNAMOUNT'],
                 'transaction_date' => $_POST['TXNDATETIME'],
-                'status' => $_POST['STATUS']
+                'status' => $_POST['STATUS'],
+                'payment_mode' => $_POST['PAYMENTMODE']
             );
 
 
