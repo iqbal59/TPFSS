@@ -334,7 +334,7 @@ class Api extends REST_Controller
 
 
     //Reciept push by Tally
-    public function reciept_by_tally_post()
+    public function receipt_by_tally_post()
     {
         $tallyData = json_decode(file_get_contents('php://input'));
 
