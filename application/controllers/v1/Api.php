@@ -267,7 +267,9 @@ class Api extends REST_Controller
                 'amount' => $item->ledger_details[0]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
-                'serial_no' => $item->voucher_no
+                'serial_no' => $item->voucher_no,
+                'is_sync' => 1,
+                'created_by' => 2
             );
 
             $creditNote['voucher_no'] = $item->voucher_no;
@@ -307,7 +309,9 @@ class Api extends REST_Controller
                 'amount' => $item->ledger_details[0]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
-                'serial_no' => $item->voucher_no
+                'serial_no' => $item->voucher_no,
+                'is_sync' => 1,
+                'created_by' => 2
             );
 
             $payment['voucher_no'] = $item->voucher_no;
@@ -347,7 +351,9 @@ class Api extends REST_Controller
                 'amount' => $item->ledger_details[1]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
-                'serial_no' => $item->voucher_no
+                'serial_no' => $item->voucher_no,
+                'is_sync' => 1,
+                'created_by' => 2
             );
 
             $reciept['voucher_no'] = $item->voucher_no;
