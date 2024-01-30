@@ -267,7 +267,7 @@ class Api extends REST_Controller
                 'amount' => $item->ledger_details[0]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
-                'serial_no' => $item->voucher_no,
+                'voucher_no' => $item->voucher_no,
                 'is_sync' => 1,
                 'created_by' => 2
             );
@@ -309,7 +309,7 @@ class Api extends REST_Controller
                 'amount' => $item->ledger_details[0]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
-                'serial_no' => $item->voucher_no,
+                'voucher_no' => $item->voucher_no,
                 'is_sync' => 1,
                 'created_by' => 2
             );
@@ -351,7 +351,7 @@ class Api extends REST_Controller
                 'amount' => $item->ledger_details[1]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
-                'serial_no' => $item->voucher_no,
+                'voucher_no' => $item->voucher_no,
                 'is_sync' => 1,
                 'created_by' => 2
             );
@@ -376,6 +376,132 @@ class Api extends REST_Controller
     }
 
     //END Reciept push by Tally
+
+
+
+    //DebitNote push by Tally
+    public function debitnote_by_tally_post()
+    {
+        $tallyData = json_decode(file_get_contents('php://input'));
+
+        $debits = array();
+        foreach ($tallyData->result as $item) {
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[1]->ledger_name));
+            $data = array(
+                'voucher_type' => 'D',
+                'store_id' => $storeCode['id'],
+                'amount' => $item->ledger_details[1]->ledger_amt,
+                'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
+                'descriptions' => $item->narration,
+                'voucher_no' => $item->voucher_no,
+                'is_sync' => 1,
+                'created_by' => 2
+            );
+
+            $debit['voucher_no'] = $item->voucher_no;
+
+            if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
+                $debit['syncstatus'] = true;
+            } else {
+                $debit['syncstatus'] = false;
+            }
+
+            array_push($debits, $debit);
+
+        }
+
+        $response['result'] = $debits;
+        $this->set_response([
+            $this->config->item('rest_status_field_name') => true,
+            'message' => $response
+        ], REST_Controller::HTTP_OK);
+    }
+
+    //END DebitNote push by Tally
+
+
+
+
+    //Journal push by Tally
+    public function journal_by_tally_post()
+    {
+        $tallyData = json_decode(file_get_contents('php://input'));
+
+        $journals = array();
+        foreach ($tallyData->result as $item) {
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[1]->ledger_name));
+            $data = array(
+                'voucher_type' => 'J',
+                'store_id' => $storeCode['id'],
+                'amount' => $item->ledger_details[1]->ledger_amt,
+                'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
+                'descriptions' => $item->narration,
+                'voucher_no' => $item->voucher_no,
+                'is_sync' => 1,
+                'created_by' => 2
+            );
+
+            $journal['voucher_no'] = $item->voucher_no;
+
+            if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
+                $journal['syncstatus'] = true;
+            } else {
+                $journal['syncstatus'] = false;
+            }
+
+            array_push($journals, $journal);
+
+        }
+
+        $response['result'] = $journals;
+        $this->set_response([
+            $this->config->item('rest_status_field_name') => true,
+            'message' => $response
+        ], REST_Controller::HTTP_OK);
+    }
+
+    //END Journal push by Tally
+
+
+    //Material Invoice push by Tally
+    public function invoice_by_tally_post()
+    {
+        $tallyData = json_decode(file_get_contents('php://input'));
+
+        $invoices = array();
+        foreach ($tallyData->result as $item) {
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[1]->ledger_name));
+            $data = array(
+                // 'voucher_type' => 'R',
+                'store_crm_code' => $storeCode['id'],
+                'amount' => $item->ledger_details[1]->ledger_amt,
+                'invoice_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
+                'material_description' => $item->narration,
+                'invoice_no' => $item->voucher_no,
+
+            );
+
+            $invoice['voucher_no'] = $item->voucher_no;
+
+            if ($this->Voucher_model->add_model('material_invoices_new', $data) > 0) {
+                $invoice['syncstatus'] = true;
+            } else {
+                $invoice['syncstatus'] = false;
+            }
+
+            array_push($invoices, $invoice);
+
+        }
+
+        $response['result'] = $invoices;
+        $this->set_response([
+            $this->config->item('rest_status_field_name') => true,
+            'message' => $response
+        ], REST_Controller::HTTP_OK);
+    }
+
+    //END Material Invoice push by Tally
+
 
 
 
