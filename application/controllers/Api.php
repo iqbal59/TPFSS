@@ -100,6 +100,8 @@ class Api extends REST_Controller
         $orderCreatedInfos = $orderInfo->OrderCreated;
         $orderEditedInfos = $orderInfo->OrderEdited;
         $orderCancelledInfos = $orderInfo->OrderCancelled;
+        $orderAdjusmentInfos = $orderInfo->OrderAdjustment;
+        $responseStatus = $orderInfo->Status;
 
         if (curl_errno($ch)) {
             echo 'Error:' . curl_error($ch);
@@ -107,71 +109,105 @@ class Api extends REST_Controller
 
         curl_close($ch);
 
-        //Insert
-        foreach ($orderCreatedInfos as $orderInfo) {
 
-            $service_list = array_map("trim", explode(",", $orderInfo->PrimaryServices));
-            if (in_array('DC', $service_list)) {
-                $service_code = 'DC';
-            } else {
-                list($service_code) = $service_list;
+        if ($responseStatus == 'True') {
+
+            //Insert
+            foreach ($orderCreatedInfos as $orderInfo) {
+
+                $service_list = array_map("trim", explode(",", $orderInfo->PrimaryServices));
+                if (in_array('CL', $service_list)) {
+                    $service_code = 'CL';
+                } else {
+                    list($service_code) = $service_list;
+                }
+
+                $data = array(
+                    "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
+                    "order_no" => $orderInfo->OrderNumber,
+                    "store_name" => $orderInfo->StoreCode,
+                    //"store_code" => $orderInfo->StoreCode,
+                    "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
+                    "net_amount" => $orderInfo->NetAmount,
+                    "service_code" => $service_code,
+                    "mobile_no" => $orderInfo->CustomerMobile,
+                    "status" => $orderInfo->OrderStatus,
+                    "customer_id" => $orderInfo->CustomerCode
+                );
+
+
+                $this->Voucher_model->add_model("storesales_qdc", $data);
+
+
             }
 
-            $data = array(
-                "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
-                "order_no" => $orderInfo->OrderNumber,
-                "store_name" => $orderInfo->StoreName,
-                "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
-                "net_amount" => $orderInfo->NetAmount,
-                "service_code" => $service_code,
-                "mobile_no" => $orderInfo->CustomerMobile,
-                "status" => $orderInfo->OrderStatus,
-                "customer_id" => $orderInfo->CustomerCode
-            );
+            //Update
+            foreach ($orderEditedInfos as $orderInfo) {
+
+                $service_list = array_map("trim", explode(",", $orderInfo->PrimaryServices));
+                if (in_array('DC', $service_list)) {
+                    $service_code = 'DC';
+                } else {
+                    list($service_code) = $service_list;
+                }
+
+                $data = array(
+                    "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
+                    //"order_no" => $orderInfo->OrderNumber,
+                    //"store_name" => $orderInfo->StoreName,
+                    "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
+                    "net_amount" => $orderInfo->NetAmount,
+                    "service_code" => $service_code,
+                    "mobile_no" => $orderInfo->CustomerMobile,
+                    "status" => $orderInfo->OrderStatus,
+                    "customer_id" => $orderInfo->CustomerCode
+                );
 
 
-            $this->Voucher_model->add_model("storesales_qdc", $data);
+                $this->Voucher_model->update_sale_order($orderInfo->OrderNumber, $orderInfo->StoreName, $data);
 
-
-        }
-
-        //Update
-        foreach ($orderEditedInfos as $orderInfo) {
-
-            $service_list = array_map("trim", explode(",", $orderInfo->PrimaryServices));
-            if (in_array('DC', $service_list)) {
-                $service_code = 'DC';
-            } else {
-                list($service_code) = $service_list;
             }
 
-            $data = array(
-                "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
-                //"order_no" => $orderInfo->OrderNumber,
-                //"store_name" => $orderInfo->StoreName,
-                "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
-                "net_amount" => $orderInfo->NetAmount,
-                "service_code" => $service_code,
-                "mobile_no" => $orderInfo->CustomerMobile,
-                "status" => $orderInfo->OrderStatus,
-                "customer_id" => $orderInfo->CustomerCode
-            );
+            //Adjusment
+
+            foreach ($orderAdjusmentInfos as $orderInfo) {
+
+                $service_list = array_map("trim", explode(",", $orderInfo->PrimaryServices));
+                if (in_array('DC', $service_list)) {
+                    $service_code = 'DC';
+                } else {
+                    list($service_code) = $service_list;
+                }
+
+                $data = array(
+                    "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
+                    //"order_no" => $orderInfo->OrderNumber,
+                    //"store_name" => $orderInfo->StoreName,
+                    "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
+                    "net_amount" => $orderInfo->NetAmount,
+                    "service_code" => $service_code,
+                    "mobile_no" => $orderInfo->CustomerMobile,
+                    "status" => $orderInfo->OrderStatus,
+                    "customer_id" => $orderInfo->CustomerCode
+                );
 
 
-            $this->Voucher_model->update_sale_order($orderInfo->OrderNumber, $orderInfo->StoreName, $data);
+                $this->Voucher_model->update_sale_order($orderInfo->OrderNumber, $orderInfo->StoreName, $data);
 
-        }
-
-        //Delete
-
-        foreach ($orderCancelledInfos as $orderInfo) {
+            }
 
 
+            //Delete
+
+            foreach ($orderCancelledInfos as $orderInfo) {
 
 
-            $this->Voucher_model->delete_sale_order($orderInfo->OrderNumber, $orderInfo->StoreName);
 
 
+                $this->Voucher_model->delete_sale_order($orderInfo->OrderNumber, $orderInfo->StoreName);
+
+
+            }
         }
 
     }
