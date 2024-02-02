@@ -55,15 +55,16 @@
                                             ?>
 
                                             <select class="form-control form-control-sm selelct2" name="month">
-                                                <option value="MONTH" <?php echo $month==1 ? "selected" : ""; ?>>This
+                                                <option value="MONTH" <?php echo $month == 1 ? "selected" : ""; ?>>This
                                                     Month</option>
-                                                <option value="QUARTER" <?php echo $month==3 ? "selected" : ""; ?>>This
+                                                <option value="QUARTER" <?php echo $month == 3 ? "selected" : ""; ?>>
+                                                    This
                                                     Quarter</option>
-                                                <option value="YEAR" <?php echo $month >3 ? "selected" : ""; ?>>This
+                                                <option value="YEAR" <?php echo $month > 3 ? "selected" : ""; ?>>This
                                                     Year</option>
 
-                                                <option value="PYEAR" <?php echo $month > 12 ? "selected" : ""; ?>>Prev
-                                                    Year</option>
+                                                <!-- <option value="PYEAR" <?php echo $month > 12 ? "selected" : ""; ?>>Prev
+                                                    Year</option> -->
                                                 <!-- <option>All Time</option> -->
                                             </select>
                                         </div>
@@ -77,12 +78,12 @@
 
                                             <select name="year" class="form-control select2 form-control-sm">
                                                 <?php
-                                        for ($i=date('Y'); $i > (date('Y')-3);$i--) {
-                                            $selctedY = $year == $i ? 'selected' : '';
+                                                for ($i = date('Y'); $i > (date('Y') - 3); $i--) {
+                                                    $selctedY = $year == $i ? 'selected' : '';
 
-                                            echo "<option value='".$i."' ".$selctedY.">".$i."</option>";
-                                        }
-                                        ?>
+                                                    echo "<option value='" . $i . "' " . $selctedY . ">" . $i . "</option>";
+                                                }
+                                                ?>
 
                                 </select>
                             </div>
@@ -103,8 +104,8 @@
 
 
                             <!-- CSRF token -->
-                            <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>"
-                                value="<?=$this->security->get_csrf_hash();?>" />
+                            <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+                                value="<?= $this->security->get_csrf_hash(); ?>" />
 
                         </div>
 
@@ -119,7 +120,8 @@
                 <div class="card-body">
 
 
-                    <h4 class="card-title">Account Summary for <?php ?>
+                    <h4 class="card-title">Account Summary for
+                        <?php ?>
                     </h4>
 
 
@@ -145,25 +147,31 @@
                             <tbody>
                                 <?php foreach ($expense as $e) { ?>
                                 <tr>
-                                    <td><?php echo $e['m'];?>
-                                    <td><?php echo number_format($e['totalsales'], 2);?>
+                                    <td>
+                                        <?php echo $e['m']; ?>
+                                    <td>
+                                        <?php echo number_format($e['totalsales'], 2); ?>
                                     </td>
-                                    <td><?php echo number_format(($e['msales']+$e['rsales']+$e['osales']), 2);?>
+                                    <td>
+                                        <?php echo number_format(($e['msales'] + $e['rsales'] + $e['osales']), 2); ?>
                                     </td>
-                                    <td><?php echo number_format($e['rsales'], 2);?>
+                                    <td>
+                                        <?php echo number_format($e['rsales'], 2); ?>
                                     </td>
-                                    <td><?php echo number_format($e['msales'], 2);?>
+                                    <td>
+                                        <?php echo number_format($e['msales'], 2); ?>
                                     </td>
-                                    <td><?php echo number_format($e['osales'], 2);?>
+                                    <td>
+                                        <?php echo number_format($e['osales'], 2); ?>
                                     </td>
-                                    <!-- <td><?php echo number_format($e['debit'], 2);?>
+                                    <!-- <td><?php echo number_format($e['debit'], 2); ?>
                         </td>
-                        <td><?php echo number_format($e['credit'], 2);?>
+                        <td><?php echo number_format($e['credit'], 2); ?>
                         </td> -->
 
 
                                 </tr>
-                                <?php }?>
+                                <?php } ?>
                             </tbody>
                         </table>
                     </div>

@@ -309,10 +309,12 @@ class Partner extends CI_Controller
             } elseif ($this->input->post('month') == 'QUARTER') {
                 $data['month'] = 3;
             } elseif ($this->input->post('month') == 'YEAR') {
-                $data['month'] = $curMonth;
-            } elseif ($this->input->post('month') == 'PYEAR') {
-                $data['month'] = 24;
+                $data['month'] = 12;
             }
+
+            // elseif ($this->input->post('month') == 'PYEAR') {
+            //     $data['month'] = 24;
+            // }
         } else {
             $data['month'] = date('n');
         }
