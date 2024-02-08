@@ -92,6 +92,8 @@ class Voucher extends CI_Controller
     public function add()
     {
         $data['stores'] = $this->Store_model->get_all_stores();
+        $data['vouchers_categories'] = $this->Voucher_model->get_vouchers_category();
+
         $this->load->library('form_validation');
 
         $this->form_validation->set_rules('store_id', 'Store Id', 'required');
@@ -101,6 +103,8 @@ class Voucher extends CI_Controller
         if ($this->form_validation->run()) {
             $params = array(
                 'voucher_type' => $this->input->post('voucher_type'),
+                'voucher_category' => $this->input->post('voucher_category'),
+                'descriptions' => $this->input->post('descriptions'),
                 'store_id' => $this->input->post('store_id'),
                 'amount' => $this->input->post('amount'),
                 'is_sync' => 1,
@@ -123,6 +127,7 @@ class Voucher extends CI_Controller
         // check if the voucher exists before trying to edit it
         $data['voucher'] = $this->Voucher_model->get_voucher($id);
         $data['stores'] = $this->Store_model->get_all_stores();
+        $data['vouchers_categories'] = $this->Voucher_model->get_vouchers_category();
         if (isset($data['voucher']['id'])) {
             $this->load->library('form_validation');
 
@@ -133,6 +138,8 @@ class Voucher extends CI_Controller
             if ($this->form_validation->run()) {
                 $params = array(
                     'voucher_type' => $this->input->post('voucher_type'),
+                    'voucher_category' => $this->input->post('voucher_category'),
+                    'descriptions' => $this->input->post('descriptions'),
                     'store_id' => $this->input->post('store_id'),
                     'amount' => $this->input->post('amount'),
                     //'create_date' => $this->input->post('create_date'),

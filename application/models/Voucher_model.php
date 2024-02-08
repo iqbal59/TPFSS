@@ -52,6 +52,18 @@ class Voucher_model extends CI_Model
         return $this->db->get('vouchers')->result_array();
     }
 
+
+    public function get_vouchers_category()
+    {
+        $this->db->select('*');
+
+
+        $this->db->order_by('id', 'asc');
+
+
+        return $this->db->get('voucher_category')->result_array();
+    }
+
     /*
      * function to add new voucher
      */
@@ -139,8 +151,8 @@ class Voucher_model extends CI_Model
     public function countAll($postData)
     {
         $this->db->from($this->table);
-        $this->db->where(["create_date >=" => $postData['from_date']]);
-        $this->db->where(["create_date <=" => $postData['to_date']]);
+        $this->db->where(["date(create_date) >=" => $postData['from_date']]);
+        $this->db->where(["date(create_date) <=" => $postData['to_date']]);
         return $this->db->count_all_results();
     }
 
@@ -160,8 +172,8 @@ class Voucher_model extends CI_Model
         // } else {
         // 	$this->db->where(["status"=>$postData['status'], "created_by"=>$this->login_id]);
         // }
-        $this->db->where(["create_date >=" => $postData['from_date']]);
-        $this->db->where(["create_date <=" => $postData['to_date']]);
+        $this->db->where(["date(create_date) >=" => $postData['from_date']]);
+        $this->db->where(["date(create_date) <=" => $postData['to_date']]);
         //  $this->db->order_by('create_date', 'DESC');
 
         $i = 0;

@@ -1,11 +1,9 @@
-
-
 <!-- Container fluid  -->
 
 <div class="container-fluid">
-    
+
     <!-- Bread crumb and right sidebar toggle -->
-    
+
     <div class="row page-titles">
         <div class="col-md-5 col-8 align-self-center">
             <h3 class="text-themecolor m-b-0 m-t-0">Voucher</h3>
@@ -14,13 +12,13 @@
                 <li class="breadcrumb-item active">Add New Voucher</li>
             </ol>
         </div>
-        
-    </div>
-    
-    <!-- End Bread crumb and right sidebar toggle -->
-    
 
-    
+    </div>
+
+    <!-- End Bread crumb and right sidebar toggle -->
+
+
+
     <!-- Start Page Content -->
 
     <div class="row">
@@ -28,109 +26,156 @@
 
             <?php $error_msg = $this->session->flashdata('error_msg'); ?>
             <?php if (isset($error_msg)): ?>
-                <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i> <?php echo $error_msg; ?> &nbsp;
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
-                </div>
+            <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
+                <?php echo $error_msg; ?> &nbsp;
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                        aria-hidden="true">×</span> </button>
+            </div>
             <?php endif ?>
-            
+
             <div class="card card-outline-info">
                 <div class="card-header">
-                    <h4 class="m-b-0 text-white"> Add New Voucher <a href="<?php echo base_url('admin/voucher/') ?>" class="btn btn-info pull-right"><i class="fa fa-list"></i> All Voucher </a></h4>
+                    <h4 class="m-b-0 text-white"> Add New Voucher <a href="<?php echo base_url('admin/voucher/') ?>"
+                            class="btn btn-info pull-right"><i class="fa fa-list"></i> All Voucher </a></h4>
 
                 </div>
                 <div class="card-body">
-            
-                <?php echo form_open('admin/voucher/add'); ?>
 
-	
-
-				<div class="row">
-                                <div class="col-md-9">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Voucher Type :  </label>
-                                        <div class="col-md-9 controls">
-										<select name="voucher_type" class="form-control">
-			<option value="">select</option>
-			<?php 
-			$voucher_type_values = array(
-				'C'=>'Credit',
-				'R'=>'Receipt',
-				'D'=>'Debit',
-			);
-
-			foreach($voucher_type_values as $value => $display_text)
-			{
-				$selected = ($value == $this->input->post('voucher_type')) ? ' selected="selected"' : "";
-
-				echo '<option value="'.$value.'" '.$selected.'>'.$display_text.'</option>';
-			} 
-			?>
-		</select>
-		<span class="text-danger"><?php echo form_error('voucher_type');?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
+                    <?php echo form_open('admin/voucher/add'); ?>
 
 
 
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Voucher Type : </label>
+                                <div class="col-md-9 controls">
+                                    <select name="voucher_type" class="form-control">
+                                        <option value="">select</option>
+                                        <?php
+                                        $voucher_type_values = array(
+                                            'C' => 'Credit',
+                                            'R' => 'Receipt',
+                                            'D' => 'Debit',
+                                        );
 
-							<div class="row">
-                                <div class="col-md-9">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Store Id : </label>
-                                        <div class="col-md-9 controls">
-										<select name="store_id" class="form-control" id="store_id_voucher">
-			<option value="">select</option>
-			<?php 
-			foreach($stores as $s)
-			{
-				$selected = ($s['id'] == $this->input->post('store_id')) ? ' selected="selected"' : "";
+                                        foreach ($voucher_type_values as $value => $display_text) {
+                                            $selected = ($value == $this->input->post('voucher_type')) ? ' selected="selected"' : "";
 
-				echo '<option value="'.$s['id'].'" '.$selected.'>'.$s['store_crm_code'].' '.$s['store_name'].'</option>';
-			} 
-			?>
-		</select>
-        
-        <span class="text-danger"><?php echo form_error('store_id');?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-							</div>
-							
-
-							<div class="row">
-                                <div class="col-md-9">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-3">Amount :  </label>
-                                        <div class="col-md-9 controls">
-										<input type="text" name="amount" class="form-control" value="<?php echo $this->input->post('amount'); ?>" />
-		<span class="text-danger"><?php echo form_error('amount');?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!--/span-->
-                            </div>
-
-
-
-	
-	
-	<hr/>
-	<div class="row">
-                                <div class="col-md-9">
-                                    <div class="form-group row">
-                                        <label class="control-label text-right col-md-3"></label>
-                                        <div class="controls">
-                                            <button type="submit" class="btn btn-success">Save</button>
-                                        </div>
-                                    </div>
+                                            echo '<option value="' . $value . '" ' . $selected . '>' . $display_text . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text-danger">
+                                        <?php echo form_error('voucher_type'); ?>
+                                    </span>
                                 </div>
                             </div>
+                        </div>
+                        <!--/span-->
+                    </div>
 
-<?php echo form_close(); ?>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Voucher Category : </label>
+                                <div class="col-md-9 controls">
+                                    <select name="voucher_category" class="form-control">
+
+                                        <?php
+                                        foreach ($vouchers_categories as $value) {
+                                            $selected = ($value['id'] == $this->input->post('voucher_category')) ? ' selected="selected"' : "";
+
+                                            echo '<option value="' . $value['id'] . '" ' . $selected . '>' . $value['name'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+                                    <span class="text-danger">
+                                        <?php echo form_error('voucher_category'); ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Store Id : </label>
+                                <div class="col-md-9 controls">
+                                    <select name="store_id" class="form-control" id="store_id_voucher">
+                                        <option value="">select</option>
+                                        <?php
+                                        foreach ($stores as $s) {
+                                            $selected = ($s['id'] == $this->input->post('store_id')) ? ' selected="selected"' : "";
+
+                                            echo '<option value="' . $s['id'] . '" ' . $selected . '>' . $s['store_crm_code'] . ' ' . $s['store_name'] . '</option>';
+                                        }
+                                        ?>
+                                    </select>
+
+                                    <span class="text-danger">
+                                        <?php echo form_error('store_id'); ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Amount : </label>
+                                <div class="col-md-9 controls">
+                                    <input type="text" name="amount" class="form-control"
+                                        value="<?php echo $this->input->post('amount'); ?>" />
+                                    <span class="text-danger">
+                                        <?php echo form_error('amount'); ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3">Descriptions : </label>
+                                <div class="col-md-9 controls">
+                                    <input type="text" name="descriptions" class="form-control"
+                                        value="<?php echo $this->input->post('descriptions'); ?>" />
+                                    <span class="text-danger">
+                                        <?php echo form_error('descriptions'); ?>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <!--/span-->
+                    </div>
+
+
+
+
+                    <hr />
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group row">
+                                <label class="control-label text-right col-md-3"></label>
+                                <div class="controls">
+                                    <button type="submit" class="btn btn-success">Save</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php echo form_close(); ?>
 
                 </div>
             </div>
