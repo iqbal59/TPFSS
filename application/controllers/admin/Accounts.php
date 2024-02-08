@@ -1381,6 +1381,122 @@ class Accounts extends CI_Controller
             }
         }
 
+
+
+        //Unbilled ledgerItem
+        $pdf->lastPage();
+        $pdf->AddPage();
+        $html = '<h4 align="center">Unbilled Ledger</h4>';
+        $openBalanceUnbilled = $this->Accounts_model->calculate_balance_by_store_unbilled($data['open_date'], $id);
+        $ledgerItemsUnbilled = $this->Accounts_model->ledgerItem_unbilled($data['open_date'], $data['to_date'], $id);
+
+
+        $html .= '<table id="" class="list" cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <td class="center" width="10%">Voucher No.</td>
+                    <td class="center" width="15%">Voucher Type</td>
+                    <td class="center" width="15%">Voucher Date</td>
+                    <td class="center" width="10%">Debit</td>
+                    <td class="center" width="10%">Credit</td>
+                    <td class="center" width="30%">Descriptions</td>
+                    <td class="center" width="20%">Balance</td>
+
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <tr>
+                    <td width="10%">-</td>
+                    <td width="15%">Opening Balance</td>
+                    <td width="15%">' . date("d-m-Y", strtotime($data['open_date'])) . '</td>
+                    <td class="right" width="10%">' . $openBalanceUnbilled['openbalance'] . '</td>
+
+                    <td width="10%">-</td>
+                    <td width="30%">-</td>
+                    <td class="right" width="10%">' . $openBalanceUnbilled['openbalance'] . '</td>
+
+                </tr>';
+
+        $total_balalnce = $openBalanceUnbilled['openbalance'];
+
+
+
+        foreach ($ledgerItemsUnbilled as $li) {
+
+            $html .= '<tr>
+                        <td width="10%">' . $li['voucher_no'] . '</td>
+                        <td width="15%">';
+            if ($li['voucher_type'] == 'C') {
+                $voucher_type = 'Credit';
+            } elseif ($li['voucher_type'] == 'R') {
+                $voucher_type = 'Receipt';
+            } elseif ($li['voucher_type'] == 'D') {
+                $voucher_type = 'Debit';
+            } else {
+                $voucher_type = $li['voucher_type'];
+            }
+            $html .= $voucher_type . '</td>
+                        <td width="15%">' . date("d-m-Y", strtotime($li['voucher_date'])) . '</td>
+
+                        ';
+
+
+            if ($li['voucher_type'] == 'D' or $li['voucher_type'] == 'Sale') {
+                $total_balalnce += $li['np'];
+                $html .= '<td class="right" width="10%">' . $li['np'] . '</td>';
+            } else {
+                $html .= '<td>-</td>';
+            }
+
+            if ($li['voucher_type'] == 'C' or $li['voucher_type'] == 'R') {
+                $total_balalnce -= $li['np'];
+                $html .= '<td class="right" width="10%">' . $li['np'] . '</td>';
+            } else {
+                $html .= '<td width="10%">-</td>';
+            }
+
+
+
+
+            $html .= '<td width="30%">' . $li['descriptions'] . '</td>
+<td class="right" width="10%">' . number_format($total_balalnce, 2) . '</td>
+
+</tr>';
+        }
+
+        $color = '#FF0000';
+        if ($total_balalnce < 0) {
+            $color = '#008000';
+        }
+
+        $html .= '</tbody>
+
+
+<tfoot>
+    <tr>
+        <th></th>
+        <th></th>
+
+        <th>-</th>
+        <th>-</th>
+        <th>-</th>
+        <th>-</th>
+        <th class="right" style="color:' . $color . ';" ><strong>' . number_format($total_balalnce, 2) . '</strong></th>
+
+    </tr>
+</tfoot>
+
+
+</table>
+';
+
+        $pdf->writeHTML($html, true, false, true, false, '');
+        //Unbilled ledgerItem end
+
+
+
         //Paytm
 
         if (!empty($paytmR)) {
