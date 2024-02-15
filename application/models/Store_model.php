@@ -83,6 +83,14 @@ class Store_model extends CI_Model
     }
 
 
+    public function get_all_store_have_to_renewal()
+    {
+
+
+        $sql = "SELECT * FROM `stores` where 1 and is_active=1 and month(launch_date) = month(curdate()) and year(launch_date) < year(curdate())";
+        return $this->db->query($sql)->result_array();
+    }
+
     public function get_all_amc_store_count()
     {
         // $sql = "SELECT * FROM `stores` where 1 and is_active=1   and store_type = 1 and launch_date >='2022-07-01' and curdate() > launch_date + INTERVAL 365 day";

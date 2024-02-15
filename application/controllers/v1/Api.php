@@ -21,8 +21,16 @@ class Api extends REST_Controller
         $items = $this->api_model->get_all_invoice();
 
         foreach ($items as $item) {
+
+            if ($item->invoice_type == 1)
+                $vtype = 'AMC';
+            else if ($item->invoice_type == 2)
+                $vtype = 'CRM';
+            else
+                $vtype = 'Sales';
+
             $invoiceItem['id'] = $item->id;
-            $invoiceItem['voucher_type'] = $item->invoice_type == 1 ? 'AMC' : 'Sales';
+            $invoiceItem['voucher_type'] = $vtype;
             $invoiceItem['voucher_no'] = $item->invoice_no;
             $invoiceItem['voucher_date'] = date('d/m/Y', strtotime($item->invoice_date));
             $invoiceItem['party_name'] = $item->firm_name;

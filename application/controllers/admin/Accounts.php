@@ -100,7 +100,7 @@ class Accounts extends CI_Controller
 
     public function refundAdjust()
     {
-        $this->Common_model->refundAdjust('2024-01-22', '2024-01-28');
+        $this->Common_model->refundAdjust('2024-01-29', '2024-02-04');
         $data['main_content'] = $this->load->view('admin/accounts/refund', null, true);
         $this->load->view('admin/index', $data);
     }
@@ -598,6 +598,29 @@ class Accounts extends CI_Controller
     }
 
 
+
+    public function add_paytm_payment_to_party()
+    {
+
+        $data['period'] = date('d-m-Y', strtotime($this->input->post('invoice_date'))) . " to " . date('d-m-Y', strtotime($this->input->post('invoice_to_date')));
+        //PAYTM
+        $paytm = $this->Accounts_model->get_paytm_by_store();
+
+        foreach ($paytm as $p) {
+            if ($p['store_id'] == null) {
+                continue;
+            }
+            $this->Common_model->insert(array('store_id' => $p['store_id'], 'voucher_type' => 'R', 'amount' => $p['final_amount'], 'descriptions' => 'Paytm ' . $data['period']), "vouchers");
+
+            if ($p['paytmcommission'] != 0)
+                $this->Common_model->insert(array('store_id' => $p['store_id'], 'voucher_type' => 'C', 'amount' => ($p['paytmcommission'] * 7.5 / 100), 'descriptions' => 'Paytm ' . $p['paytmcommission'] . " @7.5% " . $data['period']), "vouchers");
+
+            $this->Common_model->paytmbill($p['ids']);
+        }
+
+    }
+
+
     //Create AMC Invoice
 
 
@@ -627,6 +650,34 @@ class Accounts extends CI_Controller
     }
 
     //Create AMC Invoice END
+
+
+    //Create CRM Invoice
+    public function createCrmInvoices()
+    {
+        // check_login_user();
+
+        $data['stores'] = $this->Store_model->get_all_store_have_to_renewal();
+        // print_r($data['stores']);
+
+        foreach ($data['stores'] as $s) {
+            if (!$s['id']) {
+                continue;
+            }
+
+            $item = array('amount' => 19000, 'service_code' => '', 'store_royalty' => 0, 'order_ids' => "", 'item_name' => 'CRM Licence Fees (I)', 'rate' => 19000);
+
+            $data['invoice'][$s['id']][] = $item;
+        }
+
+        if (!is_array($data['invoice'])) {
+            $data['invoice'] = array();
+        }
+        $data['period'] = "";
+        $this->Accounts_model->saveCRMInvoice($data['invoice'], $data['period']);
+
+    }
+    //Create CRM Invoice END
 
     public function invoicepdf($id)
     {

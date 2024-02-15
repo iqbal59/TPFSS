@@ -123,9 +123,11 @@ body {
                 <td colspan="2" style="vertical-align:top">
                     <p><span style="font-size:9pt;font-family:Calibri,Arial;">:
                             <?php if ($invoice->invoice_type == '1') {
-                                echo 'AMC/23-24/'.$invoice->invoiceno;
+                                echo 'AMC/23-24/' . $invoice->invoiceno;
+                            } else if ($invoice->invoice_type == '2') {
+                                echo 'CRM/23-24/' . $invoice->invoiceno;
                             } else {
-                                echo 'TD/23-24/'.$invoice->invoiceno;
+                                echo 'TD/23-24/' . $invoice->invoiceno;
                             } ?>
 
                         </span></p>
@@ -328,7 +330,15 @@ body {
                 <td class="s14 left" colspan="9">
                     <p><strong>Remarks:</strong></p>
                     <p><strong>
-                            <?php echo $invoice->invoice_type == '1' ? "AMC Charges" : "Royalty" ?> for the period of
+                            <?php
+                            if ($invoice->invoice_type == '1')
+                                echo "AMC Charges";
+                            else if ($invoice->invoice_type == '2')
+                                echo "CRM License Charges";
+                            else
+                                echo "Royalty";
+                            ?>
+                            for the period of
                             <?php echo $invoice->descriptions; ?>.
                         </strong><br>
                         <?php

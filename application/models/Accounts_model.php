@@ -182,6 +182,30 @@ class Accounts_model extends CI_Model
             $this->db->query("update invoices set amount='$total_amount', tax_rate='18', tax_amount='$tax_amount', net_amount='$net_amount', descriptions='$period', invoice_type=1 where id='$invoice_id'");
         }
     }
+
+    public function saveCRMInvoice($data, $period)
+    {
+        foreach ($data as $store_id => $items) {
+            $total_amount = 0;
+            $tax_amount = 0;
+            $net_amount = 0;
+            $invoice_no = $this->getCRMInvoiceNo();
+            $this->db->insert('invoices', array('store_id' => $store_id, 'invoice_no' => $invoice_no));
+            $invoice_id = $this->db->insert_id();
+            $storeData = $this->db->get_where('stores', array('id' => $store_id))->row_array();
+            foreach ($items as $item) {
+
+                //print_r($item);
+                $this->db->insert('invoice_item', array('invoice_id' => $invoice_id, 'item_name' => $item['item_name'], 'rate' => $item['rate'], 'order_nos' => $item['order_ids'], 'amount' => $item['amount'], 'service_code' => $item['service_code'], 'royalty' => $item['store_royalty']));
+
+                $total_amount += $item['rate'];
+                //$this->db->query("update storesales set is_bill=1 where store_name='$storeData[store_name]' and order_no in($item[order_ids])");
+            }
+            $tax_amount = $total_amount * 18 / 100;
+            $net_amount = $total_amount + $tax_amount;
+            $this->db->query("update invoices set amount='$total_amount', tax_rate='18', tax_amount='$tax_amount', net_amount='$net_amount', descriptions='$period', invoice_type=2 where id='$invoice_id'");
+        }
+    }
     public function getInvoiceNo()
     {
         $invoice_no = 1;
@@ -204,6 +228,16 @@ class Accounts_model extends CI_Model
         return $invoice_no;
     }
 
+    public function getCRMInvoiceNo()
+    {
+        $invoice_no = 1;
+        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where invoice_type=2 and date(invoice_date) >= '2023-04-01'")->row();
+        if ($invoiceData->invoice_no) {
+            $invoice_no += $invoiceData->invoice_no;
+        }
+
+        return $invoice_no;
+    }
 
     public function select_max_serial_no()
     {
