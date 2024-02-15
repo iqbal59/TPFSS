@@ -205,16 +205,16 @@
 
 <script type="text/javascript">
 function downloadpdf(store_id) {
-    url = "<?php echo base_url('admin/accounts/downloadledger/') ?> ";
-    $("#ledger_form").attr("action", url + store_id);
+    url = '<?php echo base_url('admin/accounts/downloadledger/') ?> ';
+    $("#ledger_form").attr("action", url.trim() + store_id);
     $("#ledger_form").attr("target", "_self");
     $("#ledger_form").submit();
 }
 
 
 function viewledger(store_id) {
-    url = "<?php echo base_url('admin/accounts/customerledger/') ?> ";
-    $("#ledger_form").attr("action", url + store_id);
+    url = '<?php echo base_url('admin/accounts/customerledger/') ?> ';
+    $("#ledger_form").attr("action", url.trim() + store_id);
     $("#ledger_form").attr("target", "_blank");
     $("#ledger_form").submit();
 }
