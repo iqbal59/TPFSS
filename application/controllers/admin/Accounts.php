@@ -250,7 +250,7 @@ class Accounts extends CI_Controller
         $mail->Password = 'Zab33506';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
-        //$mail->SMTPDebug = 2;
+        $mail->SMTPDebug = 2;
         // $mail->Host     = 'mail.centuryfasteners.in';
         // $mail->SMTPAuth = true;
         // $mail->Username = 'admin@centuryfasteners.in';
