@@ -247,10 +247,10 @@ class Accounts extends CI_Controller
         $mail->Host = 'smtp.office365.com';
         $mail->SMTPAuth = true;
         $mail->Username = 'mis2@tumbledry.in';
-        $mail->Password = 'Zab33506';
+        $mail->Password = 'Dag79650';
         $mail->SMTPSecure = 'tls';
         $mail->Port = 587;
-        $mail->SMTPDebug = 2;
+        //$mail->SMTPDebug = 2;
         // $mail->Host     = 'mail.centuryfasteners.in';
         // $mail->SMTPAuth = true;
         // $mail->Username = 'admin@centuryfasteners.in';
