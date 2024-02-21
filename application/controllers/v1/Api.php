@@ -834,7 +834,7 @@ class Api extends REST_Controller
             $this->form_validation->set_rules('paytm_mid1', 'Paytm MID1', 'is_unique[stores.paytm_mid1]');
             $this->form_validation->set_rules('paytm_mid2', 'Paytm MID2', 'is_unique[stores.paytm_mid2]');
             $this->form_validation->set_rules('paytm_mid3', 'Paytm MID3', 'is_unique[stores.paytm_mid3]');
-            $this->form_validation->set_rules('pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
+            $this->form_validation->set_rules('firm_pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
 
             if (!$this->form_validation->run()) {
                 throw new Exception(validation_errors());
