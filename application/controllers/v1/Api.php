@@ -826,14 +826,12 @@ class Api extends REST_Controller
         try {
             $_POST = json_decode(file_get_contents('php://input'), true);
 
-            $this->form_validation->set_rules('store_code', 'Store Code', 'required|is_unique[stores.store_code]');
-            $this->form_validation->set_rules('store_crm_code', 'Store CRM Code', 'required|is_unique[stores.store_crm_code]');
-            $this->form_validation->set_rules('store_name', 'Store Name', 'required|is_unique[stores.store_name]');
-            $this->form_validation->set_rules('firm_name', 'Firm Name', 'required|is_unique[stores.firm_name]');
-            //$this->form_validation->set_rules('bharatpay_id', 'Bharat Pay Id', 'is_unique[stores.bharatpay_id]');
-            $this->form_validation->set_rules('paytm_mid1', 'Paytm MID1', 'is_unique[stores.paytm_mid1]');
-            $this->form_validation->set_rules('paytm_mid2', 'Paytm MID2', 'is_unique[stores.paytm_mid2]');
-            $this->form_validation->set_rules('paytm_mid3', 'Paytm MID3', 'is_unique[stores.paytm_mid3]');
+            $this->form_validation->set_rules('store_code', 'Store Code', 'required|is_unique[stores_new.store_code]');
+            $this->form_validation->set_rules('store_crm_code', 'Store CRM Code', 'required|is_unique[stores_new.store_crm_code]');
+            $this->form_validation->set_rules('store_name', 'Store Name', 'required|is_unique[stores_new.store_name]');
+            $this->form_validation->set_rules('firm_name', 'Firm Name', 'required|is_unique[stores_new.firm_name]');
+            //$this->form_validation->set_rules('bharatpay_id', 'Bharat Pay Id', 'is_unique[stores_new.bharatpay_id]');
+            $this->form_validation->set_rules('paytm_mid1', 'Paytm MID1', 'is_unique[stores_new.paytm_mid1]');
             $this->form_validation->set_rules('firm_pin_code', 'Pin Code', 'required|min_length[6]|max_length[6]');
 
             if (!$this->form_validation->run()) {
