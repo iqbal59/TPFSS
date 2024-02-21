@@ -841,35 +841,38 @@ class Api extends REST_Controller
             }
 
 
-            $params = array(
-                'store_code' => $this->input->post('store_code'),
-                'store_name' => $this->input->post('store_name'),
-                'store_crm_code' => $this->input->post('store_crm_code'),
-                'firm_name' => $this->input->post('firm_name'),
-                'store_city' => $this->input->post('store_city'),
-                'store_state' => $this->input->post('store_state'),
-                'email_id' => $this->input->post('email_id'),
-                'gstin_no' => $this->input->post('gstin_no'),
-                'contact_number' => $this->input->post('contact_number'),
-                'paytm_mid1' => $this->input->post('paytm_mid1'),
-                'paytm_mid2' => $this->input->post('paytm_mid2'),
-                'paytm_mid3' => $this->input->post('paytm_mid3'),
-                'bharatpay_id' => $this->input->post('bharatpay_id'),
-                'store_address' => $this->input->post('store_address'),
-                'launch_date' => $this->input->post('launch_date'),
-                'pan_no' => $this->input->post('pan_no'),
-                'opening_balance' => $this->input->post('opening_balance'),
-                'is_active' => $this->input->post('is_active'),
-                'gst_st_code' => $this->input->post('gst_st_code'),
-                'discount' => $this->input->post('discount'),
-                'pin_code' => $this->input->post('pin_code'),
-                'store_type' => $this->input->post('store_type'),
-            );
+            // $params = array(
+            //     'store_code' => $this->input->post('store_code'),
+            //     'store_name' => $this->input->post('store_name'),
+            //     'store_crm_code' => $this->input->post('store_crm_code'),
+            //     'firm_name' => $this->input->post('firm_name'),
+            //     'store_city' => $this->input->post('store_city'),
+            //     'store_state' => $this->input->post('store_state'),
+            //     'email_id' => $this->input->post('email_id'),
+            //     'gstin_no' => $this->input->post('gstin_no'),
+            //     'contact_number' => $this->input->post('contact_number'),
+            //     'paytm_mid1' => $this->input->post('paytm_mid1'),
+            //     'paytm_mid2' => $this->input->post('paytm_mid2'),
+            //     'paytm_mid3' => $this->input->post('paytm_mid3'),
+            //     'bharatpay_id' => $this->input->post('bharatpay_id'),
+            //     'store_address' => $this->input->post('store_address'),
+            //     'launch_date' => $this->input->post('launch_date'),
+            //     'pan_no' => $this->input->post('pan_no'),
+            //     'opening_balance' => $this->input->post('opening_balance'),
+            //     'is_active' => $this->input->post('is_active'),
+            //     'gst_st_code' => $this->input->post('gst_st_code'),
+            //     'discount' => $this->input->post('discount'),
+            //     'pin_code' => $this->input->post('pin_code'),
+            //     'store_type' => $this->input->post('store_type'),
+            // );
+
+
+            $params = $_POST;
 
 
 
 
-            if ($this->store_model->add_store($params) > 0) {
+            if ($this->store_model->add_store_new($params) > 0) {
                 $this->set_response([
                     'status' => true,
                     'message' => $params,
