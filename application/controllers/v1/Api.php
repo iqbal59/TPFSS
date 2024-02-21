@@ -867,7 +867,40 @@ class Api extends REST_Controller
             // );
 
 
-            $params = $_POST;
+            $params = array(
+                'partner_name' => $this->input->post('partner_name'),
+                'mobile_no' => $this->input->post('mobile_no'),
+                'email_id' => $this->input->post('email_id'),
+                'store_code' => $this->input->post('store_code'),
+                'store_name' => $this->input->post('store_name'),
+                'is_fofo' => $this->input->post('is_fofo'),
+                'paytm_mid_1' => $this->input->post('paytm_mid_1'),
+                'first_pickup' => $this->input->post('first_pickup') ? $this->input->post('first_pickup') : null,
+                'last_pickup' => $this->input->post('last_pickup') ? $this->input->post('last_pickup') : null,
+                'str_manager_name' => $this->input->post('str_manager_name'),
+                'tsm_name' => $this->input->post('tsm_name'),
+                'str_address' => $this->input->post('str_address'),
+                'store_city' => $this->input->post('store_city'),
+                'store_state' => $this->input->post('store_state') ? $this->input->post('store_state') : 0,
+                'str_pin_code' => $this->input->post('str_pin_code'),
+                'firm_name' => $this->input->post('firm_name'),
+                'firm_gst_regis_type' => $this->input->post('firm_gst_regis_type') ? $this->input->post('firm_gst_regis_type') : 2,
+                'gst_no' => $this->input->post('gst_no'),
+                'firm_pan_no' => $this->input->post('firm_pan_no'),
+                'firm_address' => $this->input->post('firm_address'),
+                'firm_city' => $this->input->post('firm_city'),
+                'firm_state' => $this->input->post('firm_state') ? $this->input->post('firm_state') : 0,
+                'firm_pin_code' => $this->input->post('firm_pin_code'),
+                'bank_name' => $this->input->post('bank_name'),
+                'account_no' => $this->input->post('account_no'),
+                'ifsc_code' => $this->input->post('ifsc_code'),
+                'cancelled_cheque' => $this->input->post('cancelled_cheque'),
+                'store_crm_code' => $this->input->post('store_crm_code'),
+                'franchise_agreement_date' => $this->input->post('franchise_agreement_date') ? $this->input->post('franchise_agreement_date') : null,
+                'additional_info' => json_encode($this->input->post('extrainfo')),
+                'machine_info' => json_encode($this->input->post('machine')),
+
+            );
 
 
 
