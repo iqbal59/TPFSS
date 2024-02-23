@@ -258,7 +258,7 @@ class Storenew extends CI_Controller
                         'launch_date' => "",
                         'pan_no' => $this->input->post('firm_pan_no'),
                         'opening_balance' => 0,
-                        'is_active' => 1,
+                        //'is_active' => 1,
                         'gst_st_code' => "",
                         'discount' => 0,
                         'pin_code' => $this->input->post('firm_pin_code'),
