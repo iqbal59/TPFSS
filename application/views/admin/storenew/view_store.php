@@ -453,6 +453,9 @@
                                             </thead>
                                             <tbody id="tableBody">
                                                 <?php
+
+                                                print_r($str);
+
                                                 $machineInfo = json_decode($str->machine_info);
                                                 $s = 0;
                                                 foreach ($machineInfo as $m) {
