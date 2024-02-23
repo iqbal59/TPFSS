@@ -316,6 +316,13 @@ class Storenew extends CI_Controller
 
             if ($this->Store_model->add_update_store($params) > 0) {
 
+                $postData = array(
+
+                    'status' => 1
+                );
+
+                $this->Storenew_model->status($id, $postData);
+
                 $this->session->set_flashdata('msg', "Store has been live successfully");
                 $this->session->set_flashdata('msg_class', 'alert-success');
             } else {
