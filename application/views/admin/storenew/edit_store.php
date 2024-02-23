@@ -475,7 +475,7 @@
                                             <input type="hidden" name="old"
                                                 value="<?php echo $str->cancelled_cheque ?>">
                                             <input type="hidden" name="store_crm_code"
-                                                value="<?php echo $str->store_crm_code ?>">
+                                                value="<?php echo $str->store_crm_code; ?>">
                                             <span class="text-danger">
                                                 <?php 
                                                  if (isset($error_message)) {

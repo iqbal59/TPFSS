@@ -243,6 +243,7 @@ class Storenew extends CI_Controller
                     $params = array(
                         'store_code' => trim($this->input->post('store_code')),
                         'store_name' => $this->input->post('store_name'),
+                        'store_crm_code' => $this->input->post('store_crm_code'),
                         'firm_name' => $this->input->post('firm_name'),
                         'store_city' => $this->input->post('firm_city'),
                         'store_state' => $stateInfo->name,
