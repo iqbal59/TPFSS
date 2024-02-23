@@ -481,9 +481,11 @@
                                                 }
                                             ?></span>
                                             <div class="col-md-8">
+
                                                 <img style="margin-top:5px;" width="100%"
-                                                    src="<?php echo base_url('/assets/uploads/').$str->cancelled_cheque?>"
+                                                    src="<?php echo "https://centuryfasteners.in/project-management/assets/uploads/".$str->cancelled_cheque;?>"
                                                     alt="">
+
                                             </div>
 
                                         </div>
