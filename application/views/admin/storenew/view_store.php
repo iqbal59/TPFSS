@@ -388,8 +388,7 @@
                                                 }
                                             ?></span> -->
                                             <div class="col-md-8">
-                                                <img style="margin-top:5px;" width="100%"
-                                                    src="<?php echo base_url('/assets/uploads/').$str->cancelled_cheque?>"
+                                                <img style="margin-top:5px;" width="100%" src="<?php echo "https://centuryfasteners.in/project-management/assets/upload/".$str->cancelled_cheque;?>
                                                     alt="">
                                             </div>
 
@@ -398,13 +397,13 @@
                                 </div>
                             </div>
 
-                            <div class="panel panel-warning">
-                                <div style="margin:0;" class="panel-heading h4">
-                                    MACHINE DETAILS
-                                </div>
-                                <div class="panel-boby">
+                            <div class=" panel panel-warning">
+                                                <div style="margin:0;" class="panel-heading h4">
+                                                    MACHINE DETAILS
+                                                </div>
+                                                <div class="panel-boby">
 
-                                    <!-- <div class="row" style="padding:5px 15px;">
+                                                    <!-- <div class="row" style="padding:5px 15px;">
  
                                         <div class="form-group col-md-4">
                                             <label class="form-label" for="">Machine Name</label>
@@ -433,26 +432,26 @@
  
                                     </div> -->
 
-                                    <div class="table-responsive mt-4">
+                                                    <div class="table-responsive mt-4">
 
-                                        <table class="table table-bordered table-striped">
-                                            <thead>
-                                                <tr>
-                                                    <!-- <th scope="col">Sr. No.</th>
+                                                        <table class="table table-bordered table-striped">
+                                                            <thead>
+                                                                <tr>
+                                                                    <!-- <th scope="col">Sr. No.</th>
                                                     <th scope="col">Machine/Name</th>
                                                     <th scope="col">Quantity</th>
                                                     <th scope="col">Action</th> -->
 
-                                                    <th class="col-2" scope="col">Sr. No.</th>
-                                                    <th class="col-2" scope="col">Model No.</th>
-                                                    <th class="col-2" scope="col">Supplier Name</th>
-                                                    <th class="col-2" scope="col">Brand Name</th>
-                                                    <th class="col-2" scope="col">Machine Type</th>
-                                                    <th class="col-2" scope="col">Serial No.</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody id="tableBody">
-                                                <?php
+                                                                    <th class="col-2" scope="col">Sr. No.</th>
+                                                                    <th class="col-2" scope="col">Model No.</th>
+                                                                    <th class="col-2" scope="col">Supplier Name</th>
+                                                                    <th class="col-2" scope="col">Brand Name</th>
+                                                                    <th class="col-2" scope="col">Machine Type</th>
+                                                                    <th class="col-2" scope="col">Serial No.</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="tableBody">
+                                                                <?php
                                                 $machineInfo = json_decode($str->machine_info);
                                                 $s = 0;
                                                 foreach ($machineInfo as $m) {
@@ -501,171 +500,178 @@
                                                                         'Washer');
 
                                                     ?>
-                                                <tr>
-                                                    <td>
-                                                        <?php echo $s + 1; ?>
-                                                    </td>
-                                                    <td>
+                                                                <tr>
+                                                                    <td>
+                                                                        <?php echo $s + 1; ?>
+                                                                    </td>
+                                                                    <td>
 
 
-                                                        <select class="form-control"
-                                                            name="machine[<?php echo $s; ?>][model]" disabled>
-                                                            <option value="">--Select--</option>
+                                                                        <select class="form-control"
+                                                                            name="machine[<?php echo $s; ?>][model]"
+                                                                            disabled>
+                                                                            <option value="">--Select--</option>
 
-                                                            <?php
+                                                                            <?php
                                                                 foreach ($models as $model) {
                                                                     ?>
-                                                            <option value="<?php echo $model ?>"
-                                                                <?php echo $m->model === $model ? "selected" : "" ?>>
-                                                                <?php echo $model ?>
-                                                            </option>
-                                                            <?php
+                                                                            <option value="<?php echo $model ?>"
+                                                                                <?php echo $m->model === $model ? "selected" : "" ?>>
+                                                                                <?php echo $model ?>
+                                                                            </option>
+                                                                            <?php
                                                                 }
                                                                 ?>
-                                                        </select>
+                                                                        </select>
 
-                                                        <?php  //echo $m->name; ?>
-                                                    </td>
+                                                                        <?php  //echo $m->name; ?>
+                                                                    </td>
 
-                                                    <td>
+                                                                    <td>
 
 
-                                                        <select class="form-control"
-                                                            name="machine[<?php echo $s; ?>][supplier]" disabled>
-                                                            <option value="">--Select--</option>
+                                                                        <select class="form-control"
+                                                                            name="machine[<?php echo $s; ?>][supplier]"
+                                                                            disabled>
+                                                                            <option value="">--Select--</option>
 
-                                                            <?php
+                                                                            <?php
                                                                 foreach ($suppliers as $supplier) {
                                                                     ?>
-                                                            <option value="<?php echo $supplier ?>"
-                                                                <?php echo $m->supplier === $supplier ? "selected" : "" ?>>
-                                                                <?php echo $supplier ?>
-                                                            </option>
-                                                            <?php
+                                                                            <option value="<?php echo $supplier ?>"
+                                                                                <?php echo $m->supplier === $supplier ? "selected" : "" ?>>
+                                                                                <?php echo $supplier ?>
+                                                                            </option>
+                                                                            <?php
                                                                 }
                                                                 ?>
-                                                        </select>
+                                                                        </select>
 
-                                                        <?php  //echo $m->name; ?>
-                                                    </td>
+                                                                        <?php  //echo $m->name; ?>
+                                                                    </td>
 
-                                                    <td>
+                                                                    <td>
 
 
-                                                        <select class="form-control"
-                                                            name="machine[<?php echo $s; ?>][brand]" disabled>
-                                                            <option value="">--Select--</option>
+                                                                        <select class="form-control"
+                                                                            name="machine[<?php echo $s; ?>][brand]"
+                                                                            disabled>
+                                                                            <option value="">--Select--</option>
 
-                                                            <?php
+                                                                            <?php
                                                                 foreach ($brands as $brand) {
                                                                     ?>
-                                                            <option value="<?php echo $brand ?>"
-                                                                <?php echo $m->brand === $brand ? "selected" : "" ?>>
-                                                                <?php echo $brand ?>
-                                                            </option>
-                                                            <?php
+                                                                            <option value="<?php echo $brand ?>"
+                                                                                <?php echo $m->brand === $brand ? "selected" : "" ?>>
+                                                                                <?php echo $brand ?>
+                                                                            </option>
+                                                                            <?php
                                                                 }
                                                                 ?>
-                                                        </select>
+                                                                        </select>
 
-                                                        <?php  //echo $m->name; ?>
-                                                    </td>
+                                                                        <?php  //echo $m->name; ?>
+                                                                    </td>
 
-                                                    <td>
+                                                                    <td>
 
 
-                                                        <select class="form-control"
-                                                            name="machine[<?php echo $s; ?>][machine]" disabled>
-                                                            <option value="">--Select--</option>
+                                                                        <select class="form-control"
+                                                                            name="machine[<?php echo $s; ?>][machine]"
+                                                                            disabled>
+                                                                            <option value="">--Select--</option>
 
-                                                            <?php
+                                                                            <?php
                                                                 foreach ($machines as $machine) {
                                                                     ?>
-                                                            <option value="<?php echo $machine ?>"
-                                                                <?php echo $m->machine === $machine ? "selected" : "" ?>>
-                                                                <?php echo $machine ?>
-                                                            </option>
-                                                            <?php
+                                                                            <option value="<?php echo $machine ?>"
+                                                                                <?php echo $m->machine === $machine ? "selected" : "" ?>>
+                                                                                <?php echo $machine ?>
+                                                                            </option>
+                                                                            <?php
                                                                 }
                                                                 ?>
-                                                        </select>
+                                                                        </select>
 
-                                                        <?php  //echo $m->name; ?>
-                                                    </td>
+                                                                        <?php  //echo $m->name; ?>
+                                                                    </td>
 
-                                                    <td>
-                                                        <input type="text" class="form-control"
-                                                            name="machine[<?php echo $s; ?>][serial]"
-                                                            value="<?php echo $m->serial; ?>" disabled />
+                                                                    <td>
+                                                                        <input type="text" class="form-control"
+                                                                            name="machine[<?php echo $s; ?>][serial]"
+                                                                            value="<?php echo $m->serial; ?>"
+                                                                            disabled />
 
-                                                    </td>
+                                                                    </td>
 
-                                                </tr>
-                                                <?php $s++;
+                                                                </tr>
+                                                                <?php $s++;
                                                 } ?>
-                                            </tbody>
-                                        </table>
+                                                            </tbody>
+                                                        </table>
 
 
-                                    </div>
-                                    &nbsp;
+                                                    </div>
+                                                    &nbsp;
 
-                                </div>
-                            </div>
+                                                </div>
+                                            </div>
 
-                            <div class="panel panel-warning">
-                                <div style="margin:0;" class="panel-heading h4">
-                                    Extra Info
-                                </div>
-                                <div class="panel-boby">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Sr. No.</th>
-                                                <th scope="col">Field Name</th>
-                                                <th scope="col">Field Value</th>
+                                            <div class="panel panel-warning">
+                                                <div style="margin:0;" class="panel-heading h4">
+                                                    Extra Info
+                                                </div>
+                                                <div class="panel-boby">
+                                                    <table class="table">
+                                                        <thead>
+                                                            <tr>
+                                                                <th scope="col">Sr. No.</th>
+                                                                <th scope="col">Field Name</th>
+                                                                <th scope="col">Field Value</th>
 
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <?php
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <?php
 
                                             $extrainfo = json_decode($str->additional_info);
 
                                             //print_r($extrainfo);
                                             
                                             for ($i = 0; $i < 10; $i++) { ?>
-                                            <tr>
-                                                <td>
-                                                    <?php echo ($i + 1); ?>
-                                                </td>
-                                                <td><input type="text" class="form-control"
-                                                        name="extrainfo[][field_name]"
-                                                        value="<?php echo $extrainfo[$i]->field_name; ?>" disabled></td>
-                                                <td><input type=" text" class="form-control"
-                                                        name="extrainfo[][field_value]"
-                                                        value="<?php echo $extrainfo[$i]->field_value; ?>" disabled>
-                                                </td>
+                                                            <tr>
+                                                                <td>
+                                                                    <?php echo ($i + 1); ?>
+                                                                </td>
+                                                                <td><input type="text" class="form-control"
+                                                                        name="extrainfo[][field_name]"
+                                                                        value="<?php echo $extrainfo[$i]->field_name; ?>"
+                                                                        disabled></td>
+                                                                <td><input type=" text" class="form-control"
+                                                                        name="extrainfo[][field_value]"
+                                                                        value="<?php echo $extrainfo[$i]->field_value; ?>"
+                                                                        disabled>
+                                                                </td>
 
-                                            </tr>
-                                            <?php } ?>
-                                        </tbody>
-                                    </table>
+                                                            </tr>
+                                                            <?php } ?>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+
+
+                                    </div>
                                 </div>
+                                <!-- /.box-body -->
                             </div>
-
-
-
+                            <!--/.col (right) -->
                         </div>
-
-
-                    </div>
-                </div>
-                <!-- /.box-body -->
-            </div>
-            <!--/.col (right) -->
-        </div>
-        <!-- /.row -->
+                        <!-- /.row -->
     </section>
     <!-- /.content -->
 </div>
