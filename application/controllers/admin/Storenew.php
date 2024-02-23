@@ -46,6 +46,7 @@ class Storenew extends CI_Controller
                 'mobile_no' => $this->input->post('mobile_no'),
                 'email_id' => $this->input->post('email_id'),
                 'store_code' => $this->input->post('store_code'),
+                'store_crm_code' => $this->input->post('store_crm_code'),
                 'store_name' => $this->input->post('store_name'),
                 'is_fofo' => $this->input->post('is_fofo'),
                 'paytm_mid_1' => $this->input->post('paytm_mid_1'),
