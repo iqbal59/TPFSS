@@ -152,7 +152,7 @@ class Storenew extends CI_Controller
         $this->load->library('form_validation');
         $id = $this->input->post('id');
 
-        $this->form_validation->set_rules('store_code', 'Store Code', 'edit_unique[stores.store_code.' . $id . ']');
+        $this->form_validation->set_rules('store_code', 'Store Code', 'edit_unique[stores_new.store_code.' . $id . ']');
         // $this->form_validation->set_rules('store_name', 'Store Name', 'required|edit_unique[stores.store_name.' . $id . ']');
         // $this->form_validation->set_rules('firm_name', 'Firm Name', 'required|edit_unique[stores.firm_name.' . $id . ']');
         // $this->form_validation->set_rules('firm_city', 'Firm City', 'required');
