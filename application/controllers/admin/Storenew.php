@@ -238,13 +238,13 @@ class Storenew extends CI_Controller
                 if ($this->Storenew_model->edit_store($id, $formData)) {
 
 
-
+                    $stateInfo = $this->Storenew_model->getStateName($this->input->post('firm_state'));
                     $params = array(
                         'store_code' => trim($this->input->post('store_code')),
                         'store_name' => $this->input->post('store_name'),
                         'firm_name' => $this->input->post('firm_name'),
                         'store_city' => $this->input->post('firm_city'),
-                        'store_state' => $this->input->post('state_name'),
+                        'store_state' => $stateInfo->name,
                         'email_id' => $this->input->post('email_id'),
                         'gstin_no' => $this->input->post('gst_no'),
                         'contact_number' => $this->input->post('mobile_no'),

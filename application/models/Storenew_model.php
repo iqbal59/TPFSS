@@ -45,6 +45,14 @@ class Storenew_model extends CI_Model
         return $q->row();
     }
 
+
+    public function getStateName($s_id)
+    {
+        // echo "select * from stores_new left join states on states.id = stores_new.firm_state where stores_new.id=$id";
+        $q = $this->db->query("select * from states where id = $s_id");
+        return $q->row();
+    }
+
     public function edit_store($id, array $post)
     {
         $res = $this->db->where('id', $id)
