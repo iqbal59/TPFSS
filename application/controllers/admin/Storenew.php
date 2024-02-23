@@ -284,7 +284,7 @@ class Storenew extends CI_Controller
             $params = array(
                 'store_code' => trim($storeInfo->store_code),
                 'store_name' => $storeInfo->store_name,
-                'store_crm_code' => $storeInfo->store_crm_code,
+                'store_crm_code' => trim($storeInfo->store_crm_code),
                 'firm_name' => $storeInfo->firm_name,
                 'store_city' => $storeInfo->firm_city,
                 'store_state' => $storeInfo->state_name,
@@ -314,7 +314,7 @@ class Storenew extends CI_Controller
 
 
 
-            if ($this->Store_model->add_store($params) > 0) {
+            if ($this->Store_model->add_update_store($params) > 0) {
 
                 $this->session->set_flashdata('msg', "Store has been live successfully");
                 $this->session->set_flashdata('msg_class', 'alert-success');

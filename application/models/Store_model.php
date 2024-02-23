@@ -131,6 +131,11 @@ class Store_model extends CI_Model
         return $this->db->insert_id();
     }
 
+    public function add_update_store($params)
+    {
+        return $this->db->replace('stores', $params);
+
+    }
 
     public function add_store_new($params)
     {
