@@ -40,7 +40,7 @@ class Storenew_model extends CI_Model
 
     public function viewtblrow($id)
     {
-        echo "select * from stores_new left join states on states.id = stores_new.firm_state where stores_new.id=$id";
+        // echo "select * from stores_new left join states on states.id = stores_new.firm_state where stores_new.id=$id";
         $q = $this->db->query("select * from stores_new left join states on states.id = stores_new.firm_state where stores_new.id=$id");
         return $q->row();
     }

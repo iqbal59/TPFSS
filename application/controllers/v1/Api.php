@@ -895,8 +895,8 @@ class Api extends REST_Controller
                 'cancelled_cheque' => $this->input->post('cancelled_cheque'),
                 'store_crm_code' => $this->input->post('store_crm_code'),
                 'franchise_agreement_date' => $this->input->post('franchise_agreement_date') ? $this->input->post('franchise_agreement_date') : null,
-                'additional_info' => json_encode($this->input->post('additional_info')),
-                'machine_info' => json_encode($this->input->post('machine_info')),
+                'additional_info' => $this->input->post('additional_info'),
+                'machine_info' => $this->input->post('machine_info'),
 
             );
 
