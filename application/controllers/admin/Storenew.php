@@ -237,6 +237,37 @@ class Storenew extends CI_Controller
             if ($formData) {
                 if ($this->Storenew_model->edit_store($id, $formData)) {
 
+
+
+                    $params = array(
+                        'store_code' => trim($this->input->post('store_code')),
+                        'store_name' => $this->input->post('store_name'),
+                        'firm_name' => $this->input->post('firm_name'),
+                        'store_city' => $this->input->post('firm_city'),
+                        'store_state' => $this->input->post('state_name'),
+                        'email_id' => $this->input->post('email_id'),
+                        'gstin_no' => $this->input->post('gst_no'),
+                        'contact_number' => $this->input->post('mobile_no'),
+                        'paytm_mid1' => $this->input->post('paytm_mid_1'),
+                        'paytm_mid2' => "",
+                        'paytm_mid3' => "",
+                        'bharatpay_id' => "",  //this field is not in my table
+                        'store_address' => $this->input->post('firm_address'),
+                        'launch_date' => "",
+                        'pan_no' => $this->input->post('firm_pan_no'),
+                        'opening_balance' => 0,
+                        'is_active' => 1,
+                        'gst_st_code' => "",
+                        'discount' => 0,
+                        'pin_code' => $this->input->post('firm_pin_code'),
+                        'store_type' => $this->input->post('is_fofo'),
+                        // 'firm_gst_regis_type' => $storeInfo->firm_gst_regis_type,
+                        // 'courier_charge_per_kg' => "",
+                        // 'out_of_delivery_charge' => ""
+                    );
+
+                    $this->Store_model->add_update_store($params);
+
                     $this->session->set_flashdata('msg', 'Store updated Successfully.');
                     $this->session->set_flashdata('msg_class', 'alert-success');
                 } else {
@@ -278,7 +309,7 @@ class Storenew extends CI_Controller
             && !empty($storeInfo->firm_address) && !empty($storeInfo->firm_pin_code)
         ) {
 
-            $storeInfo->store_crm_code = trim($this->input->post('store_crm_code'));
+
 
 
             $params = array(
