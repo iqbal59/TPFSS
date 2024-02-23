@@ -304,9 +304,9 @@ class Storenew extends CI_Controller
                 'discount' => 0,
                 'pin_code' => $storeInfo->firm_pin_code,
                 'store_type' => $storeInfo->is_fofo,
-                'firm_gst_regis_type' => $storeInfo->firm_gst_regis_type,
-                'courier_charge_per_kg' => "",
-                'out_of_delivery_charge' => ""
+                // 'firm_gst_regis_type' => $storeInfo->firm_gst_regis_type,
+                // 'courier_charge_per_kg' => "",
+                // 'out_of_delivery_charge' => ""
             );
 
 
