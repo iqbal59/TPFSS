@@ -212,6 +212,39 @@ class Api extends REST_Controller
 
     }
 
+    private function get_license_by_qdc($store_code = null)
+    {
+        $this->load->library('tumbledryqdc');
+        $params["ClientID"] = "2469";
+
+        if ($store_code != null)
+            $params["StoreCode"] = trim($store_code);
+
+        $response = $this->tumbledryqdc->QDCLiveApi('StoreRenewalData', $params);
+        return $response = json_decode($response);
+    }
+
+
+    public function get_license_renewal_date_get()
+    {
+        //echo "dsfds";
+        $response = $this->get_license_by_qdc();
+
+        //print_r($response);
+        foreach ($response as $res) {
+            $params = array(
+                'store_crm_code' => $res->StoreCode,
+                'licence_renewal_date' => date('Y-m-d', strtotime($res->RenewalDate))
+            );
+
+            // print_r($params);
+
+            $this->store_model->add_update_store($params);
+
+        }
+
+    }
+
 
 
 }

@@ -86,11 +86,24 @@ class Store_model extends CI_Model
     public function get_all_store_have_to_renewal()
     {
 
+        //We are assuming it will call on every thursday
 
-        $sql = "SELECT * FROM `stores` where 1 and is_active=1 and month(launch_date) = month(curdate()) and year(launch_date) < year(curdate())";
+        $sql = "SELECT * FROM `stores` where 1 and is_active=1 and licence_renewal_date is not null and licence_renewal_date between curdate()+ interval 8 day and curdate() + interval 14 day ";
         return $this->db->query($sql)->result_array();
     }
 
+
+
+    public function get_all_store_without_license()
+    {
+
+        //We are assuming it will call on every thursday
+
+        $sql = "SELECT * FROM `stores` where 1 and is_active=1 and licence_renewal_date is null";
+        return $this->db->query($sql)->result_array();
+    }
+
+    
     public function get_all_amc_store_count()
     {
         // $sql = "SELECT * FROM `stores` where 1 and is_active=1   and store_type = 1 and launch_date >='2022-07-01' and curdate() > launch_date + INTERVAL 365 day";
