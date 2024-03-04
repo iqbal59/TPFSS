@@ -281,6 +281,7 @@ class Api extends REST_Controller
             );
 
             $creditNote['voucher_no'] = $item->voucher_no;
+            $creditNote['id'] = $item->id;
 
             if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
                 $creditNote['syncstatus'] = true;
@@ -323,7 +324,7 @@ class Api extends REST_Controller
             );
 
             $payment['voucher_no'] = $item->voucher_no;
-
+            $payment['id'] = $item->id;
             if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
                 $payment['syncstatus'] = true;
             } else {
@@ -365,7 +366,7 @@ class Api extends REST_Controller
             );
 
             $reciept['voucher_no'] = $item->voucher_no;
-
+            $reciept['id'] = $item->id;
             if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
                 $reciept['syncstatus'] = true;
             } else {
@@ -407,7 +408,7 @@ class Api extends REST_Controller
             );
 
             $debit['voucher_no'] = $item->voucher_no;
-
+            $debit['id'] = $item->id;
             if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
                 $debit['syncstatus'] = true;
             } else {
@@ -450,7 +451,7 @@ class Api extends REST_Controller
             );
 
             $journal['voucher_no'] = $item->voucher_no;
-
+            $journal['id'] = $item->id;
             if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
                 $journal['syncstatus'] = true;
             } else {
@@ -490,6 +491,7 @@ class Api extends REST_Controller
             );
 
             $invoice['voucher_no'] = $item->voucher_no;
+            $invoice['id'] = $item->id;
 
             if ($this->Voucher_model->insert_or_update_voucher('material_invoices_new', $data) > 0) {
                 $invoice['syncstatus'] = true;
