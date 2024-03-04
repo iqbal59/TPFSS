@@ -482,7 +482,7 @@ class Api extends REST_Controller
             $data = array(
                 // 'voucher_type' => 'R',
                 'store_crm_code' => $storeCode['id'],
-                'amount' => $item->ledger_details[0]->ledger_amt,
+                'amount' => str_replace(',', '', $item->ledger_details[0]->ledger_amt),
                 'invoice_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'material_description' => $item->narration,
                 'invoice_no' => $item->voucher_no,
