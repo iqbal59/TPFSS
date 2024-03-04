@@ -85,7 +85,7 @@ class Voucher_model extends CI_Model
 
     public function insert_or_update_voucher($tableName, $params)
     {
-        echo $sql = "insert into $tableName (invoice_date, invoice_no, amount, store_crm_code, material_description)values('" . $params['invoice_date'] . "','" . $params['invoice_no'] . "','" . $params['amount'] . "','" . $params['store_crm_code'] . "','" . $params['material_description'] . "') on duplicate key update set amount='" . $params['amount'] . "',  material_description='" . $params['material_description'] . "'";
+        $sql = "insert into $tableName (invoice_date, invoice_no, amount, store_crm_code, material_description)values('" . $params['invoice_date'] . "','" . $params['invoice_no'] . "','" . $params['amount'] . "','" . $params['store_crm_code'] . "','" . $params['material_description'] . "') on duplicate key update  amount='" . $params['amount'] . "',  material_description='" . $params['material_description'] . "'";
         return $this->db->query($sql);
     }
 
