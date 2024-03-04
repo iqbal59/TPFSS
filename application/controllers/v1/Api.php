@@ -491,7 +491,7 @@ class Api extends REST_Controller
 
             $invoice['voucher_no'] = $item->voucher_no;
 
-            if ($this->Voucher_model->add_model('material_invoices_new', $data) > 0) {
+            if ($this->Voucher_model->insert_or_update_voucher('material_invoices_new', $data) > 0) {
                 $invoice['syncstatus'] = true;
             } else {
                 $invoice['syncstatus'] = false;
