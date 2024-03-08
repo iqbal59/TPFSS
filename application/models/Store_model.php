@@ -103,7 +103,7 @@ class Store_model extends CI_Model
         return $this->db->query($sql)->result_array();
     }
 
-    
+
     public function get_all_amc_store_count()
     {
         // $sql = "SELECT * FROM `stores` where 1 and is_active=1   and store_type = 1 and launch_date >='2022-07-01' and curdate() > launch_date + INTERVAL 365 day";
@@ -146,7 +146,17 @@ class Store_model extends CI_Model
 
     public function add_update_store($params)
     {
-        return $this->db->replace('stores', $params);
+
+        $this->db->where('store_crm_code', $params['store_crm_code']);
+        $q = $this->db->get('stores');
+
+        if ($q->num_rows() > 0) {
+            $this->db->where('store_crm_code', $params['store_crm_code']);
+            return $this->db->update('stores', $params);
+        } else {
+            $this->db->set('store_crm_code', $params['store_crm_code']);
+            return $this->db->insert('stores', $params);
+        }
 
     }
 
