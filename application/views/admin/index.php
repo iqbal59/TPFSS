@@ -575,8 +575,8 @@
                                             class="fa fa-angle-right"></i> Add Voucher</a></li>
                                 <li><a href="<?php echo base_url('admin/voucher') ?>"><i class="fa fa-angle-right"></i>
                                         Voucher List</a></li>
-                                <li><a href="<?php echo base_url('admin/voucher/importvoucher') ?>"><i
-                                            class="fa fa-angle-right"></i> Import Voucher</a></li>
+                                <!-- <li><a href="<?php echo base_url('admin/voucher/importvoucher') ?>"><i
+                                            class="fa fa-angle-right"></i> Import Voucher</a></li> -->
 
                             </ul>
                         </li>
@@ -594,8 +594,8 @@
                                             class="fa fa-angle-right"></i> Import Sale Data</a></li> -->
                                 <li><a href="<?php echo base_url('admin/import/paytmdata') ?>"><i
                                             class="fa fa-angle-right"></i> Paytm data</a></li>
-                                <li><a href="<?php echo base_url('admin/import/bharatpedata') ?>"><i
-                                            class="fa fa-angle-right"></i> Bharat Pe data</a></li>
+                                <!-- <li><a href="<?php echo base_url('admin/import/bharatpedata') ?>"><i
+                                            class="fa fa-angle-right"></i> Bharat Pe data</a></li> -->
                                 <li><a href="<?php echo base_url('admin/import/mbdata') ?>"><i
                                             class="fa fa-angle-right"></i> Material Bill data</a></li>
                                 <li><a href="<?php echo base_url('admin/import/saledata') ?>"><i
