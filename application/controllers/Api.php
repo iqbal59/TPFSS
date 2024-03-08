@@ -234,7 +234,7 @@ class Api extends REST_Controller
         foreach ($response as $res) {
             $params = array(
                 'store_crm_code' => $res->StoreCode,
-                'licence_renewal_date' => date('Y-m-d', strtotime($res->RenewalDate))
+                'licence_renewal_date' => date('Y-m-d', strtotime('-7 days', strtotime($res->RenewalDate)))
             );
 
             // print_r($params);
