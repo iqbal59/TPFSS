@@ -482,7 +482,8 @@ class Api extends REST_Controller
             $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[0]->ledger_name));
             $data = array(
                 // 'voucher_type' => 'R',
-                'store_crm_code' => $storeCode['id'],
+                'store_crm_code' => $storeCode['store_crm_code'],
+                'store_auto_id' => $storeCode['id'],
                 'amount' => str_replace(',', '', $item->ledger_details[0]->ledger_amt),
                 'invoice_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'material_description' => $item->narration,
@@ -493,7 +494,7 @@ class Api extends REST_Controller
             $invoice['voucher_no'] = $item->voucher_no;
             $invoice['id'] = $item->id;
 
-            if ($this->Voucher_model->insert_or_update_voucher('material_invoices_new', $data) > 0) {
+            if ($this->Voucher_model->insert_or_update_voucher('material_invoices', $data) > 0) {
                 $invoice['syncstatus'] = true;
             } else {
                 $invoice['syncstatus'] = false;
