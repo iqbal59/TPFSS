@@ -67,7 +67,7 @@
                                                 data-validation-required-message="field is required">
                                                 <option value="">--Select--</option>
                                                 <!-- <option value="1">Sales Data</option> -->
-                                                <option value="2">Material Bill</option>
+                                                <!-- <option value="2">Material Bill</option> -->
                                                 <option value="3">Paytm</option>
                                                 <!-- <option value="4">Bharat Pe</option> -->
                                                 <!-- <option value="5">Bank Statement</option> -->
@@ -109,8 +109,8 @@
 
 
                             <!-- CSRF token -->
-                            <input type="hidden" name="<?=$this->security->get_csrf_token_name();?>"
-                                value="<?=$this->security->get_csrf_hash();?>" />
+                            <input type="hidden" name="<?= $this->security->get_csrf_token_name(); ?>"
+                                value="<?= $this->security->get_csrf_hash(); ?>" />
 
 
                             <hr>
