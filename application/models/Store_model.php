@@ -93,6 +93,23 @@ class Store_model extends CI_Model
     }
 
 
+    public function get_all_store_have_to_temp_renewal()
+    {
+
+        //We are assuming it will call on every thursday
+
+        $sql = "SELECT * FROM `stores` where 1 and store_crm_code in('T124',
+        'T209',
+        'T562',
+        'T576',
+        'T542',
+        'T665',
+        'T597',
+        'T626',
+        'T635')";
+        return $this->db->query($sql)->result_array();
+    }
+
 
     public function get_all_store_without_license()
     {

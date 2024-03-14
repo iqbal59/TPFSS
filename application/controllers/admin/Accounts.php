@@ -657,7 +657,8 @@ class Accounts extends CI_Controller
     {
         // check_login_user();
 
-        $data['stores'] = $this->Store_model->get_all_store_have_to_renewal();
+        // $data['stores'] = $this->Store_model->get_all_store_have_to_renewal();
+        $data['stores'] = $this->Store_model->get_all_store_have_to_temp_renewal();
         // print_r($data['stores']);
 
         foreach ($data['stores'] as $s) {
