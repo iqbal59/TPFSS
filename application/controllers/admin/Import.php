@@ -113,16 +113,17 @@ class Import extends CI_Controller
                             $data['settled_date'] = date('Y-m-d H:i:s', strtotime(trim($filesop[20], "'")));
                             $data['store_name'] = trim($filesop[8], "'");
                             $data['gst'] = trim($filesop[15], "'");
+                            $data['is_reconcile'] = 1;
                             $this->common_model->insert_ignore($data, 'paytm');
 
                             //print_r($data);
                         }
-                        $paytmbankdata = $this->common_model->matchPaytmWithBank();
-                        foreach ($paytmbankdata as $p) {
-                            if ($p['ba'] == $p['bta'] or ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta'])) {
-                                $this->common_model->paytmReconcile($p['utr_no']);
-                            }
-                        }
+                        // $paytmbankdata = $this->common_model->matchPaytmWithBank();
+                        // foreach ($paytmbankdata as $p) {
+                        //     if ($p['ba'] == $p['bta'] or ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta'])) {
+                        //         $this->common_model->paytmReconcile($p['utr_no']);
+                        //     }
+                        // }
                         $this->session->set_flashdata('msg', "data upload success");
                         redirect('admin/import/storesales');
                         break;
@@ -288,17 +289,18 @@ class Import extends CI_Controller
                             $data['settled_date'] = date('Y-m-d H:i:s', strtotime(trim($filesop[20], "'")));
                             $data['store_name'] = trim($filesop[8], "'");
                             $data['gst'] = trim($filesop[15], "'");
+                            $data['is_reconcile'] = 1;
                             $this->common_model->insert_ignore($data, 'paytm');
 
                             //  print_r($data);
                         }
-                        $paytmbankdata = $this->common_model->matchPaytmWithBank();
-                        foreach ($paytmbankdata as $p) {
-                            //if($p['ba']==$p['bta'])
-                            if ($p['ba'] == $p['bta'] or ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta'])) {
-                                $this->common_model->paytmReconcile($p['utr_no']);
-                            }
-                        }
+                        // $paytmbankdata = $this->common_model->matchPaytmWithBank();
+                        // foreach ($paytmbankdata as $p) {
+                        //     //if($p['ba']==$p['bta'])
+                        //     if ($p['ba'] == $p['bta'] or ($p['bta'] > 0 && $p['ba'] > $p['bta']) or ($p['bta'] > 0 && $p['ba'] < $p['bta'])) {
+                        //         $this->common_model->paytmReconcile($p['utr_no']);
+                        //     }
+                        // }
                         $this->session->set_flashdata('msg', "data upload success");
                         redirect('admin/import/storesales');
                         break;
