@@ -84,6 +84,14 @@ class Api extends REST_Controller
                 array_push($ledgerDetails, $ld);
             }
 
+            if ($item->invoice_type == '2') {
+                $ld['ledger_name'] = "CRM Renewal Charges";
+                $ld['ledger_perc'] = "";
+                $ld['ledger_amt'] = $item->amount;
+                $ld['dr_cr'] = "CR";
+                array_push($ledgerDetails, $ld);
+            }
+
             if ($item->gst_st_code == '09' || $item->gst_st_code == '9') {
                 $cgstRate = $item->tax_rate / 2;
                 $sgstRate = $item->tax_rate / 2;
