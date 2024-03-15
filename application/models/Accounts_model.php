@@ -69,7 +69,7 @@ class Accounts_model extends CI_Model
 
     public function ledgerItem($date, $date_to, $sotreid)
     {
-        return $this->db->query("select * from (SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat(case when invoice_type =0 then 'Royalty' else 'AMC' end, ' ', descriptions) as descriptions, concat('TD', '-', invoice_no) as voucher_no, invoice_type FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
+        return $this->db->query("select * from (SELECT id, net_amount as np, 'Sale' as voucher_type,  date(invoice_date) as voucher_date, concat(case when invoice_type =0 then 'Royalty' when invoice_type =2 then 'CRM Renewal' else 'AMC' end, ' ', descriptions) as descriptions, concat('TD', '-', invoice_no) as voucher_no, invoice_type FROM `invoices` where 1 and date(invoice_date) >= '$date' and date(invoice_date) <= '$date_to' and store_id=$sotreid
 
             UNION
             
