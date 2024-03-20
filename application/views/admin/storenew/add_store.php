@@ -565,7 +565,8 @@ function generateSelectBox1() {
         "HPD-10 MG", "HPW-10 TOUCH II EP", "HYD11-03532-333", "HYD11-03532-443", "LG Dosing Pump",
         "Lineablu - 1560", "MM2SG2", "MM2SG2.1", "PT3JGAJP403UG06", "RN1329AN7S", "RN1840CD7", "RV1329C7T",
         "RV1329CD7P", "RV1840CD7", "SE 4", "SE 8", "STEWYAJP303NW22", "TD6-20LAC / N2360G417", "TD6-37 / N2675G417",
-        "TD6-6LAC / N1130E17", "TD-6-7LAC / N1135E17", "USMT001", "VF120", "WF280B", "WH6-6LAC / W555HE17"
+        "TD6-6LAC / N1130E17", "TD-6-7LAC / N1135E17", "USMT001", "VF120", "WF280B", "WH6-6LAC / W555HE17",
+        "ST035E", "WF180B", "DSS-2"
     ];
     var selectBox = '<select class="form-control" name="machine[' + currentIndex + '][model]">';
 
@@ -590,7 +591,8 @@ function generateSelectBox2() {
         'QC',
         'Stefab',
         'Trevil',
-        'Usmani and co.'
+        'Usmani and co.',
+        'Prabhu Industries'
     ];
     var selectBox = '<select class="form-control" name="machine[' + currentIndex + '][supplier]">';
 
@@ -617,7 +619,8 @@ function generateSelectBox3() {
         'M2M',
         'Stefab',
         'Trevil',
-        'tumbledry'
+        'tumbledry',
+        'Speed Queen'
     ];
     var selectBox = '<select class="form-control" name="machine[' + currentIndex + '][brand]">';
 
