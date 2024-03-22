@@ -319,11 +319,11 @@ class Api extends REST_Controller
 
         $payments = array();
         foreach ($tallyData->result as $item) {
-            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[0]->ledger_name));
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_entries[0]->ledger_name));
             $data = array(
                 'voucher_type' => 'P',
                 'store_id' => $storeCode['id'],
-                'amount' => str_replace(',', '', $item->ledger_details[0]->ledger_amt),
+                'amount' => str_replace(',', '', $item->ledger_entries[0]->ledger_amt),
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
                 'voucher_no' => $item->voucher_no,
@@ -361,11 +361,11 @@ class Api extends REST_Controller
 
         $reciepts = array();
         foreach ($tallyData->result as $item) {
-            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[1]->ledger_name));
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_entries[1]->ledger_name));
             $data = array(
                 'voucher_type' => 'R',
                 'store_id' => $storeCode['id'],
-                'amount' => str_replace(',', '', $item->ledger_details[1]->ledger_amt),
+                'amount' => str_replace(',', '', $item->ledger_entries[1]->ledger_amt),
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
                 'voucher_no' => $item->voucher_no,
@@ -403,11 +403,11 @@ class Api extends REST_Controller
 
         $debits = array();
         foreach ($tallyData->result as $item) {
-            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[0]->ledger_name));
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_entries[0]->ledger_name));
             $data = array(
                 'voucher_type' => 'D',
                 'store_id' => $storeCode['id'],
-                'amount' => $item->ledger_details[0]->ledger_amt,
+                'amount' => $item->ledger_entries[0]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
                 'voucher_no' => $item->voucher_no,
@@ -446,11 +446,11 @@ class Api extends REST_Controller
 
         $journals = array();
         foreach ($tallyData->result as $item) {
-            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[0]->ledger_name));
+            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_entries[0]->ledger_name));
             $data = array(
                 'voucher_type' => 'J',
                 'store_id' => $storeCode['id'],
-                'amount' => $item->ledger_details[0]->ledger_amt,
+                'amount' => $item->ledger_entries[0]->ledger_amt,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
                 'voucher_no' => $item->voucher_no,
