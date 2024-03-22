@@ -292,7 +292,11 @@ class Accounts_model extends CI_Model
 
     public function get_royalty_sale_data($order_nos, $store_name)
     {
-        echo $sql = "select * from storesales where order_no in(" . implode(",", $order_nos) . ") and store_name='" . $store_name . "'";
+        $sql_search = "and order_no=''";
+        $orders = implode(",", $order_nos);
+        if ($orders)
+            $sql_search = 'and order_no in(' . $orders . ')';
+        echo $sql = "select * from storesales where 1 $sql_search and store_name='" . $store_name . "'";
 
         return $query = $this->db->query($sql)->result_array();
     }
