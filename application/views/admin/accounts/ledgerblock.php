@@ -46,6 +46,10 @@
             <div class="card">
 
                 <div class="card-body">
+
+                    <a href="<?php echo base_url('store') ?>" class="btn btn-info pull-right"><i class="fa fa-plus"></i>
+                        Block All</a>
+
                     <form id="ledger_form" method="post" action="" class="form-horizontal" enctype="multipart/form-data"
                         novalidate>
 
