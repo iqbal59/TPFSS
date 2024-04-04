@@ -467,7 +467,7 @@ class Api extends REST_Controller
 
             $journal['voucher_no'] = $item->voucher_no;
             $journal['id'] = $item->id;
-            if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
+            if ($this->Voucher_model->add_model('vouchers', $data) > 0) {
                 $journal['syncstatus'] = true;
             } else {
                 $journal['syncstatus'] = false;
