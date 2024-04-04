@@ -321,9 +321,9 @@ class Api extends REST_Controller
         foreach ($tallyData->result as $item) {
             $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_entries[0]->ledger_name));
             $data = array(
-                'voucher_type' => 'P',
+                'voucher_type' => 'R',
                 'store_id' => $storeCode['id'],
-                'amount' => str_replace(',', '', $item->ledger_entries[0]->ledger_amt),
+                'amount' => '-' . str_replace(',', '', $item->ledger_entries[0]->ledger_amt),
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
                 'voucher_no' => $item->voucher_no,
@@ -333,7 +333,7 @@ class Api extends REST_Controller
 
             $payment['voucher_no'] = $item->voucher_no;
             $payment['id'] = $item->id;
-            if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
+            if ($this->Voucher_model->add_model('vouchers', $data) > 0) {
                 $payment['syncstatus'] = true;
             } else {
                 $payment['syncstatus'] = false;
@@ -375,7 +375,7 @@ class Api extends REST_Controller
 
             $reciept['voucher_no'] = $item->voucher_no;
             $reciept['id'] = $item->id;
-            if ($this->Voucher_model->add_model('vouchers_new', $data) > 0) {
+            if ($this->Voucher_model->add_model('vouchers', $data) > 0) {
                 $reciept['syncstatus'] = true;
             } else {
                 $reciept['syncstatus'] = false;
