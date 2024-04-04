@@ -449,7 +449,7 @@ class Api extends REST_Controller
             $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_entries[0]->ledger_name));
 
             $amount = 0;
-            if ($item->ledger_entries[0]->ledger_name == 'Dr')
+            if ($item->ledger_entries[0]->Dr_Cr == 'Dr')
                 $amount = '-' . str_replace(',', '', $item->ledger_details[0]->ledger_amt);
             else
                 $amount = str_replace(',', '', $item->ledger_details[0]->ledger_amt);
