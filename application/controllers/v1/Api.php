@@ -447,10 +447,17 @@ class Api extends REST_Controller
         $journals = array();
         foreach ($tallyData->result as $item) {
             $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_entries[0]->ledger_name));
+
+            $amount = 0;
+            if ($item->ledger_entries[0]->ledger_name == 'Dr')
+                $amount = '-' . str_replace(',', '', $item->ledger_details[0]->ledger_amt);
+            else
+                $amount = str_replace(',', '', $item->ledger_details[0]->ledger_amt);
+
             $data = array(
-                'voucher_type' => 'J',
+                'voucher_type' => 'R',
                 'store_id' => $storeCode['id'],
-                'amount' => $item->ledger_entries[0]->ledger_amt,
+                'amount' => $amount,
                 'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
                 'descriptions' => $item->narration,
                 'voucher_no' => $item->voucher_no,
