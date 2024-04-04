@@ -3,7 +3,7 @@ class Api_model extends CI_Model
 {
     public function get_all_invoice()
     {
-        $this->db->select("invoices.id, net_amount, store_name, invoice_date, firm_name, store_state, case when invoice_type = 0 then concat('TD/','23-24','/', invoices.invoice_no) when  invoice_type= 2 then concat('CRM/','23-24','/', invoices.invoice_no) else concat('AMC/','23-24','/', invoices.invoice_no) end as invoice_no, store_address, store_city, store_state, gstin_no, email_id, pan_no, contact_number, amount, tax_amount, tax_rate, gst_st_code, 	descriptions,pin_code, invoice_type");
+        $this->db->select("invoices.id, net_amount, store_name, invoice_date, firm_name, store_state, case when invoice_type = 0 then concat('TD/','24-25','/', invoices.invoice_no) when  invoice_type= 2 then concat('CRM/','24-25','/', invoices.invoice_no) else concat('AMC/','24-25','/', invoices.invoice_no) end as invoice_no, store_address, store_city, store_state, gstin_no, email_id, pan_no, contact_number, amount, tax_amount, tax_rate, gst_st_code, 	descriptions,pin_code, invoice_type");
         $this->db->from("invoices");
         $this->db->join("stores", "stores.id=invoices.store_id", "left");
         $this->db->where('is_sync', 0);
@@ -29,7 +29,7 @@ class Api_model extends CI_Model
 
     public function get_all_payment()
     {
-        $this->db->select("vouchers.id, amount as net_amount, store_name, create_date as voucher_date, firm_name, store_state, concat('TD/','23-24','/', vouchers.id) as voucher_no, store_address, store_city, store_state, gstin_no, email_id, pan_no, contact_number, amount, 12 as tax_amount, 18 as tax_rate, gst_st_code, descriptions,pin_code, voucher_type");
+        $this->db->select("vouchers.id, amount as net_amount, store_name, create_date as voucher_date, firm_name, store_state, concat('TD/','24-25','/', vouchers.id) as voucher_no, store_address, store_city, store_state, gstin_no, email_id, pan_no, contact_number, amount, 12 as tax_amount, 18 as tax_rate, gst_st_code, descriptions,pin_code, voucher_type");
         $this->db->from("vouchers");
         $this->db->join("stores", "stores.id=vouchers.store_id", "left");
         $this->db->where('is_sync', 0);

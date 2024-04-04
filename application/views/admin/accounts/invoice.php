@@ -123,11 +123,11 @@ body {
                 <td colspan="2" style="vertical-align:top">
                     <p><span style="font-size:9pt;font-family:Calibri,Arial;">:
                             <?php if ($invoice->invoice_type == '1') {
-                                echo 'AMC/23-24/' . $invoice->invoiceno;
+                                echo 'AMC/24-25/' . $invoice->invoiceno;
                             } else if ($invoice->invoice_type == '2') {
-                                echo 'CRM/23-24/' . $invoice->invoiceno;
+                                echo 'CRM/24-25/' . $invoice->invoiceno;
                             } else {
-                                echo 'TD/23-24/' . $invoice->invoiceno;
+                                echo 'TD/24-25/' . $invoice->invoiceno;
                             } ?>
 
                         </span></p>

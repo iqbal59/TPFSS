@@ -209,7 +209,7 @@ class Accounts_model extends CI_Model
     public function getInvoiceNo()
     {
         $invoice_no = 1;
-        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where invoice_type=0 and date(invoice_date) >= '2023-04-01'")->row();
+        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where invoice_type=0 and date(invoice_date) >= '2024-04-01'")->row();
         if ($invoiceData->invoice_no) {
             $invoice_no += $invoiceData->invoice_no;
         }
@@ -220,7 +220,7 @@ class Accounts_model extends CI_Model
     public function getAMCInvoiceNo()
     {
         $invoice_no = 1;
-        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where invoice_type=1 and date(invoice_date) >= '2023-04-01'")->row();
+        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where invoice_type=1 and date(invoice_date) >= '2024-04-01'")->row();
         if ($invoiceData->invoice_no) {
             $invoice_no += $invoiceData->invoice_no;
         }
@@ -231,7 +231,7 @@ class Accounts_model extends CI_Model
     public function getCRMInvoiceNo()
     {
         $invoice_no = 1;
-        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where invoice_type=2 and date(invoice_date) >= '2023-04-01'")->row();
+        $invoiceData = $this->db->query("select max(invoice_no) as invoice_no from invoices where invoice_type=2 and date(invoice_date) >= '2024-04-01'")->row();
         if ($invoiceData->invoice_no) {
             $invoice_no += $invoiceData->invoice_no;
         }
@@ -241,8 +241,16 @@ class Accounts_model extends CI_Model
 
     public function select_max_serial_no()
     {
-        $this->db->select_max('serial_no');
-        return $this->db->get('vouchers')->row()->serial_no;
+        // $this->db->select_max('serial_no');
+        // return $this->db->get('vouchers')->row()->serial_no;
+
+        $serial_no = 1;
+        $voucherData = $this->db->query("select max(serial_no) as serial_no from vouchers where voucher_type='C' and date(create_date) >= '2024-04-01'")->row();
+        if ($voucherData->serial_no) {
+            $serial_no += $voucherData->serial_no;
+        }
+
+        return $serial_no;
     }
 
     public function refundInvoice($data)
