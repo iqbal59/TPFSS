@@ -100,7 +100,7 @@ class Accounts extends CI_Controller
 
     public function refundAdjust()
     {
-        $this->Common_model->refundAdjust('2024-03-11', '2024-03-17');
+        $this->Common_model->refundAdjust('2024-03-18', '2024-03-24');
         $data['main_content'] = $this->load->view('admin/accounts/refund', null, true);
         $this->load->view('admin/index', $data);
     }
@@ -1031,7 +1031,7 @@ class Accounts extends CI_Controller
         // output the HTML content
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        if (!empty ($saleInvoice)) {
+        if (!empty($saleInvoice)) {
             foreach ($saleInvoice as $sv) {
                 $pdf->lastPage();
                 $pdf->AddPage();
@@ -1097,7 +1097,7 @@ class Accounts extends CI_Controller
 
         //Paytm
 
-        if (!empty ($paytmR)) {
+        if (!empty($paytmR)) {
             foreach ($paytmR as $sv) {
                 $pdf->lastPage();
                 $pdf->AddPage();
@@ -1137,7 +1137,7 @@ class Accounts extends CI_Controller
 
         //Bharate Pe
 
-        if (!empty ($bharatpeR)) {
+        if (!empty($bharatpeR)) {
             foreach ($bharatpeR as $sv) {
                 $pdf->lastPage();
                 $pdf->AddPage();
@@ -1373,7 +1373,7 @@ class Accounts extends CI_Controller
         // output the HTML content
         $pdf->writeHTML($html, true, false, true, false, '');
 
-        if (!empty ($saleInvoice)) {
+        if (!empty($saleInvoice)) {
             foreach ($saleInvoice as $sv) {
                 $pdf->lastPage();
                 $pdf->AddPage();
@@ -1435,7 +1435,7 @@ class Accounts extends CI_Controller
 
         //Paytm
 
-        if (!empty ($paytmR)) {
+        if (!empty($paytmR)) {
             foreach ($paytmR as $sv) {
                 $pdf->lastPage();
                 $pdf->AddPage();
@@ -1475,7 +1475,7 @@ class Accounts extends CI_Controller
 
         //Bharate Pe
 
-        if (!empty ($bharatpeR)) {
+        if (!empty($bharatpeR)) {
             foreach ($bharatpeR as $sv) {
                 $pdf->lastPage();
                 $pdf->AddPage();
