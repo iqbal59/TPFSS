@@ -446,35 +446,37 @@ class Api extends REST_Controller
 
         $journals = array();
         foreach ($tallyData->result as $item) {
-            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_entries[0]->ledger_name));
+            foreach ($item->ledger_entries as $le) {
+                $storeCode = $this->store_model->get_store_by_firm_name(trim($le->ledger_name));
+                if (!$storeCode)
+                    continue;
+                // $amount = 0;
+                if ($le->Dr_Cr == 'Dr')
+                    $amount = '-' . str_replace(',', '', $le->ledger_amt);
+                else
+                    $amount = str_replace(',', '', $le->ledger_amt);
 
-            // $amount = 0;
-            if ($item->ledger_entries[0]->Dr_Cr == 'Dr')
-                $amount = '-' . str_replace(',', '', $item->ledger_entries[0]->ledger_amt);
-            else
-                $amount = str_replace(',', '', $item->ledger_entries[0]->ledger_amt);
+                $data = array(
+                    'voucher_type' => 'R',
+                    'store_id' => $storeCode['id'],
+                    'amount' => $amount,
+                    'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
+                    'descriptions' => $item->narration,
+                    'voucher_no' => $item->voucher_no,
+                    'is_sync' => 1,
+                    'created_by' => 2
+                );
 
-            $data = array(
-                'voucher_type' => 'R',
-                'store_id' => $storeCode['id'],
-                'amount' => $amount,
-                'create_date' => date('Y-m-d H:i:s', strtotime($item->voucher_date)),
-                'descriptions' => $item->narration,
-                'voucher_no' => $item->voucher_no,
-                'is_sync' => 1,
-                'created_by' => 2
-            );
+                $journal['voucher_no'] = $item->voucher_no;
+                $journal['id'] = $item->id;
+                if ($this->Voucher_model->add_model('vouchers', $data) > 0) {
+                    $journal['syncstatus'] = true;
+                } else {
+                    $journal['syncstatus'] = false;
+                }
 
-            $journal['voucher_no'] = $item->voucher_no;
-            $journal['id'] = $item->id;
-            if ($this->Voucher_model->add_model('vouchers', $data) > 0) {
-                $journal['syncstatus'] = true;
-            } else {
-                $journal['syncstatus'] = false;
+                array_push($journals, $journal);
             }
-
-            array_push($journals, $journal);
-
         }
 
         $response['result'] = $journals;
