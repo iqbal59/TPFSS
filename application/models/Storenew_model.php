@@ -38,6 +38,14 @@ class Storenew_model extends CI_Model
         return $q->row();
     }
 
+
+    public function getDetailsByStoreCode($storeCode)
+    {
+        $sql = "select stores_new.*, states.name as state_name from stores_new left join states on (stores_new.firm_state=states.id) where 1 and stores_new.store_crm_code ='" . $storeCode . "'";
+        $q = $this->db->query($sql);
+        return $q->row();
+    }
+
     public function viewtblrow($id)
     {
         // echo "select * from stores_new left join states on states.id = stores_new.firm_state where stores_new.id=$id";

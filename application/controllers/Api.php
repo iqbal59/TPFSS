@@ -11,6 +11,7 @@ class Api extends REST_Controller
         $this->load->model('api_model');
         $this->load->model('Voucher_model');
         $this->load->model('store_model');
+        $this->load->model('storenew_model');
         $this->load->library('form_validation');
         header('Content-Type: application/json');
     }
@@ -210,6 +211,28 @@ class Api extends REST_Controller
             }
         }
 
+    }
+
+    public function get_machine_details_by_storecode_get($store_code)
+    {
+        //echo "sdfd";
+
+
+        $data = $this->storenew_model->getDetailsByStoreCode($store_code);
+
+        echo "Store Code: " . $data->store_crm_code . "\n";
+
+        echo "Machine Details\n";
+
+        $machineInfo = json_decode($data->machine_info);
+
+        foreach ($machineInfo as $m) {
+
+            echo "Model No. " . $m->model . " Supplier: " . $m->supplier . " Brand: " . $m->brand . " Machine: " . $m->machine . " Serial No.:" . $m->serial . "\n";
+        }
+        return;
+
+        // return $response = json_decode($response);
     }
 
     private function get_license_by_qdc($store_code = null)
