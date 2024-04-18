@@ -683,6 +683,22 @@ class Accounts extends CI_Controller
     public function invoicepdf($id)
     {
         $data['invoice'] = $this->Accounts_model->get_invoice_by_id($id);
+
+        // print_r($data['invoice']);
+
+        $today = new DateTime($data['invoice']->invoice_date);
+        $currentMonth = (int) $today->format('n'); // Get the current month (1 to 12)
+        $currentYear = (int) $today->format('Y'); // Get the current year
+
+        // Check if the current month is April (4) or later
+        // If yes, then the financial year starts from the current year, else it starts from last year
+        $startYear = $currentMonth >= 4 ? $currentYear : $currentYear - 1;
+
+        // Financial year format: April of startYear to March of startYear+1
+        $financialYearStart = new DateTime("$startYear-04-01");
+        $financialYearEnd = new DateTime(($startYear + 1) . "-03-31");
+
+        $data['financialYear'] = $financialYearStart->format('y') . '-' . $financialYearEnd->format('y');
         $data['invoiceitems'] = $this->Accounts_model->get_invoice_item_by_id($id);
         $this->load->view('admin/accounts/invoice', $data);
     }
