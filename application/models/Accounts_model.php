@@ -276,7 +276,7 @@ class Accounts_model extends CI_Model
             }
             $tax_amount = $total_amount * 18 / 100;
             $net_amount = $total_amount + $tax_amount;
-            $this->db->insert("vouchers", array("amount" => $net_amount, "voucher_type" => 'C', "descriptions" => $order_string, "store_id" => $store_id, "serial_no" => $this->select_max_serial_no() + 1));
+            $this->db->insert("vouchers", array("amount" => $net_amount, "voucher_type" => 'C', "descriptions" => $order_string, "store_id" => $store_id, "serial_no" => $this->select_max_serial_no()));
         }
     }
 
