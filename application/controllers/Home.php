@@ -1,4 +1,4 @@
-<?php if (! defined('BASEPATH')) {
+<?php if (!defined('BASEPATH')) {
     exit('No direct script access allowed');
 }
 
@@ -24,6 +24,67 @@ class Home extends CI_Controller
     }
 
 
+    public function viewbyaadhar()
+    {
+        check_login_partner();
+
+        $aadhar_no = trim($this->input->get("aadhar_no"));
+
+
+
+
+        $data = array();
+
+
+        $flg = 0;
+
+        if ($aadhar_no) {
+            $ch = curl_init();
+            $url = 'https://tms.simplifytumbledry.in/api/viewbyaadharapi';
+            $data = array(
+                'aadhar_no' => $aadhar_no
+            );
+
+            // Append data to URL
+            $url .= '?' . http_build_query($data);
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+            // Execute cURL session
+            $response = curl_exec($ch);
+
+            // Check for errors
+            if ($response === false) {
+                $error = curl_error($ch);
+                // Handle error
+            } else {
+                // Handle response
+                // echo $response;
+            }
+
+            // Close cURL session
+            curl_close($ch);
+
+            $response = json_decode($response);
+            $student = $response->s;
+            $studentDetails = $response->studentDetails;
+            $flg = 1;
+            $salary = $response->salary;
+
+
+        }
+
+
+
+        $data['page'] = 'simplify tumbledry| Manpower';
+        $data['s'] = $student;
+        $data['studentDetails'] = $studentDetails;
+        $data['flg'] = $flg;
+        $data['salary'] = $salary;
+        $this->load->view('manpower', $data);
+    }
+
     public function login()
     {
         $data = array();
@@ -34,10 +95,10 @@ class Home extends CI_Controller
     public function profile()
     {
         check_login_partner();
-        $id=$this->session->userdata('id');
+        $id = $this->session->userdata('id');
         $data = array();
         $data['page'] = 'Profile';
-        $data['storeData']=$this->store_model->get_store($id);
+        $data['storeData'] = $this->store_model->get_store($id);
 
 
         if (isset($data['storeData']['id'])) {
@@ -64,7 +125,7 @@ class Home extends CI_Controller
                     $this->session->set_flashdata('error_msg', 'Current Passoword is Wrong');
                     redirect('home/profile');
                 }
-            //echo $this->db->last_query();
+                //echo $this->db->last_query();
             } else {
                 // $data['main_content'] = $this->load->view('partner/profile', $data, true);
                 $this->load->view('profile', $data);
@@ -98,10 +159,10 @@ class Home extends CI_Controller
                     $data = array(
                         'id' => $row->id,
                         'name' => $row->firm_name,
-                        'email' =>$row->email_id,
-                        'code' =>$row->store_crm_code,
+                        'email' => $row->email_id,
+                        'code' => $row->store_crm_code,
                         'psw' => base64_encode($this->input->post('password')),
-                        'role' =>'user',
+                        'role' => 'user',
                         'is_partner_login' => true
                     );
                     $this->session->set_userdata($data);
@@ -181,17 +242,17 @@ class Home extends CI_Controller
 
     public function check_login()
     {
-        $url='';
+        $url = '';
         if ($this->session->userdata('is_partner_login') == true) {
-            if ($this->input->post('url')=='fss') {
+            if ($this->input->post('url') == 'fss') {
                 $url = base_url('partner/dashboard');
-            } elseif ($this->input->post('url')=='order') {
-                $url = "https://orderattumbledry.in/partner/log/".$this->session->userdata('code')."/".$this->session->userdata('psw');
+            } elseif ($this->input->post('url') == 'order') {
+                $url = "https://orderattumbledry.in/partner/log/" . $this->session->userdata('code') . "/" . $this->session->userdata('psw');
             }
-            echo json_encode(array('st'=>1, 'url'=>$url));
+            echo json_encode(array('st' => 1, 'url' => $url));
         } //--success
         else {
-            echo json_encode(array('st'=>0));
+            echo json_encode(array('st' => 0));
         } //-- error
     }
 }
