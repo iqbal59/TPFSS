@@ -661,7 +661,8 @@ class Accounts extends CI_Controller
     public function createCrmInvoices()
     {
         // check_login_user();
-
+        if (date('w') != 4)
+            return;
         $data['stores'] = $this->Store_model->get_all_store_have_to_renewal();
         //$data['stores'] = $this->Store_model->get_all_store_have_to_temp_renewal();
         // print_r($data['stores']);
