@@ -624,28 +624,33 @@ class Accounts extends CI_Controller
     //Create AMC Invoice
 
 
-    public function createAmcInvoices($from_date, $to_date)
+    public function createAmcInvoices()
     {
+        //$from_date, $to_date
+        if (date('w') != 4)
+            return;
+        echo $from_date = date('Y-m-d', strtotime('next monday'));
+        echo $to_date = date('Y-m-d', strtotime('+6 days', strtotime($from_date)));
         // check_login_user();
 
-        $data['stores'] = $this->Store_model->get_all_amc_store();
-        // print_r($data['stores']);
+        // $data['stores'] = $this->Store_model->get_all_amc_store();
+        // // print_r($data['stores']);
 
-        foreach ($data['stores'] as $s) {
-            if (!$s['id']) {
-                continue;
-            }
+        // foreach ($data['stores'] as $s) {
+        //     if (!$s['id']) {
+        //         continue;
+        //     }
 
-            $item = array('amount' => 580, 'service_code' => '', 'store_royalty' => 0, 'order_ids' => "", 'item_name' => 'AMC Charges', 'rate' => 580);
+        //     $item = array('amount' => 580, 'service_code' => '', 'store_royalty' => 0, 'order_ids' => "", 'item_name' => 'AMC Charges', 'rate' => 580);
 
-            $data['invoice'][$s['id']][] = $item;
-        }
+        //     $data['invoice'][$s['id']][] = $item;
+        // }
 
-        if (!is_array($data['invoice'])) {
-            $data['invoice'] = array();
-        }
-        $data['period'] = date('d-m-Y', strtotime($from_date)) . " to " . date('d-m-Y', strtotime($to_date));
-        $this->Accounts_model->saveAMCInvoice($data['invoice'], $data['period']);
+        // if (!is_array($data['invoice'])) {
+        //     $data['invoice'] = array();
+        // }
+        // $data['period'] = date('d-m-Y', strtotime($from_date)) . " to " . date('d-m-Y', strtotime($to_date));
+        // $this->Accounts_model->saveAMCInvoice($data['invoice'], $data['period']);
 
     }
 
