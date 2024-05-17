@@ -5,24 +5,24 @@ class Common_model extends CI_Model
     /********Sale Data logic*******/
     public function saleRefund($from_dt, $to_dt)
     {
-        $sql="insert into refundsales(order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill, customer_id) select order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill, customer_id from storesales where date(order_date) between '".$from_dt."' and '".$to_dt."' and is_bill=1";
-        $query=$this->db->query($sql);
-        $query=$this->db->query("delete from storesales where  date(order_date) between '".$from_dt."' and '".$to_dt."'");
+        $sql = "insert into refundsales(order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill, customer_id) select order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, is_bill, customer_id from storesales where date(order_date) between '" . $from_dt . "' and '" . $to_dt . "' and is_bill=1";
+        $query = $this->db->query($sql);
+        $query = $this->db->query("delete from storesales where  date(order_date) between '" . $from_dt . "' and '" . $to_dt . "'");
         return $query;
     }
 
 
     public function refundAdjust($from_dt, $to_dt)
     {
-        $sql="select * from (SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `refundsales` WHERE 1 and date(order_date) BETWEEN '".$from_dt."' and '".$to_dt."' and is_refund=0
+        $sql = "select * from (SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `refundsales` WHERE 1 and date(order_date) BETWEEN '" . $from_dt . "' and '" . $to_dt . "' and is_refund=0
     union all 
-    SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `storesales` WHERE 1 and date(order_date) BETWEEN '".$from_dt."' and '".$to_dt."' ) as temp
+    SELECT order_date, order_no, store_name, taxable_amount, net_amount, service_code FROM `storesales` WHERE 1 and date(order_date) BETWEEN '" . $from_dt . "' and '" . $to_dt . "' ) as temp
     group by order_no, store_name, taxable_amount, net_amount, service_code HAVING count(*) > 1";
-        $query=$this->db->query($sql)->result_array();
+        $query = $this->db->query($sql)->result_array();
         foreach ($query as $row) {
-            $linequery="update storesales set is_bill='1' where order_no='".$row['order_no']."' and store_name='".$row['store_name']."'";
+            $linequery = "update storesales set is_bill='1' where order_no='" . $row['order_no'] . "' and store_name='" . $row['store_name'] . "'";
             $this->db->query($linequery);
-            $linequery="delete from refundsales where order_no='".$row['order_no']."' and store_name='".$row['store_name']."'";
+            $linequery = "delete from refundsales where order_no='" . $row['order_no'] . "' and store_name='" . $row['store_name'] . "'";
             $this->db->query($linequery);
         }
     }
@@ -33,8 +33,8 @@ class Common_model extends CI_Model
 
     public function getMidNo($order_no, $mobile_no, $customer_id)
     {
-        $sql="SELECT storesales.store_name, stores.paytm_mid1 FROM `storesales` LEFT join stores on (storesales.store_name = stores.store_name) WHERE (order_no='".$order_no."' and mobile_no='".$mobile_no."') or (order_no='".$order_no."' && storesales.customer_id='".$customer_id."') or storesales.customer_id='".$customer_id."'  order by order_date desc limit 0,1";
-        $query=$this->db->query($sql)->row_array();
+        $sql = "SELECT storesales.store_name, stores.paytm_mid1 FROM `storesales` LEFT join stores on (storesales.store_name = stores.store_name) WHERE (order_no='" . $order_no . "' and mobile_no='" . $mobile_no . "') or (order_no='" . $order_no . "' && storesales.customer_id='" . $customer_id . "') or storesales.customer_id='" . $customer_id . "'  order by order_date desc limit 0,1";
+        $query = $this->db->query($sql)->row_array();
         return $query['paytm_mid1'];
     }
     /***********END MID NO */
@@ -42,8 +42,8 @@ class Common_model extends CI_Model
 
     public function getStoreId($store_crm_code)
     {
-        $sql="SELECT id FROM `stores`  WHERE store_crm_code='".$store_crm_code."'";
-        $query=$this->db->query($sql)->row_array();
+        $sql = "SELECT id FROM `stores`  WHERE store_crm_code='" . $store_crm_code . "'";
+        $query = $this->db->query($sql)->row_array();
         return $query['id'];
     }
 
@@ -55,47 +55,47 @@ class Common_model extends CI_Model
 
 
 
-    public function getPaytmData($f_dt, $t_dt, $store_id=null)
+    public function getPaytmData($f_dt, $t_dt, $store_id = null)
     {
-        $sql_search='';
+        $sql_search = '';
         if ($store_id != null) {
-            $sql_search=" and stores.id=".$store_id;
+            $sql_search = " and stores.id=" . $store_id;
         }
-        $query = $this->db->query("SELECT * FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) where 1  $sql_search and date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."'  order by transaction_date DESC")->result_array();
+        $query = $this->db->query("SELECT * FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) where 1  $sql_search and date(transaction_date) >= '" . $f_dt . "' and date(transaction_date) <= '" . $t_dt . "'  order by transaction_date DESC")->result_array();
         return $query;
     }
 
 
-    public function getPaytmDataMonthly($f_dt, $t_dt, $store_id=null)
+    public function getPaytmDataMonthly($f_dt, $t_dt, $store_id = null)
     {
-        $sql_search='';
+        $sql_search = '';
         if ($store_id != null) {
-            $sql_search=" and stores.id=".$store_id;
+            $sql_search = " and stores.id=" . $store_id;
         }
-        $query = $this->db->query("SELECT date_format(transaction_date, '%b %Y') as m, sum(amount) as total_amt FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) where 1  $sql_search and date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."' and is_reconcile=1 group by month(transaction_date), year(transaction_date) order by transaction_date desc")->result_array();
+        $query = $this->db->query("SELECT date_format(transaction_date, '%b %Y') as m, sum(amount) as total_amt FROM `paytm` LEFT join stores on(paytm.mid_no=stores.paytm_mid1 or paytm.mid_no=stores.paytm_mid2 or paytm.mid_no=stores.paytm_mid3) where 1  $sql_search and date(transaction_date) >= '" . $f_dt . "' and date(transaction_date) <= '" . $t_dt . "' and is_reconcile=1 group by month(transaction_date), year(transaction_date) order by transaction_date desc")->result_array();
         return $query;
     }
 
 
-    public function getBharatPeData($f_dt, $t_dt, $store_id=null)
+    public function getBharatPeData($f_dt, $t_dt, $store_id = null)
     {
-        $sql_search='';
+        $sql_search = '';
         if ($store_id != null) {
-            $sql_search=" and stores.id=".$store_id;
+            $sql_search = " and stores.id=" . $store_id;
         }
-        $query = $this->db->query("SELECT * FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) where 1 $sql_search and date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."' order by transaction_date DESC")->result_array();
+        $query = $this->db->query("SELECT * FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) where 1 $sql_search and date(transaction_date) >= '" . $f_dt . "' and date(transaction_date) <= '" . $t_dt . "' order by transaction_date DESC")->result_array();
         return $query;
     }
 
 
 
-    public function getBharatPeDataMonthly($f_dt, $t_dt, $store_id=null)
+    public function getBharatPeDataMonthly($f_dt, $t_dt, $store_id = null)
     {
-        $sql_search='';
+        $sql_search = '';
         if ($store_id != null) {
-            $sql_search=" and stores.id=".$store_id;
+            $sql_search = " and stores.id=" . $store_id;
         }
-        $query = $this->db->query("SELECT date_format(transaction_date, '%b %Y') as m, sum(amount) as total_amt FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) where 1 $sql_search and date(transaction_date) >= '".$f_dt."' and date(transaction_date) <= '".$t_dt."' and is_reconcile=1 group by month(transaction_date), year(transaction_date) order by transaction_date desc")->result_array();
+        $query = $this->db->query("SELECT date_format(transaction_date, '%b %Y') as m, sum(amount) as total_amt FROM `bharatpe` LEFT join stores on(bharatpe.store_name=stores.bharatpay_id) where 1 $sql_search and date(transaction_date) >= '" . $f_dt . "' and date(transaction_date) <= '" . $t_dt . "' and is_reconcile=1 group by month(transaction_date), year(transaction_date) order by transaction_date desc")->result_array();
         return $query;
     }
 
@@ -109,18 +109,18 @@ class Common_model extends CI_Model
 
     public function getSaleOrderData($param)
     {
-        $sql='SELECT * FROM storesales LEFT join stores on(storesales.store_name=stores.store_name) where date(order_date) between \''.$param['from_dt'].'\'  and \''.$param['to_dt'].'\' order by order_date DESC';
+        $sql = 'SELECT * FROM storesales LEFT join stores on(storesales.store_name=stores.store_name) where date(order_date) between \'' . $param['from_dt'] . '\'  and \'' . $param['to_dt'] . '\' order by order_date DESC';
         $query = $this->db->query($sql)->result_array();
         return $query;
     }
 
     public function getSaleBillOrderData($param)
     {
-        $condition=date('d-m-Y', strtotime($param['from_dt']));
-        $condition.=" to ".date('d-m-Y', strtotime($param['to_dt']));
+        $condition = date('d-m-Y', strtotime($param['from_dt']));
+        $condition .= " to " . date('d-m-Y', strtotime($param['to_dt']));
 
-        $query=$this->db->query('CALL gt_orders_by_fss(?)', array('period'=>$condition));
-        $res=$query->result_array();
+        $query = $this->db->query('CALL gt_orders_by_fss(?)', array('period' => $condition));
+        $res = $query->result_array();
         mysqli_next_result($this->db->conn_id);
 
         $query->free_result();
@@ -130,14 +130,14 @@ class Common_model extends CI_Model
 
     public function getBillOrderData($param, $store_name)
     {
-        $sql="select * from storesales  left join stores on (storesales.store_name=stores.store_name) where storesales.store_name='".$store_name."' and order_no in ($param)";
+        $sql = "select * from storesales  left join stores on (storesales.store_name=stores.store_name) where storesales.store_name='" . $store_name . "' and order_no in ($param)";
         $query = $this->db->query($sql)->result_array();
         return $query;
     }
 
     public function getCreditOrderData($param)
     {
-        $sql='SELECT * FROM refundsales LEFT join stores on(refundsales.store_name=stores.store_name) where date(refund_date) between \''.$param['from_dt'].'\'  and \''.$param['to_dt'].'\' and is_refund=1 order by refund_date DESC';
+        $sql = 'SELECT * FROM refundsales LEFT join stores on(refundsales.store_name=stores.store_name) where date(refund_date) between \'' . $param['from_dt'] . '\'  and \'' . $param['to_dt'] . '\' and is_refund=1 order by refund_date DESC';
         $query = $this->db->query($sql)->result_array();
         return $query;
     }
@@ -147,8 +147,8 @@ class Common_model extends CI_Model
     {
         // foreach($params as $key => $value){
 
-        $query="insert into storesales (order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, mobile_no, customer_id)values('$param[order_date]', '$param[order_no]', '$param[store_name]', '$param[taxable_amount]', '$param[net_amount]', '$param[service_code]', '$param[status]', '$param[mobile_no]', '$param[customer_id]') on duplicate key update 
-            taxable_amount='".$param['taxable_amount']."', net_amount='".$param['net_amount']."', service_code='".$param['service_code']."', status='".$param['status']."', customer_id='".$param['customer_id']."'";
+        $query = "insert into storesales (order_date, order_no, store_name, taxable_amount, net_amount, service_code, status, mobile_no, customer_id)values('$param[order_date]', '$param[order_no]', '$param[store_name]', '$param[taxable_amount]', '$param[net_amount]', '$param[service_code]', '$param[status]', '$param[mobile_no]', '$param[customer_id]') on duplicate key update 
+            taxable_amount='" . $param['taxable_amount'] . "', net_amount='" . $param['net_amount'] . "', service_code='" . $param['service_code'] . "', status='" . $param['status'] . "', customer_id='" . $param['customer_id'] . "'";
         $this->db->query($query);
         // }
     }
@@ -156,14 +156,14 @@ class Common_model extends CI_Model
 
     public function matchPaytmWithBank()
     {
-        $query="select paytmdata.amount, utr_no, (commission + gst) as fc, (paytmdata.amount-commission-gst) as ba, bank_paytm.amount as bta  from (SELECT sum(paytm.amount) as amount, utr_no, sum(commission) as commission, sum(gst) as gst  FROM `paytm` WHERE 1 and paytm.is_reconcile=0 group by utr_no) as paytmdata left join bank_paytm on (bank_paytm.ref_no=paytmdata.utr_no)";
+        $query = "select paytmdata.amount, utr_no, (commission + gst) as fc, (paytmdata.amount-commission-gst) as ba, bank_paytm.amount as bta  from (SELECT sum(paytm.amount) as amount, utr_no, sum(commission) as commission, sum(gst) as gst  FROM `paytm` WHERE 1 and paytm.is_reconcile=0 group by utr_no) as paytmdata left join bank_paytm on (bank_paytm.ref_no=paytmdata.utr_no)";
 
         return $this->db->query($query)->result_array();
     }
 
     public function paytmReconcile($utr_no)
     {
-        $query="update paytm set is_reconcile=1 where utr_no='$utr_no'";
+        $query = "update paytm set is_reconcile=1 where utr_no='$utr_no'";
         $this->db->query($query);
     }
 
@@ -175,19 +175,19 @@ class Common_model extends CI_Model
 
     public function bharatpeReconcile($utr_no)
     {
-        $query="update bharatpe set is_reconcile=1 where utr_no='$utr_no'";
+        $query = "update bharatpe set is_reconcile=1 where utr_no='$utr_no'";
         $this->db->query($query);
     }
 
     public function bharatpebill($ids)
     {
-        $query="update bharatpe set is_bill=1 where id in($ids)";
+        $query = "update bharatpe set is_bill=1 where id in($ids)";
         $this->db->query($query);
     }
 
     public function paytmbill($ids)
     {
-        $query="update paytm set is_bill=1 where id in($ids)";
+        $query = "update paytm set is_bill=1 where id in($ids)";
         $this->db->query($query);
     }
 
@@ -199,12 +199,12 @@ class Common_model extends CI_Model
         return $this->db->count_all_results();
     }
 
-    public function get_all_by_table($table, $params = array(), $order_by=array())
+    public function get_all_by_table($table, $params = array(), $order_by = array())
     {
-        if($order_by)
-        $this->db->order_by($order_by['field'], $order_by['order']);
+        if ($order_by)
+            $this->db->order_by($order_by['field'], $order_by['order']);
         else
-        $this->db->order_by('id', 'desc');
+            $this->db->order_by('id', 'desc');
         if (isset($params) && !empty($params)) {
             $this->db->limit($params['limit'], $params['offset']);
         }
@@ -214,14 +214,14 @@ class Common_model extends CI_Model
 
     public function get_activity_header($project_type)
     {
-        
-        return $this->db->query("select * from activities where project_type='".$project_type."' group by header")->result();
+
+        return $this->db->query("select * from activities where project_type='" . $project_type . "' group by header")->result();
     }
 
 
     public function get_material_by_id($id)
     {
-        return $this->db->get_where('material_invoices', array('id'=>$id))->row_array();
+        return $this->db->get_where('material_invoices', array('id' => $id))->row_array();
     }
 
 
@@ -268,7 +268,7 @@ class Common_model extends CI_Model
 
     public function updateStoreOpenBalance($store_id, $open_bal)
     {
-        $query="update stores set opening_balance=$open_bal where store_crm_code='".$store_id."'";
+        $query = "update stores set opening_balance=$open_bal where store_crm_code='" . $store_id . "'";
         $this->db->query($query);
     }
 
@@ -449,11 +449,11 @@ class Common_model extends CI_Model
     public function upload_image($max_size)
     {
         //-- set upload path
-        $config['upload_path']  = "./assets/images/";
-        $config['allowed_types']= 'gif|jpg|png|jpeg';
-        $config['max_size']     = '92000';
-        $config['max_width']    = '92000';
-        $config['max_height']   = '92000';
+        $config['upload_path'] = "./assets/images/";
+        $config['allowed_types'] = 'gif|jpg|png|jpeg';
+        $config['max_size'] = '92000';
+        $config['max_width'] = '92000';
+        $config['max_height'] = '92000';
 
         $this->load->library('upload', $config);
 
@@ -461,76 +461,76 @@ class Common_model extends CI_Model
             $data = $this->upload->data();
 
             //-- set upload path
-            $source             = "./assets/images/".$data['file_name'] ;
-            $destination_thumb  = "./assets/images/thumbnail/" ;
-            $destination_medium = "./assets/images/medium/" ;
+            $source = "./assets/images/" . $data['file_name'];
+            $destination_thumb = "./assets/images/thumbnail/";
+            $destination_medium = "./assets/images/medium/";
             $main_img = $data['file_name'];
             // Permission Configuration
-            chmod($source, 0777) ;
+            chmod($source, 0777);
 
             /* Resizing Processing */
             // Configuration Of Image Manipulation :: Static
-            $this->load->library('image_lib') ;
+            $this->load->library('image_lib');
             $img['image_library'] = 'GD2';
-            $img['create_thumb']  = true;
-            $img['maintain_ratio']= true;
+            $img['create_thumb'] = true;
+            $img['maintain_ratio'] = true;
 
             /// Limit Width Resize
-            $limit_medium   = $max_size ;
-            $limit_thumb    = 200 ;
+            $limit_medium = $max_size;
+            $limit_thumb = 200;
 
             // Size Image Limit was using (LIMIT TOP)
-            $limit_use  = $data['image_width'] > $data['image_height'] ? $data['image_width'] : $data['image_height'] ;
+            $limit_use = $data['image_width'] > $data['image_height'] ? $data['image_width'] : $data['image_height'];
 
             // Percentase Resize
             if ($limit_use > $limit_medium || $limit_use > $limit_thumb) {
-                $percent_medium = $limit_medium/$limit_use ;
-                $percent_thumb  = $limit_thumb/$limit_use ;
+                $percent_medium = $limit_medium / $limit_use;
+                $percent_thumb = $limit_thumb / $limit_use;
             }
 
             //// Making THUMBNAIL ///////
-            $img['width']  = $limit_use > $limit_thumb ? $data['image_width'] * $percent_thumb : $data['image_width'] ;
-            $img['height'] = $limit_use > $limit_thumb ? $data['image_height'] * $percent_thumb : $data['image_height'] ;
+            $img['width'] = $limit_use > $limit_thumb ? $data['image_width'] * $percent_thumb : $data['image_width'];
+            $img['height'] = $limit_use > $limit_thumb ? $data['image_height'] * $percent_thumb : $data['image_height'];
 
             // Configuration Of Image Manipulation :: Dynamic
-            $img['thumb_marker'] = '_thumb-'.floor($img['width']).'x'.floor($img['height']) ;
-            $img['quality']      = ' 100%' ;
-            $img['source_image'] = $source ;
-            $img['new_image']    = $destination_thumb ;
+            $img['thumb_marker'] = '_thumb-' . floor($img['width']) . 'x' . floor($img['height']);
+            $img['quality'] = ' 100%';
+            $img['source_image'] = $source;
+            $img['new_image'] = $destination_thumb;
 
-            $thumb_nail = $data['raw_name']. $img['thumb_marker'].$data['file_ext'];
+            $thumb_nail = $data['raw_name'] . $img['thumb_marker'] . $data['file_ext'];
             // Do Resizing
             $this->image_lib->initialize($img);
             $this->image_lib->resize();
-            $this->image_lib->clear() ;
+            $this->image_lib->clear();
 
             ////// Making MEDIUM /////////////
-            $img['width']   = $limit_use > $limit_medium ? $data['image_width'] * $percent_medium : $data['image_width'] ;
-            $img['height']  = $limit_use > $limit_medium ? $data['image_height'] * $percent_medium : $data['image_height'] ;
+            $img['width'] = $limit_use > $limit_medium ? $data['image_width'] * $percent_medium : $data['image_width'];
+            $img['height'] = $limit_use > $limit_medium ? $data['image_height'] * $percent_medium : $data['image_height'];
 
             // Configuration Of Image Manipulation :: Dynamic
-            $img['thumb_marker'] = '_medium-'.floor($img['width']).'x'.floor($img['height']) ;
-            $img['quality']      = '100%' ;
-            $img['source_image'] = $source ;
-            $img['new_image']    = $destination_medium ;
+            $img['thumb_marker'] = '_medium-' . floor($img['width']) . 'x' . floor($img['height']);
+            $img['quality'] = '100%';
+            $img['source_image'] = $source;
+            $img['new_image'] = $destination_medium;
 
-            $mid = $data['raw_name']. $img['thumb_marker'].$data['file_ext'];
+            $mid = $data['raw_name'] . $img['thumb_marker'] . $data['file_ext'];
             // Do Resizing
             $this->image_lib->initialize($img);
             $this->image_lib->resize();
-            $this->image_lib->clear() ;
+            $this->image_lib->clear();
 
             //-- set upload path
-            $images = 'assets/images/medium/'.$mid;
-            $thumb  = 'assets/images/thumbnail/'.$thumb_nail;
-            unlink($source) ;
+            $images = 'assets/images/medium/' . $mid;
+            $thumb = 'assets/images/thumbnail/' . $thumb_nail;
+            unlink($source);
 
             return array(
-                    'images' => $images,
-                    'thumb' => $thumb
-                );
+                'images' => $images,
+                'thumb' => $thumb
+            );
         } else {
-            echo "Failed! to upload image" ;
+            echo "Failed! to upload image";
         }
     }
 }
