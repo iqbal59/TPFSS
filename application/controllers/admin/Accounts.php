@@ -100,7 +100,7 @@ class Accounts extends CI_Controller
 
     public function refundAdjust()
     {
-        $this->Common_model->refundAdjust('2024-06-24', '2024-06-30');
+        $this->Common_model->refundAdjust('2024-07-01', '2024-07-07');
         $data['main_content'] = $this->load->view('admin/accounts/refund', null, true);
         $this->load->view('admin/index', $data);
     }
@@ -244,12 +244,12 @@ class Accounts extends CI_Controller
         // SMTP configuration
         $mail->isSMTP();
 
-        $mail->Host = 'smtp.office365.com';
-        $mail->SMTPAuth = true;
-        $mail->Username = 'mis3@tumbledry.in';
-        $mail->Password = 'W#794077845027aw';
-        $mail->SMTPSecure = 'tls';
-        $mail->Port = 587;
+        // $mail->Host = 'smtp.office365.com';
+        // $mail->SMTPAuth = true;
+        // $mail->Username = 'mis3@tumbledry.in';
+        // $mail->Password = 'W#794077845027aw';
+        // $mail->SMTPSecure = 'tls';
+        // $mail->Port = 587;
         //$mail->SMTPDebug = 2;
         // $mail->Host     = 'mail.centuryfasteners.in';
         // $mail->SMTPAuth = true;
@@ -265,8 +265,21 @@ class Accounts extends CI_Controller
         // $mail->SMTPSecure = 'ssl';
         // $mail->Port     = 587;
 
-        $mail->setFrom('mis3@tumbledry.in', 'MIS');
-        $mail->addReplyTo('mis3@tumbledry.in', 'MIS');
+        // $mail->setFrom('mis3@tumbledry.in', 'MIS');
+        // $mail->addReplyTo('mis3@tumbledry.in', 'MIS');
+
+
+        $mail->Host = 'smtp.gmail.com';
+        $mail->SMTPAuth = true;
+        $mail->Username = 'fss@tumbledry.co.in';
+        $mail->Password = 'cvlbtyrmtezxjvua';
+        $mail->SMTPSecure = 'tls';
+        $mail->Port = 587;
+        // $mail->SMTPDebug = 2;
+
+
+        $mail->setFrom('fss@tumbledry.co.in', 'MIS');
+        $mail->addReplyTo('Vivek.Pant@tumbledry.in', 'tumbledry');
 
         // Add a recipient
         $mail->addAddress($to_address);
