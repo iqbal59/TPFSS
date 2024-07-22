@@ -791,7 +791,7 @@ class Api extends REST_Controller
 
         if ($s_from_date && $s_to_date) {
 
-            $stores = array('TS13', 'TS90', 'B004');
+            $stores = array('TS13', 'TS90', 'B004', 'T181', 'TS36');
 
             // print_r($stores);
 
