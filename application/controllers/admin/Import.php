@@ -51,7 +51,7 @@ class Import extends CI_Controller
                         $s_from_date = $this->input->post('s_from_date');
                         $s_to_date = $this->input->post('s_to_date');
 
-                        // $this->common_model->saleRefund($s_from_date, $s_to_date);
+                        $this->common_model->saleRefund($s_from_date, $s_to_date);
                         $row = 0;
                         while (($filesop = fgetcsv($handle, 1000, ",")) !== false) {
                             $odate = date('Y-m-d', strtotime($filesop[2]));
