@@ -496,7 +496,7 @@ class Api extends REST_Controller
 
         $invoices = array();
         foreach ($tallyData->result as $item) {
-            $storeCode = $this->store_model->get_store_by_firm_name(trim($item->ledger_details[0]->ledger_name));
+            $storeCode = $this->store_model->get_store_by_firm_name(addslashes(trim($item->ledger_details[0]->ledger_name)));
             $data = array(
                 // 'voucher_type' => 'R',
                 'store_crm_code' => $storeCode['store_crm_code'],
