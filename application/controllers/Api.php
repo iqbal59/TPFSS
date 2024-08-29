@@ -240,8 +240,8 @@ class Api extends REST_Controller
                     continue;
 
                 if ($g->PrimaryService == 'SH' || $g->PrimaryService == 'SHC') {
-                    echo $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
-
+                    $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
+                    echo $this->db->last_query();
                     $params = array('shoe_order', date('Y-m-d', strtotime($g->OrderDate)));
                     $this->store_model->update_customers($mobile_no, $params);
                 }
