@@ -126,8 +126,8 @@ class Api extends REST_Controller
                 $data = array(
                     "order_date" => date('Y-m-d H:i:s', strtotime($orderInfo->OrderDateTime)),
                     "order_no" => $orderInfo->OrderNumber,
-                    "store_name" => $orderInfo->StoreCode,
-                    //"store_code" => $orderInfo->StoreCode,
+                    "store_name" => $orderInfo->StoreName,
+                    "store_code" => $orderInfo->StoreCode,
                     "taxable_amount" => (($orderInfo->GrossAmount - $orderInfo->Discount - $orderInfo->Adjustment) / 1.18),
                     "net_amount" => $orderInfo->NetAmount,
                     "service_code" => $service_code,
@@ -217,7 +217,7 @@ class Api extends REST_Controller
     public function all_garments_get()
     {
 
-        $s_from_date = $this->input->post('s_from_date') ? $this->input->post('s_from_date') : date('Y-m-d', strtotime('-2 days'));
+        $s_from_date = $this->input->post('s_from_date') ? $this->input->post('s_from_date') : date('Y-m-d', strtotime('-1 days'));
         $s_to_date = $this->input->post('s_to_date') ? $this->input->post('s_to_date') : date('Y-m-d');
 
         if ($s_from_date && $s_to_date) {
@@ -233,7 +233,20 @@ class Api extends REST_Controller
             //print_r($garmentInfo);
 
             //$garmentInfo = json_decode($garmentInfo);
-            echo $garmentInfo;
+            //echo $garmentInfo;
+
+            foreach ($garmentInfo as $g) {
+                if ($g->PrimaryService != 'CL' || $g->PrimaryService != 'SH' || $g->PrimaryService != 'SHC')
+                    continue;
+
+                if ($g->PrimaryService == 'SH' || $g->PrimaryService == 'SHC') {
+                    $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
+
+                    $params = array('shoe_order', date('Y-m-d', strtotime($g->OrderDate)));
+                    $this->store_model->update_customers($mobile_no, $params);
+                }
+
+            }
 
         }
 

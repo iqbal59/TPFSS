@@ -38,6 +38,13 @@ class Store_model extends CI_Model
     }
 
 
+
+    public function get_customer_mobile_no($store_name, $order_no)
+    {
+        $orderDetails = $this->db->get_where('storesales_qdc', array('store_name' => $store_name, 'order_no' => $order_no))->row_array();
+        return $orderDetails['mobile_no'];
+    }
+
     /*
      * Get all stores count
      */
@@ -190,6 +197,12 @@ class Store_model extends CI_Model
     {
         $this->db->where('id', $id);
         return $this->db->update('stores', $params);
+    }
+
+    public function update_customers($mobile_no, $params)
+    {
+        $this->db->where('mobile_no', $mobile_no);
+        return $this->db->update('customers', $params);
     }
 
 
