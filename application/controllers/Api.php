@@ -236,8 +236,13 @@ class Api extends REST_Controller
             //echo $garmentInfo;
 
             foreach ($garmentInfo as $g) {
+
+                echo $g->PrimaryService;
+
                 if ($g->PrimaryService != 'CL' || $g->PrimaryService != 'SH' || $g->PrimaryService != 'SHC')
                     continue;
+
+
 
                 if ($g->PrimaryService == 'SH' || $g->PrimaryService == 'SHC') {
                     $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
