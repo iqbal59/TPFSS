@@ -213,6 +213,62 @@ class Api extends REST_Controller
 
     }
 
+
+    public function all_garments_get()
+    {
+
+        $s_from_date = $this->input->post('s_from_date') ? $this->input->post('s_from_date') : date('Y-m-d', strtotime('-2 days'));
+        $s_to_date = $this->input->post('s_to_date') ? $this->input->post('s_to_date') : date('Y-m-d');
+
+        if ($s_from_date && $s_to_date) {
+
+            $stores = array('TS13', 'TS90', 'B004', 'T181', 'TS36');
+
+            // print_r($stores);
+
+            $headers = ['Content-Type: application/json', 'token:  EXDHXUXobI5WmIwVSoIPb4JnmLSVTT92OjbLIymOQSzCfs2HIzkjMaaaOPVLBB5R9DID6kMUBuzS5GItjLMT8pQdJAxsdbMOnh2ckZaXn0iSbRFHH11qoLijm4u6nUhZhk5nd5JUbo6IHyCrvpkLJWZbyjpP4Ea3jSbqmR3bRHPzeabo1Cax95PUVtpugup7ODYpXMFdWJuCHZxXHA', 'ClientID: 2469'];
+            $url = "https://api.quickdrycleaning.com/QDCV1/GarmentDetailsData";
+            $post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date)), "StoreCodeList" => []));
+            $garmentInfo = $this->cUrlGetData($url, $post_fields, $headers);
+            //print_r($garmentInfo);
+
+            //$garmentInfo = json_decode($garmentInfo);
+            echo $garmentInfo;
+
+        }
+
+    }
+
+
+    private function cUrlGetData($url, $post_fields = null, $headers = null)
+    {
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        if (!empty($post_fields)) {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
+        }
+
+        if (!empty($headers)) {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        }
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        $data = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+
+        curl_close($ch);
+        return $data;
+    }
+
     public function get_machine_details_by_storecode_get($store_code)
     {
         //echo "sdfd";
@@ -234,7 +290,6 @@ class Api extends REST_Controller
 
         // return $response = json_decode($response);
     }
-
     private function get_license_by_qdc($store_code = null)
     {
         $this->load->library('tumbledryqdc');
