@@ -242,7 +242,7 @@ class Api extends REST_Controller
 
                 if ($g->PrimaryService == 'CL' || $g->PrimaryService == 'SHC' || $g->PrimaryService == 'SHDC') {
 
-                    if ($g->PrimaryService == 'SHC') {
+                    if ($g->PrimaryService == 'SHC' || $g->PrimaryService == 'SHDC') {
                         $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
                         //echo $this->db->last_query();
                         $params = array('shoe_order' => date('Y-m-d', strtotime($g->OrderDate)));
@@ -259,7 +259,7 @@ class Api extends REST_Controller
                         'Blind Door',
                         'Blind Window'
                     );
-                    $jackets = array(
+                    $blankets = array(
                         'Baby Blanket',
                         'Blanket Double',
                         'Blanket Single',
@@ -275,7 +275,7 @@ class Api extends REST_Controller
                         'Duvet',
                         'Duvet Double'
                     );
-                    $blankets = array(
+                    $jackets = array(
                         'Jacket',
                         'Leather Jacket',
                         'Jacket with Hood',
