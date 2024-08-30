@@ -241,10 +241,12 @@ class Api extends REST_Controller
 
             foreach ($garmentInfo as $g) {
 
+                $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
+
                 if ($g->PrimaryService == 'CL' || $g->PrimaryService == 'SHC' || $g->PrimaryService == 'SHDC') {
 
                     if ($g->PrimaryService == 'SHC' || $g->PrimaryService == 'SHDC') {
-                        $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
+
                         //echo $this->db->last_query();
                         $params = array('shoe_order' => date('Y-m-d', strtotime($g->OrderDate)));
                         $this->store_model->update_customers($mobile_no, $params);
