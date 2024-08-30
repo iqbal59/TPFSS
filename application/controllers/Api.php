@@ -231,13 +231,13 @@ class Api extends REST_Controller
 
             $headers = ['Content-Type: application/json', 'token:  EXDHXUXobI5WmIwVSoIPb4JnmLSVTT92OjbLIymOQSzCfs2HIzkjMaaaOPVLBB5R9DID6kMUBuzS5GItjLMT8pQdJAxsdbMOnh2ckZaXn0iSbRFHH11qoLijm4u6nUhZhk5nd5JUbo6IHyCrvpkLJWZbyjpP4Ea3jSbqmR3bRHPzeabo1Cax95PUVtpugup7ODYpXMFdWJuCHZxXHA', 'ClientID: 2469'];
             $url = "https://api.quickdrycleaning.com/QDCV1/GarmentDetailsData";
-            $post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date)), 'StoreCodeList' => $stores));
-            //$post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date))));
+            //$post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date)), 'StoreCodeList' => $stores));
+            $post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date))));
             $garmentInfo = $this->cUrlGetData($url, $post_fields, $headers);
             //print_r($garmentInfo);
 
             $garmentInfo = json_decode($garmentInfo);
-            echo $garmentInfo;
+            //echo $garmentInfo;
 
             foreach ($garmentInfo as $g) {
 
