@@ -233,7 +233,7 @@ class Api extends REST_Controller
             //$post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date)), 'StoreCodeList' => $stores));
             $post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date))));
             $garmentInfo = $this->cUrlGetData($url, $post_fields, $headers);
-            //print_r($garmentInfo);
+            print_r($garmentInfo);
 
             $garmentInfo = json_decode($garmentInfo);
             //echo $garmentInfo;
