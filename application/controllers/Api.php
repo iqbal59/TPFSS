@@ -73,6 +73,7 @@ class Api extends REST_Controller
 
     public function sale_order_by_qdc_get()
     {
+        date_default_timezone_set("Asia/Kolkata");
         $headers = ['Content-Type: application/json', 'token:  EXDHXUXobI5WmIwVSoIPb4JnmLSVTT92OjbLIymOQSzCfs2HIzkjMaaaOPVLBB5R9DID6kMUBuzS5GItjLMT8pQdJAxsdbMOnh2ckZaXn0iSbRFHH11qoLijm4u6nUhZhk5nd5JUbo6IHyCrvpkLJWZbyjpP4Ea3jSbqmR3bRHPzeabo1Cax95PUVtpugup7ODYpXMFdWJuCHZxXHA', 'ClientID: 2469'];
         $url = "https://api.quickdrycleaning.com/QDCV1/OrderReportData";
         $post_fields = json_encode(array('ClientID' => '2469', "ReportDate" => date('d M Y', strtotime('-1 days', time()))));
@@ -217,6 +218,7 @@ class Api extends REST_Controller
     public function all_garments_get()
     {
 
+        date_default_timezone_set("Asia/Kolkata");
         $s_from_date = $this->input->post('s_from_date') ? $this->input->post('s_from_date') : date('Y-m-d', strtotime('-1 days'));
         $s_to_date = $this->input->post('s_to_date') ? $this->input->post('s_to_date') : date('Y-m-d');
 
@@ -228,29 +230,23 @@ class Api extends REST_Controller
 
             $headers = ['Content-Type: application/json', 'token:  EXDHXUXobI5WmIwVSoIPb4JnmLSVTT92OjbLIymOQSzCfs2HIzkjMaaaOPVLBB5R9DID6kMUBuzS5GItjLMT8pQdJAxsdbMOnh2ckZaXn0iSbRFHH11qoLijm4u6nUhZhk5nd5JUbo6IHyCrvpkLJWZbyjpP4Ea3jSbqmR3bRHPzeabo1Cax95PUVtpugup7ODYpXMFdWJuCHZxXHA', 'ClientID: 2469'];
             $url = "https://api.quickdrycleaning.com/QDCV1/GarmentDetailsData";
-            $post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date))));
+            $post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date)), 'StoreCodeList' => $stores));
             $garmentInfo = $this->cUrlGetData($url, $post_fields, $headers);
-            //print_r($garmentInfo);
+            // print_r($garmentInfo);
 
-            //$garmentInfo = json_decode($garmentInfo);
+            $garmentInfo = json_decode($garmentInfo);
             //echo $garmentInfo;
 
             foreach ($garmentInfo as $g) {
 
-                echo $g->PrimaryService;
-
-                if ($g->PrimaryService != 'CL' || $g->PrimaryService != 'SH' || $g->PrimaryService != 'SHC')
-                    continue;
-
-
-
-                if ($g->PrimaryService == 'SH' || $g->PrimaryService == 'SHC') {
-                    $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
-                    echo $this->db->last_query();
-                    $params = array('shoe_order', date('Y-m-d', strtotime($g->OrderDate)));
-                    $this->store_model->update_customers($mobile_no, $params);
+                if ($g->PrimaryService == 'CL' || $g->PrimaryService == 'SHC' || $g->PrimaryService == 'SHDC') {
+                    if ($g->PrimaryService == 'SHC') {
+                        $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
+                        //echo $this->db->last_query();
+                        $params = array('shoe_order', date('Y-m-d', strtotime($g->OrderDate)));
+                        $this->store_model->update_customers($mobile_no, $params);
+                    }
                 }
-
             }
 
         }
