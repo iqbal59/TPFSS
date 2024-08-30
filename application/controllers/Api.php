@@ -230,7 +230,8 @@ class Api extends REST_Controller
 
             $headers = ['Content-Type: application/json', 'token:  EXDHXUXobI5WmIwVSoIPb4JnmLSVTT92OjbLIymOQSzCfs2HIzkjMaaaOPVLBB5R9DID6kMUBuzS5GItjLMT8pQdJAxsdbMOnh2ckZaXn0iSbRFHH11qoLijm4u6nUhZhk5nd5JUbo6IHyCrvpkLJWZbyjpP4Ea3jSbqmR3bRHPzeabo1Cax95PUVtpugup7ODYpXMFdWJuCHZxXHA', 'ClientID: 2469'];
             $url = "https://api.quickdrycleaning.com/QDCV1/GarmentDetailsData";
-            $post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date)), 'StoreCodeList' => $stores));
+            //$post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date)), 'StoreCodeList' => $stores));
+            $post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date))));
             $garmentInfo = $this->cUrlGetData($url, $post_fields, $headers);
             print_r($garmentInfo);
 
@@ -249,9 +250,64 @@ class Api extends REST_Controller
                     }
 
                     //Cleaning
+                    $curtains = array(
+                        'Curtain Door',
+                        'Curtain Door With Lining',
+                        'Curtain Window',
+                        'Curtain Window With Lining',
+                        'Curtain Belt',
+                        'Blind Door',
+                        'Blind Window'
+                    );
+                    $jackets = array(
+                        'Baby Blanket',
+                        'Blanket Double',
+                        'Blanket Single',
+                        'Blanket Double 2 Ply',
+                        'Blanket Single 2 Ply',
+                        'Blanket Double',
+                        'Blanket Single',
+                        'Quilt Double',
+                        'Quilt Single',
+                        'Quilt Cover Single',
+                        'Quilt Cover Double',
+                        'Quilt Double',
+                        'Duvet',
+                        'Duvet Double'
+                    );
+                    $blankets = array(
+                        'Jacket',
+                        'Leather Jacket',
+                        'Jacket with Hood',
+                        'Jacket Full Sleeves',
+                        'Jacket Half Sleeves',
+                        'Jacket',
+                        'Jacket Full Sleeves',
+                        'Jacket Half Sleeves',
+                        'Jacket with Hood',
+                        'Jacket Full Sleeves',
+                        'Jacket with Hood',
+                        'Jacket Half Sleeves',
+                        'Leather Jacket',
+                        'Leather Jacket Large'
+                    );
+
 
                     if ($g->PrimaryService == 'CL') {
+                        if (in_array($g->Subgarment, $curtains)) {
+                            $params = array('curtain_order' => date('Y-m-d', strtotime($g->OrderDate)));
+                            $this->store_model->update_customers($mobile_no, $params);
+                        }
 
+                        if (in_array($g->Subgarment, $blankets)) {
+                            $params = array('jacket_order' => date('Y-m-d', strtotime($g->OrderDate)));
+                            $this->store_model->update_customers($mobile_no, $params);
+                        }
+
+                        if (in_array($g->Subgarment, $jackets)) {
+                            $params = array('blanket_order' => date('Y-m-d', strtotime($g->OrderDate)));
+                            $this->store_model->update_customers($mobile_no, $params);
+                        }
 
                     }
                 }
