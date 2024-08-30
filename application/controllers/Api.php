@@ -299,12 +299,12 @@ class Api extends REST_Controller
                             $this->store_model->update_customers($mobile_no, $params);
                         }
 
-                        if (in_array($g->Subgarment, $blankets)) {
+                        if (in_array($g->Subgarment, $jackets)) {
                             $params = array('jacket_order' => date('Y-m-d', strtotime($g->OrderDate)));
                             $this->store_model->update_customers($mobile_no, $params);
                         }
 
-                        if (in_array($g->Subgarment, $jackets)) {
+                        if (in_array($g->Subgarment, $blankets)) {
                             $params = array('blanket_order' => date('Y-m-d', strtotime($g->OrderDate)));
                             $this->store_model->update_customers($mobile_no, $params);
                         }
