@@ -232,7 +232,7 @@ class Api extends REST_Controller
             $url = "https://api.quickdrycleaning.com/QDCV1/GarmentDetailsData";
             $post_fields = json_encode(array('ClientID' => '2469', "FromDate" => date('d M Y', strtotime($s_from_date)), "ToDate" => date('d M Y', strtotime($s_to_date)), 'StoreCodeList' => $stores));
             $garmentInfo = $this->cUrlGetData($url, $post_fields, $headers);
-            // print_r($garmentInfo);
+            print_r($garmentInfo);
 
             $garmentInfo = json_decode($garmentInfo);
             //echo $garmentInfo;
@@ -240,11 +240,19 @@ class Api extends REST_Controller
             foreach ($garmentInfo as $g) {
 
                 if ($g->PrimaryService == 'CL' || $g->PrimaryService == 'SHC' || $g->PrimaryService == 'SHDC') {
+
                     if ($g->PrimaryService == 'SHC') {
                         $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
                         //echo $this->db->last_query();
                         $params = array('shoe_order' => date('Y-m-d', strtotime($g->OrderDate)));
                         $this->store_model->update_customers($mobile_no, $params);
+                    }
+
+                    //Cleaning
+
+                    if ($g->PrimaryService == 'CL') {
+
+
                     }
                 }
             }
