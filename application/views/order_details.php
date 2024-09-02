@@ -414,6 +414,7 @@
                                     <thead>
                                         <tr>
                                             <th scope="col"></th>
+                                            <th scope="col">Cust Id</th>
                                             <th scope="col">Mobile No.</th>
                                             <th scope="col">Last Order Date</th>
                                             <th scope="col">Curtain Order</th>
@@ -432,6 +433,7 @@
                                             ?>
                                         <tr>
                                             <th scope="row"><?php echo $i++; ?></th>
+                                            <td><?php echo $order->customer_id ?></td>
                                             <td><a class="btn btn-primary" data-id="<?php echo $order->mobile_no; ?>"
                                                     onclick="openModalWithData('<?php echo $order->mobile_no; ?>')"><?php echo substr($order->mobile_no, 0, 6); ?>XXXX</a>
                                             </td>

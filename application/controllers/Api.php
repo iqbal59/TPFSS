@@ -290,7 +290,7 @@ class Api extends REST_Controller
                     if ($g->PrimaryService == 'SHC' || $g->PrimaryService == 'SHDC') {
 
                         //echo $this->db->last_query();
-                        $params = array('shoe_order' => date('Y-m-d', strtotime($g->OrderDate)));
+                        $params = array('last_order_date' => date('Y-m-d', strtotime($g->OrderDate)), 'shoe_order' => date('Y-m-d', strtotime($g->OrderDate)));
                         $this->store_model->update_customers($mobile_no, $params);
                     }
 
@@ -340,17 +340,17 @@ class Api extends REST_Controller
 
                     if ($g->PrimaryService == 'CL') {
                         if (in_array($g->Subgarment, $curtains)) {
-                            $params = array('curtain_order' => date('Y-m-d', strtotime($g->OrderDate)));
+                            $params = array('last_order_date' => date('Y-m-d', strtotime($g->OrderDate)), 'curtain_order' => date('Y-m-d', strtotime($g->OrderDate)));
                             $this->store_model->update_customers($mobile_no, $params);
                         }
 
                         if (in_array($g->Subgarment, $jackets)) {
-                            $params = array('jacket_order' => date('Y-m-d', strtotime($g->OrderDate)));
+                            $params = array('last_order_date' => date('Y-m-d', strtotime($g->OrderDate)), 'jacket_order' => date('Y-m-d', strtotime($g->OrderDate)));
                             $this->store_model->update_customers($mobile_no, $params);
                         }
 
                         if (in_array($g->Subgarment, $blankets)) {
-                            $params = array('blanket_order' => date('Y-m-d', strtotime($g->OrderDate)));
+                            $params = array('last_order_date' => date('Y-m-d', strtotime($g->OrderDate)), 'blanket_order' => date('Y-m-d', strtotime($g->OrderDate)));
                             $this->store_model->update_customers($mobile_no, $params);
                         }
 
