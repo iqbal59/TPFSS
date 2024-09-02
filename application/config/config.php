@@ -456,7 +456,7 @@ $config['csrf_token_name'] = 'tumbledry_csrf';
 $config['csrf_cookie_name'] = 'csrf_cookie_name';
 $config['csrf_expire'] = 7200;
 $config['csrf_regenerate'] = false;
-$config['csrf_exclude_uris'] = array('v1/api/sync_with_tally', 'v1/api/sync_with_tally_creditnote', 'v1/api/sync_with_tally_payment', 'v1/api/add_hdfc_payment', 'v1/api/paytm_payment', 'v1/api/fss_status', 'v1/api/add_store', 'api/paytm_payment', 'v1/api/paytm_payment_by_app', 'v1/api/receipt_by_tally', 'v1/api/payment_by_tally', 'v1/api/invoice_by_tally', 'v1/api/journal_by_tally', 'v1/api/creditnote_by_tally', 'v1/api/all_garments', 'api/sale_order_by_qdc', 'api/get_license_renewal_date');
+$config['csrf_exclude_uris'] = array('v1/api/sync_with_tally', 'v1/api/sync_with_tally_creditnote', 'v1/api/sync_with_tally_payment', 'v1/api/add_hdfc_payment', 'v1/api/paytm_payment', 'v1/api/fss_status', 'v1/api/add_store', 'api/paytm_payment', 'v1/api/paytm_payment_by_app', 'v1/api/receipt_by_tally', 'v1/api/payment_by_tally', 'v1/api/invoice_by_tally', 'v1/api/journal_by_tally', 'v1/api/creditnote_by_tally', 'v1/api/all_garments', 'api/sale_order_by_qdc', 'api/get_license_renewal_date', 'api/customer_info_by_mobile_get');
 
 /*
 |--------------------------------------------------------------------------

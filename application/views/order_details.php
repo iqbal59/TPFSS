@@ -415,6 +415,7 @@
                                         <tr>
                                             <th scope="col"></th>
                                             <th scope="col">Mobile No.</th>
+                                            <th scope="col">Last Order Date</th>
                                             <th scope="col">Curtain Order</th>
                                             <th scope="col">Jacket Order</th>
                                             <th scope="col">Blanket Order</th>
@@ -431,7 +432,10 @@
                                             ?>
                                         <tr>
                                             <th scope="row"><?php echo $i++; ?></th>
-                                            <td><?php echo $order->mobile_no; ?></td>
+                                            <td><a class="btn btn-primary" data-id="<?php echo $order->mobile_no; ?>"
+                                                    onclick="openModalWithData('<?php echo $order->mobile_no; ?>')"><?php echo substr($order->mobile_no, 0, 6); ?>XXXX</a>
+                                            </td>
+                                            <td><?php echo $order->last_order_date != null ? date('d-m-Y', strtotime($order->last_order_date)) : ""; ?>
                                             <td><?php echo $order->curtain_order != null ? date('d-m-Y', strtotime($order->curtain_order)) : ""; ?>
                                             </td>
                                             <td><?php echo $order->jacket_order != null ? date('d-m-Y', strtotime($order->jacket_order)) : ""; ?>
@@ -643,23 +647,53 @@
             cc_table.rows().invalidate('Yes');
         });
 
+
+
+
+
+
+
+
+
     });
+
+
+    function openModalWithData(mobileNo) {
+        // Show the modal
+        $('#modalBody').html('');
+        $('#contactModal').modal('show');
+
+        // Make the API call
+        $.ajax({
+            url: '<?php echo base_url(); ?>' + 'api/customer_info_by_mobile/' + mobileNo,
+            method: 'GET',
+            success: function(response) {
+                // Update the modal's body with the response data
+                $('#modalBody').html(`
+            <p>Mobile: ${mobileNo}</p>
+            <p>Name: ${response.Name}</p>
+            <p>Email: ${response.Email}</p>
+            <p>Address: ${response.Address}</p>
+          `);
+            },
+            error: function() {
+                $('#modalBody').html('<p>An error occurred while fetching the data.</p>');
+            }
+        });
+    }
     </script>
 </body>
 
 
 <!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+<div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Contact Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div class="modal-body">
-                <div class="alert alert-danger d-none" id="error_msg" role="alert">
-                    Incorrect Storcode or Password
-                </div>
+            <div class="modal-body" id="modalBody">
 
 
             </div>

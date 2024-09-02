@@ -215,6 +215,46 @@ class Api extends REST_Controller
     }
 
 
+    //Get Customer INfo
+
+    public function customer_info_by_mobile_get($mobile_no)
+    {
+        date_default_timezone_set("Asia/Kolkata");
+        $headers = ['Content-Type: application/json', 'token:  EXDHXUXobI5WmIwVSoIPb4JnmLSVTT92OjbLIymOQSzCfs2HIzkjMaaaOPVLBB5R9DID6kMUBuzS5GItjLMT8pQdJAxsdbMOnh2ckZaXn0iSbRFHH11qoLijm4u6nUhZhk5nd5JUbo6IHyCrvpkLJWZbyjpP4Ea3jSbqmR3bRHPzeabo1Cax95PUVtpugup7ODYpXMFdWJuCHZxXHA', 'ClientID: 2469'];
+        $url = "https://api.quickdrycleaning.com/QDCV1/CustomerInfoDetails?ClientID=2469&CustomerMobile=" . $mobile_no;
+        //$post_fields = json_encode(array('ClientID' => '2469', "ReportDate" => date('d M Y', strtotime('-1 days', time()))));
+        //$post_fields = json_encode(array('ClientID' => '2469', "ReportDate" => '31 Dec 2023'));
+
+        $ch = curl_init();
+        $timeout = 5;
+        curl_setopt($ch, CURLOPT_URL, $url);
+
+        if (!empty($post_fields)) {
+            curl_setopt($ch, CURLOPT_POST, 1);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
+        }
+
+        if (!empty($headers)) {
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        }
+
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $timeout);
+        echo $data = curl_exec($ch);
+
+        //$cusinof = json_decode($data);
+
+
+        if (curl_errno($ch)) {
+            echo 'Error:' . curl_error($ch);
+        }
+
+        curl_close($ch);
+    }
+
+
     public function all_garments_get()
     {
 
