@@ -527,4 +527,19 @@ class Partner extends CI_Controller
         //$data['main_content'] = $this->load->view('partner/home', $data, true);
         $this->load->view('project_charter', $data);
     }
+
+
+    public function order_details()
+    {
+        // check_login_partner();
+        $id = $this->session->userdata('id');
+        $data = array();
+        $data['page_title'] = 'Order Details';
+        // $data['activities'] = $this->common_model->get_all_by_table('activities', '', array('field' => 'completion_day', 'order_by' => 'asc'));
+        //$data['activities_header1'] = $this->common_model->get_activity_header(1);
+        //$data['activities_header2'] = $this->common_model->get_activity_header(2);
+        //$data['main_content'] = $this->load->view('partner/home', $data, true);
+        $data['order_details'] = $this->common_model->get_orders();
+        $this->load->view('order_details', $data);
+    }
 }
