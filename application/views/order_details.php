@@ -61,7 +61,7 @@
     }
 
     footer {
-        background: #404040;
+        /* background: #404040; */
         position: relative;
         bottom: 0;
         left: 0;
@@ -464,8 +464,25 @@
                                     <tbody>
                                         <?php
                                         $i = 1;
+                                        $totalCustomers = count($order_details);
+                                        $total_curtain = 0;
+                                        $total_jacket = 0;
+                                        $total_blanket = 0;
+                                        $total_shoe = 0;
                                         foreach ($order_details as $order) {
                                             // print_r($order);
+                                        
+
+                                            if ($order->curtain_order != null)
+                                                $total_curtain++;
+                                            if ($order->jacket_order != null)
+                                                $total_jacket++;
+                                            if ($order->blanket_order != null)
+                                                $total_blanket++;
+                                            if ($order->shoe_order != null)
+                                                $total_shoe++;
+
+
                                             ?>
                                         <tr>
                                             <th scope="row"><?php echo $i++; ?></th>
@@ -515,12 +532,42 @@
                 <a href="#" class="text-primary">Back to top</a>
             </p>
 
-            <p class="mb-0 text-center text-secondary">©2019 <a href="https://www.tumbledry.in/" target="_blank"
+            <!-- <p class="mb-0 text-center text-secondary">©2019 <a href="https://www.tumbledry.in/" target="_blank"
                     class="text-primary">Tumbledry
                     Solutions
-                    Pvt. Ltd.</a> All rights reserved.</p>
+                    Pvt. Ltd.</a> All rights reserved.</p> -->
         </div>
     </footer>
+
+
+    <div class="fixed-bottom bg-dark text-white">
+        <div class="container p-3">
+            <div class="row text-center">
+                <div class="col-3">
+                    <p class="mb-0"><strong>Curtain:
+                        </strong><?php
+                        // echo $total_curtain;
+                        // echo $totalCustomers;
+                        echo round($total_curtain / $totalCustomers, 2); ?>
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p class="mb-0"><strong>Jaket: </strong><?php
+                    // echo $total_jacket;
+                    // echo $totalCustomers;
+                    echo round($total_jacket / $totalCustomers, 2); ?></p>
+                </div>
+                <div class="col-3">
+                    <p class="mb-0"><strong>Blanket: </strong> <?php echo round($total_blanket / $totalCustomers, 2); ?>
+                    </p>
+                </div>
+                <div class="col-3">
+                    <p class="mb-0"><strong>Shoe: </strong> <?php echo round($total_shoe / $totalCustomers, 2); ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="<?php echo base_url() ?>assets/plugins/jquery/jquery.min.js">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
@@ -529,6 +576,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
     <script src="//cdn.datatables.net/fixedheader/3.1.9/js/dataTables.fixedHeader.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.5/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.print.min.js"></script>
     <script type="text/javascript">
     function addDays(date, days) {
 
@@ -545,7 +596,10 @@
             order: [
                 [3, 'asc']
             ],
-            dom: 'lrtip',
+            dom: 'Blfrtip',
+            buttons: [
+                'excelHtml5' // Export to Excel
+            ],
 
 
         });
