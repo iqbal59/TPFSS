@@ -289,6 +289,37 @@
     .nav-tabs.nav-justified li:last-child {
         border-right-width: 0px;
     }
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        border-radius: 50% !important;
+        cursor: pointer;
+        padding: 0.5em 0.9em !important;
+    }
+
+
+    .dataTables_wrapper .dataTables_paginate .paginate_button {
+        /* border-radius: 0; */
+        /* background: #888888; */
+        color: #888;
+    }
+
+    .page-item.active .page-link {
+        color: #fff !important;
+        background: green;
+        background-color: #000 !important;
+    }
+
+    .page-link {
+        color: #000 !important;
+        background-color: #fff !important;
+        border: 1px solid #dee2e6 !important;
+    }
+
+    .page-link:hover {
+        color: #fff !important;
+        background-color: #000 !important;
+        border-color: #000 !important;
+    }
     </style>
 </head>
 
@@ -417,9 +448,14 @@
                                             <th scope="col">Cust Id</th>
                                             <th scope="col">Mobile No.</th>
                                             <th scope="col">Last Order Date</th>
+                                            <th scope="col">Order Count</th>
+                                            <th scope="col">Last Curtain Order</th>
                                             <th scope="col">Curtain Order</th>
+                                            <th scope="col">Last Jacket Order</th>
                                             <th scope="col">Jacket Order</th>
+                                            <th scope="col">Last Blanket Order</th>
                                             <th scope="col">Blanket Order</th>
+                                            <th scope="col">Last Shoe Order</th>
                                             <th scope="col">Shoe Order</th>
                                             <th scope="col">Package Balance</th>
 
@@ -434,15 +470,26 @@
                                         <tr>
                                             <th scope="row"><?php echo $i++; ?></th>
                                             <td><?php echo $order->customer_id ?></td>
-                                            <td><a class="btn btn-primary" data-id="<?php echo $order->mobile_no; ?>"
+                                            <td><a class="btn btn-primary btn-sm"
+                                                    data-id="<?php echo $order->mobile_no; ?>"
                                                     onclick="openModalWithData('<?php echo $order->mobile_no; ?>')"><?php echo substr($order->mobile_no, 0, 6); ?>XXXX</a>
                                             </td>
                                             <td><?php echo $order->last_order_date != null ? date('d-m-Y', strtotime($order->last_order_date)) : ""; ?>
+                                            </td>
+                                            <td><?php echo $order->order_count; ?></td>
+                                            <td><?php echo $order->last_curtain_order != null ? date('d-m-Y', strtotime($order->last_curtain_order)) : ""; ?>
+                                            </td>
                                             <td><?php echo $order->curtain_order != null ? date('d-m-Y', strtotime($order->curtain_order)) : ""; ?>
+                                            </td>
+                                            <td><?php echo $order->last_jacket_order != null ? date('d-m-Y', strtotime($order->last_jacket_order)) : ""; ?>
                                             </td>
                                             <td><?php echo $order->jacket_order != null ? date('d-m-Y', strtotime($order->jacket_order)) : ""; ?>
                                             </td>
+                                            <td><?php echo $order->last_blanket_order != null ? date('d-m-Y', strtotime($order->last_blanket_order)) : ""; ?>
+                                            </td>
                                             <td><?php echo $order->blanket_order != null ? date('d-m-Y', strtotime($order->blanket_order)) : ""; ?>
+                                            </td>
+                                            <td><?php echo $order->last_shoe_order != null ? date('d-m-Y', strtotime($order->last_shoe_order)) : ""; ?>
                                             </td>
                                             <td><?php echo $order->shoe_order != null ? date('d-m-Y', strtotime($order->shoe_order)) : ""; ?>
                                             </td>
@@ -494,25 +541,7 @@
         var sp_table = $('#sp_table').DataTable({
             responsive: true,
             paging: true, // works with or without paging
-            columnDefs: [{
-                render: function(data, type, row) {
-                    launch_dt = $('#sp_launch_dt').val();
-                    console.log(launch_dt);
-                    if (launch_dt && launch_dt != '') {
-                        final_dt = addDays(launch_dt, row[3]);
-                        return final_dt.getDate() + "-" + (final_dt
-                                .getMonth() + 1) +
-                            "-" +
-                            final_dt.getFullYear();
-                    }
 
-                    return "";
-                },
-                targets: 4,
-            }, {
-                "targets": [0, 2, 3, 4, 5],
-                "searchable": false
-            }],
             order: [
                 [3, 'asc']
             ],
@@ -544,116 +573,6 @@
 
 
         //End SP Table
-
-
-
-        var prc_table = $('#prc_table').DataTable({
-            responsive: true,
-            paging: false, // works with or without paging
-            columnDefs: [{
-                render: function(data, type, row) {
-                    launch_dt = $('#prc_launch_dt').val();
-                    console.log(launch_dt);
-                    if (launch_dt && launch_dt != '') {
-                        final_dt = addDays(launch_dt, row[3]);
-                        return final_dt.getDate() + "-" + (final_dt
-                                .getMonth() + 1) +
-                            "-" +
-                            final_dt.getFullYear();
-                    }
-
-                    return "";
-                },
-                targets: 4,
-            }, {
-                "targets": [0, 2, 3, 4, 5],
-                "searchable": false
-            }],
-            order: [
-                [3, 'asc']
-            ],
-            dom: 'lrtip',
-        });
-
-        new $.fn.dataTable.FixedHeader(prc_table);
-
-        prc_table.on('order.dt search.dt', function() {
-            prc_table.column(0, {
-                search: 'applied',
-                order: 'applied'
-            }).nodes().each(function(cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
-
-
-        $('#prc_table_filter').change(function() {
-            prc_table.search($(this).val())
-                .draw(); // this  is for customized searchbox with datatable search feature.
-        });
-
-        $('#prc_launch_dt').change(function() {
-            console.log($('#prc_launch_dt').val());
-            prc_table.rows().invalidate('Yes');
-        });
-
-        //end prc table
-
-
-
-        var cc_table = $('#cc_table').DataTable({
-            responsive: true,
-            paging: false, // works with or without paging
-            columnDefs: [{
-                render: function(data, type, row) {
-                    launch_dt = $('#cc_launch_dt').val();
-                    console.log(launch_dt);
-                    if (launch_dt && launch_dt != '') {
-                        final_dt = addDays(launch_dt, row[3]);
-                        return final_dt.getDate() + "-" + (final_dt
-                                .getMonth() + 1) +
-                            "-" +
-                            final_dt.getFullYear();
-                    }
-
-                    return "";
-                },
-                targets: 4,
-            }, {
-                "targets": [0, 2, 3, 4, 5],
-                "searchable": false
-            }],
-            order: [
-                [3, 'asc']
-            ],
-            dom: 'lrtip',
-        });
-        new $.fn.dataTable.FixedHeader(cc_table);
-
-        cc_table.on('order.dt search.dt', function() {
-            cc_table.column(0, {
-                search: 'applied',
-                order: 'applied'
-            }).nodes().each(function(cell, i) {
-                cell.innerHTML = i + 1;
-            });
-        }).draw();
-
-        $('#cc_table_filter').change(function() {
-            cc_table.search($(this).val())
-                .draw(); // this  is for customized searchbox with datatable search feature.
-        });
-
-        $('#cc_launch_dt').change(function() {
-            console.log($('#cc_launch_dt').val());
-            cc_table.rows().invalidate('Yes');
-        });
-
-
-
-
-
-
 
 
 
