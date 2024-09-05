@@ -491,24 +491,24 @@
                                                     data-id="<?php echo $order->mobile_no; ?>"
                                                     onclick="openModalWithData('<?php echo $order->mobile_no; ?>')"><?php echo substr($order->mobile_no, 0, 6); ?>XXXX</a>
                                             </td>
-                                            <td><?php echo $order->last_order_date != null ? date('d-m-Y', strtotime($order->last_order_date)) : ""; ?>
+                                            <td><?php echo $order->last_order_date != null ? date('Y/m/d', strtotime($order->last_order_date)) : ""; ?>
                                             </td>
                                             <td><?php echo $order->order_count; ?></td>
-                                            <td><?php echo $order->last_curtain_order != null ? date('d-m-Y', strtotime($order->last_curtain_order)) : ""; ?>
+                                            <td><?php echo $order->last_curtain_order != null ? date('Y/m/d', strtotime($order->last_curtain_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->curtain_order != null ? date('d-m-Y', strtotime($order->curtain_order)) : ""; ?>
+                                            <td><?php echo $order->curtain_order != null ? date('Y/m/d', strtotime($order->curtain_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->last_jacket_order != null ? date('d-m-Y', strtotime($order->last_jacket_order)) : ""; ?>
+                                            <td><?php echo $order->last_jacket_order != null ? date('Y/m/d', strtotime($order->last_jacket_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->jacket_order != null ? date('d-m-Y', strtotime($order->jacket_order)) : ""; ?>
+                                            <td><?php echo $order->jacket_order != null ? date('Y/m/d', strtotime($order->jacket_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->last_blanket_order != null ? date('d-m-Y', strtotime($order->last_blanket_order)) : ""; ?>
+                                            <td><?php echo $order->last_blanket_order != null ? date('Y/m/d', strtotime($order->last_blanket_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->blanket_order != null ? date('d-m-Y', strtotime($order->blanket_order)) : ""; ?>
+                                            <td><?php echo $order->blanket_order != null ? date('Y/m/d', strtotime($order->blanket_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->last_shoe_order != null ? date('d-m-Y', strtotime($order->last_shoe_order)) : ""; ?>
+                                            <td><?php echo $order->last_shoe_order != null ? date('Y/m/d', strtotime($order->last_shoe_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->shoe_order != null ? date('d-m-Y', strtotime($order->shoe_order)) : ""; ?>
+                                            <td><?php echo $order->shoe_order != null ? date('Y/m/d', strtotime($order->shoe_order)) : ""; ?>
                                             </td>
                                             <td></td>
                                         </tr>
@@ -548,21 +548,24 @@
                         </strong><?php
                         // echo $total_curtain;
                         // echo $totalCustomers;
-                        echo round($total_curtain / $totalCustomers, 2); ?>
+                        echo round(($total_curtain / $totalCustomers) * 100, 2); ?>
                     </p>
                 </div>
                 <div class="col-3">
-                    <p class="mb-0"><strong>Jaket: </strong><?php
+                    <p class="mb-0"><strong>Jacket: </strong><?php
                     // echo $total_jacket;
                     // echo $totalCustomers;
-                    echo round($total_jacket / $totalCustomers, 2); ?></p>
+                    echo round(($total_jacket / $totalCustomers) * 100, 2); ?></p>
                 </div>
                 <div class="col-3">
-                    <p class="mb-0"><strong>Blanket: </strong> <?php echo round($total_blanket / $totalCustomers, 2); ?>
+                    <p class="mb-0"><strong>Blanket: </strong>
+                        <?php echo round(($total_blanket / $totalCustomers) * 100, 2); ?>
                     </p>
                 </div>
                 <div class="col-3">
-                    <p class="mb-0"><strong>Shoe: </strong> <?php echo round($total_shoe / $totalCustomers, 2); ?></p>
+                    <p class="mb-0"><strong>Shoe: </strong>
+                        <?php echo round(($total_shoe / $totalCustomers) * 100, 2); ?>
+                    </p>
                 </div>
             </div>
         </div>
@@ -591,12 +594,27 @@
 
         var sp_table = $('#sp_table').DataTable({
             responsive: true,
+            "pageLength": 100,
             paging: true, // works with or without paging
 
             order: [
                 [3, 'asc']
             ],
-            dom: 'Blfrtip',
+            dom: 'Bfrtip',
+            columnDefs: [{
+                    "type": "date",
+                    "targets": [3,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9,
+                        10,
+                        11,
+                        12
+                    ]
+                } // Targets the 5th column (index 4) for date sorting
+            ],
             buttons: [
                 'excelHtml5' // Export to Excel
             ],
