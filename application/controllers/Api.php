@@ -342,11 +342,13 @@ class Api extends REST_Controller
                         if (in_array($g->Subgarment, $curtains)) {
                             $params = array('last_order_date' => date('Y-m-d', strtotime($g->OrderDate)), 'curtain_order' => date('Y-m-d', strtotime($g->OrderDate)));
                             $this->store_model->update_customers($mobile_no, $params);
+
                         }
 
                         if (in_array($g->Subgarment, $jackets)) {
                             $params = array('last_order_date' => date('Y-m-d', strtotime($g->OrderDate)), 'jacket_order' => date('Y-m-d', strtotime($g->OrderDate)));
                             $this->store_model->update_customers($mobile_no, $params);
+                            echo $this->db->last_query();
                         }
 
                         if (in_array($g->Subgarment, $blankets)) {
