@@ -429,7 +429,7 @@
 
 
         <div class="album mt-5">
-            <div class="container">
+            <div class="container-fluid">
 
                 <div class="col-md-12">
                     <div class="card">
@@ -447,15 +447,15 @@
                                             <th scope="col"></th>
                                             <th scope="col">Cust Id</th>
                                             <th scope="col">Mobile No.</th>
-                                            <th scope="col">Last Order Date</th>
+                                            <th scope="col" class="text-warning">Last Order Date</th>
                                             <th scope="col">Order Count</th>
-                                            <th scope="col">Last Curtain Order</th>
+                                            <th scope="col" class="text-warning">Last Curtain Order</th>
                                             <th scope="col">Curtain Order</th>
-                                            <th scope="col">Last Jacket Order</th>
+                                            <th scope="col" class="text-warning">Last Jacket Order</th>
                                             <th scope="col">Jacket Order</th>
-                                            <th scope="col">Last Blanket Order</th>
+                                            <th scope="col" class="text-warning">Last Blanket Order</th>
                                             <th scope="col">Blanket Order</th>
-                                            <th scope="col">Last Shoe Order</th>
+                                            <th scope="col" class="text-warning">Last Shoe Order</th>
                                             <th scope="col">Shoe Order</th>
                                             <th scope="col">Package Balance</th>
 
@@ -491,24 +491,29 @@
                                                     data-id="<?php echo $order->mobile_no; ?>"
                                                     onclick="openModalWithData('<?php echo $order->mobile_no; ?>')"><?php echo substr($order->mobile_no, 0, 6); ?>XXXX</a>
                                             </td>
-                                            <td><?php echo $order->last_order_date != null ? date('Y/m/d', strtotime($order->last_order_date)) : ""; ?>
+                                            <td class="text-warning">
+                                                <?php echo $order->last_order_date != null ? date('d/m/Y', strtotime($order->last_order_date)) : ""; ?>
                                             </td>
                                             <td><?php echo $order->order_count; ?></td>
-                                            <td><?php echo $order->last_curtain_order != null ? date('Y/m/d', strtotime($order->last_curtain_order)) : ""; ?>
+                                            <td class="text-warning">
+                                                <?php echo $order->last_curtain_order != null ? date('d/m/Y', strtotime($order->last_curtain_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->curtain_order != null ? date('Y/m/d', strtotime($order->curtain_order)) : ""; ?>
+                                            <td><?php echo $order->curtain_order != null ? date('d/m/Y', strtotime($order->curtain_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->last_jacket_order != null ? date('Y/m/d', strtotime($order->last_jacket_order)) : ""; ?>
+                                            <td class="text-warning">
+                                                <?php echo $order->last_jacket_order != null ? date('d/m/Y', strtotime($order->last_jacket_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->jacket_order != null ? date('Y/m/d', strtotime($order->jacket_order)) : ""; ?>
+                                            <td><?php echo $order->jacket_order != null ? date('d/m/Y', strtotime($order->jacket_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->last_blanket_order != null ? date('Y/m/d', strtotime($order->last_blanket_order)) : ""; ?>
+                                            <td class="text-warning">
+                                                <?php echo $order->last_blanket_order != null ? date('d/m/Y', strtotime($order->last_blanket_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->blanket_order != null ? date('Y/m/d', strtotime($order->blanket_order)) : ""; ?>
+                                            <td><?php echo $order->blanket_order != null ? date('d/m/Y', strtotime($order->blanket_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->last_shoe_order != null ? date('Y/m/d', strtotime($order->last_shoe_order)) : ""; ?>
+                                            <td class="text-warning">
+                                                <?php echo $order->last_shoe_order != null ? date('d/m/Y', strtotime($order->last_shoe_order)) : ""; ?>
                                             </td>
-                                            <td><?php echo $order->shoe_order != null ? date('Y/m/d', strtotime($order->shoe_order)) : ""; ?>
+                                            <td><?php echo $order->shoe_order != null ? date('d/m/Y', strtotime($order->shoe_order)) : ""; ?>
                                             </td>
                                             <td></td>
                                         </tr>
@@ -616,7 +621,9 @@
                 } // Targets the 5th column (index 4) for date sorting
             ],
             buttons: [
-                'excelHtml5' // Export to Excel
+                // 'excelHtml5',
+                'csvHtml5' // Export to Excel
+
             ],
 
 
