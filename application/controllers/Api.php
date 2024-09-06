@@ -286,6 +286,7 @@ class Api extends REST_Controller
                 if ($g->PrimaryService == 'CL' || $g->PrimaryService == 'SHC' || $g->PrimaryService == 'SHDC') {
 
                     $mobile_no = $this->store_model->get_customer_mobile_no($g->StoreName, $g->OrderNumber);
+                    echo $this->db->last_query();
 
                     if ($g->PrimaryService == 'SHC' || $g->PrimaryService == 'SHDC') {
 
