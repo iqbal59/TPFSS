@@ -139,6 +139,7 @@ class Api extends REST_Controller
 
 
                 $this->Voucher_model->add_model("storesales_qdc", $data);
+                echo $this->db->last_query();
 
 
             }
