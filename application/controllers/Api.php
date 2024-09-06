@@ -277,7 +277,7 @@ class Api extends REST_Controller
             //print_r($garmentInfo);
 
             $garmentInfo = json_decode($garmentInfo);
-            //echo $garmentInfo;
+            echo $garmentInfo;
 
             foreach ($garmentInfo as $g) {
 
