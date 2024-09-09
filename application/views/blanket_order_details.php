@@ -320,6 +320,10 @@
         background-color: #000 !important;
         border-color: #000 !important;
     }
+
+    .table-responsive {
+        overflow-y: hidden;
+    }
     </style>
 </head>
 
