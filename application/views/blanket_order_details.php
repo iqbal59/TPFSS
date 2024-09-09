@@ -434,7 +434,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3>Customer Orders with Date Filtering</h3>
+                            <h3>Blanket Orders</h3>
 
                         </div>
                         <div class="card-body">
@@ -445,14 +445,9 @@
                             <label for="date-column">Select Date Column:</label>
                             <select id="date-column">
                                 <option value="3">Last Order Date</option>
-                                <option value="5">Last Curtain Order</option>
-                                <option value="6">Curtain Order</option>
-                                <option value="7">Last Jacket Order</option>
-                                <option value="8">Jacket Order</option>
-                                <option value="9">Last Blanket Order</option>
-                                <option value="10">Blanket Order</option>
-                                <option value="11">Last Shoe Order</option>
-                                <option value="12">Shoe Order</option>
+                                <option value="5">Last Blanket Order</option>
+                                <option value="6">Blanket Order</option>
+
                             </select>
 
                             <!-- Date range filter inputs -->
@@ -463,14 +458,8 @@
                             <input type="text" id="max-date" placeholder="To Date">
 
 
-                            <a href="<?php echo base_url('partner/order_details'); ?>?type=curtain"
-                                class="btn btn-primary">Curtain</a>
-                            <a href="<?php echo base_url('partner/order_details'); ?>?type=jacket"
-                                class="btn btn-primary">Jacket</a>
-                            <a href="<?php echo base_url('partner/order_details'); ?>?type=blanket"
-                                class="btn btn-primary">Blanket</a>
-                            <a href="<?php echo base_url('partner/order_details'); ?>?type=shoe"
-                                class="btn btn-primary">Shoe</a>
+                            <a href="<?php echo base_url('partner/order_details'); ?>" class="btn btn-primary">All</a>
+
 
 
                             <br /><br />
@@ -484,15 +473,11 @@
                                             <th scope="col">Mobile No.</th>
                                             <th scope="col" class="text-warning">Last Order Date</th>
                                             <th scope="col">Order Count</th>
-                                            <th scope="col" class="text-warning">Last Curtain Order</th>
-                                            <th scope="col">Curtain Order</th>
-                                            <th scope="col" class="text-warning">Last Jacket Order</th>
-                                            <th scope="col">Jacket Order</th>
                                             <th scope="col" class="text-warning">Last Blanket Order</th>
                                             <th scope="col">Blanket Order</th>
-                                            <th scope="col" class="text-warning">Last Shoe Order</th>
-                                            <th scope="col">Shoe Order</th>
-                                            <th scope="col">Package Balance</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Update Date</th>
+
 
                                         </tr>
                                     </thead>
@@ -510,7 +495,7 @@
 
                                             if ($order->curtain_order != null)
                                                 $total_curtain++;
-                                            if ($order->jacket_order != null)
+                                            if ($order->blanket_order != null)
                                                 $total_jacket++;
                                             if ($order->blanket_order != null)
                                                 $total_blanket++;
@@ -531,26 +516,31 @@
                                             </td>
                                             <td><?php echo $order->order_count; ?></td>
                                             <td class="text-warning">
-                                                <?php echo $order->last_curtain_order != null ? date('d/m/Y', strtotime($order->last_curtain_order)) : ""; ?>
-                                            </td>
-                                            <td><?php echo $order->curtain_order != null ? date('d/m/Y', strtotime($order->curtain_order)) : ""; ?>
-                                            </td>
-                                            <td class="text-warning">
-                                                <?php echo $order->last_jacket_order != null ? date('d/m/Y', strtotime($order->last_jacket_order)) : ""; ?>
-                                            </td>
-                                            <td><?php echo $order->jacket_order != null ? date('d/m/Y', strtotime($order->jacket_order)) : ""; ?>
-                                            </td>
-                                            <td class="text-warning">
                                                 <?php echo $order->last_blanket_order != null ? date('d/m/Y', strtotime($order->last_blanket_order)) : ""; ?>
                                             </td>
                                             <td><?php echo $order->blanket_order != null ? date('d/m/Y', strtotime($order->blanket_order)) : ""; ?>
                                             </td>
-                                            <td class="text-warning">
-                                                <?php echo $order->last_shoe_order != null ? date('d/m/Y', strtotime($order->last_shoe_order)) : ""; ?>
+
+                                            <td>
+                                                <select id="status"
+                                                    onchange="update_status('<?php echo $order->id;?>', this.value)">
+                                                    <option value="YTC"
+                                                        <?php echo $order->blanket_status == 'YTC' ? "selected" : ''; ?>>
+                                                        Yet to Contact</option>
+                                                    <option value="UF"
+                                                        <?php echo $order->blanket_status == 'UF' ? "selected" : ''; ?>>
+                                                        Under Followup</option>
+                                                    <option value="OD"
+                                                        <?php echo $order->blanket_order != null ? "selected" : ''; ?>>
+                                                        Order
+                                                        Given
+                                                    </option>
+                                                </select>
                                             </td>
-                                            <td><?php echo $order->shoe_order != null ? date('d/m/Y', strtotime($order->shoe_order)) : ""; ?>
-                                            </td>
-                                            <td></td>
+                                            <td><span id="<?php echo $order->id;?>">
+
+                                                    <?php if($order->blanket_status_time != null){echo date('d/m/Y H:i:s', strtotime($order->blanket_status_time)); }?>
+                                                </span></td>
                                         </tr>
                                         <?php } ?>
                                 </table>
@@ -579,7 +569,7 @@
         </div>
     </footer>
 
-
+    <!-- 
     <div class="fixed-bottom bg-dark text-white">
         <div class="container p-3">
             <div class="row text-center">
@@ -609,7 +599,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <script src="<?php echo base_url() ?>assets/plugins/jquery/jquery.min.js">
     </script>
@@ -739,6 +729,27 @@
             },
             error: function() {
                 $('#modalBody').html('<p>An error occurred while fetching the data.</p>');
+            }
+        });
+    }
+
+
+    function update_status(id, status) {
+        // Show the modal
+
+
+        // Make the API call
+        $.ajax({
+            url: '<?php echo base_url(); ?>' + 'api/customer_update_blanket_status/' + id + '/' + status,
+            method: 'GET',
+            dataType: "JSON",
+            success: function(response) {
+                // Update the modal's body with the response data
+                console.log(response);
+                $('#' + id).html(response.status_update);
+            },
+            error: function(er) {
+                console.log(er);
             }
         });
     }

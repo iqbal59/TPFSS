@@ -205,6 +205,11 @@ class Store_model extends CI_Model
         return $this->db->update('customers', $params);
     }
 
+    public function update_customers_by_id($id, $params)
+    {
+        $this->db->where('id', $id);
+        return $this->db->update('customers', $params);
+    }
 
     public function change_password($id, $params, $old_password)
     {

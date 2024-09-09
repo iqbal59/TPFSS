@@ -255,7 +255,60 @@ class Api extends REST_Controller
         curl_close($ch);
     }
 
+    public function customer_update_status_get($id, $status)
+    {
+        date_default_timezone_set('Asia/Kolkata');
+        $time = date('Y-m-d H:i:s');
+        $params = array(
+            'curtain_status' => $status,
+            'curtain_status_time' => $time
+        );
+        $this->store_model->update_customers_by_id($id, $params);
+        $res['status_update'] = date('d/m/Y H:i:s', strtotime($time));
+        echo json_encode($res);
+    }
 
+
+    public function customer_update_jacket_status_get($id, $status)
+    {
+        date_default_timezone_set('Asia/Kolkata');
+        $time = date('Y-m-d H:i:s');
+        $params = array(
+            'jacket_status' => $status,
+            'jacket_status_time' => $time
+        );
+        $this->store_model->update_customers_by_id($id, $params);
+        $res['status_update'] = date('d/m/Y H:i:s', strtotime($time));
+        echo json_encode($res);
+    }
+
+
+    public function customer_update_blanket_status_get($id, $status)
+    {
+        date_default_timezone_set('Asia/Kolkata');
+        $time = date('Y-m-d H:i:s');
+        $params = array(
+            'blanket_status' => $status,
+            'blanket_status_time' => $time
+        );
+        $this->store_model->update_customers_by_id($id, $params);
+        $res['status_update'] = date('d/m/Y H:i:s', strtotime($time));
+        echo json_encode($res);
+    }
+
+
+    public function customer_update_shoe_status_get($id, $status)
+    {
+        date_default_timezone_set('Asia/Kolkata');
+        $time = date('Y-m-d H:i:s');
+        $params = array(
+            'shoe_status' => $status,
+            'shoe_status_time' => $time
+        );
+        $this->store_model->update_customers_by_id($id, $params);
+        $res['status_update'] = date('d/m/Y H:i:s', strtotime($time));
+        echo json_encode($res);
+    }
     public function all_garments_get()
     {
 

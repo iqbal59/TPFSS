@@ -51,7 +51,7 @@ class Common_model extends CI_Model
 
     public function get_orders()
     {
-        $sql = "SELECT * from customers where store_name=(SELECT store_name FROM `stores` where id='" . $this->session->userdata('id') . "');";
+        $sql = "SELECT * from customers where store_name=(SELECT store_name FROM `stores` where id='" . $this->session->userdata('id') . "') order by last_order_date desc;";
         return $query = $this->db->query($sql)->result();
 
     }

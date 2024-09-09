@@ -535,11 +535,27 @@ class Partner extends CI_Controller
         $id = $this->session->userdata('id');
         $data = array();
         $data['page_title'] = 'Order Details';
-        // $data['activities'] = $this->common_model->get_all_by_table('activities', '', array('field' => 'completion_day', 'order_by' => 'asc'));
-        //$data['activities_header1'] = $this->common_model->get_activity_header(1);
-        //$data['activities_header2'] = $this->common_model->get_activity_header(2);
-        //$data['main_content'] = $this->load->view('partner/home', $data, true);
-        $data['order_details'] = $this->common_model->get_orders();
-        $this->load->view('order_details', $data);
+        if ($this->input->get('type') == 'curtain') {
+            $data['order_details'] = $this->common_model->get_orders();
+            $this->load->view('curtainorder_details', $data);
+
+        } else if ($this->input->get('type') == 'jacket') {
+            $data['order_details'] = $this->common_model->get_orders();
+            $this->load->view('jacket_order_details', $data);
+
+        } else if ($this->input->get('type') == 'blanket') {
+            $data['order_details'] = $this->common_model->get_orders();
+            $this->load->view('blanket_order_details', $data);
+
+        } else if ($this->input->get('type') == 'shoe') {
+            $data['order_details'] = $this->common_model->get_orders();
+            $this->load->view('shoe_order_details', $data);
+
+        } else {
+            $data['order_details'] = $this->common_model->get_orders();
+            $this->load->view('order_details', $data);
+        }
+
+
     }
 }
