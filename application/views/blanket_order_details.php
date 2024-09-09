@@ -324,6 +324,53 @@
     .table-responsive {
         overflow-y: hidden;
     }
+
+    /* .table {
+        border: 1px solid black;
+    }
+
+    .table thead th {
+        border-top: 1px solid #000 !important;
+        border-bottom: 1px solid #000 !important;
+        border-left: 1px solid #000;
+        border-right: 1px solid #000;
+    } */
+
+    .border-td {
+        /* border-left: 1px solid #000;
+            border-right: 1px solid #000;
+            border-top: none !important;
+            border-bottom: none !important; */
+        /* color: #000 !important; */
+        background-color: #000000;
+        opacity: 0.2;
+
+    }
+
+    .bg-secondary {
+        background-color: #d3d3d3 !important;
+    }
+
+    .table td,
+    th {
+        font-size: 0.875rem !important;
+        vertical-align: middle;
+        ;
+
+    }
+
+    table.dataTable thead th {
+        text-align: center;
+        vertical-align: middle;
+        ;
+    }
+
+    .highlight-background {}
+
+    .text-dark {
+
+        opacity: 1 !important;
+    }
     </style>
 </head>
 
@@ -437,45 +484,52 @@
 
                 <div class="col-md-12">
                     <div class="card">
-                        <div class="card-header">
+                        <!-- <div class="card-header">
                             <h3>Blanket Orders</h3>
 
-                        </div>
+                        </div> -->
                         <div class="card-body">
+                            <div class="row gy-2 gx-3 align-items-center">
+                                <div class="col-auto">
+                                    <!-- Dropdown to select date column -->
+                                    <label for="date-column" class="visually-hidden">Select Date Column:</label>
+                                    <select id="date-column" class="form-select form-select-sm">
+                                        <option value="3">Last Order Date</option>
+                                        <option value="5">Last Blanket Order</option>
+                                        <option value="6">Blanket Order</option>
+
+                                    </select>
+
+                                </div>
+                                <!-- Date range filter inputs -->
+                                <div class="col-auto">
+                                    <label for="min-date" class="visually-hidden">Start Date:</label>
+                                    <input type="text" id="min-date" class="form-control form-control-sm"
+                                        placeholder="From Date">
+                                </div>
+                                <div class="col-auto">
+                                    <label for="max-date" class="visually-hidden">End Date:</label>
+                                    <input type="text" id="max-date" class="form-control form-control-sm"
+                                        placeholder="To Date">
+                                </div>
+                                <div class="col-auto">
+
+                                    <a href="<?php echo base_url('partner/order_details'); ?>"
+                                        class="btn btn-outline-secondary btn-sm">All</a>
+                                </div>
+                            </div>
 
 
-
-                            <!-- Dropdown to select date column -->
-                            <label for="date-column">Select Date Column:</label>
-                            <select id="date-column">
-                                <option value="3">Last Order Date</option>
-                                <option value="5">Last Blanket Order</option>
-                                <option value="6">Blanket Order</option>
-
-                            </select>
-
-                            <!-- Date range filter inputs -->
-                            <label for="min-date">Start Date:</label>
-                            <input type="text" id="min-date" placeholder="From Date">
-
-                            <label for="max-date">End Date:</label>
-                            <input type="text" id="max-date" placeholder="To Date">
-
-
-                            <a href="<?php echo base_url('partner/order_details'); ?>" class="btn btn-primary">All</a>
-
-
-
-                            <br /><br />
+                            <br />
 
                             <div class="table-responsive">
                                 <table class="table  table-light table-striped" id="sp_table">
                                     <thead>
-                                        <tr>
+                                        <tr class="table-dark">
                                             <th scope="col"></th>
                                             <th scope="col">Cust Id</th>
                                             <th scope="col">Mobile No.</th>
-                                            <th scope="col" class="text-warning">Last Order Date</th>
+                                            <th scope="col">Last Order Date</th>
                                             <th scope="col">Order Count</th>
                                             <th scope="col" class="text-warning">Last Blanket Order</th>
                                             <th scope="col">Blanket Order</th>
@@ -511,15 +565,18 @@
                                         <tr>
                                             <th scope="row"><?php echo $i++; ?></th>
                                             <td><?php echo $order->customer_id ?></td>
-                                            <td><a class="btn btn-primary btn-sm"
+                                            <td>
+                                                <a class="btn btn-default btn-sm"
                                                     data-id="<?php echo $order->mobile_no; ?>"
-                                                    onclick="openModalWithData('<?php echo $order->mobile_no; ?>')"><?php echo substr($order->mobile_no, 0, 6); ?>XXXX</a>
+                                                    onclick="openModalWithData('<?php echo $order->mobile_no; ?>')"
+                                                    data-bs-toggle="tooltip" data-bs-placement="right"
+                                                    title="Click to get Details"><?php echo substr($order->mobile_no, 0, 6); ?>XXXX</a>
                                             </td>
-                                            <td class="text-warning">
+                                            <td>
                                                 <?php echo $order->last_order_date != null ? date('d/m/Y', strtotime($order->last_order_date)) : ""; ?>
                                             </td>
                                             <td><?php echo $order->order_count; ?></td>
-                                            <td class="text-warning">
+                                            <td class="bg-secondary">
                                                 <?php echo $order->last_blanket_order != null ? date('d/m/Y', strtotime($order->last_blanket_order)) : ""; ?>
                                             </td>
                                             <td><?php echo $order->blanket_order != null ? date('d/m/Y', strtotime($order->blanket_order)) : ""; ?>
@@ -550,13 +607,13 @@
                                 </table>
                             </div>
 
+
                         </div>
                     </div>
+
+
                 </div>
-
-
             </div>
-        </div>
 
     </main>
 
@@ -648,10 +705,14 @@
                 [3, 'desc']
 
             ],
-            dom: 'Bfrtip',
+            dom: '<"row"<"col-sm-6"B><"col-sm-6"f>>tip',
             buttons: [
                 // 'excelHtml5',
-                'csvHtml5' // Export to Excel
+                {
+                    extend: 'csvHtml5',
+                    title: 'Export',
+                    text: 'Export'
+                }, // Export to Excel
 
             ],
 
