@@ -805,7 +805,7 @@
 
         // Make the API call
         $.ajax({
-            url: '<?php echo base_url(); ?>' + 'api/customer_update_curtain_status/' + id + '/' + status,
+            url: '<?php echo base_url(); ?>' + 'api/customer_update_status/' + id + '/' + status,
             method: 'GET',
             dataType: "JSON",
             success: function(response) {
