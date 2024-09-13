@@ -13,62 +13,62 @@
     <link rel="stylesheet" href="//cdn.datatables.net/fixedheader/3.1.9/css/fixedHeader.dataTables.min.css" />
 
     <style type="text/css">
-    section #services {
-        /*text-align: center;*/
-        transform: translatez(0);
-        margin: 0;
-        padding: 0;
-    }
+        section #services {
+            /*text-align: center;*/
+            transform: translatez(0);
+            margin: 0;
+            padding: 0;
+        }
 
-    section #services li {
-        width: 40px;
-        height: 50px;
-        display: inline-block;
-        margin-right: 10px;
-        list-style: none;
-    }
+        section #services li {
+            width: 40px;
+            height: 50px;
+            display: inline-block;
+            margin-right: 10px;
+            list-style: none;
+        }
 
-    section #services li div {
-        width: 40px;
-        height: 40px;
-        color: #FFBE0E;
-        font-size: 1.5em;
-        text-align: center;
-        line-height: 40px;
-        background-color: #fff;
-        transition: all 0.5s ease;
-    }
+        section #services li div {
+            width: 40px;
+            height: 40px;
+            color: #FFBE0E;
+            font-size: 1.5em;
+            text-align: center;
+            line-height: 40px;
+            background-color: #fff;
+            transition: all 0.5s ease;
+        }
 
-    section #services li a {
-        color: #FFBE0E;
-    }
+        section #services li a {
+            color: #FFBE0E;
+        }
 
-    section #services li div:hover {
-        transform: rotate(360deg);
-        border-radius: 100px;
-    }
+        section #services li div:hover {
+            transform: rotate(360deg);
+            border-radius: 100px;
+        }
 
-    .credits a {
-        display: block;
-        text-align: center;
-        color: #74d4b3;
-        text-decoration: none;
-        font-size: 24px;
-        margin-top: 50px;
-        background: white;
-        padding: 20px;
-        max-width: 300px;
-    }
+        .credits a {
+            display: block;
+            text-align: center;
+            color: #74d4b3;
+            text-decoration: none;
+            font-size: 24px;
+            margin-top: 50px;
+            background: white;
+            padding: 20px;
+            max-width: 300px;
+        }
 
-    footer {
-        /* background: #404040; */
-        position: relative;
-        bottom: 0;
-        left: 0;
-    }
+        footer {
+            /* background: #404040; */
+            position: relative;
+            bottom: 0;
+            left: 0;
+        }
 
 
-    /* footer {
+        /* footer {
         position: fixed;
         left: 0;
         bottom: 0;
@@ -78,254 +78,254 @@
         text-align: center;
     } */
 
-    .shadow-sm {
-        cursor: pointer;
-    }
+        .shadow-sm {
+            cursor: pointer;
+        }
 
-    .row.equal-cols {
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex-wrap: wrap;
-        -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
-    }
+        .row.equal-cols {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-wrap: wrap;
+            -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        }
 
-    .row.equal-cols:before,
-    .row.equal-cols:after {
-        display: block;
-    }
+        .row.equal-cols:before,
+        .row.equal-cols:after {
+            display: block;
+        }
 
-    .row.equal-cols>[class*='col-'] {
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-flex-direction: column;
-        -ms-flex-direction: column;
-        flex-direction: column;
-    }
+        .row.equal-cols>[class*='col-'] {
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-flex-direction: column;
+            -ms-flex-direction: column;
+            flex-direction: column;
+        }
 
-    .row.equal-cols>[class*='col-']>* {
-        -webkit-flex: 1 1 auto;
-        -ms-flex: 1 1 auto;
-        flex: 1 1 auto;
-    }
+        .row.equal-cols>[class*='col-']>* {
+            -webkit-flex: 1 1 auto;
+            -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+        }
 
-    .card-text {
-        font-size: 14px;
-    }
+        .card-text {
+            font-size: 14px;
+        }
 
-    .bg-top {
-        background-color: #212121;
-    }
+        .bg-top {
+            background-color: #212121;
+        }
 
-    .nav-tabs {
-        border: 0;
-        padding: 15px 0.7rem;
-    }
+        .nav-tabs {
+            border: 0;
+            padding: 15px 0.7rem;
+        }
 
-    .nav-tabs:not(.nav-justified)>.nav-item>.nav-link.active {
-        box-shadow: 0px 5px 35px 0px rgba(0, 0, 0, 0.3);
-    }
+        .nav-tabs:not(.nav-justified)>.nav-item>.nav-link.active {
+            box-shadow: 0px 5px 35px 0px rgba(0, 0, 0, 0.3);
+        }
 
-    .card .nav-tabs {
-        border-top-right-radius: 0.1875rem;
-        border-top-left-radius: 0.1875rem;
-    }
+        .card .nav-tabs {
+            border-top-right-radius: 0.1875rem;
+            border-top-left-radius: 0.1875rem;
+        }
 
-    .nav-tabs>.nav-item>.nav-link {
-        color: #888888;
-        margin: 0;
-        margin-right: 5px;
-        background-color: transparent;
-        border: 1px solid transparent;
-        border-radius: 30px;
-        font-size: 14px;
-        padding: 11px 23px;
-        line-height: 1.5;
-    }
+        .nav-tabs>.nav-item>.nav-link {
+            color: #888888;
+            margin: 0;
+            margin-right: 5px;
+            background-color: transparent;
+            border: 1px solid transparent;
+            border-radius: 30px;
+            font-size: 14px;
+            padding: 11px 23px;
+            line-height: 1.5;
+        }
 
-    .nav-tabs>.nav-item>.nav-link:hover {
-        background-color: transparent;
-    }
+        .nav-tabs>.nav-item>.nav-link:hover {
+            background-color: transparent;
+        }
 
-    .nav-tabs>.nav-item>.nav-link.active {
-        background-color: #444;
-        border-radius: 30px;
-        color: #FFFFFF;
-    }
+        .nav-tabs>.nav-item>.nav-link.active {
+            background-color: #444;
+            border-radius: 30px;
+            color: #FFFFFF;
+        }
 
-    .nav-tabs>.nav-item>.nav-link i.now-ui-icons {
-        font-size: 14px;
-        position: relative;
-        top: 1px;
-        margin-right: 3px;
-    }
+        .nav-tabs>.nav-item>.nav-link i.now-ui-icons {
+            font-size: 14px;
+            position: relative;
+            top: 1px;
+            margin-right: 3px;
+        }
 
-    .nav-tabs.nav-justified>.nav-item>.nav-link {
-        color: #FFFFFF;
-    }
+        .nav-tabs.nav-justified>.nav-item>.nav-link {
+            color: #FFFFFF;
+        }
 
-    .nav-tabs.nav-justified>.nav-item>.nav-link.active {
-        background-color: #ccc;
-        color: #000000;
-        font-size: 18px;
-        fornt-weight: 700;
-        border: 1px solid black;
-        text-align: center;
-    }
-
-
-    .nav-tabs.nav-justified>.nav-item>.nav-link:hover {
-        background-color: #ccc;
-        color: #000000;
-        font-size: 18px;
-        fornt-weight: 700;
-        box-shadow: 0px 5px 35px 0px rgba(0, 0, 0, 0.3);
-        text-align: center;
-    }
-
-    .nav-tabs.nav-justified>.nav-item>.nav-link {
-        background-color: #ccc;
-        color: #000000;
-        font-size: 18px;
-        fornt-weight: 700;
-        text-align: center;
-    }
+        .nav-tabs.nav-justified>.nav-item>.nav-link.active {
+            background-color: #ccc;
+            color: #000000;
+            font-size: 18px;
+            fornt-weight: 700;
+            border: 1px solid black;
+            text-align: center;
+        }
 
 
-    .card {
-        border: 0;
-        border-radius: 0.1875rem;
-        display: inline-block;
-        position: relative;
-        width: 100%;
-        margin-bottom: 30px;
-        box-shadow: none;
-    }
+        .nav-tabs.nav-justified>.nav-item>.nav-link:hover {
+            background-color: #ccc;
+            color: #000000;
+            font-size: 18px;
+            fornt-weight: 700;
+            box-shadow: 0px 5px 35px 0px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
 
-    .card .card-header {
-        background-color: transparent;
-        border-bottom: 0;
-        background-color: transparent;
-        border-radius: 0;
-        padding: 0;
-    }
-
-    .card[data-background-color="orange"] {
-        background-color: #f96332;
-    }
-
-    .card[data-background-color="red"] {
-        background-color: #FF3636;
-    }
-
-    .card[data-background-color="yellow"] {
-        background-color: #FFB236;
-    }
-
-    .card[data-background-color="blue"] {
-        background-color: #2CA8FF;
-    }
-
-    .card[data-background-color="green"] {
-        background-color: #15b60d;
-    }
-
-    [data-background-color="orange"] {
-        background-color: #e95e38;
-    }
-
-    [data-background-color="black"] {
-        background-color: #2c2c2c;
-    }
-
-    [data-background-color]:not([data-background-color="gray"]) {
-        color: #FFFFFF;
-    }
-
-    [data-background-color]:not([data-background-color="gray"]) p {
-        color: #FFFFFF;
-    }
-
-    [data-background-color]:not([data-background-color="gray"]) a:not(.btn):not(.dropdown-item) {
-        color: #FFFFFF;
-    }
-
-    [data-background-color]:not([data-background-color="gray"]) .nav-tabs>.nav-item>.nav-link i.now-ui-icons {
-        color: #FFFFFF;
-    }
+        .nav-tabs.nav-justified>.nav-item>.nav-link {
+            background-color: #ccc;
+            color: #000000;
+            font-size: 18px;
+            fornt-weight: 700;
+            text-align: center;
+        }
 
 
-    @font-face {
-        font-family: 'Nucleo Outline';
-        src: url("https://github.com/creativetimofficial/now-ui-kit/blob/master/assets/fonts/nucleo-outline.eot");
-        src: url("https://github.com/creativetimofficial/now-ui-kit/blob/master/assets/fonts/nucleo-outline.eot") format("embedded-opentype");
-        src: url("https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/fonts/nucleo-outline.woff2");
-        font-weight: normal;
-        font-style: normal;
+        .card {
+            border: 0;
+            border-radius: 0.1875rem;
+            display: inline-block;
+            position: relative;
+            width: 100%;
+            margin-bottom: 30px;
+            box-shadow: none;
+        }
 
-    }
+        .card .card-header {
+            background-color: transparent;
+            border-bottom: 0;
+            background-color: transparent;
+            border-radius: 0;
+            padding: 0;
+        }
 
-    .now-ui-icons {
-        display: inline-block;
-        font: normal normal normal 14px/1 'Nucleo Outline';
-        font-size: inherit;
-        speak: none;
-        text-transform: none;
-        /* Better Font Rendering */
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-    }
+        .card[data-background-color="orange"] {
+            background-color: #f96332;
+        }
 
-    .album {
-        min-height: calc(100vh - 350px);
-    }
+        .card[data-background-color="red"] {
+            background-color: #FF3636;
+        }
 
-    .nav-tabs.nav-justified li {
-        border-right: 20px solid rgba(255, 255, 255, 0.00);
-    }
+        .card[data-background-color="yellow"] {
+            background-color: #FFB236;
+        }
 
-    .nav-tabs.nav-justified li:last-child {
-        border-right-width: 0px;
-    }
+        .card[data-background-color="blue"] {
+            background-color: #2CA8FF;
+        }
 
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-        border-radius: 50% !important;
-        cursor: pointer;
-        padding: 0.5em 0.9em !important;
-    }
+        .card[data-background-color="green"] {
+            background-color: #15b60d;
+        }
+
+        [data-background-color="orange"] {
+            background-color: #e95e38;
+        }
+
+        [data-background-color="black"] {
+            background-color: #2c2c2c;
+        }
+
+        [data-background-color]:not([data-background-color="gray"]) {
+            color: #FFFFFF;
+        }
+
+        [data-background-color]:not([data-background-color="gray"]) p {
+            color: #FFFFFF;
+        }
+
+        [data-background-color]:not([data-background-color="gray"]) a:not(.btn):not(.dropdown-item) {
+            color: #FFFFFF;
+        }
+
+        [data-background-color]:not([data-background-color="gray"]) .nav-tabs>.nav-item>.nav-link i.now-ui-icons {
+            color: #FFFFFF;
+        }
 
 
-    .dataTables_wrapper .dataTables_paginate .paginate_button {
-        /* border-radius: 0; */
-        /* background: #888888; */
-        color: #888;
-    }
+        @font-face {
+            font-family: 'Nucleo Outline';
+            src: url("https://github.com/creativetimofficial/now-ui-kit/blob/master/assets/fonts/nucleo-outline.eot");
+            src: url("https://github.com/creativetimofficial/now-ui-kit/blob/master/assets/fonts/nucleo-outline.eot") format("embedded-opentype");
+            src: url("https://raw.githack.com/creativetimofficial/now-ui-kit/master/assets/fonts/nucleo-outline.woff2");
+            font-weight: normal;
+            font-style: normal;
 
-    .page-item.active .page-link {
-        color: #fff !important;
-        background: green;
-        background-color: #000 !important;
-    }
+        }
 
-    .page-link {
-        color: #000 !important;
-        background-color: #fff !important;
-        border: 1px solid #dee2e6 !important;
-    }
+        .now-ui-icons {
+            display: inline-block;
+            font: normal normal normal 14px/1 'Nucleo Outline';
+            font-size: inherit;
+            speak: none;
+            text-transform: none;
+            /* Better Font Rendering */
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
 
-    .page-link:hover {
-        color: #fff !important;
-        background-color: #000 !important;
-        border-color: #000 !important;
-    }
+        .album {
+            min-height: calc(100vh - 350px);
+        }
 
-    .table-responsive {
-        overflow-y: hidden;
-    }
+        .nav-tabs.nav-justified li {
+            border-right: 20px solid rgba(255, 255, 255, 0.00);
+        }
 
-    /* .table {
+        .nav-tabs.nav-justified li:last-child {
+            border-right-width: 0px;
+        }
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            border-radius: 50% !important;
+            cursor: pointer;
+            padding: 0.5em 0.9em !important;
+        }
+
+
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            /* border-radius: 0; */
+            /* background: #888888; */
+            color: #888;
+        }
+
+        .page-item.active .page-link {
+            color: #fff !important;
+            background: green;
+            background-color: #000 !important;
+        }
+
+        .page-link {
+            color: #000 !important;
+            background-color: #fff !important;
+            border: 1px solid #dee2e6 !important;
+        }
+
+        .page-link:hover {
+            color: #fff !important;
+            background-color: #000 !important;
+            border-color: #000 !important;
+        }
+
+        .table-responsive {
+            overflow-y: hidden;
+        }
+
+        /* .table {
         border: 1px solid black;
     }
 
@@ -336,47 +336,47 @@
         border-right: 1px solid #000;
     } */
 
-    .border-td {
-        /* border-left: 1px solid #000;
+        .border-td {
+            /* border-left: 1px solid #000;
             border-right: 1px solid #000;
             border-top: none !important;
             border-bottom: none !important; */
-        /* color: #000 !important; */
-        background-color: #000000;
-        opacity: 0.2;
+            /* color: #000 !important; */
+            background-color: #000000;
+            opacity: 0.2;
 
-    }
+        }
 
-    .bg-secondary {
-        background-color: #d3d3d3 !important;
-    }
+        .bg-secondary {
+            background-color: #d3d3d3 !important;
+        }
 
-    .table td,
-    th {
-        font-size: 0.875rem !important;
-        vertical-align: middle;
-        ;
+        .table td,
+        th {
+            font-size: 0.875rem !important;
+            vertical-align: middle;
+            ;
 
-    }
+        }
 
-    table.dataTable thead th {
-        text-align: center;
-        vertical-align: middle;
-        ;
-    }
+        table.dataTable thead th {
+            text-align: center;
+            vertical-align: middle;
+            ;
+        }
 
-    table.dataTable tfoot th {
-        text-align: center;
-        vertical-align: middle;
-        ;
-    }
+        table.dataTable tfoot th {
+            text-align: center;
+            vertical-align: middle;
+            ;
+        }
 
-    .highlight-background {}
+        .highlight-background {}
 
-    .text-dark {
+        .text-dark {
 
-        opacity: 1 !important;
-    }
+            opacity: 1 !important;
+        }
     </style>
 </head>
 
@@ -457,9 +457,9 @@
 
 
                 if ($this->session->userdata('is_partner_login')) { ?>
-                <span class="navbar-text">
-                    Welcome <?php echo $this->session->userdata('name'); ?>
-                </span>
+                    <span class="navbar-text">
+                        Welcome <?php echo $this->session->userdata('name'); ?>
+                    </span>
 
                 <?php } ?>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
@@ -506,14 +506,14 @@
                                         <label for="date-column" class="visually-hidden">Select Date Column:</label>
                                         <select id="date-column" class="form-select form-select-sm">
                                             <option value="3">Last Order Date</option>
-                                            <option value="5">Last Curtain Order</option>
-                                            <option value="6">Curtain Order</option>
-                                            <option value="7">Last Jacket Order</option>
-                                            <option value="8">Jacket Order</option>
-                                            <option value="9">Last Blanket Order</option>
-                                            <option value="10">Blanket Order</option>
-                                            <option value="11">Last Shoe Order</option>
-                                            <option value="12">Shoe Order</option>
+                                            <option value="5">Curtain Order (Before 1st Sep)</option>
+                                            <option value="6">Curtain Order (After 1st Sep)</option>
+                                            <option value="7">Jacket Order (Before 1st Sep)</option>
+                                            <option value="8">Jacket Order (After 1st Sep)</option>
+                                            <option value="9">Blanket Order (Before 1st Sep)</option>
+                                            <option value="10">Blanket Order (After 1st Sep)</option>
+                                            <option value="11">Last Shoe Order(Before 1st Sep)</option>
+                                            <option value="12">Shoe Order (After 1st Sep)</option>
                                         </select>
                                     </div>
                                     <div class="col-auto">
@@ -554,22 +554,30 @@
                                                 <th scope="col">Mobile No.</th>
                                                 <th scope="col">Last Order</th>
                                                 <th scope="col">Order<br />Count</th>
-                                                <th scope="col" class="text-warning">Curtain</br> <small><em>(Before
-                                                            1-Sep)</em></small></th>
-                                                <th scope="col">Curtain</br> <small><em>(After
-                                                            1-Sep)</em></small></th>
-                                                <th scope="col" class="text-warning">Jacket</br> <small><em>(Before
-                                                            1-Sep)</em></small></th>
-                                                <th scope="col">Jacket</br> <small><em>(After
-                                                            1-Sep)</em></small></th>
-                                                <th scope="col" class="text-warning">Blanket</br> <small><em>(Before
-                                                            1-Sep)</em></small></th>
-                                                <th scope="col">Blanket</br> <small><em>(After
-                                                            1-Sep)</em></small></th>
-                                                <th scope="col" class="text-warning">Shoe</br> <small><em>(Before
-                                                            1-Sep)</em></small></th>
-                                                <th scope="col">Shoe</br> <small><em>(After
-                                                            1-Sep)</em></small></th>
+                                                <th scope="col" class="text-warning">Curtain<br>
+                                                    <small><em>(Before 1-Sep)</em></small>
+                                                </th>
+                                                <th scope="col">Curtain<br>
+                                                    <small><em>(After 1-Sep)</em></small>
+                                                </th>
+                                                <th scope="col" class="text-warning">Jacket<br>
+                                                    <small><em>(Before 1-Sep)</em></small>
+                                                </th>
+                                                <th scope="col">Jacket<br>
+                                                    <small><em>(After 1-Sep)</em></small>
+                                                </th>
+                                                <th scope="col" class="text-warning">Blankeg<br>
+                                                    <small><em>(Before 1-Sep)</em></small>
+                                                </th>
+                                                <th scope="col">Blanket<br>
+                                                    <small><em>(After 1-Sep)</em></small>
+                                                </th>
+                                                <th scope="col" class="text-warning">Shoe<br>
+                                                    <small><em>(Before 1-Sep)</em></small>
+                                                </th>
+                                                <th scope="col">Shoe<br>
+                                                    <small><em>(After 1-Sep)</em></small>
+                                                </th>
                                                 <!-- <th scope="col">Package</br>Balance</th> -->
 
                                             </tr>
@@ -597,43 +605,43 @@
 
 
                                                 ?>
-                                            <tr>
-                                                <th scope="row"><?php echo $i++; ?></th>
-                                                <td><?php echo $order->customer_id ?></td>
-                                                <td><a class="btn btn-default btn-sm"
-                                                        data-id="<?php echo $order->mobile_no; ?>"
-                                                        onclick="openModalWithData('<?php echo $order->mobile_no; ?>')"
-                                                        data-bs-toggle="tooltip" data-bs-placement="right"
-                                                        title="Click to get Details"><?php echo substr($order->mobile_no, 0, 6); ?>XXXX</a>
-                                                </td>
-                                                <td>
-                                                    <?php echo $order->last_order_date != null ? date('d/m/Y', strtotime($order->last_order_date)) : ""; ?>
-                                                </td>
-                                                <td><?php echo $order->order_count; ?></td>
-                                                <td class="bg-secondary">
+                                                <tr>
+                                                    <th scope="row"><?php echo $i++; ?></th>
+                                                    <td><?php echo $order->customer_id ?></td>
+                                                    <td><a class="btn btn-default btn-sm"
+                                                            data-id="<?php echo $order->mobile_no; ?>"
+                                                            onclick="openModalWithData('<?php echo $order->mobile_no; ?>')"
+                                                            data-bs-toggle="tooltip" data-bs-placement="right"
+                                                            title="Click to get Details"><?php echo substr($order->mobile_no, 0, 6); ?>XXXX</a>
+                                                    </td>
+                                                    <td>
+                                                        <?php echo $order->last_order_date != null ? date('d/m/Y', strtotime($order->last_order_date)) : ""; ?>
+                                                    </td>
+                                                    <td><?php echo $order->order_count; ?></td>
+                                                    <td class="bg-secondary">
 
-                                                    <?php echo $order->last_curtain_order != null ? date('d/m/Y', strtotime($order->last_curtain_order)) : ""; ?>
+                                                        <?php echo $order->last_curtain_order != null ? date('d/m/Y', strtotime($order->last_curtain_order)) : ""; ?>
 
-                                                </td>
-                                                <td><?php echo $order->curtain_order != null ? date('d/m/Y', strtotime($order->curtain_order)) : ""; ?>
-                                                </td>
-                                                <td class="bg-secondary">
-                                                    <?php echo $order->last_jacket_order != null ? date('d/m/Y', strtotime($order->last_jacket_order)) : ""; ?>
-                                                </td>
-                                                <td><?php echo $order->jacket_order != null ? date('d/m/Y', strtotime($order->jacket_order)) : ""; ?>
-                                                </td>
-                                                <td class="bg-secondary">
-                                                    <?php echo $order->last_blanket_order != null ? date('d/m/Y', strtotime($order->last_blanket_order)) : ""; ?>
-                                                </td>
-                                                <td><?php echo $order->blanket_order != null ? date('d/m/Y', strtotime($order->blanket_order)) : ""; ?>
-                                                </td>
-                                                <td class="bg-secondary">
-                                                    <?php echo $order->last_shoe_order != null ? date('d/m/Y', strtotime($order->last_shoe_order)) : ""; ?>
-                                                </td>
-                                                <td><?php echo $order->shoe_order != null ? date('d/m/Y', strtotime($order->shoe_order)) : ""; ?>
-                                                </td>
-                                                <!-- <td></td> -->
-                                            </tr>
+                                                    </td>
+                                                    <td><?php echo $order->curtain_order != null ? date('d/m/Y', strtotime($order->curtain_order)) : ""; ?>
+                                                    </td>
+                                                    <td class="bg-secondary">
+                                                        <?php echo $order->last_jacket_order != null ? date('d/m/Y', strtotime($order->last_jacket_order)) : ""; ?>
+                                                    </td>
+                                                    <td><?php echo $order->jacket_order != null ? date('d/m/Y', strtotime($order->jacket_order)) : ""; ?>
+                                                    </td>
+                                                    <td class="bg-secondary">
+                                                        <?php echo $order->last_blanket_order != null ? date('d/m/Y', strtotime($order->last_blanket_order)) : ""; ?>
+                                                    </td>
+                                                    <td><?php echo $order->blanket_order != null ? date('d/m/Y', strtotime($order->blanket_order)) : ""; ?>
+                                                    </td>
+                                                    <td class="bg-secondary">
+                                                        <?php echo $order->last_shoe_order != null ? date('d/m/Y', strtotime($order->last_shoe_order)) : ""; ?>
+                                                    </td>
+                                                    <td><?php echo $order->shoe_order != null ? date('d/m/Y', strtotime($order->shoe_order)) : ""; ?>
+                                                    </td>
+                                                    <!-- <td></td> -->
+                                                </tr>
                                             <?php } ?>
 
                                         <tfoot>
@@ -748,7 +756,7 @@
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
     <script src="//cdn.datatables.net/1.10.25/js/jquery.dataTables.min.js"></script>
@@ -763,131 +771,149 @@
     <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.3.5/js/buttons.print.min.js"></script>
 
     <script type="text/javascript">
-    function addDays(date, days) {
+        function addDays(date, days) {
 
-        result = new Date(date);
-        result.setDate(result.getDate() + parseInt(days));
-        return result;
-    }
-    $(document).ready(function() {
+            result = new Date(date);
+            result.setDate(result.getDate() + parseInt(days));
+            return result;
+        }
+        $(document).ready(function () {
 
-        $.fn.dataTable.moment('DD/MM/YYYY');
+            $.fn.dataTable.moment('DD/MM/YYYY');
 
-        $('#min-date, #max-date').datepicker({
-            dateFormat: 'dd/mm/yy'
-        });
+            $('#min-date, #max-date').datepicker({
+                dateFormat: 'dd/mm/yy'
+            });
 
-        var sp_table = $('#sp_table').DataTable({
-            responsive: true,
-            "pageLength": 100,
-            fixedHeader: {
-                header: true,
-                footer: true
-            },
-            //ordering: false,
-            dom: '<"row"<"col-sm-6"><"col-sm-6 text-end"B>>tip',
-            paging: true, // works with or without paging
+            var sp_table = $('#sp_table').DataTable({
+                responsive: true,
+                "pageLength": 100,
+                fixedHeader: {
+                    header: true,
+                    footer: true
+                },
+                //ordering: false,
+                dom: '<"row"<"col-sm-6"><"col-sm-6 text-end"B>>tip',
+                paging: true, // works with or without paging
 
-            order: [
+                order: [
 
-                [3, 'desc']
+                    [3, 'desc']
 
-            ],
+                ],
 
-            buttons: [
-                // 'excelHtml5',
-                {
-                    extend: 'csvHtml5',
-                    title: 'Export',
-                    text: 'Export'
-                }, // Export to Excel
-
-            ],
-
-
-        });
-        // new $.fn.dataTable.FixedHeader(sp_table);
-        // new $.fn.dataTable.FixedFooter(sp_table);
-
-        // sp_table.on('order.dt search.dt', function() {
-        //     sp_table.column(0, {
-        //         search: 'applied',
-        //         order: 'applied'
-        //     }).nodes().each(function(cell, i) {
-        //         cell.innerHTML = i + 1;
-        //     });
-        // }).draw();
+                buttons: [
+                    // 'excelHtml5',
+                    {
+                        extend: 'csvHtml5',
+                        title: 'Order List',
+                        text: 'Export',
+                        exportOptions: {
+                            // columns: [0, 1], // Specify which columns to export
+                            format: {
+                                body: function (data, row, column, node) {
 
 
-        // $('#sp_table_filter').change(function() {
-        //     sp_table.search($(this).val())
-        //         .draw(); // this  is for customized searchbox with datatable search feature.
-        // });
+                                    var anchorElement = $(node).find('a');
+                                    if (anchorElement.length > 0) {
+                                        return anchorElement.text().trim();
+                                    }
 
-        $.fn.dataTable.ext.search.push(
-            function(settings, data, dataIndex) {
-                var min = $('#min-date').val();
-                var max = $('#max-date').val();
-                var selectedColumn = parseInt($('#date-column').val());
 
-                // Get the date from the selected column
-                var date = data[selectedColumn] || '';
-                //alert(date);
 
-                if (!date) {
-                    // Include blank dates by default
-                    return true;
+                                    return data.replace(/\s+/g, ' ').trim();
+                                }
+                            }
+                        }
+
+                    }, // Export to Excel
+
+                ],
+
+
+            });
+            // new $.fn.dataTable.FixedHeader(sp_table);
+            // new $.fn.dataTable.FixedFooter(sp_table);
+
+            // sp_table.on('order.dt search.dt', function() {
+            //     sp_table.column(0, {
+            //         search: 'applied',
+            //         order: 'applied'
+            //     }).nodes().each(function(cell, i) {
+            //         cell.innerHTML = i + 1;
+            //     });
+            // }).draw();
+
+
+            // $('#sp_table_filter').change(function() {
+            //     sp_table.search($(this).val())
+            //         .draw(); // this  is for customized searchbox with datatable search feature.
+            // });
+
+            $.fn.dataTable.ext.search.push(
+                function (settings, data, dataIndex) {
+                    var min = $('#min-date').val();
+                    var max = $('#max-date').val();
+                    var selectedColumn = parseInt($('#date-column').val());
+
+                    // Get the date from the selected column
+                    var date = data[selectedColumn] || '';
+                    //alert(date);
+
+                    if (!date) {
+                        // Include blank dates by default
+                        return true;
+                    }
+
+                    var dateObj = $.datepicker.parseDate('dd/mm/yy', date);
+
+                    if (
+                        (min === "" || $.datepicker.parseDate('dd/mm/yy', min) <= dateObj) &&
+                        (max === "" || dateObj <= $.datepicker.parseDate('dd/mm/yy', max))
+                    ) {
+                        return true;
+                    }
+
+                    return false; // Exclude the row if it doesn't match the selected date column
                 }
+            );
 
-                var dateObj = $.datepicker.parseDate('dd/mm/yy', date);
-
-                if (
-                    (min === "" || $.datepicker.parseDate('dd/mm/yy', min) <= dateObj) &&
-                    (max === "" || dateObj <= $.datepicker.parseDate('dd/mm/yy', max))
-                ) {
-                    return true;
+            $('#min-date, #max-date, #date-column').change(function () {
+                if ($('#min-date').val() && $('#max-date').val() && $('#date-column').val()) {
+                    sp_table.draw();
                 }
+            });
 
-                return false; // Exclude the row if it doesn't match the selected date column
-            }
-        );
+            //End SP Table
 
-        $('#min-date, #max-date, #date-column').change(function() {
-            if ($('#min-date').val() && $('#max-date').val() && $('#date-column').val()) {
-                sp_table.draw();
-            }
+
+
         });
 
-        //End SP Table
 
+        function openModalWithData(mobileNo) {
+            // Show the modal
+            $('#modalBody').html('');
+            $('#contactModal').modal('show');
 
-
-    });
-
-
-    function openModalWithData(mobileNo) {
-        // Show the modal
-        $('#modalBody').html('');
-        $('#contactModal').modal('show');
-
-        // Make the API call
-        $.ajax({
-            url: '<?php echo base_url(); ?>' + 'api/customer_info_by_mobile/' + mobileNo,
-            method: 'GET',
-            success: function(response) {
-                // Update the modal's body with the response data
-                $('#modalBody').html(`
+            // Make the API call
+            $.ajax({
+                url: '<?php echo base_url(); ?>' + 'api/customer_info_by_mobile/' + mobileNo,
+                method: 'GET',
+                success: function (response) {
+                    // Update the modal's body with the response data
+                    $('#modalBody').html(`
             <p>Mobile: ${mobileNo}</p>
             <p>Name: ${response.Name}</p>
             <p>Email: ${response.Email}</p>
             <p>Address: ${response.Address}</p>
           `);
-            },
-            error: function() {
-                $('#modalBody').html('<p>An error occurred while fetching the data.</p>');
-            }
-        });
-    }
+                },
+                error: function () {
+                    $('#modalBody').html('<p>An error occurred while fetching the data.</p>');
+                }
+            });
+        }
     </script>
 </body>
 

@@ -732,7 +732,7 @@
                                     return spanElement.text().trim();
                                 }
 
-                                return data;
+                                return data.trim();
                             }
                         }
                     }
