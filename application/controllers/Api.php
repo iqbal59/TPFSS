@@ -313,8 +313,8 @@ class Api extends REST_Controller
     {
 
         date_default_timezone_set("Asia/Kolkata");
-        $s_from_date = $this->input->post('s_from_date') ? $this->input->post('s_from_date') : date('Y-m-d', strtotime('-1 days'));
-        $s_to_date = $this->input->post('s_to_date') ? $this->input->post('s_to_date') : date('Y-m-d');
+        $s_from_date = $this->input->get('s_from_date') ? $this->input->get('s_from_date') : date('Y-m-d', strtotime('-1 days'));
+        $s_to_date = $this->input->get('s_to_date') ? $this->input->get('s_to_date') : date('Y-m-d');
 
         if ($s_from_date && $s_to_date) {
 
