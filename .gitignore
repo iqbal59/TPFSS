@@ -19,3 +19,4 @@ application/logs/*
 uploads/temppdf/*
 uploads/tempinvoice/*
 uploads/.DS_Store
+assets/.DS_Store

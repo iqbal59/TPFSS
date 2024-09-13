@@ -365,6 +365,12 @@
         ;
     }
 
+    table.dataTable tfoot th {
+        text-align: center;
+        vertical-align: middle;
+        ;
+    }
+
     .highlight-background {}
 
     .text-dark {
@@ -564,7 +570,7 @@
                                                             1-Sep)</em></small></th>
                                                 <th scope="col">Shoe</br> <small><em>(After
                                                             1-Sep)</em></small></th>
-                                                <th scope="col">Package</br>Balance</th>
+                                                <!-- <th scope="col">Package</br>Balance</th> -->
 
                                             </tr>
                                         </thead>
@@ -626,7 +632,7 @@
                                                 </td>
                                                 <td><?php echo $order->shoe_order != null ? date('d/m/Y', strtotime($order->shoe_order)) : ""; ?>
                                                 </td>
-                                                <td></td>
+                                                <!-- <td></td> -->
                                             </tr>
                                             <?php } ?>
 
@@ -670,7 +676,7 @@
                                                                 <?php echo $total_shoe . "/" . $totalCustomers; ?>
                                                             </p>
                                                         </em></small></th>
-                                                <th scope="col"></th>
+                                                <!-- <th scope="col"></th> -->
 
                                             </tr>
                                         </tfoot>
@@ -779,7 +785,7 @@
                 footer: true
             },
             //ordering: false,
-            dom: '<"row"<"col-sm-6"B><"col-sm-6"f>>tip',
+            dom: '<"row"<"col-sm-6"><"col-sm-6 text-end"B>>tip',
             paging: true, // works with or without paging
 
             order: [
@@ -800,8 +806,8 @@
 
 
         });
-        new $.fn.dataTable.FixedHeader(sp_table);
-        new $.fn.dataTable.FixedFooter(sp_table);
+        // new $.fn.dataTable.FixedHeader(sp_table);
+        // new $.fn.dataTable.FixedFooter(sp_table);
 
         // sp_table.on('order.dt search.dt', function() {
         //     sp_table.column(0, {

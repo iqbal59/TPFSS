@@ -523,7 +523,7 @@
                             <br />
 
                             <div class="table-responsive">
-                                <table class="table  table-light table-striped" id="sp_table">
+                                <table class="table text-center table-light table-striped" id="sp_table">
                                     <thead>
                                         <tr class="table-dark">
                                             <th scope="col"></th>
@@ -705,13 +705,36 @@
                 [3, 'desc']
 
             ],
-            dom: '<"row"<"col-sm-6"B><"col-sm-6"f>>tip',
-            buttons: [
-                // 'excelHtml5',
-                {
+            dom: '<"row"<"col-sm-6"><"col-sm-6 text-end"B>>tip',
+            buttons: [{
                     extend: 'csvHtml5',
-                    title: 'Export',
-                    text: 'Export'
+                    title: 'Shoe Order List',
+                    text: 'Export',
+                    exportOptions: {
+                        // columns: [0, 1], // Specify which columns to export
+                        format: {
+                            body: function(data, row, column, node) {
+                                var selectElement = $(node).find('select');
+                                if (selectElement.length > 0) {
+                                    return selectElement.find('option:selected').text()
+                                        .trim();
+                                }
+
+                                var anchorElement = $(node).find('a');
+                                if (anchorElement.length > 0) {
+                                    return anchorElement.text().trim();
+                                }
+
+                                var spanElement = $(node).find('span');
+                                if (spanElement.length > 0) {
+                                    return spanElement.text().trim();
+                                }
+
+                                return data;
+                            }
+                        }
+                    }
+
                 }, // Export to Excel
 
             ],
