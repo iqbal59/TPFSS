@@ -531,8 +531,8 @@
                                             <th scope="col">Mobile No.</th>
                                             <th scope="col">Last Order Date</th>
                                             <th scope="col">Order Count</th>
-                                            <th scope="col" class="text-warning">Last Jacket Order</th>
-                                            <th scope="col">Jacket Order</th>
+                                            <th scope="col" class="text-warning">Jacket Order (Before 1st Sep 2024)</th>
+                                            <th scope="col">Jacket Order (After 1st Sep 2024)</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Update Date</th>
 
@@ -604,6 +604,32 @@
                                                 </span></td>
                                         </tr>
                                         <?php } ?>
+
+                                    <tfoot>
+                                        <tr class="table-dark">
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+
+
+                                            <th scope="col" class="text-warning">
+
+                                            </th>
+                                            <th scope="col"><small><em>
+                                                        <p class="mb-0"><strong>Jacket: </strong><?php
+
+                                                            echo $total_jacket . "/" . $totalCustomers; ?></p>
+                                                    </em></small></th>
+
+                                            <th scope="col"></th>
+                                            <th scope="col" class="text-warning">
+
+                                            </th>
+
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
 
@@ -699,7 +725,10 @@
             responsive: true,
             "pageLength": 100,
             paging: true, // works with or without paging
-
+            fixedHeader: {
+                header: true,
+                footer: true
+            },
             order: [
 
                 [3, 'desc']
@@ -741,7 +770,7 @@
 
 
         });
-        new $.fn.dataTable.FixedHeader(sp_table);
+
 
         // sp_table.on('order.dt search.dt', function() {
         //     sp_table.column(0, {

@@ -7,7 +7,7 @@ class Import extends CI_Controller
         parent::__construct();
         check_login_user();
         $this->load->model('common_model');
-        //$this->load->model("store_model");
+        $this->load->model("store_model");
     }
 
 
@@ -62,7 +62,22 @@ class Import extends CI_Controller
                             $data['order_date'] = date('Y-m-d H:i:s', strtotime($filesop[2]));
                             $data['order_no'] = $filesop[3];
                             $data['mobile_no'] = $filesop[6];
-                            $data['taxable_amount'] = (($filesop[12] - $filesop[13] - $filesop[18]) / 1.18);
+
+                            $storeInfo = $this->store_model->get_store_by_store_name($filesop[1]);
+
+                            //GST
+                            if ($storeInfo['gst_type'] == 1)
+                                $data['taxable_amount'] = (($filesop[12] - $filesop[13] - $filesop[18]) / 1.18);
+
+                            //Composite GST
+                            if ($storeInfo['gst_type'] == 2)
+                                $data['taxable_amount'] = (($filesop[12] - $filesop[13] - $filesop[18]) / 1.06);
+
+                            //None GST
+                            if ($storeInfo['gst_type'] == 0)
+                                $data['taxable_amount'] = (($filesop[12] - $filesop[13] - $filesop[18]));
+
+
                             $data['net_amount'] = $filesop[15];
                             //list($service_code)=explode(",", $filesop[34]);
                             $service_list = array_map("trim", explode(",", $filesop[34]));

@@ -531,8 +531,9 @@
                                             <th scope="col">Mobile No.</th>
                                             <th scope="col">Last Order Date</th>
                                             <th scope="col">Order Count</th>
-                                            <th scope="col" class="text-warning">Last Blanket Order</th>
-                                            <th scope="col">Blanket Order</th>
+                                            <th scope="col" class="text-warning">Blanket Order (Before 1st Sep 2024)
+                                            </th>
+                                            <th scope="col">Blanket Order (After 1st Sep 2024)</th>
                                             <th scope="col">Status</th>
                                             <th scope="col">Update Date</th>
 
@@ -604,6 +605,34 @@
                                                 </span></td>
                                         </tr>
                                         <?php } ?>
+
+
+                                    <tfoot>
+                                        <tr class="table-dark">
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col"></th>
+                                            <th scope="col" class="text-warning">
+
+                                            </th>
+
+                                            <th scope="col" class="text-warning"></th>
+                                            <th scope="col">
+                                                <small><em>
+                                                        <p class="mb-0"><strong>Blanket: </strong>
+                                                            <?php echo $total_blanket . "/" . $totalCustomers; ?>
+                                                        </p>
+                                                    </em></small>
+                                            </th>
+                                            <th scope="col" class="text-warning">
+                                            </th>
+
+
+
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
 
@@ -699,7 +728,10 @@
             responsive: true,
             "pageLength": 100,
             paging: true, // works with or without paging
-
+            fixedHeader: {
+                header: true,
+                footer: true
+            },
             order: [
 
                 [3, 'desc']
@@ -714,11 +746,11 @@
                     text: 'Export'
                 }, // Export to Excel
 
-            ],
+            ]
 
 
         });
-        new $.fn.dataTable.FixedHeader(sp_table);
+
 
         // sp_table.on('order.dt search.dt', function() {
         //     sp_table.column(0, {
