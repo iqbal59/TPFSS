@@ -926,8 +926,8 @@ class Accounts extends CI_Controller
 
             <b class="title_name"> ' . $openBalance['firm_name'] . ' </b>
             <BR />
-           ' . $openBalance['store_address'] . '
-
+           ' . $openBalance['store_address'] . '<br/>
+            Firm Type: ' . ($openBalance['gst_type'] == 2 ? "Composite GST" : ($openBalance['gst_type'] == 1 ? "GST" : "Non GST")) . '
 
 
         </div>
@@ -1120,7 +1120,7 @@ class Accounts extends CI_Controller
         <td>' . date('d-m-Y', strtotime($data['order_date'])) . '</td>
         <td>' . $data['order_no'] . '</td>
         <td>' . ($data['order_date'] < $startDate ? $data['ta'] : $data['taxable_amount']) . '</td>
-        <td>' . ($data['order_date'] < $startDate ? $data['nt'] : $data['net_amount']) . '</td>
+        <td>' . ($data['order_date'] < $startDate ? $data['na'] : $data['net_amount']) . '</td>
         <td>' . ($data['order_date'] < $startDate ? $data['sc'] : $data['service_code']) . '</td>
 </tr>';
                 }
@@ -1278,7 +1278,8 @@ class Accounts extends CI_Controller
 
             <b class="title_name"> ' . $openBalance['firm_name'] . ' </b>
             <BR />
-           ' . $openBalance['store_address'] . '
+           ' . $openBalance['store_address'] . '<br/>
+            Firm Type: ' . ($openBalance['gst_type'] == 2 ? "Composite GST" : ($openBalance['gst_type'] == 1 ? "GST" : "Non GST")) . '
 
 
 
@@ -1465,7 +1466,7 @@ class Accounts extends CI_Controller
         <td>' . date('d-m-Y', strtotime($data['order_date'])) . '</td>
         <td>' . $data['order_no'] . '</td>
          <td>' . ($data['order_date'] < $startDate ? $data['ta'] : $data['taxable_amount']) . '</td>
-        <td>' . ($data['order_date'] < $startDate ? $data['nt'] : $data['net_amount']) . '</td>
+        <td>' . ($data['order_date'] < $startDate ? $data['na'] : $data['net_amount']) . '</td>
         <td>' . ($data['order_date'] < $startDate ? $data['sc'] : $data['service_code']) . '</td>
 </tr>';
                 }
