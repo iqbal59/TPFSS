@@ -1119,9 +1119,9 @@ class Accounts extends CI_Controller
                     $html .= '<tr>
         <td>' . date('d-m-Y', strtotime($data['order_date'])) . '</td>
         <td>' . $data['order_no'] . '</td>
-        <td>' . $data['order_date'] < $startDate ? $data['ta'] : $data['taxable_amount'] . '</td>
-        <td>' . $data['order_date'] < $startDate ? $data['nt'] : $data['net_amount'] . '</td>
-        <td>' . $data['order_date'] < $startDate ? $data['sc'] : $data['service_code'] . '</td>
+        <td>' . ($data['order_date'] < $startDate ? $data['ta'] : $data['taxable_amount']) . '</td>
+        <td>' . ($data['order_date'] < $startDate ? $data['nt'] : $data['net_amount']) . '</td>
+        <td>' . ($data['order_date'] < $startDate ? $data['sc'] : $data['service_code']) . '</td>
 </tr>';
                 }
 
@@ -1464,9 +1464,9 @@ class Accounts extends CI_Controller
                     $html .= '<tr>
         <td>' . date('d-m-Y', strtotime($data['order_date'])) . '</td>
         <td>' . $data['order_no'] . '</td>
-         <td>' . $data['order_date'] < $startDate ? $data['ta'] : $data['taxable_amount'] . '</td>
-        <td>' . $data['order_date'] < $startDate ? $data['nt'] : $data['net_amount'] . '</td>
-        <td>' . $data['order_date'] < $startDate ? $data['sc'] : $data['service_code'] . '</td>
+         <td>' . ($data['order_date'] < $startDate ? $data['ta'] : $data['taxable_amount']) . '</td>
+        <td>' . ($data['order_date'] < $startDate ? $data['nt'] : $data['net_amount']) . '</td>
+        <td>' . ($data['order_date'] < $startDate ? $data['sc'] : $data['service_code']) . '</td>
 </tr>';
                 }
 
