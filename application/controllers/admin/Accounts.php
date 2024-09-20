@@ -1087,6 +1087,10 @@ class Accounts extends CI_Controller
 
                 //print_r($orderNos);
                 $saleRoyaltyData = $this->Accounts_model->get_royalty_sale_data($orderNos, $invoice->store_name);
+
+                $infoData = explode(' ', $invoice->descriptions);
+                $startDate = date('Y-m-d', strtotime($infoData[0]));
+
                 $html = '<h4 align="center">Sale Data (' . $invoice->descriptions . ')</h4>';
                 $html .= '<table id="" class="list" cellspacing="0" width="100%">
 <thead>
@@ -1105,14 +1109,19 @@ class Accounts extends CI_Controller
                 $txt = 0;
                 $ntt = 0;
                 foreach ($saleRoyaltyData as $data) {
-                    $txt += $data['taxable_amount'];
-                    $ntt += $data['net_amount'];
+                    if ($data['order_date'] < $startDate) {
+                        $txt += $data['ta'];
+                        $ntt += $data['na'];
+                    } else {
+                        $txt += $data['taxable_amount'];
+                        $ntt += $data['net_amount'];
+                    }
                     $html .= '<tr>
         <td>' . date('d-m-Y', strtotime($data['order_date'])) . '</td>
         <td>' . $data['order_no'] . '</td>
-        <td>' . $data['taxable_amount'] . '</td>
-        <td>' . $data['net_amount'] . '</td>
-        <td>' . $data['service_code'] . '</td>
+        <td>' . $data['order_date'] < $startDate ? $data['ta'] : $data['taxable_amount'] . '</td>
+        <td>' . $data['order_date'] < $startDate ? $data['nt'] : $data['net_amount'] . '</td>
+        <td>' . $data['order_date'] < $startDate ? $data['sc'] : $data['service_code'] . '</td>
 </tr>';
                 }
 
@@ -1425,6 +1434,8 @@ class Accounts extends CI_Controller
                     }
                 }
                 $saleRoyaltyData = $this->Accounts_model->get_royalty_sale_data($orderNos, $invoice->store_name);
+                $infoData = explode(' ', $invoice->descriptions);
+                $startDate = date('Y-m-d', strtotime($infoData[0]));
                 $html = '<h4 align="center">Sale Data (' . $invoice->descriptions . ')</h4>';
                 $html .= '<table id="" class="list" cellspacing="0" width="100%">
 <thead>
@@ -1443,14 +1454,19 @@ class Accounts extends CI_Controller
                 $txt = 0;
                 $ntt = 0;
                 foreach ($saleRoyaltyData as $data) {
-                    $txt += $data['taxable_amount'];
-                    $ntt += $data['net_amount'];
+                    if ($data['order_date'] < $startDate) {
+                        $txt += $data['ta'];
+                        $ntt += $data['na'];
+                    } else {
+                        $txt += $data['taxable_amount'];
+                        $ntt += $data['net_amount'];
+                    }
                     $html .= '<tr>
         <td>' . date('d-m-Y', strtotime($data['order_date'])) . '</td>
         <td>' . $data['order_no'] . '</td>
-        <td>' . $data['taxable_amount'] . '</td>
-        <td>' . $data['net_amount'] . '</td>
-        <td>' . $data['service_code'] . '</td>
+         <td>' . $data['order_date'] < $startDate ? $data['ta'] : $data['taxable_amount'] . '</td>
+        <td>' . $data['order_date'] < $startDate ? $data['nt'] : $data['net_amount'] . '</td>
+        <td>' . $data['order_date'] < $startDate ? $data['sc'] : $data['service_code'] . '</td>
 </tr>';
                 }
 
