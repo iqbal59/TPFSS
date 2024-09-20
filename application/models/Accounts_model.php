@@ -298,27 +298,27 @@ class Accounts_model extends CI_Model
     }
 
 
-    // public function get_royalty_sale_data($order_nos, $store_name)
-    // {
-    //     $sql_search = "and order_no=''";
-    //     $orders = implode(",", $order_nos);
-    //     if ($orders)
-    //         $sql_search = 'and order_no in(' . $orders . ')';
-    //     $sql = "select * from storesales where 1 $sql_search and store_name='" . $store_name . "'";
-
-    //     return $query = $this->db->query($sql)->result_array();
-    // }
-
     public function get_royalty_sale_data($order_nos, $store_name)
     {
         $sql_search = "and order_no=''";
         $orders = implode(",", $order_nos);
         if ($orders)
-            $sql_search = 'and storesales.order_no in(' . $orders . ')';
-        $sql = "select storesales.order_date, storesales.order_no, COALESCE(refundsales.taxable_amount, storesales.taxable_amount) AS taxable_amount, COALESCE(refundsales.net_amount, storesales.net_amount) AS net_amount, COALESCE(refundsales.service_code, storesales.service_code) AS service_code from storesales left join refundsales on (storesales.order_no=refundsales.order_no and storesales.store_name=refundsales.store_name) where 1 $sql_search and storesales.store_name='" . $store_name . "'";
+            $sql_search = 'and order_no in(' . $orders . ')';
+        $sql = "select * from storesales where 1 $sql_search and store_name='" . $store_name . "'";
 
         return $query = $this->db->query($sql)->result_array();
     }
+
+    // public function get_royalty_sale_data($order_nos, $store_name)
+    // {
+    //     $sql_search = "and order_no=''";
+    //     $orders = implode(",", $order_nos);
+    //     if ($orders)
+    //         $sql_search = 'and storesales.order_no in(' . $orders . ')';
+    //     $sql = "select storesales.order_date, storesales.order_no, COALESCE(refundsales.taxable_amount, storesales.taxable_amount) AS taxable_amount, COALESCE(refundsales.net_amount, storesales.net_amount) AS net_amount, COALESCE(refundsales.service_code, storesales.service_code) AS service_code from storesales left join refundsales on (storesales.order_no=refundsales.order_no and storesales.store_name=refundsales.store_name) where 1 $sql_search and storesales.store_name='" . $store_name . "'";
+
+    //     return $query = $this->db->query($sql)->result_array();
+    // }
 
     public function get_royalty_paytm_data($mid1, $mid2, $mid3, $from_dt, $to_dt)
     {
