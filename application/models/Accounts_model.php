@@ -312,7 +312,7 @@ class Accounts_model extends CI_Model
 
     public function get_royalty_sale_data($order_nos, $store_name)
     {
-        $sql_search = "and order_no=''";
+        $sql_search = "and storesales.order_no=''";
         $orders = implode(",", $order_nos);
         if ($orders)
             $sql_search = 'and storesales.order_no in(' . $orders . ')';
