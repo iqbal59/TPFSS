@@ -82,11 +82,28 @@
 
                         </div>
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label>Firm Name</label>
                             <input type="text" class="form-control form-control-sm" name="firm_name"
                                 value="<?php echo $this->input->post('firm_name'); ?>" />
                             <span class="text-danger"><?php echo form_error('firm_name');?></span>
+                        </div>
+
+                        <div class="form-group col-md-1">
+                            <label>Firm Type</label>
+                            <select name="gst_type" class="form-control form-control-sm">
+                                <option value="1" <?php echo($this->input->post('gst_type')=='0' ? "selected" : ""); ?>>
+                                    Non GST
+                                </option>
+                                <option value="1" <?php echo($this->input->post('gst_type')=='1' ? "selected" : ""); ?>>
+                                    GST
+                                </option>
+
+                                <option value="2" <?php echo($this->input->post('gst_type')=='2' ? "selected" : ""); ?>>
+                                    Composite
+                                </option>
+
+                            </select>
                         </div>
 
 

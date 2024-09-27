@@ -92,6 +92,7 @@
                                     <th>Store Name</th>
                                     <th>Store Crm Code</th>
                                     <th>Firm Name</th>
+                                    <th>Firm Type</th>
                                     <th>Store City</th>
                                     <th>Store State</th>
                                     <th>Email Id</th>
@@ -120,6 +121,8 @@
                                     <td><?php echo $s['store_name']; ?></td>
                                     <td><?php echo $s['store_crm_code']; ?></td>
                                     <td><?php echo $s['firm_name']; ?></td>
+                                    <td><?php echo ($s['gst_type'] == 2 ? "Composite GST" : ($s['gst_type'] == 1 ? "GST" : "Non GST")); ?>
+                                    </td>
                                     <td><?php echo $s['store_city']; ?></td>
                                     <td><?php echo $s['store_state']; ?></td>
                                     <td><?php echo $s['email_id']; ?></td>

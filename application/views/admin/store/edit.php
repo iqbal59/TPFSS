@@ -26,11 +26,11 @@
 
             <?php $error_msg = $this->session->flashdata('error_msg'); ?>
             <?php if (isset($error_msg)): ?>
-            <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
-                <?php echo $error_msg; ?> &nbsp;
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
-                        aria-hidden="true">×</span> </button>
-            </div>
+                <div class="alert alert-danger delete_msg pull" style="width: 100%"> <i class="fa fa-times"></i>
+                    <?php echo $error_msg; ?> &nbsp;
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span
+                            aria-hidden="true">×</span> </button>
+                </div>
             <?php endif ?>
 
             <div class="card card-outline-info">
@@ -91,7 +91,7 @@
                         </div>
 
 
-                        <div class="form-group col-md-4">
+                        <div class="form-group col-md-3">
                             <label>Firm Name</label>
                             <input type="text" class="form-control form-control-sm" name="firm_name"
                                 value="<?php echo ($this->input->post('firm_name') ? $this->input->post('firm_name') : $store['firm_name']); ?>" />
@@ -100,7 +100,22 @@
                             </span>
                         </div>
 
+                        <div class="form-group col-md-1">
+                            <label>Firm Type</label>
+                            <select name="gst_type" class="form-control form-control-sm">
+                                <option value="1" <?php echo ($this->input->post('gst_type') == '0' ? "selected" : ""); ?>>
+                                    Non GST
+                                </option>
+                                <option value="1" <?php echo ($this->input->post('gst_type') == '1' ? "selected" : ""); ?>>
+                                    GST
+                                </option>
 
+                                <option value="2" <?php echo ($this->input->post('gst_type') == '2' ? "selected" : ""); ?>>
+                                    Composite
+                                </option>
+
+                            </select>
+                        </div>
                         <div class="form-group col-md-4">
                             <label>Store City</label>
                             <input type="text" name="store_city" class="form-control form-control-sm"
@@ -256,12 +271,10 @@
                             <label>Status</label>
 
                             <select name="is_active" class="form-control form-control-sm">
-                                <option value="0"
-                                    <?php echo ($store['is_active'] == '0' ? "selected" : ($this->input->post('is_active') == '0' ? "selected" : "")); ?>>
+                                <option value="0" <?php echo ($store['is_active'] == '0' ? "selected" : ($this->input->post('is_active') == '0' ? "selected" : "")); ?>>
                                     Inactive
                                 </option>
-                                <option value="1"
-                                    <?php echo ($store['is_active'] == '1' ? "selected" : ($this->input->post('is_active') == '1' ? "selected" : "")); ?>>
+                                <option value="1" <?php echo ($store['is_active'] == '1' ? "selected" : ($this->input->post('is_active') == '1' ? "selected" : "")); ?>>
                                     Active
                                 </option>
                             </select>
