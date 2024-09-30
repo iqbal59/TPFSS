@@ -92,7 +92,7 @@
                         <div class="form-group col-md-1">
                             <label>Firm Type</label>
                             <select name="gst_type" class="form-control form-control-sm">
-                                <option value="1" <?php echo($this->input->post('gst_type')=='0' ? "selected" : ""); ?>>
+                                <option value="0" <?php echo($this->input->post('gst_type')=='0' ? "selected" : ""); ?>>
                                     Non GST
                                 </option>
                                 <option value="1" <?php echo($this->input->post('gst_type')=='1' ? "selected" : ""); ?>>
