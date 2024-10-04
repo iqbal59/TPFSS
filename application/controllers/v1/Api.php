@@ -999,6 +999,14 @@ class Api extends REST_Controller
 
     }
 
+    //MIS API
 
 
+
+    public function get_sales_summary_get()
+    {
+        $items = $this->api_model->get_sales_summary($_GET['input_current_date']);
+        $response['result'] = $items;
+        $this->set_response($response, REST_Controller::HTTP_OK);
+    }
 }

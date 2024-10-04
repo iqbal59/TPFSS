@@ -73,4 +73,18 @@ class Api_model extends CI_Model
         $this->db->where('id', $id);
         return $this->db->update('vouchers', array('is_sync' => 1));
     }
+
+
+
+    public function get_sales_summary($date)
+    {
+        $query = $this->db->query('CALL GetSalesSummary(?)', array('input_current_date' => $date));
+        $res = $query->result_array();
+        //print_r($res);
+        mysqli_next_result($this->db->conn_id);
+
+        $query->free_result();
+        return $res;
+    }
+
 }
