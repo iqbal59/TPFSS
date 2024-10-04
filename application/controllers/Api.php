@@ -75,8 +75,8 @@ class Api extends REST_Controller
     {
         try {
             $_POST = json_decode(file_get_contents('php://input'), true);
-            $this->form_validation->set_rules('store_code', 'Store Code', 'trim|required');
-            $this->form_validation->set_rules('holiday_date', 'Holiday Date', 'trim|required');
+            $this->form_validation->set_rules('StoreCode', 'Store Code', 'trim|required');
+            $this->form_validation->set_rules('HolidayDate', 'Holiday Date', 'trim|required');
 
 
             if (!$this->form_validation->run()) {
@@ -112,8 +112,8 @@ class Api extends REST_Controller
     {
         try {
             $_POST = json_decode(file_get_contents('php://input'), true);
-            $this->form_validation->set_rules('store_code', 'Store Code', 'trim|required');
-            $this->form_validation->set_rules('holiday_date', 'Holiday Date', 'trim|required');
+            $this->form_validation->set_rules('StoreCode', 'Store Code', 'trim|required');
+            $this->form_validation->set_rules('HolidayDate', 'Holiday Date', 'trim|required');
 
 
             if (!$this->form_validation->run()) {
