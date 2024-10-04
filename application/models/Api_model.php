@@ -75,7 +75,6 @@ class Api_model extends CI_Model
     }
 
 
-
     public function get_sales_summary($date)
     {
         $query = $this->db->query('CALL GetSalesSummary(?)', array('input_current_date' => $date));

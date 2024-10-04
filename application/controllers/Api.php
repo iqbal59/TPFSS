@@ -12,6 +12,7 @@ class Api extends REST_Controller
         $this->load->model('Voucher_model');
         $this->load->model('store_model');
         $this->load->model('storenew_model');
+        $this->load->model('common_model');
         $this->load->library('form_validation');
         header('Content-Type: application/json');
     }
@@ -69,6 +70,74 @@ class Api extends REST_Controller
     }
     //END Paytm Payment
 
+
+    public function add_store_holiday_post()
+    {
+        try {
+            $_POST = json_decode(file_get_contents('php://input'), true);
+            $this->form_validation->set_rules('store_code', 'Store Code', 'trim|required');
+            $this->form_validation->set_rules('holiday_date', 'Holiday Date', 'trim|required');
+
+
+            if (!$this->form_validation->run()) {
+                throw new Exception(validation_errors());
+            }
+
+            $data = array(
+
+                'store_code' => $_POST['StoreCode'],
+                'holiday_date' => $_POST['HolidayDate'],
+                'holiday_name' => $_POST['HolidayName'],
+
+            );
+
+            if ($this->common_model->insert($data, 'tbl_holidays') > 0) {
+                $this->set_response([
+                    'status' => true,
+                    'message' => $data,
+                ], REST_Controller::HTTP_OK);
+            } else {
+                // echo $this->db->last_query();
+                throw new Exception('Insert fail');
+            }
+        } catch (Throwable $e) {
+            $this->set_response([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
+
+    public function delete_store_holiday_post()
+    {
+        try {
+            $_POST = json_decode(file_get_contents('php://input'), true);
+            $this->form_validation->set_rules('store_code', 'Store Code', 'trim|required');
+            $this->form_validation->set_rules('holiday_date', 'Holiday Date', 'trim|required');
+
+
+            if (!$this->form_validation->run()) {
+                throw new Exception(validation_errors());
+            }
+
+
+
+            if ($this->common_model->delete_holiday($_POST['StoreCode'], $_POST['HolidayDate']) > 0) {
+                $this->set_response([
+                    'status' => true,
+                    'message' => "Delete Success",
+                ], REST_Controller::HTTP_OK);
+            } else {
+                // echo $this->db->last_query();
+                throw new Exception('Delete fail');
+            }
+        } catch (Throwable $e) {
+            $this->set_response([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
 
 
     public function sale_order_by_qdc_get()

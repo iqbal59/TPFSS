@@ -288,6 +288,12 @@ class Common_model extends CI_Model
         return;
     }
 
+
+    public function delete_holiday($store_code, $holiday_dt)
+    {
+        return $this->db->delete('tbl_holidays', array('store_code' => $store_code, "holiday_date" => $holiday_dt));
+
+    }
     //-- user role delete function
     public function delete_user_role($id, $table)
     {
