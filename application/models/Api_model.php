@@ -75,9 +75,14 @@ class Api_model extends CI_Model
     }
 
 
-    public function get_sales_summary($date)
+    public function get_sales_summary($date, $type)
     {
-        $query = $this->db->query('CALL GetSalesSummary(?)', array('input_current_date' => $date));
+        if ($type == 'store')
+            $query = $this->db->query('CALL GetSalesSummary(?)', array('input_current_date' => $date));
+        if ($type == 'tsm')
+            $query = $this->db->query('CALL GetSalesSummaryTsmWise(?)', array('input_current_date' => $date));
+        if ($type == 'zsm')
+            $query = $this->db->query('CALL GetSalesSummaryZsmWise(?)', array('input_current_date' => $date));
         $res = $query->result_array();
         //print_r($res);
         mysqli_next_result($this->db->conn_id);

@@ -1005,7 +1005,7 @@ class Api extends REST_Controller
 
     public function get_sales_summary_get()
     {
-        $items = $this->api_model->get_sales_summary($_GET['input_current_date']);
+        $items = $this->api_model->get_sales_summary($_GET['input_current_date'], $_GET['type']);
         $response['result'] = $items;
         $this->set_response($response, REST_Controller::HTTP_OK);
     }
