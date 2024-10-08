@@ -83,6 +83,8 @@ class Api_model extends CI_Model
             $query = $this->db->query('CALL GetSalesSummaryTsmWise(?)', array('input_current_date' => $date));
         if ($type == 'zsm')
             $query = $this->db->query('CALL GetSalesSummaryZsmWise(?)', array('input_current_date' => $date));
+        if ($type == 'all')
+            $query = $this->db->query('CALL GetAllSalesRevenue(?)', array('input_current_date' => $date));
         $res = $query->result_array();
         //print_r($res);
         mysqli_next_result($this->db->conn_id);
