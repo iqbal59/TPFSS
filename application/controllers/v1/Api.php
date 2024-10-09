@@ -1018,7 +1018,7 @@ class Api extends REST_Controller
     }
     public function get_target_get()
     {
-        $items = $this->api_model->get_mis_usermap();
+        $items = $this->api_model->get_target();
         $response['result'] = $items;
         $this->set_response($response, REST_Controller::HTTP_OK);
     }
