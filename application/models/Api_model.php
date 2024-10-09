@@ -75,6 +75,25 @@ class Api_model extends CI_Model
     }
 
 
+    public function get_mis_usermap()
+    {
+        return $this->db->select('u1.id, u1.email, u1.name, u1.role, u2.name as zsm_name')
+            ->from('tbl_mis_user u1')
+            ->join('tbl_mis_user u2', "u1.parent_id=u2.id")
+            ->get()->result();
+
+    }
+
+
+    public function get_target()
+    {
+        return $this->db->select('*')
+            ->from('tbl_revenue_target u1')
+
+            ->get()->result();
+
+    }
+
     public function get_sales_summary($date, $type)
     {
         if ($type == 'store')
