@@ -97,21 +97,23 @@ class Api_model extends CI_Model
     public function get_mis_role($email_id)
     {
         $sql = "
-SELECT  DISTINCT
-  tsm_email AS email,
-    'TSM' AS role
-    
-FROM tbl_revenue_target
-WHERE tsm_email = '" . $email_id . "'
-
-UNION
-
 SELECT DISTINCT
        zsm_email AS email,
     'ZSM' AS role
 
 FROM tbl_revenue_target
-WHERE zsm_email = '" . $email_id . "'";
+WHERE zsm_email = '" . $email_id . "'
+UNION
+        SELECT  DISTINCT
+  tsm_email AS email,
+    'TSM' AS role
+    
+FROM tbl_revenue_target
+WHERE tsm_email = '" . $email_id . "'";
+
+
+
+
         return $this->db->query($sql)->row();
 
     }
