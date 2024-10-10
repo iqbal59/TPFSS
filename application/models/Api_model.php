@@ -109,7 +109,7 @@ UNION
     'TSM' AS role
     
 FROM tbl_revenue_target
-WHERE LOWER(tsm_email) = LOWER'" . $email_id . "')";
+WHERE LOWER(tsm_email) = LOWER('" . $email_id . "')";
 
 
 
