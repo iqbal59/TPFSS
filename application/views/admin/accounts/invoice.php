@@ -151,7 +151,7 @@ body {
             <tr style='height:89px;'>
 
                 <td colspan="5"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Billing
-                        Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s
+                        Address<br></span><span style="font-size:9pt;font-family:Arial;">
                         <?php echo $invoice->firm_name; ?><br>
                     </span><span style="font-size:9pt;font-family:Calibri,Arial;">
                         <?php echo $invoice->store_address; ?>
@@ -161,7 +161,7 @@ body {
                     </span>
                 </td>
                 <td colspan="4"><span style="font-size:9pt;font-family:Calibri,Arial;color:#808080;">Shipping
-                        Address<br></span><span style="font-size:9pt;font-family:Arial;">M/s
+                        Address<br></span><span style="font-size:9pt;font-family:Arial;">
                         <?php echo $invoice->firm_name; ?><br>
                     </span><span style="font-size:9pt;font-family:Calibri,Arial;">
                         <?php echo $invoice->store_address; ?>
