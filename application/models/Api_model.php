@@ -102,14 +102,14 @@ SELECT DISTINCT
     'ZSM' AS role
 
 FROM tbl_revenue_target
-WHERE zsm_email = '" . $email_id . "'
+WHERE LOWER(zsm_email) = LOWER('" . $email_id . "')
 UNION
         SELECT  DISTINCT
   tsm_email AS email,
     'TSM' AS role
     
 FROM tbl_revenue_target
-WHERE tsm_email = '" . $email_id . "'";
+WHERE LOWER(tsm_email) = LOWER'" . $email_id . "')";
 
 
 
