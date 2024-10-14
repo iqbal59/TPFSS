@@ -685,7 +685,7 @@ class Accounts extends CI_Controller
                 continue;
             }
 
-            $item = array('amount' => 19000, 'service_code' => '', 'store_royalty' => 0, 'order_ids' => "", 'item_name' => 'CRM Licence Fees (I)', 'rate' => 19000);
+            $item = array('amount' => 20500, 'service_code' => '', 'store_royalty' => 0, 'order_ids' => "", 'item_name' => 'CRM Licence Fees (I)', 'rate' => 19000);
 
             $data['invoice'][$s['id']][] = $item;
         }
