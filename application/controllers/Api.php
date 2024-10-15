@@ -588,18 +588,20 @@ class Api extends REST_Controller
             // Ensure data is available
             if (isset($data['row'])) {
                 $row = $data['row'];
-                $data = array(
 
+                //print_r($row);
+                $data = array(
                     'zsm_tsm_name' => $row[0],
                     'store_code' => $row[1],
                     'video_link' => $row[2],
-                    'discussion_date' => $row[3]
+                    'discussion_date' => date('Y-m-d', strtotime($row[3]))
 
                 );
 
-
+                //print_r($data);
 
                 if ($this->common_model->insert($data, 'tbl_video_call') > 0) {
+                    echo $this->db->last_query();
                     $this->set_response([
                         'status' => true,
                         'message' => $data,
