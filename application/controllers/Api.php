@@ -601,7 +601,7 @@ class Api extends REST_Controller
                 //print_r($data);
 
                 if ($this->common_model->insert($data, 'tbl_video_call') > 0) {
-                    echo $this->db->last_query();
+                    // echo $this->db->last_query();
                     $this->set_response([
                         'status' => true,
                         'message' => $data,
