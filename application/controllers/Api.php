@@ -569,6 +569,52 @@ class Api extends REST_Controller
 
     }
 
+    public function video_call_post()
+    {
+        try {
+            //$_POST = json_decode(file_get_contents('php://input'), true);
+            //$data = file_get_contents('php://input');
+            // $this->form_validation->set_rules('order_id', 'Order ID', 'trim|required');
+            // $this->form_validation->set_rules('amount', 'Amount', 'trim|required');
 
+
+            // if (!$this->form_validation->run()) {
+            //     throw new Exception(validation_errors());
+            // }
+
+            $input = file_get_contents('php://input');
+            $data = json_decode($input, true);
+
+            // Ensure data is available
+            if (isset($data['row'])) {
+                $row = $data['row'];
+                $data = array(
+
+                    'zsm_tsm_name' => $row[0],
+                    'store_code' => $row[1],
+                    'video_link' => $row[2],
+                    'discussion_date' => $row[3]
+
+                );
+
+
+
+                if ($this->common_model->insert($data, 'tbl_video_call') > 0) {
+                    $this->set_response([
+                        'status' => true,
+                        'message' => $data,
+                    ], REST_Controller::HTTP_OK);
+                } else {
+                    // echo $this->db->last_query();
+                    throw new Exception('Insert fail');
+                }
+            }
+        } catch (Throwable $e) {
+            $this->set_response([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ], REST_Controller::HTTP_BAD_REQUEST);
+        }
+    }
 
 }
