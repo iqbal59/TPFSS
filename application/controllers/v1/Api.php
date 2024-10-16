@@ -1010,6 +1010,13 @@ class Api extends REST_Controller
         $this->set_response($response, REST_Controller::HTTP_OK);
     }
 
+    public function get_package_summary_get()
+    {
+        $items = $this->api_model->get_package_summary($_GET['input_current_date'], $_GET['type']);
+        $response['result'] = $items;
+        $this->set_response($response, REST_Controller::HTTP_OK);
+    }
+
     public function get_mis_usermap_get()
     {
         $items = $this->api_model->get_mis_usermap();

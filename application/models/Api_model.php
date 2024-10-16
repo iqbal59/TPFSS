@@ -136,4 +136,23 @@ WHERE LOWER(tsm_email) = LOWER('" . $email_id . "')";
         return $res;
     }
 
+
+    public function get_package_summary($date, $type)
+    {
+        if ($type == 'store')
+            $query = $this->db->query('CALL GetPackageSummary(?)', array('input_current_date' => $date));
+        if ($type == 'tsm')
+            $query = $this->db->query('CALL GetPackageSummary(?)', array('input_current_date' => $date));
+        if ($type == 'zsm')
+            $query = $this->db->query('CALL GetPackageSummary(?)', array('input_current_date' => $date));
+        if ($type == 'all')
+            $query = $this->db->query('CALL GetPackageSummary(?)', array('input_current_date' => $date));
+        $res = $query->result_array();
+        //print_r($res);
+        mysqli_next_result($this->db->conn_id);
+
+        $query->free_result();
+        return $res;
+    }
+
 }
