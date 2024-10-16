@@ -619,4 +619,38 @@ class Api extends REST_Controller
         }
     }
 
+
+    public function get_package_get()
+    {
+
+        date_default_timezone_set("Asia/Kolkata");
+        $s_from_date = date('Y-m-d', strtotime('-0 days'));
+
+
+        if ($s_from_date) {
+            $headers = ['Content-Type: application/json', 'token:  MFguD2FKe0lWvhMAYO6PXKTsu7cN2k9Tdez2spkZrudC3ogwZdLz14MBmnA5qshuq2jQikH83GY37RZFrgop8arJ2xfFpO9zMjLBFZNe6c5UFi44YueJDsVQa9okFBjP6ZQoFXA22JTwE7Dj3Lgu9ZvUXv15a294sQng2gYAtMhu9ZLD6ERtUofH3w0Kw5rzaoDojXRnmgBXiBkykX', 'ClientID: 31719'];
+            $url = "https://api.quickdrycleaning.com/SubscriptionManagementTesting/PackageSaleRechargeReport";
+
+            $post_fields = json_encode(array('ClientID' => '31719', "ReportDate" => date('d M Y', strtotime($s_from_date))));
+            $packageInfo = $this->cUrlGetData($url, $post_fields, $headers);
+            //print_r($packageInfo);
+
+            $packageInfo = json_decode($packageInfo);
+            if ($packageInfo->Status == 'True') {
+                foreach ($packageInfo->Data as $item) {
+                    $data = array(
+                        "staff_name" => $item->StaffName,
+                        "package_name" => $item->PackageName,
+                        "customer_id" => $item->CustomerID,
+                        "customer_mobile" => $item->CustomerMobile,
+                        "store_code" => $item->StoreCode,
+                        "sale" => $item->Sale,
+                        "recharge" => $item->Recharge
+
+                    );
+                    $this->common_model->insert($data, 'tbl_qdc_package');
+                }
+            }
+        }
+    }
 }
