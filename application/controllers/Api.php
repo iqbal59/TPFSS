@@ -624,7 +624,7 @@ class Api extends REST_Controller
     {
 
         date_default_timezone_set("Asia/Kolkata");
-        $s_from_date = date('Y-m-d', strtotime('-0 days'));
+        $s_from_date = date('Y-m-d', strtotime('-1 days'));
 
 
         if ($s_from_date) {
