@@ -142,11 +142,11 @@ WHERE LOWER(tsm_email) = LOWER('" . $email_id . "')";
         if ($type == 'store')
             $query = $this->db->query('CALL GetPackageSummary(?)', array('input_current_date' => $date));
         if ($type == 'tsm')
-            $query = $this->db->query('CALL GetPackageSummary(?)', array('input_current_date' => $date));
+            $query = $this->db->query('CALL GetPackagesByTSM(?)', array('input_current_date' => $date));
         if ($type == 'zsm')
-            $query = $this->db->query('CALL GetPackageSummary(?)', array('input_current_date' => $date));
+            $query = $this->db->query('CALL GetPackageByZSM(?)', array('input_current_date' => $date));
         if ($type == 'all')
-            $query = $this->db->query('CALL GetPackageSummary(?)', array('input_current_date' => $date));
+            $query = $this->db->query('CALL GetAllPackageSummary(?)', array('input_current_date' => $date));
         $res = $query->result_array();
         //print_r($res);
         mysqli_next_result($this->db->conn_id);
