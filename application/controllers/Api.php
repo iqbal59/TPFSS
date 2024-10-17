@@ -628,8 +628,8 @@ class Api extends REST_Controller
 
 
         if ($s_from_date) {
-            $headers = ['Content-Type: application/json', 'token:  MFguD2FKe0lWvhMAYO6PXKTsu7cN2k9Tdez2spkZrudC3ogwZdLz14MBmnA5qshuq2jQikH83GY37RZFrgop8arJ2xfFpO9zMjLBFZNe6c5UFi44YueJDsVQa9okFBjP6ZQoFXA22JTwE7Dj3Lgu9ZvUXv15a294sQng2gYAtMhu9ZLD6ERtUofH3w0Kw5rzaoDojXRnmgBXiBkykX', 'ClientID: 31719'];
-            $url = "https://api.quickdrycleaning.com/SubscriptionManagementTesting/PackageSaleRechargeReport";
+            $headers = ['Content-Type: application/json', 'token:  EXDHXUXobI5WmIwVSoIPb4JnmLSVTT92OjbLIymOQSzCfs2HIzkjMaaaOPVLBB5R9DID6kMUBuzS5GItjLMT8pQdJAxsdbMOnh2ckZaXn0iSbRFHH11qoLijm4u6nUhZhk5nd5JUbo6IHyCrvpkLJWZbyjpP4Ea3jSbqmR3bRHPzeabo1Cax95PUVtpugup7ODYpXMFdWJuCHZxXHA', 'ClientID: 31719'];
+            $url = "https://api.quickdrycleaning.com/QDCV1/PackageSaleRechargeReport";
 
             $post_fields = json_encode(array('ClientID' => '31719', "ReportDate" => date('d M Y', strtotime($s_from_date))));
             $packageInfo = $this->cUrlGetData($url, $post_fields, $headers);
