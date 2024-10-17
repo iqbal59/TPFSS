@@ -620,11 +620,12 @@ class Api extends REST_Controller
     }
 
 
-    public function get_package_get()
+    public function get_package_get($date = null)
     {
 
         date_default_timezone_set("Asia/Kolkata");
-        $s_from_date = date('Y-m-d', strtotime('-1 days'));
+
+        $s_from_date = $date != null ? date('Y-m-d', strtotime($date)) : date('Y-m-d', strtotime('-1 days'));
 
 
         if ($s_from_date) {
@@ -645,6 +646,7 @@ class Api extends REST_Controller
                         "customer_mobile" => $item->CustomerMobile,
                         "store_code" => $item->StoreCode,
                         "sale" => $item->Sale,
+                        "package_sale_on" => $s_from_date,
                         "recharge" => $item->Recharge
 
                     );
